@@ -26,10 +26,10 @@ class CreateSenderTable extends Migration
           $table->float('price_fixed');
           $table->date('date_fixed');
           $table->dateTime('hour_fixed');
-          $table->integer('carrier_note')
-          $table->string('carrier_notice')
-          $table->integer('id_member_sender')
-          $table->integer('id_member_carrier')
+          $table->integer('carrier_note');
+          $table->string('carrier_notice');
+          $table->integer('id_member_sender');
+          $table->integer('id_member_carrier');
           $table->timestamps();
           $table->softDeletes();
     }
