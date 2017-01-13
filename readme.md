@@ -1,1 +1,1 @@
-ushainbox
+Créer migration: php artisan make:migration create_users_table
