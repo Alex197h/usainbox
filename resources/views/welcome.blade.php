@@ -81,7 +81,7 @@
                 <div class="links">
                     <a href="">Envoyer un coli</a>
                     <a href="">Ajouter un itinéraire</a>
-                    <a href="">Mon Espace</a>
+                    <a href="{{ URL::to('user/connexion') }}">Connexion</a>
                     <a href="{{ URL::to('map') }}">Map</a>
                 </div>
             </div>
