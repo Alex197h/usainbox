@@ -11,10 +11,13 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function() {
     return view('welcome');
 });
 
-Route::get('/map', function () {
+Route::get('/map', function() {
     return view('map');
 });
+
+Route::any('user/connexion', 'UserController@connexion');
+Route::any('user/deconnexion', 'UserController@deconnexion');
