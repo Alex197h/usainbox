@@ -29,7 +29,7 @@ class CreateTransportOfferTable extends Migration {
             $table->datetime('deposit_date');
             $table->boolean('full');
             $table->timestamps();
-            $table->sofDelete();
+            $table->softDeletes();
         });
     }
 

@@ -27,7 +27,7 @@ class CreateReservationTable extends Migration {
             $table->integer('city_end');
             $table->integer('id_shipping');
             $table->timestamps();
-            $table->sofDelete();
+            $table->softDeletes();
         });
     }
 

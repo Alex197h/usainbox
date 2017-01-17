@@ -28,7 +28,7 @@ class CreateUsersTable extends Migration
             $table->boolean('help_charge');
             $table->rememberToken();
             $table->timestamps();
-            $table->sofDelete();
+            $table->softDeletes();
         });
     }
 

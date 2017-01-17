@@ -11,8 +11,7 @@ class CreateShippingTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
       Schema::create('shipping', function (Blueprint $table) {
           $table->increments('id');
           $table->date('earliest_date');
@@ -32,6 +31,7 @@ class CreateShippingTable extends Migration
           $table->integer('id_user_carrier');
           $table->timestamps();
           $table->softDeletes();
+      });  
     }
 
     /**

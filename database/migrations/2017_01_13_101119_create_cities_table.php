@@ -13,7 +13,7 @@ class CreateCitiesTable extends Migration {
     public function up() {
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->int('insee');
+            $table->integer('insee');
             $table->string('name');
             $table->float('longitude');
             $table->float('latitude');
