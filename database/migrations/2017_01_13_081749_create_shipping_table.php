@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSenderTable extends Migration
+class CreateShippingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateSenderTable extends Migration
      */
     public function up()
     {
-      Schema::create('sender', function (Blueprint $table) {
+      Schema::create('shipping', function (Blueprint $table) {
           $table->increments('id');
           $table->date('earliest_date');
           $table->date('latest_date');
@@ -28,8 +28,8 @@ class CreateSenderTable extends Migration
           $table->dateTime('hour_fixed');
           $table->integer('carrier_note');
           $table->string('carrier_notice');
-          $table->integer('id_member_sender');
-          $table->integer('id_member_carrier');
+          $table->integer('id_user_shipping');
+          $table->integer('id_user_carrier');
           $table->timestamps();
           $table->softDeletes();
     }
@@ -41,6 +41,6 @@ class CreateSenderTable extends Migration
      */
     public function down()
     {
-      Schema::drop('sender');
+      Schema::drop('shipping');
     }
 }
