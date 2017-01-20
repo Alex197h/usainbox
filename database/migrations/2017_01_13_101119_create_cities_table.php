@@ -13,8 +13,9 @@ class CreateCitiesTable extends Migration {
     public function up() {
         Schema::create('cities', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('insee');
             $table->string('name');
+            $table->integer('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries');
             $table->float('longitude');
             $table->float('latitude');
         });

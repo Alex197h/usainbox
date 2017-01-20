@@ -16,7 +16,7 @@ class CreateShippingTable extends Migration
           $table->increments('id');
           $table->date('earliest_date');
           $table->date('latest_date');
-          $table->string('description');
+          $table->string('description')->nullable();
           $table->float('obj_length');
           $table->float('obj_width');
           $table->float('obj_height');
@@ -27,11 +27,13 @@ class CreateShippingTable extends Migration
           $table->dateTime('hour_fixed');
           $table->integer('carrier_note');
           $table->string('carrier_notice');
-          $table->integer('id_user_shipping');
-          $table->integer('id_user_carrier');
+          $table->integer('user_shipping_id');
+          $table->foreign('user_shipping_id')->references('id')->on('users');
+          $table->integer('user_carrier_id')->nullable(); // A voir si utilisé (absurde)
+          $table->foreign('user_carrier_id')->references('id')->on('users');
           $table->timestamps();
           $table->softDeletes();
-      });  
+      });
     }
 
     /**

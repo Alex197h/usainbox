@@ -20,12 +20,12 @@ class CreateReservationTable extends Migration {
             $table->integer('transport_note');
             $table->string('shipping_review');
             $table->string('transport_review');
-            $table->boolean('validated');
-            $table->integer('id_user');
-            $table->integer('id_transport');
-            $table->integer('city_start');
-            $table->integer('city_end');
-            $table->integer('id_shipping');
+            $table->boolean('validated')->default(false);
+            $table->integer('user_id')->unsigned();
+            $table->integer('transport_id')->unsigned();
+            $table->integer('shipping_id')->unsigned();
+            $table->integer('city_start_id')->unsigned();
+            $table->integer('city_end_id')->unsigned();
             $table->timestamps();
             $table->softDeletes();
         });

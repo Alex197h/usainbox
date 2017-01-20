@@ -15,9 +15,12 @@ class CreateQuestionsTable extends Migration {
             $table->increments('id');
             $table->string('question');
             $table->string('answer');
-            $table->integer('id_shipping');
-            $table->integer('id_offer');
-            $table->integer('id_user');
+            $table->integer('shipping_id')->unsigned()->nullable();
+            $table->foreign('shipping_id')->references('id')->on('shipping');
+            $table->integer('offer_id')->unsigned()->nullable();
+            $table->foreign('offer_id')->references('id')->on('transport_offer');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

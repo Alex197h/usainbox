@@ -13,15 +13,17 @@ class CreateVehicleTable extends Migration {
     public function up() {
         Schema::create('vehicle', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('default');
-            $table->float('max_width');
-            $table->float('max_length');
-            $table->float('max_height');
-            $table->float('max_volume');
+            $table->boolean('default')->default(false);
+            $table->float('max_width')->default(0);
+            $table->float('max_length')->default(0);
+            $table->float('max_height')->default(0);
+            $table->float('max_volume')->default(0);
             $table->string('car_brand');
             $table->string('car_model');
-            $table->integer('id_user');
-            $table->integer('id_type_vehicle');
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->integer('type_vehicle_id')->unsigned();
+            $table->foreign('type_vehicle_id')->references('id')->on('type_vehicle');
             $table->timestamps();
         });
     }

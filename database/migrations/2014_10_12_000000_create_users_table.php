@@ -23,9 +23,9 @@ class CreateUsersTable extends Migration
             $table->boolean('gender');
             $table->date('birthday');
             $table->string('phone');
-            $table->text('description');
-            $table->string('avatar');
-            $table->boolean('help_charge');
+            $table->text('description')->nullable();
+            $table->string('avatar')->nullable();
+            $table->boolean('help_charge')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
