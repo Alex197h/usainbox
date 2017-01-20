@@ -21,3 +21,7 @@ Route::get('/map', function() {
 
 Route::any('user/connexion', 'UserController@connexion');
 Route::any('user/deconnexion', 'UserController@deconnexion');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
