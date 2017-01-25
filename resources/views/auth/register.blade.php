@@ -67,6 +67,8 @@
                                 </button>
                             </div>
                         </div>
+                        
+                        Ajouter champs Nom, prénom, genre (male / femelle), date naissance, phone
                     </form>
                 </div>
             </div>
