@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function() {
-    return view('welcome');
-});
+Route::get('/', function () {
+    return view('front/pages/accueil');
+})->name('home');
 
 Route::get('/map', function() {
     return view('map');
