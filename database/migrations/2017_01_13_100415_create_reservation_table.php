@@ -24,8 +24,10 @@ class CreateReservationTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->integer('transport_id')->unsigned();
             $table->integer('shipping_id')->unsigned();
-            $table->integer('city_start_id')->unsigned();
-            $table->integer('city_end_id')->unsigned();
+            $table->float('city_start_longitude');
+            $table->float('city_start_latitude');
+            $table->float('city_end_longitude');
+            $table->float('city_end_latitude');
             $table->timestamps();
             $table->softDeletes();
         });

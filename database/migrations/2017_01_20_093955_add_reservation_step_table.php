@@ -16,8 +16,8 @@ class AddReservationStepTable extends Migration
       Schema::create('reservation_step', function (Blueprint $table) {
           $table->integer('reservation_id')->unsigned();
           $table->foreign('reservation_id')->references('id')->on('reservation');
-          $table->integer('country_id')->unsigned();
-          $table->foreign('country_id')->references('id')->on('countries');
+          $table->float('longitude');
+          $table->float('latitude');
           $table->integer('step')->unsigned();
       });
     }

@@ -17,9 +17,7 @@ class CreateTransportOfferTable extends Migration {
             $table->boolean('end_detour')->default(false);
             $table->boolean('highway')->default(false);
             $table->boolean('is_regular')->default(false);
-            $table->datetime('date_start_min');
-            $table->datetime('date_start_max');
-            $table->time('start_hour');
+            $table->datetime('date_start');
             $table->float('max_width')->default(0);
             $table->float('max_length')->default(0);
             $table->float('max_height')->default(0);
