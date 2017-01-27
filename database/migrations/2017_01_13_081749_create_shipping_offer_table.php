@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShippingTable extends Migration
+class CreateShippingOfferTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,17 @@ class CreateShippingTable extends Migration
      * @return void
      */
     public function up() {
-      Schema::create('shipping', function (Blueprint $table) {
+      Schema::create('shipping_offer', function (Blueprint $table) {
           $table->increments('id');
           $table->date('earliest_date');
           $table->date('latest_date');
           $table->string('description')->nullable();
-          $table->float('obj_length');
-          $table->float('obj_width');
-          $table->float('obj_height');
-          $table->float('obj_weight');
+          $table->float('max_length');
+          $table->float('max_width');
+          $table->float('max_height');
+          $table->float('max_weight');
           $table->float('max_price');
-          $table->float('price_fixed');
+          $table->float('fixed_price');
           $table->date('date_fixed');
           $table->dateTime('hour_fixed');
           $table->integer('carrier_note');
@@ -43,6 +43,6 @@ class CreateShippingTable extends Migration
      */
     public function down()
     {
-      Schema::drop('shipping');
+      Schema::drop('shipping_offer');
     }
 }
