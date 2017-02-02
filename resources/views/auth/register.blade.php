@@ -4,6 +4,15 @@
     <div class="row">
         <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 z-depth-1 login-form">
             {{-- $errors->getBag('default')->toArray()) --}}
+            @if($errors->any())
+            <div class="row collapse">
+                <ul class="alert-box warning radius">
+                    @foreach($errors->all() as $error)
+                        <li> {{ $error }} </li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
             <div class="section center">
                 <div class="section">
                     <h5>Inscrivez vous gratuitement</h5>
