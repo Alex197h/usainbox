@@ -14,7 +14,6 @@ class CreateQuestionsTable extends Migration {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
-            $table->string('answer');
             $table->integer('shipping_id')->unsigned()->nullable();
             $table->foreign('shipping_id')->references('id')->on('shipping');
             $table->integer('offer_id')->unsigned()->nullable();
