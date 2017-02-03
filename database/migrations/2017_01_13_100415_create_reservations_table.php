@@ -20,8 +20,6 @@ class CreateReservationsTable extends Migration {
             $table->foreign('transport_id')->references('id')->on('transport_offers');
             $table->integer('shipping_id')->unsigned()->nullable();
             $table->foreign('shipping_id')->references('id')->on('shipping_offers');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
             $table->float('city_start_longitude');
             $table->float('city_start_latitude');
             $table->text('city_start_label');
