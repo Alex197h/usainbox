@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Question extends Model
 {
-  public function shippingoffer(){
+  public function shippingOffer(){
     return $this->belongsTo('App\ShippingOffer');
   }
 }
