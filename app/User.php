@@ -5,8 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use Notifiable;
 
     /**
@@ -29,5 +28,13 @@ class User extends Authenticatable
 
     public function vehicles(){
         return $this->hasMany('App\Vehicule');
+    }
+    
+    public function reservations(){
+        return $this->hasMany('App\Reservation');
+    }
+    
+    public function questions(){
+        return $this->hasMany('App\Question');
     }
 }

@@ -4,13 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShippingOffersTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+class CreateShippingOffersTable extends Migration {
     public function up() {
       Schema::create('shipping_offers', function (Blueprint $table) {
             $table->increments('id');
@@ -34,13 +28,7 @@ class CreateShippingOffersTable extends Migration
       });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
+    public function down() {
       Schema::drop('shipping_offers');
     }
 }

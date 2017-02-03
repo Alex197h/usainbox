@@ -5,11 +5,6 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateTransportOffersTable extends Migration {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up() {
         Schema::create('transport_offers', function (Blueprint $table) {
             $table->increments('id');
@@ -33,11 +28,6 @@ class CreateTransportOffersTable extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down() {
         Schema::drop('transport_offers');
     }
