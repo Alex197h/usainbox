@@ -8,15 +8,15 @@ class TransportOffer extends Model {
     public function vehicule(){
         return $this->belongsTo('App\Vehicule');
     }
-    
+
     public function reservations(){
-        return $this->belongsToMany('App\Reservation');
+        return $this->hasMany('App\Reservation');
     }
-    
+
     public function questions(){
         return $this->hasMany('App\Question');
     }
-    
+
     public function steps(){
         return $this->hasMany('App\Step');
     }
