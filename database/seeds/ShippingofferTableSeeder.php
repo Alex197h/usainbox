@@ -8,7 +8,7 @@ use App\User;
 class UsersSeeder extends Seeder{
     public function run(){
         $faker = Faker::create();
-
+        $users = User::all()->pluck('id')->toArray();
         for ($i = 0; $i < 50; $i++) {
             User::create([
                 'description' => $faker->paragraph,
@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder{
                 'max_price' => $faker->numberBetween($min = 3, $max = 50),
                 'fixed_date' => $faker->dateTimeBetween($format = 'Y-m-d', $startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get())
                 'fixed_hour' => $faker->time,
-                'user_shipping_id' => User::all()->random()->id;
+                'user_shipping_id' => !empty($users) ? $faker->randomElement($users) : 0;
             ]);
         }
     }
