@@ -40,9 +40,8 @@ class TransportOffersSeeder extends Seeder{
                 'vehicle_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
             ]);
             
-            /*
-            $n = rand(2, 6);
-            for($j = 0; $j < $n; $i++){
+            $n = rand(3, 7);
+            for($j = 1; $j < $n; $j++){
                 TransportStep::create([
                     'transport_offer_id' => $to->id,
                     'longitude' => $faker->randomFloat(5, 1, 1000),
@@ -50,7 +49,7 @@ class TransportOffersSeeder extends Seeder{
                     'label' => $faker->sentence,
                     'step' => $j,
                 ]);
-            }*/
+            }
         }
     }
 }
