@@ -29,7 +29,7 @@ class ShippingOfferSeeder extends Seeder{
                 'carrier_notice' => $note != null ? $faker->sentence : null,
                 'fixed_date' => $faker->dateTimeBetween($startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get()),
                 'fixed_hour' => $faker->time,
-                'user_shipping_id' => !empty($users) ? $faker->randomElement($users) : 0,
+                'user_id' => !empty($users) ? $faker->randomElement($users) : 0,
             ]);
         }
     }

@@ -27,11 +27,15 @@ class User extends Authenticatable {
     ];
 
     public function vehicles(){
-        return $this->hasMany('App\Vehicule');
+        return $this->hasMany('App\Vehicle');
     }
     
     public function reservations(){
         return $this->hasMany('App\Reservation');
+    }
+    
+    public function shipping_offers(){
+        return $this->hasMany('App\ShippingOffer');
     }
     
     public function questions(){

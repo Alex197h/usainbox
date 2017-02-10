@@ -16,10 +16,10 @@ class CreateReservationsTable extends Migration {
             $table->string('shipping_review');
             $table->string('transport_review');
             $table->boolean('validated')->default(false);
-            $table->integer('transport_id')->unsigned()->nullable();
-            $table->foreign('transport_id')->references('id')->on('transport_offers');
-            $table->integer('shipping_id')->unsigned()->nullable();
-            $table->foreign('shipping_id')->references('id')->on('shipping_offers');
+            $table->integer('transport_offer_id')->unsigned()->nullable();
+            $table->foreign('transport_offer_id')->references('id')->on('transport_offers');
+            $table->integer('shipping_offer_id')->unsigned()->nullable();
+            $table->foreign('shipping_offer_id')->references('id')->on('shipping_offers');
             $table->float('city_start_longitude');
             $table->float('city_start_latitude');
             $table->text('city_start_label');

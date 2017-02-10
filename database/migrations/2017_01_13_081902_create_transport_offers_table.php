@@ -19,10 +19,9 @@ class CreateTransportOffersTable extends Migration {
             $table->float('max_volume')->default(0);
             $table->float('max_weight');
             $table->text('description')->nullable();
-            $table->datetime('deposit_date');
             $table->boolean('full')->default(false);
-            $table->integer('vehicule_id');
-            $table->foreign('vehicule_id')->references('id')->on('vehicule');
+            $table->integer('vehicle_id');
+            $table->foreign('vehicle_id')->references('id')->on('vehicule');
             $table->timestamps();
             $table->softDeletes();
         });

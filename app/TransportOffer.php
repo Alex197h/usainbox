@@ -20,4 +20,8 @@ class TransportOffer extends Model {
     public function steps(){
         return $this->hasMany('App\Step');
     }
+    
+    public function getVolumeAttribute(){
+        return $this->max_volume == 0 ? $this->max_width * $this->max_length * $this->max_height : $this->max_volume;
+    }
 }

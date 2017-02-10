@@ -19,8 +19,8 @@ class CreateShippingOffersTable extends Migration {
             $table->time('fixed_hour')->nullable();
             $table->integer('carrier_note')->nullable();
             $table->text('carrier_notice')->nullable();
-            $table->integer('user_shipping_id');
-            $table->foreign('user_shipping_id')->references('id')->on('users');
+            $table->integer('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
             $table->softDeletes();
       });

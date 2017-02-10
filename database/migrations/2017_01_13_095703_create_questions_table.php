@@ -9,10 +9,10 @@ class CreateQuestionsTable extends Migration {
         Schema::create('questions', function (Blueprint $table) {
             $table->increments('id');
             $table->string('question');
-            $table->integer('shipping_id')->unsigned()->nullable();
-            $table->foreign('shipping_id')->references('id')->on('shipping');
-            $table->integer('offer_id')->unsigned()->nullable();
-            $table->foreign('offer_id')->references('id')->on('transport_offer');
+            $table->integer('shipping_offer_id')->unsigned()->nullable();
+            $table->foreign('shipping_offer_id')->references('id')->on('shipping_offers');
+            $table->integer('transport_offer_id')->unsigned()->nullable();
+            $table->foreign('transport_offer_id')->references('id')->on('transport_offer');
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users');
         });

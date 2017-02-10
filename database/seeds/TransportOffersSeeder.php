@@ -35,9 +35,8 @@ class TransportOffersSeeder extends Seeder{
                 'max_volume' => $volume,
                 'max_weight' => $faker->randomFloat(2, 1, 20),
                 'description' => $faker->text,
-                'deposit_date' => $date->modify('+7 day')->format('Y-m-d H:i:s'),
                 'full' => $faker->boolean,
-                'vehicule_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
+                'vehicle_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
             ]);
         }
     }
