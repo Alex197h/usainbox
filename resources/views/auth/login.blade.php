@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <div class="row">
     <div class="col l4 m8 s10 offset-l4 offset-m2 offset-s1 z-depth-1 login-form">
 

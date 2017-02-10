@@ -13,6 +13,7 @@ class CreateVehiclesTable extends Migration {
             $table->float('max_length')->default(0);
             $table->float('max_height')->default(0);
             $table->float('max_volume')->default(0);
+            $table->float('max_weight')->nullable();
             $table->string('car_brand');
             $table->string('car_model');
             $table->integer('user_id')->unsigned();

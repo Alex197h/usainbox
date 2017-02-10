@@ -836,14 +836,10 @@ class ComposerStaticInit3ac6a1e6a87e61b143cd953154d600f0
         'SebastianBergmann\\Version' => __DIR__ . '/..' . '/sebastian/version/src/Version.php',
         'TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
-<<<<<<< HEAD
-=======
+        'TransportOffersSeeder' => __DIR__ . '/../..' . '/database/seeds/TransportOffersSeeder.php',
         'TypeVehicleSeeder' => __DIR__ . '/../..' . '/database/seeds/TypeVehicleSeeder.php',
-<<<<<<< HEAD
         'UsersSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersSeeder.php',
-=======
->>>>>>> origin/master
->>>>>>> refs/remotes/origin/master
+        'VehicleSeeder' => __DIR__ . '/../..' . '/database/seeds/VehicleSeeder.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
