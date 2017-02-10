@@ -12,7 +12,7 @@
             </div>
             <div class="section">
                 @foreach($offers as $offer)
-                    <div class="card-panel cyan lighten-5">
+                    <div class="card-panel hoverable cyan lighten-5">
                         @if($offer->is_regular)
                             <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
                         @else

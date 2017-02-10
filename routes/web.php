@@ -14,6 +14,13 @@ Route::get('/transport-offers', 'TransportOffersController@index');
 Route::get('/shipping-offers', 'ShippingOffersController@index');
 
 
+Route::get('contact', 'AboutController@create')->name('contact');
+Route::post('contact', 'AboutController@store')->name('contact_post');
+
+Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
+
+
+
 
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');

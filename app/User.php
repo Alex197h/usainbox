@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Vehicle;
 
 class User extends Authenticatable {
     use Notifiable;
@@ -40,5 +41,11 @@ class User extends Authenticatable {
     
     public function questions(){
         return $this->hasMany('App\Question');
+    }
+    
+    
+    
+    public function getIsTransporterAttribute(){
+        return Vehicle::where('user_id', $this->id)->first() != NULL;
     }
 }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\TransportOffer;
+use App\TransportStep;
 use App\Vehicle;
 
 class TransportOffersSeeder extends Seeder{
@@ -23,7 +24,7 @@ class TransportOffersSeeder extends Seeder{
             
             $date = $faker->dateTimeBetween($startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get());
             
-            TransportOffer::create([
+            $to = TransportOffer::create([
                 'start_detour' => $faker->boolean,
                 'end_detour' => $faker->boolean,
                 'highway' => $faker->boolean,
@@ -38,6 +39,18 @@ class TransportOffersSeeder extends Seeder{
                 'full' => $faker->boolean,
                 'vehicle_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
             ]);
+            
+            /*
+            $n = rand(2, 6);
+            for($j = 0; $j < $n; $i++){
+                TransportStep::create([
+                    'transport_offer_id' => $to->id,
+                    'longitude' => $faker->randomFloat(5, 1, 1000),
+                    'latitude' => $faker->randomFloat(5, 1, 1000),
+                    'label' => $faker->sentence,
+                    'step' => $j,
+                ]);
+            }*/
         }
     }
 }

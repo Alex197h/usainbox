@@ -1,25 +1,51 @@
-header .brand-logo img{
-  padding: 5px;
-}
 body{
     background: #f5f5f5;
 }
+
+header .brand-logo img{
+  padding: 5px;
+}
+
+footer{
+    background: #786A6A !important;
+}
+
+button{
+    height: 45px;
+}
+input{
+    padding-left: 10px;
+    box-sizing: border-box;
+}
+input:focus, textarea:focus{
+    border-bottom: 1px solid #786A6A !important;
+    box-shadow: 0 1px 0 0 #786A6A !important;
+}
+input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
+    color: #786A6A !important;
+}
+[type="checkbox"]+label:before{
+    border-right: 2px solid #786A6A !important;
+    border-bottom: 2px solid #786A6A !important;
+}
+[type="radio"]:checked+label:after, [type="radio"]:checked+label:before{
+    border: 2px solid #786A6A !important;
+}
+[type="radio"]:checked+label:after{
+    background-color: #786A6A !important;
+}
+
 .header-search{
   background: url('../img/header.jpg') center center;
   background-size: cover;
-  padding: 30vh 0 200px 0 !important;
-    min-height: calc(100vh - 64px);
+  padding: 30vh 0 200px 0 !important;  
+  min-height: calc(100vh - 64px);
 }
-.header-search button, .login-form button{
-  height: 45px;
-}
-.header-search input, .login-form input{
-  padding-left: 10px;
-  box-sizing: border-box;
-}
-.header-search input:focus, .login-form input:focus{
-    border-bottom: 1px solid #786A6A !important;
-    box-shadow: 0 1px 0 0 #786A6A !important;
+
+@media screen and (max-width: 600px) {
+    .header-search{
+        padding: 0 !important;
+    }
 }
 .header-search input::-webkit-input-placeholder {
     color:grey;
@@ -27,8 +53,13 @@ body{
 .header-search input:-moz-placeholder {
     color:grey;
 }
+.header-search input{
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
 #video-pres{
-    height:400px;
+    margin-top: 20px;
     overflow:hidden;
 }
 .home-img, .home-img video{
@@ -46,16 +77,7 @@ body{
 .login-form{
     margin-top: 50px;
 }
-[type="checkbox"]+label:before{
-    border-right: 2px solid #786A6A !important;
-    border-bottom: 2px solid #786A6A !important;
-}
-[type="radio"]:checked+label:after, [type="radio"]:checked+label:before{
-    border: 2px solid #786A6A !important;
-}
-[type="radio"]:checked+label:after{
-    background-color: #786A6A !important;
-}
+
 .login-form{
     background: white;
     margin-top: 15vh;
@@ -67,6 +89,3 @@ body{
     border-radius:3px;
 }
 
-footer{
-    background: #786A6A !important;
-}

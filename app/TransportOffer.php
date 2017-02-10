@@ -18,7 +18,7 @@ class TransportOffer extends Model {
     }
 
     public function steps(){
-        return $this->hasMany('App\Step');
+        return $this->hasMany('App\TransportStep');
     }
     
     public function getVolumeAttribute(){
