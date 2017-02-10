@@ -546,6 +546,12 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+<<<<<<< HEAD
+=======
     'TypeVehicleSeeder' => $baseDir . '/database/seeds/TypeVehicleSeeder.php',
+<<<<<<< HEAD
     'UsersSeeder' => $baseDir . '/database/seeds/UsersSeeder.php',
+=======
+>>>>>>> origin/master
+>>>>>>> refs/remotes/origin/master
 );
