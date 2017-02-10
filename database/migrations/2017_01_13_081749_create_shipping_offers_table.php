@@ -8,7 +8,7 @@ class CreateShippingOffersTable extends Migration {
     public function up() {
       Schema::create('shipping_offers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->float('max_length');
             $table->float('max_width');
             $table->float('max_height');
@@ -16,7 +16,7 @@ class CreateShippingOffersTable extends Migration {
             $table->float('max_price');
             $table->float('fixed_price')->nullable();
             $table->date('fixed_date');
-            $table->dateTime('fixed_hour')->nullable();
+            $table->time('fixed_hour')->nullable();
             $table->integer('carrier_note')->nullable();
             $table->string('carrier_notice')->nullable();
             $table->integer('user_shipping_id');

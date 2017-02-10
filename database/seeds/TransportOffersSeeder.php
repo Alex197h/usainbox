@@ -21,19 +21,21 @@ class TransportOffersSeeder extends Seeder{
                 $length = $faker->randomFloat(2, 1, $width);
             } else {$width = 0; $height = 0; $length = 0;}
             
+            $date = $faker->dateTimeBetween($startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get());
+            
             TransportOffer::create([
                 'start_detour' => $faker->boolean,
                 'end_detour' => $faker->boolean,
                 'highway' => $faker->boolean,
                 'is_regular' => $faker->boolean,
-                'date_start' => $faker->date('Y-m-d H:i:s'),
+                'date_start' => $date,
                 'max_width' => $width,
                 'max_length' => $length,
                 'max_height' => $height,
                 'max_volume' => $volume,
                 'max_weight' => $faker->randomFloat(2, 1, 20),
                 'description' => $faker->text,
-                'deposit_date' => $faker->date('Y-m-d H:i:s'),
+                'deposit_date' => $date->modify('+7 day')->format('Y-m-d H:i:s'),
                 'full' => $faker->boolean,
                 'vehicule_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
             ]);
