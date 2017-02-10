@@ -547,4 +547,5 @@ return array(
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'TypeVehicleSeeder' => $baseDir . '/database/seeds/TypeVehicleSeeder.php',
+    'UsersSeeder' => $baseDir . '/database/seeds/UsersSeeder.php',
 );
