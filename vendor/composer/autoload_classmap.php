@@ -149,7 +149,6 @@ return array(
     'PHPUnit_Framework_Constraint_TraversableContains' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/TraversableContains.php',
     'PHPUnit_Framework_Constraint_TraversableContainsOnly' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/TraversableContainsOnly.php',
     'PHPUnit_Framework_Constraint_Xor' => $vendorDir . '/phpunit/phpunit/src/Framework/Constraint/Xor.php',
-    'PHPUnit_Framework_CoveredCodeNotExecutedException' => $vendorDir . '/phpunit/phpunit/src/Framework/CoveredCodeNotExecutedException.php',
     'PHPUnit_Framework_Error' => $vendorDir . '/phpunit/phpunit/src/Framework/Error.php',
     'PHPUnit_Framework_Error_Deprecated' => $vendorDir . '/phpunit/phpunit/src/Framework/Error/Deprecated.php',
     'PHPUnit_Framework_Error_Notice' => $vendorDir . '/phpunit/phpunit/src/Framework/Error/Notice.php',
@@ -161,7 +160,6 @@ return array(
     'PHPUnit_Framework_IncompleteTestCase' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestCase.php',
     'PHPUnit_Framework_IncompleteTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
     'PHPUnit_Framework_InvalidCoversTargetException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
-    'PHPUnit_Framework_MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/MissingCoversAnnotationException.php',
     'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
     'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',
@@ -546,12 +544,6 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
-<<<<<<< HEAD
-=======
     'TypeVehicleSeeder' => $baseDir . '/database/seeds/TypeVehicleSeeder.php',
-<<<<<<< HEAD
     'UsersSeeder' => $baseDir . '/database/seeds/UsersSeeder.php',
-=======
->>>>>>> origin/master
->>>>>>> refs/remotes/origin/master
 );
