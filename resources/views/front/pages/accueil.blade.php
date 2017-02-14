@@ -32,8 +32,7 @@
                 </div>
             </div>
         </form>
-        <a id="scrollDown" href="#introduction" class="hide-on-small-only waves-effect waves-light transparent white-text"><i
-                    class="material-icons">expand_more</i></a>
+        <a id="scrollDown" href="#introduction" class="hide-on-small-only waves-effect waves-light transparent white-text"><i class="material-icons floating">expand_more</i></a>
     </div>
 
     <div class="row">
