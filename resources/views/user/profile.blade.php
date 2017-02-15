@@ -12,7 +12,7 @@
             <div class="col s9">
                 <h4>{{$user->last_name}} {{$user->first_name}}</h4>
                 <p><span>Type de membre : {{ ($user->is_transporter) ? 'Transporteur' : 'Expéditeur' }}</span></p>
-                <p><span>Inscrit le {{ $user->created_at->formatLocalized('d F Y') }}</span></p>
+                <p><span>Inscrit le {{ $user->created_at->format('d F Y') }}</span></p>
             </div>
         </div>
 
