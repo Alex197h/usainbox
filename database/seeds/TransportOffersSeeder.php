@@ -44,8 +44,8 @@ class TransportOffersSeeder extends Seeder{
             for($j = 1; $j < $n; $j++){
                 TransportStep::create([
                     'transport_offer_id' => $to->id,
-                    'longitude' => $faker->randomFloat(5, 1, 1000),
-                    'latitude' => $faker->randomFloat(5, 1, 1000),
+                    'longitude' => $faker->randomFloat(5, 0.637207, 4.855957),
+                    'latitude' => $faker->randomFloat(5, 44.21371, 48.253941),
                     'label' => $faker->sentence,
                     'step' => $j,
                 ]);

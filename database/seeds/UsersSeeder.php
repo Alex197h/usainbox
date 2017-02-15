@@ -15,10 +15,11 @@ class UsersSeeder extends Seeder{
                 'email' => $faker->unique()->email,
                 'password' => bcrypt('password'),
                 'gender' => $faker->boolean,
-                'birthday' => $faker->date('Y-m-d H:i:s'),
+                'birthday' => $faker->dateTimeBetween('-70 years', '- 18 years'),
                 'phone' => $faker->e164PhoneNumber,
                 'description' => $faker->paragraph,
                 'help_charge' => $faker->boolean,
+                'is_admin' => $faker->boolean(5),
             ]);
         }
     }

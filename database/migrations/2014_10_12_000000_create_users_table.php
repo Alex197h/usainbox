@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration {
             $table->text('description')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('help_charge')->default(false);
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
