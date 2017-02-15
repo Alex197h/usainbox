@@ -10,12 +10,12 @@
             <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
             <div class="row">
                 <div class="input-field col s12 m5 l3">
-                    <input id="icon_prefix" class="white" placeholder="Ville départ" type="text">
-                    <label style="display: none;" for="icon_prefix">Ville départ</label>
+                    <input id="city_start" class="white" placeholder="Ville départ" type="text">
+                    <label style="display: none;" for="city_start">Ville départ</label>
                 </div>
                 <div class="input-field col s12 m5 l3">
-                    <input id="icon_telephone" class="white" placeholder="Ville arrivée" type="tel">
-                    <label style="display: none;" for="icon_prefix">Ville arrivée</label>
+                    <input id="city_end" class="white" placeholder="Ville arrivée" type="tel">
+                    <label style="display: none;" for="city_end">Ville arrivée</label>
                 </div>
                 <div class="input-field col s12 m2 l2">
                     <input type="date" class="datepicker white" placeholder="Date">
@@ -213,6 +213,11 @@
             }
 
             addRoute(getPos('Gap'), getPos('Paris'));
+            
+            
+            var options = {types: ['(cities)']};
+            new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
+            new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
         }
 
         /** Récupérer les positions actuelles */
@@ -226,7 +231,7 @@
 
     </script>
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap"></script>
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
 
 
 
