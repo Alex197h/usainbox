@@ -95,17 +95,18 @@
       <div class="white nav-wrapper">
         <a href="{{route('home')}}" class="brand-logo">{{ Html::image('public/img/logo.png', 'UBox') }}</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse black-text"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+        <li><a href="#" class="black-text">A propos</a></li>
         @if (Auth::check())
-          <ul class="right hide-on-med-and-down">
             <li><a href="{{route('login')}}" class="black-text">Déposer une annonce</a></li>
             <li><a href="{{route('logout')}}" class="black-text">Déconnexion</a></li>
           </ul>
           <ul class="side-nav" id="mobile-demo">
             <li><a href="{{route('login')}}" class="black-text">Déposer une annonce</a></li>
+            <li><a href="#" class="black-text">A propos</a></li>
             <li><a href="{{route('logout')}}" class="black-text">Déconnexion</a></li>
           </ul>
         @else
-          <ul class="right hide-on-med-and-down">
             <li><a href="{{route('login')}}" class="black-text">Déposer une annonce</a></li>
             <li><a href="{{route('register')}}" class="black-text">Inscription</a></li>
             <li><a href="{{route('login')}}" class="black-text">Connexion</a></li>
@@ -114,6 +115,7 @@
             <li><a href="{{route('login')}}" class="black-text">Déposer une annonce</a></li>
             <li><a href="{{route('register')}}" class="black-text">Inscription</a></li>
             <li><a href="{{route('login')}}" class="black-text">Connexion</a></li>
+            <li><a href="#" class="black-text">A propos</a></li>
           </ul>
         @endif
       </div>

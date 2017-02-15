@@ -10,7 +10,7 @@
     @foreach($offers as $offer)
         <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
             <div class="section center">
-                <h5>Offre de transport</h5>
+                <h5>Offre</h5>
                 @if(isset($steps[$offer->id]))
                     @foreach($steps[$offer->id] as $step)
 
