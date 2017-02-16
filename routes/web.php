@@ -13,7 +13,13 @@ Route::get('/home', 'HomeController@index');
 Route::get('/transport-offers', 'TransportOffersController@index')->name('transport-offers');
 Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
 
+Route::get('/offer/transport/create', 'TransportOffersController@create')->name('create_transport_offer');
+Route::post('/offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
+
 Route::get('/shipping-offers', 'ShippingOffersController@index')->name('shippin-offers');
+
+Route::get('/offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
+Route::post('/offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');
 
 
 
@@ -23,6 +29,7 @@ Route::post('contact', 'AboutController@store')->name('contact_post');
 
 /* A supprimer */
 Route::get('test', 'AboutController@test')->name('test');
+Route::post('ptest', 'AboutController@ptest')->name('ptest');
 
 
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');

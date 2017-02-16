@@ -44,4 +44,9 @@ class AboutController extends Controller{
         
         return view('front.pages.test', ['transport_offers' => $transport_offers]);
     }
+    
+    public function ptest(){
+        $offer = TransportOffer::find($_POST['transport']);
+        echo json_encode($offer->toArray());
+    }
 }
