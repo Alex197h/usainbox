@@ -123,3 +123,7 @@ input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
 .collapsible-body{
   padding: 2rem !important;
 }
+
+.collapsible-header{
+  color: #786A6A !important;
+}
