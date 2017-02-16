@@ -38,7 +38,7 @@ input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
 .header-search{
   background: url('../img/header.jpg') center center;
   background-size: cover;
-  padding: 30vh 0 200px 0 !important;  
+  padding: 30vh 0 200px 0 !important;
   min-height: calc(100vh - 64px);
 }
 .floating{
@@ -120,4 +120,3 @@ input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
     -moz-border-radius:3px;
     border-radius:3px;
 }
-

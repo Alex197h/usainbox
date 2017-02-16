@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Nous contacter')
+@section('title', '404')
 
   @section('content')
     <div class="container">
