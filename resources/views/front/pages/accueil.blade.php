@@ -9,11 +9,11 @@
     {{ csrf_field() }}
     <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
     <div class="row">
-      <div class="input-field col s12 m5 l3">
+      <div class="input-field col s12 m5 l4">
         <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start">
         <label style="display: none;" for="city_start">Ville départ</label>
       </div>
-      <div class="input-field col s12 m5 l3">
+      <div class="input-field col s12 m5 l4">
         <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end">
         <label style="display: none;" for="city_end">Ville arrivée</label>
       </div>
