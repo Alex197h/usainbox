@@ -150,20 +150,20 @@
         <h5 class="white-text">Suivez-nous</h5>
         <ul>
           <li>
-            <a class="grey-text text-lighten-3" href="https://twitter.com/UBox12" target="_blank">
-              {{ Html::image('public/img/twitter.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }} Twitter
+            <a class="grey-text text-lighten-3 valign-wrapper" href="https://twitter.com/UBox12" target="_blank">
+              {{ Html::image('public/img/twitter.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Twitter</span>
             </a>
           </li>
 
           <li>
-            <a class="grey-text text-lighten-3" href="https://www.facebook.com/UBox-1837407246530068/" target="_blank">
-              {{ Html::image('public/img/facebook.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }} Facebook
+            <a class="grey-text text-lighten-3 valign-wrapper" href="https://www.facebook.com/UBox-1837407246530068/" target="_blank">
+              {{ Html::image('public/img/facebook.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Facebook</span>
             </a>
           </li>
 
           <li>
-            <a class="grey-text text-lighten-3" href="https://plus.google.com/u/3/109901738787479044420" target="_blank">
-              {{ Html::image('public/img/google.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }} Google Plus
+            <a class="grey-text text-lighten-3 valign-wrapper" href="https://plus.google.com/u/3/109901738787479044420" target="_blank">
+              {{ Html::image('public/img/google.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Google Plus</span>
             </a>
           </li>
         </ul>
