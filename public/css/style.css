@@ -1,7 +1,6 @@
 body{
     background: #f5f5f5;
 }
-
 header .brand-logo img{
   padding: 5px;
 }
@@ -119,4 +118,8 @@ input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
     -webkit-border-radius:3px;
     -moz-border-radius:3px;
     border-radius:3px;
+}
+
+.collapsible-body{
+  padding: 2rem !important;
 }
