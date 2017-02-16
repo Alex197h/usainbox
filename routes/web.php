@@ -17,6 +17,7 @@ Route::get('/shipping-offers', 'ShippingOffersController@index')->name('shippin-
 
 
 
+Route::get('about', 'AboutController@about')->name('about');
 Route::get('contact', 'AboutController@create')->name('contact');
 Route::post('contact', 'AboutController@store')->name('contact_post');
 

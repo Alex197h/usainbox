@@ -8,6 +8,6 @@ class TypeVehicle extends Model {
     public $timestamps = false;
     
     public function vehicules(){
-        return $this->hasMany('App\Vehicule');
+        return $this->hasMany('App\Vehicle');
     }
 }

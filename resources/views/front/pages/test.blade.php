@@ -80,15 +80,22 @@
                 mapTypeControl: false,
                 scaleControl: false,
                 draggable: true,
-                zoom: 10
+                zoom: 6
             });
             
+            var icon = {
+                url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
+                scaledSize: new google.maps.Size(20, 20),
+                origin: new google.maps.Point(0,0),
+                anchor: new google.maps.Point(0, 0)
+            };
             
             for(i in Cities){
                 if(Cities[i][0]){
                     var marker = new google.maps.Marker({
                         position: {lng: Cities[i][0].lng, lat: Cities[i][0].lat},
                         map: map,
+                        icon: icon,
                         title: Cities[i][0].label
                     });
                 }
