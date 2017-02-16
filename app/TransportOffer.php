@@ -5,8 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class TransportOffer extends Model {
-    public function vehicule(){
-        return $this->belongsTo('App\Vehicule');
+    public function vehicle(){
+        return $this->belongsTo('App\Vehicle');
     }
 
     public function reservations(){
