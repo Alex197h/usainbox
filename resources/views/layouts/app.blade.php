@@ -180,11 +180,7 @@
 $(".button-collapse").sideNav();
 </script>
 <script type="text/javascript">
-$('.datepicker').pickadate({
-  selectMonths: true,
-  selectYears: 15,
-  format: 'yyyy-mm-dd',
-});
+
 $(document).ready(function() {
   $('select').material_select();
 });
