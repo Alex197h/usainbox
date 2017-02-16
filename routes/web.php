@@ -23,6 +23,7 @@ Route::post('contact', 'AboutController@store')->name('contact_post');
 /* A supprimer */
 Route::get('test', 'AboutController@test')->name('test');
 
+
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
 
 

@@ -13,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require('App/Helpers/Test.php');
+        setlocale(LC_TIME, 'fr_FR.utf8','fra');
+        var_dump( strftime("%A %d %B") );
     }
 
     /**
