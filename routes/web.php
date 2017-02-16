@@ -10,14 +10,23 @@ Route::get('/map', function() {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/transport-offers', 'TransportOffersController@index');
-Route::get('/shipping-offers', 'ShippingOffersController@index');
+Route::get('/transport-offers', 'TransportOffersController@index')->name('transport-offers');
+Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
+
+Route::get('/shipping-offers', 'ShippingOffersController@index')->name('shippin-offers');
+
 
 
 Route::get('contact', 'AboutController@create')->name('contact');
 Route::post('contact', 'AboutController@store')->name('contact_post');
 
+/* A supprimer */
+Route::get('test', 'AboutController@test')->name('test');
+
+
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
+Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
+Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 
 
 
