@@ -162,6 +162,9 @@
           selectYears: 15,
           format: 'yyyy-mm-dd',
       });
+      $(document).ready(function() {
+          $('select').material_select();
+      });
   </script>
 </body>
 </html>

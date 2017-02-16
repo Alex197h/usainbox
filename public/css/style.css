@@ -34,6 +34,9 @@ input:focus:not([readonly])+label, textarea:focus:not([readonly])+label{
 [type="radio"]:checked+label:after{
     background-color: #786A6A !important;
 }
+.dropdown-content li>a, .dropdown-content li>span{
+    color: #786A6A !important;
+}
 
 .header-search{
   background: url('../img/header.jpg') center center;
