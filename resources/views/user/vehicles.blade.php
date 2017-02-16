@@ -5,16 +5,6 @@
 @section('content')
     <div class="row">
 
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <div class="col s12 section center">
             <h4>Vos véhicules</h4>
         </div>
@@ -132,6 +122,18 @@
                         @endif
                     </div>
 
+                    <div class="col s12{{ $errors->has('weight') ? ' has-error' : '' }}">
+                        <label for="weight" class="col-md-4 control-label">Poids maximum</label>
+
+                        <input id="weight" placeholder="Poids disponible" type="number" class="form-control" name="weight">
+
+                        @if ($errors->has('weight'))
+                            <span class="col s12">
+                                    <strong>{{ $errors->first('weight') }}</strong>
+                                </span>
+                        @endif
+                    </div>
+
                     <div class="col s12{{ $errors->has('height') ? ' has-error' : '' }}">
                         <label for="height" class="col-md-4 control-label">Hauteur</label>
 
@@ -139,14 +141,20 @@
 
                         @if ($errors->has('height'))
                             <span class="col s12">
-                                    <strong>{{ $errors->first('height') }}</strong>
-                                </span>
+                                <strong>{{ $errors->first('height') }}</strong>
+                            </span>
                         @endif
                     </div>
 
-                    <p class="col s12">
-                        <input type="checkbox" name="default_vehicle" id="default_vehicle"/>
+                    <p class="col s12{{ $errors->has('default_vehicle') ? ' has-error' : '' }}">
+                        <input type="checkbox" name="default_vehicle" id="default_vehicle" value="1"/>
                         <label for="default_vehicle"> Véhicule utilisé par défaut</label>
+
+                        @if ($errors->has('default_vehicle'))
+                            <span class="col s12">
+                                <strong>{{ $errors->first('default_vehicle') }}</strong>
+                            </span>
+                        @endif
                     </p>
 
                     <div class="right-align">

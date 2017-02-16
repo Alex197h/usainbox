@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\TypeVehicle;
+use App\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
@@ -39,12 +40,34 @@ class UserController extends Controller {
             'volume' => 'required|numeric',
             'length' => 'numeric',
             'width' => 'numeric',
-            'height' => 'numeric',
-            'default_vehicle' => 'boolean'
+            'height' => 'numeric'
 
         );
 
         $this->validate($request, $rules);
-        dd('coucou');
+
+        $auth_vehicle_default = Vehicle::where('user_id', Auth::user()->id)->where('default', 1)->count();
+
+        $vehicle = new Vehicle();
+        $vehicle->type_vehicle_id = $request->input('vehicle_type');
+        $vehicle->user_id = Auth::user()->id;
+        if($auth_vehicle_default == 1 && $request->input('default_vehicle')){
+            Vehicle::where('user_id', Auth::user()->id)->where('default', 1)->update(['default' => 0]);
+        }
+        $vehicle->default = $request->input('default_vehicle') ? 1 : 0;
+        $vehicle->max_width = $request->input('width');
+        $vehicle->max_length = $request->input('length');
+        $vehicle->max_height = $request->input('height');
+        $vehicle->max_volume = $request->input('volume');
+        $vehicle->max_weight = $request->input('weight');
+        $vehicle->car_brand = $request->input('vehicle_brand');
+        $vehicle->car_model = $request->input('vehicle_model');
+
+        if($vehicle->save()){
+            return redirect()->route('user_vehicles', [Auth::user()->id]);
+        }else{
+            return redirect()->back()->withInput();
+        }
+
     }
 }
