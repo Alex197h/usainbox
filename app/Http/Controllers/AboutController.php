@@ -21,4 +21,12 @@ class AboutController extends Controller
 
         return redirect('contact')->with('status', 'Message envoyé !');
     }
+    
+    
+    
+    public function test(){
+        
+        
+        return view('front.pages.test');
+    }
 }
