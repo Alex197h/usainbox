@@ -6,27 +6,28 @@
 
 
     <div class="row header-search ">
-        <form class=" col s12">
+        <form class=" col s12" role="form" method="POST" action="{{ route('transport') }}">
+          {{ csrf_field() }}
             <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
             <div class="row">
                 <div class="input-field col s12 m5 l3">
-                    <input id="city_start" class="white" placeholder="Ville départ" type="text">
+                    <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start">
                     <label style="display: none;" for="city_start">Ville départ</label>
                 </div>
                 <div class="input-field col s12 m5 l3">
-                    <input id="city_end" class="white" placeholder="Ville arrivée" type="tel">
+                    <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end">
                     <label style="display: none;" for="city_end">Ville arrivée</label>
                 </div>
                 <div class="input-field col s12 m2 l2">
                     <input type="date" class="datepicker white" placeholder="Date">
                 </div>
-                <div class="input-field col s12 m6 l2">
+                {{-- <div class="input-field col s12 m6 l2">
                     <button class="col s12 btn waves-effect waves-light white black-text" type="button" name="action">
                         Expédier
                     </button>
-                </div>
+                </div> --}}
                 <div class="input-field col s12 m6 l2">
-                    <button class="col s12 btn waves-effect waves-light white black-text" type="button" name="action">
+                    <button type="submit" class="col s12 btn waves-effect waves-light white black-text">
                         Transporter
                     </button>
                 </div>
@@ -213,8 +214,8 @@
             }
 
             addRoute(getPos('Gap'), getPos('Paris'));
-            
-            
+
+
             var options = {types: ['(cities)']};
             new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
             new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
