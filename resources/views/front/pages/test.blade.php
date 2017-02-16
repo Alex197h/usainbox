@@ -6,75 +6,25 @@
 
 
     <div id="map"></div>
+    <div id="show">
+        <h4 class="title"></h4>
+        <b class="description"></b>
+        <div class="offer">
+            
+        </div>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
+        var MapElement = document.getElementById('map');
+        var ShowElement = document.getElementById('show');
         var Cities = <?= json_encode($transport_offers) ?>;
         
-        var Villes = {
-            Gap: {
-                lat: 44.559638,
-                lng: 6.079758
-            },
-            Vars: {
-                lat: 44.57207367490651,
-                lng: 6.680030822753906
-            },
-            Tallard: {
-                lat: 44.46153683560693,
-                lng: 6.055011749267578
-            },
-            Sisteron: {
-                lat: 44.19500528245342,
-                lng: 5.943045616149902
-            },
-            Briancon: {
-                lat: 44.89926459675508,
-                lng: 6.6432952880859375
-            },
-            Hyeres: {
-                lat: 43.118841028558776,
-                lng: 6.128911972045898
-            },
-            Toulon: {
-                lat: 43.124228780989085,
-                lng: 5.92987060546875
-            },
-            Quincy: {
-                lat: 47.13377541734805,
-                lng: 2.1560239791870117
-            },
-            Orleans: {
-                lat: 47.90667693563599,
-                lng: 1.9095611572265625
-            },
-            Paris: {
-                lat: 48.8511618571692,
-                lng: 2.3565673828125
-            },
-            Bordeaux: {
-                lat: 44.83834308566653,
-                lng: -0.569915771484375
-            },
-            NewYork: {
-                lat: 40.69521661351715,
-                lng: -73.9984130859375
-            },
-            Bogota: {
-                lat: 4.688666902768214,
-                lng: -74.06707763671875
-            },
-        }
-
-        function getPos(ville) {
-            return {lat: Villes[ville].lat, lng: Villes[ville].lng};
-        }
-
-
         var map;
-        var coords = getPos('Gap');
-
+        
+        
         function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: coords,
+            map = new google.maps.Map(MapElement, {
+                center: {lng: 2.70263671875, lat: 46.255846818480315},
                 scrollwheel: false,
                 navigationControl: false,
                 mapTypeControl: false,
@@ -90,6 +40,16 @@
                 anchor: new google.maps.Point(0, 0)
             };
             
+            var Markers = [];
+            var MarkersHidden = false;
+            var MarkerClicked = false;
+            
+            var Directions = new google.maps.DirectionsRenderer({
+                map: map,
+                preserveViewport: true,
+            });
+            
+            
             for(i in Cities){
                 if(Cities[i][0]){
                     var marker = new google.maps.Marker({
@@ -97,53 +57,102 @@
                         map: map,
                         icon: icon,
                         title: Cities[i][0].label,
-                        cities: Cities[i]
+                        cities: Cities[i],
+                        transport: i,
+                        path: null,
                     });
                     
                     marker.addListener('mouseover', function() {
-                        console.log(this.cities)
+                        for(m in Markers){
+                            Markers[m].setVisible(false);
+                        }
+                        this.setVisible(true);
+                        this.path = setPath(this.cities);
+                        
+                        MarkersHidden = true;
                     });
+                    
+                    marker.addListener('click', function() {
+                        var clone = this;
+                        
+                        $.ajax({
+                            url: 'ptest',
+                            method: 'POST',
+                            dataType: 'json',
+                            data: {
+                                '_token': '{{ csrf_token() }}',
+                                'transport': clone.transport,
+                            },
+                            success: (function(result){
+                                MarkerClicked = true;
+                                $(ShowElement).find('.title').text(result.date_start);
+                                $(ShowElement).find('.description').text(result.description);
+                                $(ShowElement).find('.offer').html(
+                                    'Autoroute: '+(result.highway ? 'Oui' : 'Non')
+                                    +'<br>Trajet: '+(result.is_regular ? 'Régulier' : 'Occasionnel')
+                                );
+                            }),
+                        });
+                    });
+                    Markers.push(marker);
                 }
             }
+            
+            map.addListener('mousemove', function() {
+                if(!MarkerClicked && MarkersHidden){
+                    for(m in Markers){
+                        Markers[m].setVisible(true);
+                    }
+                    Directions.setDirections();
+                    MarkersHidden = false;
+                }
+            });
+            
+            map.addListener('click', function() {
+                if(MarkerClicked){
+                    /** Effacer contenu, effacer route actuelle */
+                    Directions.setDirections();
+                    MarkerClicked = false;
+                }
+            });
             
             
             
             /** Route */
-            /*
-            function addRoute(origin, destination) {
-                direction = new google.maps.DirectionsRenderer({
-                    map: map,
-                    // panel: document.getElementById('map')
-                });
+            
+            function setPath(cities) {
+                var origin = {lng: cities[0].lng, lat: cities[0].lat};
+                var destination = {lng: cities[cities.length-1].lng, lat: cities[cities.length-1].lat};
+                var waypoints = [];
+                
+                if(cities.length > 2){
+                    for(var i = 1; i < cities.length-1; i++){
+                        waypoints.push({location: {
+                            lng: cities[i].lng,
+                            lat: cities[i].lat,
+                        }, stopover: true});
+                    }
+                }
+                
                 var request = {
-                    origin: origin,
-                    destination: destination,
                     travelMode: google.maps.DirectionsTravelMode.DRIVING,
                     avoidTolls: false,
-                    waypoints: [
-                        {location: getPos('Bordeaux'), stopover: true},
-                        {location: getPos('Toulon'), stopover: true},
-                        {location: getPos('Briancon'), stopover: true},
-                        {location: getPos('Orleans'), stopover: true},
-                        {location: getPos('Hyeres'), stopover: true},
-                        {location: getPos('Quincy'), stopover: true},
-                    ]
+                    origin: origin,
+                    destination: destination,
+                    waypoints: waypoints
                 }
                 var directionsService = new google.maps.DirectionsService();
                 directionsService.route(request, function (response, status) {
-                    if (status == google.maps.DirectionsStatus.OK) {
-                        direction.setDirections(response);
+                    if(status == google.maps.DirectionsStatus.OK) {
+                        Directions.setDirections(response);
                     }
                 });
             }
-
-            addRoute(getPos('Gap'), getPos('Paris'));
-            */
+            
             
         }
         
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
 
 
 

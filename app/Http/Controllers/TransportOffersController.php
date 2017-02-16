@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\TransportOffer;
 use App\TransportStep;
 use App\Vehicle;
+use Auth;
 
 class TransportOffersController extends Controller {
     public function index(){
@@ -39,6 +40,15 @@ class TransportOffersController extends Controller {
             'steps' => $city_steps
         );
         return view('front.transport.list', $data);
+    }
+
+    public function create(){
+        $auth = Auth::user();
+        $vehicles = $auth->vehicles;
+        $data = array(
+            'vehicles' => $vehicles
+        );
+        return view('front.transport.create', $data);
     }
 
     public function search(Request $request){

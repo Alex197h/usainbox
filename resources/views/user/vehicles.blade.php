@@ -9,7 +9,7 @@
             <h4>Vos véhicules</h4>
         </div>
         @foreach($vehicles as $vehicle)
-            <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
+            <div class="col l6 m10 s12 offset-l3 offset-m1 card-panel">
                 <div class="section center">
                     <h5>{{ ucfirst($vehicle->car_brand) }} {{ ucfirst($vehicle->car_model) }}</h5>
                 </div>
@@ -39,7 +39,7 @@
             <h4>Ajouter un véhicule</h4>
         </div>
 
-        <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
+        <div class="col l6 m10 s12 offset-l3 offset-m1 card-panel">
             <div class="section">
                 <form role="form" method="POST" action="{{ route('post_user_vehicles') }}">
                     {{ csrf_field() }}

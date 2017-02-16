@@ -151,19 +151,19 @@
         <ul>
           <li>
             <a class="grey-text text-lighten-3 valign-wrapper" href="https://twitter.com/UBox12" target="_blank">
-              {{ Html::image('public/img/twitter.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Twitter</span>
+              {{ Html::image('public/img/twitter.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 5px;')) }} <span class="hide-on-small-only"> Twitter</span>
             </a>
           </li>
 
           <li>
             <a class="grey-text text-lighten-3 valign-wrapper" href="https://www.facebook.com/UBox-1837407246530068/" target="_blank">
-              {{ Html::image('public/img/facebook.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Facebook</span>
+              {{ Html::image('public/img/facebook.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 5px;')) }} <span class="hide-on-small-only"> Facebook</span>
             </a>
           </li>
 
           <li>
             <a class="grey-text text-lighten-3 valign-wrapper" href="https://plus.google.com/u/3/109901738787479044420" target="_blank">
-              {{ Html::image('public/img/google.png', 'Lorem Ipsum', array('class' => 'responsive-img valign')) }} <span class="hide-on-small-only"> Google Plus</span>
+              {{ Html::image('public/img/google.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 5px;')) }} <span class="hide-on-small-only"> Google Plus</span>
             </a>
           </li>
         </ul>
@@ -180,11 +180,7 @@
 $(".button-collapse").sideNav();
 </script>
 <script type="text/javascript">
-$('.datepicker').pickadate({
-  selectMonths: true,
-  selectYears: 15,
-  format: 'yyyy-mm-dd',
-});
+
 $(document).ready(function() {
   $('select').material_select();
 });
