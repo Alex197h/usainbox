@@ -7,6 +7,8 @@
 
     <div id="map"></div>
     <script type="text/javascript">
+        var Cities = <?= json_encode($transport_offers) ?>;
+        
         var Villes = {
             Gap: {
                 lat: 44.559638,
@@ -80,69 +82,26 @@
                 draggable: true,
                 zoom: 10
             });
-
-            var marker = new google.maps.Marker({
-                position: coords,
-                map: map,
-                title: 'Hello World!'
-            });
-
-            var infoWindow = new google.maps.InfoWindow({map: map});
-
-
-            /** Géolocaliser l'utilisateur */
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    infoWindow.setPosition(pos);
-                    map.setCenter(pos);
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            } else {
-                handleLocationError(false, infoWindow, map.getCenter());
-            }
-            /***************/
-
-
-            /** Log positions on click */
-            var ClickPos = false;
-            if (ClickPos) {
-                google.maps.event.addListener(map, "click", function (event) {
-                    var latitude = event.latLng.lat();
-                    var longitude = event.latLng.lng();
-                    console.log(latitude + ', ' + longitude);
-
-                    radius = new google.maps.Circle({
+            
+            
+            for(i in Cities){
+                if(Cities[i][0]){
+                    var marker = new google.maps.Marker({
+                        position: {lng: Cities[i][0].lng, lat: Cities[i][0].lat},
                         map: map,
-                        radius: 100,
-                        center: event.latLng,
-                        fillColor: '#777',
-                        fillOpacity: 0.1,
-                        strokeColor: '#AA0000',
-                        strokeOpacity: 0.8,
-                        strokeWeight: 2,
-                        scrollwheel: false,
-                        navigationControl: false,
-                        draggable: true,    // Dragable
-                        editable: true      // Resizable
+                        title: Cities[i][0].label
                     });
-                    map.panTo(new google.maps.LatLng(latitude, longitude));
-                });
+                }
             }
-            /** Eng log positions */
-
-
+            
+            
+            
             /** Route */
-
+            /*
             function addRoute(origin, destination) {
                 direction = new google.maps.DirectionsRenderer({
                     map: map,
-                    panel: document.getElementById('map')
+                    // panel: document.getElementById('map')
                 });
                 var request = {
                     origin: origin,
@@ -167,21 +126,13 @@
             }
 
             addRoute(getPos('Gap'), getPos('Paris'));
+            */
             
-            
-            var options = {types: ['(cities)']};
-            new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
-            new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
         }
-
-        /** Récupérer les positions actuelles */
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
-        }
+        
     </script>
-    
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+
+
+
 @endsection

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\TransportOffer;
 
 class AboutController extends Controller
 {
@@ -25,8 +26,21 @@ class AboutController extends Controller
     
     
     public function test(){
+        $offers = TransportOffer::all();
         
+        $transport_offers = [];
+        foreach($offers as $offer){
+            if($offer->steps){
+                foreach($offer->steps as $k => $step){
+                    $transport_offers[$step->transport_offer_id][$k] = [
+                        'lng' => $step->longitude,
+                        'lat' => $step->latitude,
+                        'label' => $step->label,
+                    ];
+                }
+            }
+        }
         
-        return view('front.pages.test');
+        return view('front.pages.test', ['transport_offers' => $transport_offers]);
     }
 }

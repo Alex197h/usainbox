@@ -25,6 +25,8 @@ Route::get('test', 'AboutController@test')->name('test');
 
 
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
+Route::get('user/vehicle', 'UserController@getVehicles')->name('user_vehicles');
+Route::post('user/vehicle', 'UserController@postVehicles')->name('post_user_vehicles');
 
 
 
