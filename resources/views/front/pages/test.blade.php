@@ -42,6 +42,13 @@
             
             var Markers = [];
             var MarkersHidden = false;
+            var MarkerClicked = false;
+            
+            var Directions = new google.maps.DirectionsRenderer({
+                map: map,
+                preserveViewport: true,
+            });
+            
             
             for(i in Cities){
                 if(Cities[i][0]){
@@ -77,6 +84,7 @@
                                 'transport': clone.transport,
                             },
                             success: (function(result){
+                                MarkerClicked = true;
                                 $(ShowElement).find('.title').text(result.date_start);
                                 $(ShowElement).find('.description').text(result.description);
                                 $(ShowElement).find('.offer').html(
@@ -91,15 +99,20 @@
             }
             
             map.addListener('mousemove', function() {
-                if(MarkersHidden){
+                if(!MarkerClicked && MarkersHidden){
                     for(m in Markers){
                         Markers[m].setVisible(true);
-                        if(Markers[m].path){
-                            Markers[m].path.setMap(null);
-                            Markers[m].path = null;
-                        }
                     }
+                    Directions.setDirections();
                     MarkersHidden = false;
+                }
+            });
+            
+            map.addListener('click', function() {
+                if(MarkerClicked){
+                    /** Effacer contenu, effacer route actuelle */
+                    Directions.setDirections();
+                    MarkerClicked = false;
                 }
             });
             
@@ -121,10 +134,6 @@
                     }
                 }
                 
-                direction = new google.maps.DirectionsRenderer({
-                    map: map,
-                    preserveViewport: true,
-                });
                 var request = {
                     travelMode: google.maps.DirectionsTravelMode.DRIVING,
                     avoidTolls: false,
@@ -135,10 +144,9 @@
                 var directionsService = new google.maps.DirectionsService();
                 directionsService.route(request, function (response, status) {
                     if(status == google.maps.DirectionsStatus.OK) {
-                        direction.setDirections(response);
+                        Directions.setDirections(response);
                     }
                 });
-                return direction;
             }
             
             
