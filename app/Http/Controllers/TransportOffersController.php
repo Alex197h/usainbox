@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\TransportOffer;
+use App\TransportStep;
 use App\Vehicle;
 
 class TransportOffersController extends Controller {
@@ -88,7 +89,24 @@ class TransportOffersController extends Controller {
 
       $end_area = array($min_new_lat_end, $min_new_lng_end, $plus_new_lat_end, $plus_new_lng_end);
 
-      dd($start_city,$end_city, $start_area, $end_area);
+
+      $offers = TransportStep::select('transport_offer_id')->where(function ($query) use($start_area, $end_area){
+            $query->where('longitude', '>', $start_area[1])
+                ->where('longitude', '<', $start_area[3])
+                ->where('latitude', '>', $start_area[0])
+                ->where('latitude', '<', $start_area[2]);
+        })->orWhere(function ($query) use($start_area, $end_area){
+            $query->where('longitude', '>', $end_area[1])
+                ->where('longitude', '<', $end_area[3])
+                ->where('latitude', '>', $end_area[0])
+                ->where('latitude', '<', $end_area[2]);
+        })->groupBy("transport_offer_id")->havingRaw('COUNT(*) > 1')->where('longitude', '>', $end_area[1])
+            ->where('longitude', '<', $end_area[3])
+            ->where('latitude', '>', $end_area[0])
+            ->where('latitude', '<', $end_area[2])->get();
+
+
+      dd($start_city,$end_city, $offers);
       //$data['city_start'] = $request->input('city_start')
       //return redirect()->view('front.transport.list_trie', $data);
     }
