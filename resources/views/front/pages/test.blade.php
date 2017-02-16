@@ -85,7 +85,7 @@
             
             var icon = {
                 url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
-                scaledSize: new google.maps.Size(20, 20),
+                scaledSize: new google.maps.Size(25, 25),
                 origin: new google.maps.Point(0,0),
                 anchor: new google.maps.Point(0, 0)
             };
@@ -96,7 +96,12 @@
                         position: {lng: Cities[i][0].lng, lat: Cities[i][0].lat},
                         map: map,
                         icon: icon,
-                        title: Cities[i][0].label
+                        title: Cities[i][0].label,
+                        cities: Cities[i]
+                    });
+                    
+                    marker.addListener('mouseover', function() {
+                        console.log(this.cities)
                     });
                 }
             }
