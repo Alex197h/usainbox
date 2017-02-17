@@ -17,7 +17,7 @@
 
             <div class="col l6 m8 s12 offset-l3 offset-m2 card-panel">
 
-                <h3>Contact</h3>
+                <h3>Qu'est-ce qui vous amène ?</h3>
 
                 <div class="section">
                     <form role="form" method="POST" action="{{ route('contact_post') }}">
