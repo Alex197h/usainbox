@@ -70,6 +70,7 @@
                         this.path = setPath(this.cities);
                     });
                     
+            /** Events on stacked markers */
                     marker.addListener('mouseout', function() {
                         if(!this.showPath){
                             for(m in Markers){
