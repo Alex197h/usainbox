@@ -120,12 +120,12 @@ class TransportOffersController extends Controller {
               ->where('longitude', '<', $start_area[3])
               ->where('latitude', '>', $start_area[0])
               ->where('latitude', '<', $start_area[2]);
-      })->whereIn('transport_offer_id', array(TransportStep::select('transport_offer_id')->where(function ($query) use($start_area, $end_area){
+      })->whereIn('transport_offer_id', TransportStep::select('transport_offer_id')->where(function ($query) use($start_area, $end_area){
           $query->where('longitude', '>', $end_area[1])
               ->where('longitude', '<', $end_area[3])
               ->where('latitude', '>', $end_area[0])
               ->where('latitude', '<', $end_area[2]);
-      })))-get();
+      })->get()->toArray())->get();
 
 
       dd($start_city,$end_city, $offers);
