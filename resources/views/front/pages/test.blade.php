@@ -30,6 +30,7 @@
                 mapTypeControl: false,
                 scaleControl: false,
                 draggable: true,
+                scrollwheel:true,
                 zoom: 6
             });
             
