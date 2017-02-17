@@ -128,7 +128,7 @@
             <div class="col l3">
                 <h5 class="white-text">Informations</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="{{route('about')}}" class="black-text">Comment ça marche ?</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'about')}}" class="black-text">Comment ça marche ?</a></li>
                     <li><a class="grey-text text-lighten-3" href="#" class="black-text">A quoi ça sert ?</a></li>
                     <li><a class="grey-text text-lighten-3" href="#" class="black-text">Plan du site</a></li>
                     <li><a class="grey-text text-lighten-3" href="#">Charte de bonne conduite</a></li>
@@ -139,7 +139,7 @@
                 <h5 class="white-text">À propos</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="#">Qui sommes nous ?</a></li>
-                    <li><a class="grey-text text-lighten-3" href="{{route('contact')}}">Nous contacter</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'contact')}}">Nous contacter</a></li>
 
                 </ul>
             </div>

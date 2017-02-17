@@ -4,7 +4,9 @@
 
 @section('content')
 
-
+    <style>
+        #map{height: 700px;}
+    </style>
     <div id="map"></div>
     <div id="show">
         <h4 class="title"></h4>
@@ -45,10 +47,6 @@
             var MarkersHidden = false;
             var MarkerClicked = false;
             
-            var Directions = new google.maps.DirectionsRenderer({
-                map: map,
-                preserveViewport: true,
-            });
             
             
             for(i in Cities){
@@ -60,6 +58,7 @@
                         title: Cities[i][0].label,
                         cities: Cities[i],
                         transport: i,
+                        showPath: false,
                         path: null,
                     });
                     
@@ -69,11 +68,19 @@
                         }
                         this.setVisible(true);
                         this.path = setPath(this.cities);
-                        
-                        MarkersHidden = true;
+                    });
+                    
+                    marker.addListener('mouseout', function() {
+                        if(!this.showPath){
+                            for(m in Markers){
+                                Markers[m].setVisible(true);
+                            }
+                            this.path.setMap(null);
+                        }
                     });
                     
                     marker.addListener('click', function() {
+                        console.log('click')
                         var clone = this;
                         
                         $.ajax({
@@ -85,8 +92,9 @@
                                 'transport': clone.transport,
                             },
                             success: (function(result){
+                                clone.showPath = true;
                                 MarkerClicked = true;
-                                $(ShowElement).find('.title').text(result.date_start);
+                                $(ShowElement).find('.title').text(result.date_start+' ('+result.id+')');
                                 $(ShowElement).find('.description').text(result.description);
                                 $(ShowElement).find('.offer').html(
                                     'Autoroute: '+(result.highway ? 'Oui' : 'Non')
@@ -99,29 +107,47 @@
                 }
             }
             
+            map.addListener('click', function() {
+                for(m in Markers){
+                    Markers[m].setVisible(true);
+                    Markers[m].showPath = false;
+                    if(Markers[m].path){
+                        Markers[m].path.setMap(null);
+                        Markers[m].path = null;
+                    }
+                }
+            });
+            
+            /*
             map.addListener('mousemove', function() {
                 if(!MarkerClicked && MarkersHidden){
                     for(m in Markers){
                         Markers[m].setVisible(true);
+                        if(Markers[m].path){
+                            Markers[m].path.setMap(null);
+                            Markers[m].path = null;
+                        }
                     }
-                    Directions.setDirections();
+                    // Directions.setMap(null);
                     MarkersHidden = false;
                 }
             });
             
-            map.addListener('click', function() {
+            map.addListener('mousedown', function() {
                 if(MarkerClicked){
-                    /** Effacer contenu, effacer route actuelle */
-                    Directions.setDirections();
+                    // Directions.setDirections();
                     MarkerClicked = false;
                 }
             });
-            
+            */
             
             
             /** Route */
-            
             function setPath(cities) {
+                var Directions = new google.maps.DirectionsRenderer({
+                    map: map,
+                    preserveViewport: true,
+                });
                 var origin = {lng: cities[0].lng, lat: cities[0].lat};
                 var destination = {lng: cities[cities.length-1].lng, lat: cities[cities.length-1].lat};
                 var waypoints = [];
@@ -148,11 +174,11 @@
                         Directions.setDirections(response);
                     }
                 });
+                return Directions;
             }
             
             
         }
-        
     </script>
 
 

@@ -23,9 +23,9 @@ Route::post('/offer/shipping/create', 'ShippingOffersController@postCreate')->na
 
 
 
-Route::get('about', 'AboutController@about')->name('about');
-Route::get('contact', 'AboutController@create')->name('contact');
-Route::post('contact', 'AboutController@store')->name('contact_post');
+Route::get('page/{page}', 'AboutController@page')->name('page');
+Route::get('contact', 'AboutController@contact')->name('contact');
+Route::post('contact', 'AboutController@postcontact')->name('contact_post');
 
 /* A supprimer */
 Route::get('test', 'AboutController@test')->name('test');
