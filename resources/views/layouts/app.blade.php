@@ -175,9 +175,6 @@
   </div>
 </footer>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places">
-</script>
-
 <script>
 
 $(".button-collapse").sideNav();
