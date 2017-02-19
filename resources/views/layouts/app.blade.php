@@ -130,7 +130,6 @@
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="{{route('page', 'about')}}" class="black-text">Comment ça marche ?</a></li>
                     <li><a class="grey-text text-lighten-3" href="#" class="black-text">A quoi ça sert ?</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#" class="black-text">Plan du site</a></li>
                     <li><a class="grey-text text-lighten-3" href="#">Charte de bonne conduite</a></li>
 
                 </ul>
