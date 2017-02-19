@@ -9,7 +9,7 @@
             <h3>Conditions générales</h3>
             <div class="col s9 offset-s1 card-panel">
                 <h4>Inscription à la plateforme</h4>
-                <p>L’utilisation de plateforme est réservée aux personnes physiques âgées de 18 ans ou plus.
+                <p>L’utilisation de la plateforme est réservée aux personnes physiques âgées de 18 ans ou plus.
                     Toute inscription sur la plateforme par une personne mineure est strictement interdite.
                     En accédant, utilisant ou vous inscrivant sur la plateforme, vous déclarez et garantissez avoir 18 ans ou plus.
                 </p>
@@ -117,6 +117,41 @@
                         Vous reconnaissez et acceptez que les critères pris en compte dans le classement et l’ordre d’affichage de votre
                         Annonce parmi les autres Annonces relèvent de la seule discrétion de BlaBlaCar.
                     </p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Réservation d’une Place</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Système d’avis</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Conditions financières</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Politique d’annulation</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Comportement des utilisateurs de la Plateforme et Membres</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Données personnelles</h4>
+                <p>
+                </p>
+            </div>
+            <div class="col s9 offset-s1 card-panel">
+                <h4>Fonctionnement, disponibilité et fonctionnalités de la Plateforme</h4>
+                <p>
                 </p>
             </div>
         </div>
