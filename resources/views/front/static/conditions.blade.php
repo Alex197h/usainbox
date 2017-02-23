@@ -92,11 +92,16 @@
             <div class="col s9 offset-s1 card-panel">
                 <h4>Réservation d’une Place</h4>
                 <p>
+                    Lorsqu’un expéditeur est intéressé par une annonce, il peut effectuer une demande de réservation en ligne.
+                    Au moment de la réservation, l'expéditeur prend contact avec le transporteur et se met d'accord sur les
+                    modalités du transport. Après acceptation de la réservation par le transporteur,
+                    l'expéditeur reçoit une confirmation de réservation.
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
                 <h4>Système d’avis</h4>
                 <p>
+                    
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
