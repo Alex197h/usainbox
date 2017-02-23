@@ -137,7 +137,7 @@
             <div class="col l3">
                 <h5 class="white-text">À propos</h5>
                 <ul>
-                    <li><a class="grey-text text-lighten-3" href="#">Qui sommes nous ?</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'who')}}">Qui sommes nous ?</a></li>
                     <li><a class="grey-text text-lighten-3" href="{{route('page', 'contact')}}">Nous contacter</a></li>
 
                 </ul>
