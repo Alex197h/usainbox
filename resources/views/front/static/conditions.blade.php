@@ -25,11 +25,11 @@
                 </p>
                 <p>
                     Pour créer votre Compte, vous pouvez :
-                    <ul>
-                        <li>
+                    <ul class="collection">
+                        <li class="collection-item">
                             - remplir l’ensemble des champs figurant sur le formulaire d’inscription
                         </li>
-                        <li>
+                        <li class="collection-item">
                             - vous connecter, via Usain Box, à votre compte Facebook
                         </li>
                     </ul>
@@ -62,21 +62,21 @@
                 </p>
                 <p>
                     Vous êtes autorisé à publier une annonce si vous remplissez l’ensemble des conditions suivantes :
-                    <ul>
-                        <li>
+                    <ul class="collection">
+                        <li class="collection-item">
                             - vous êtes titulaire d’un permis de conduire valide
                         </li>
-                        <li>
+                        <li class="collection-item">
                             - le véhicule bénéficie d’une assurance au tiers valide
                         </li>
-                        <li>
+                        <li class="collection-item">
                             - vous n’avez aucune contre-indication ou incapacité médicale à conduire
                         </li>
 
-                        <li>
+                        <li class="collection-item">
                             - vous n’offrez pas plus de places que celles disponibles dans votre véhicule
                         </li>
-                        <li>
+                        <li class="collection-item">
                             - vous utilisez un véhicule en parfait état de fonctionnement et conforme aux usages et dispositions
                             légales applicables, notamment avec un contrôle technique à jour
                         </li>
@@ -101,32 +101,73 @@
             <div class="col s9 offset-s1 card-panel">
                 <h4>Système d’avis</h4>
                 <p>
-                    
+                    Usain Box vous encourage à laisser un avis sur un transporteur ou un expéditeur avec lequel vous avez
+                    effectué un trajet ou avec lequel vous étiez censé effectuer un trajet. En revanche, vous n’êtes pas
+                    autorisé à laisser un avis sur un membre avec lequel vous n’avez pas effectué de trajet.
+                    L’avis est publié sur votre profil.
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
                 <h4>Conditions financières</h4>
                 <p>
+                    L’accès et l’inscription à Usain Box, de même que la recherche, la consultation et la publication
+                    d’Annonces sont gratuites. En revanche, la réservation est payante en fonction des modalités définies
+                    par le transporteur et l'expéditeur.
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
                 <h4>Politique d’annulation</h4>
                 <p>
+                    Seuls les trajets avec réservation font l’objet de la présente politique d’annulation, Usain Box
+                    n’offrant aucune garantie, en cas d’annulation, pour quelque raison
+                    que ce soit, de la part d’un expéditeur ou d’un transporteur, d’un trajet sans réservation.
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
-                <h4>Comportement des utilisateurs de la Plateforme et Membres</h4>
+                <h4>Engagement de tous les utilisateurs</h4>
                 <p>
+                    Vous reconnaissez être seul responsable du respect de l’ensemble des lois, règlements et
+                    obligations applicables à votre utilisation de Usain Box.
+                </p>
+                <p>
+                    En utilisant Usain Box et lors des trajets, vous vous engagez à :
+                    <ul class="collection">
+                        <li class="collection-item">
+                            - ne pas utiliser Usain Box à des fins professionnelles, commerciales ou lucratives
+                        </li>
+                        <li class="collection-item">
+                            - ne transmettre à Usain Box ou aux autres membres aucune information fausse, trompeuse,
+                            mensongère ou frauduleuse
+                        </li>
+                        <li class="collection-item">
+                            - ne tenir aucun propos, n’avoir aucun comportement ou ne publier aucun contenu à
+                            caractère diffamatoire, injurieux, obscène, pornographique, vulgaire, offensant, agressif, déplacé,
+                            violent, menaçant, harcelant, raciste, xénophobe, à connotation sexuelle, incitant à la haine, à la
+                            violence, à la discrimination ou à la haine, encourageant les activités ou l’usage de substances
+                            illégales ou, plus généralement, contraires aux finalités de la Plateforme, de nature à porter atteinte
+                            aux droits de BlaBlaCar ou d’un tiers ou contraires aux bonnes mœurs
+                        </li>
+                        <li class="collection-item">
+                            - ne pas porter atteinte aux droits et à l’image de Usain Box, notamment à ses droits de propriété
+                            intellectuelle
+                        </li>
+                        <li class="collection-item">
+                            - ne pas ouvrir plus d’un compte sur Usain Box et ne pas ouvrir de compte au nom d’un tiers
+                        </li>
+                        <li class="collection-item">
+                            - ne pas contacter un autre membre, notamment par l’intermédiaire de Usain Box, à une autre fin que
+                            celle de définir les modalités du colisvoiturage
+                        </li>
+                    </ul>
                 </p>
             </div>
             <div class="col s9 offset-s1 card-panel">
                 <h4>Données personnelles</h4>
                 <p>
-                </p>
-            </div>
-            <div class="col s9 offset-s1 card-panel">
-                <h4>Fonctionnement, disponibilité et fonctionnalités de la Plateforme</h4>
-                <p>
+                    Dans le cadre de votre utilisation, Usain Box est amenée à collecter et traiter certaines de vos
+                    données personnelles. En utilisant Usain Box et vous inscrivant en tant que membre,
+                    vous reconnaissez et acceptez le traitement de vos données personnelles par Usain Box
+                    conformément à la loi applicable et aux stipulations de la Politique de Confidentialité.
                 </p>
             </div>
         </div>
