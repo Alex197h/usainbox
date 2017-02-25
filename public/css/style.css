@@ -133,3 +133,11 @@ input[type="date"]::-webkit-inner-spin-button {
 .collapsible-header{
   color: #786A6A !important;
 }
+
+.what h4{
+    font-size: 1.28rem !important;
+    text-align: center;
+}
+.what i,.what p{
+    text-align: center;
+}

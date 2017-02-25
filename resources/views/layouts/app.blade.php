@@ -129,8 +129,8 @@
                 <h5 class="white-text">Informations</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="{{route('page', 'about')}}" class="black-text">Comment ça marche ?</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#" class="black-text">A quoi ça sert ?</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#">Charte de bonne conduite</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'what')}}" class="black-text">A quoi ça sert ?</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'charter')}}">Charte de bonne conduite</a></li>
 
                 </ul>
             </div>
@@ -138,7 +138,7 @@
                 <h5 class="white-text">À propos</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="{{route('page', 'who')}}">Qui sommes nous ?</a></li>
-                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'contact')}}">Nous contacter</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('contact')}}">Nous contacter</a></li>
 
                 </ul>
             </div>
@@ -146,8 +146,8 @@
                 <h5 class="white-text">Mention légales</h5>
                 <ul>
                     <li><a class="grey-text text-lighten-3" href="{{route('page', 'conditions')}}">Conditions générales</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#">Politique de Confidentialité</a></li>
-                    <li><a class="grey-text text-lighten-3" href="#">Utilisation des cookies</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'privacy')}}">Politique de confidentialité</a></li>
+                    <li><a class="grey-text text-lighten-3" href="{{route('page', 'cookies')}}">Utilisation des cookies</a></li>
 
                 </ul>
             </div>
