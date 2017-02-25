@@ -15,7 +15,7 @@
                 </script>
             @endif
 
-            <div class="col l6 m8 s12 offset-l3 offset-m2 card-panel">
+            <div class="col l6 m8 s12 offset-l3 offset-m2 card-panel contact">
 
                 <h3>Qu'est-ce qui vous amène ?</h3>
 
