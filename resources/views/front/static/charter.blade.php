@@ -7,8 +7,8 @@
     <div class="row">
         <div class="col s12 ">
             <h3>Charte de bonne conduite</h3>
-            <div class="col s9 offset-s1 card-panel">
-                <div class="row what">
+            <div class="col s9 offset-s1 ">
+                <div class="row what card-panel">
                     <div class="col s6">
                         <h4>Donner de véritables <br> informations</h4>
                         <p><i class="material-icons">supervisor_account</i></p>
@@ -26,7 +26,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row what">
+                <div class="row what card-panel">
                     <div class="col s6">
                         <h4>Privilégier la <br> sécurité</h4>
                         <p><i class="material-icons">airline_seat_recline_normal</i></p>
@@ -44,7 +44,7 @@
                         </p>
                     </div>
                 </div>
-                <div class="row what">
+                <div class="row what card-panel">
                     <div class="col s6">
                         <h4>Laisser des <br> avis honnêtes</h4>
                         <p><i class="material-icons">message</i></p>
