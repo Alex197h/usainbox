@@ -117,6 +117,7 @@
                                 S'enregistrer
                             </button>
                         </div>
+                        <p>En cliquant sur S'enregistrer, vous certifiez avoir 18 ans et plus et vous acceptez les <a href="#">Conditions Générales d'Utilisation</a> de Usain Box.</p>
 
                     </form>
                 </div>
