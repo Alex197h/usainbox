@@ -151,6 +151,17 @@
                     @endif
                 </p>
 
+                <p class="col s12{{ $errors->has('help_charge') ? ' has-error' : '' }}">
+                    <input type="checkbox" name="help_charge" id="help_charge" value="1"/>
+                    <label for="help_charge"> Je peux aider à charger ou décharger</label>
+
+                    @if ($errors->has('help_charge'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('help_charge') }}</strong>
+                        </span>
+                    @endif
+                </p>
+
                 <div class="col s12 m12{{ $errors->has('description') ? ' has-error' : '' }}">
                     <label for="description">Description</label>
                     <textarea id="description" placeholder="Description" class="materialize-textarea"
