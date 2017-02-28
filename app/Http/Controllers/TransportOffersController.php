@@ -14,32 +14,7 @@ use Auth;
 
 class TransportOffersController extends Controller {
     public function index(){
-        // var_dump(Vehicle::where('id', '1'));
-
-
-            // Si !date_start passée ou !full
-        $offers = TransportOffer::all();
-
-        $city_steps = array();
-        foreach ($offers as $offer){
-
-            $steps = $offer->steps;
-            foreach ($steps as $step){
-                $geocode=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng='. $step['latitude'] .','. $step['longitude'] .'&sensor=false');
-
-                $output= json_decode($geocode);
-
-                if(isset($output->results[0])){
-                    $city_steps[$offer->id][$step->step] = $output->results[0]->address_components[1]->long_name;
-                }
-            }
-        }
-
-        $data = array(
-            'offers' => $offers,
-            'steps' => $city_steps
-        );
-        return view('front.transport.list', $data);
+        return redirect()->route('home');
     }
 
     public function create(){
@@ -100,21 +75,7 @@ class TransportOffersController extends Controller {
       $end_area = array($min_new_lat_end, $min_new_lng_end, $plus_new_lat_end, $plus_new_lng_end);
 
 
-    //   $offers = TransportStep::select('transport_offer_id')->where(function ($query) use($start_area, $end_area){
-    //         $query->where('longitude', '>', $start_area[1])
-    //             ->where('longitude', '<', $start_area[3])
-    //             ->where('latitude', '>', $start_area[0])
-    //             ->where('latitude', '<', $start_area[2]);
-    //     })->orWhere(function ($query) use($start_area, $end_area){
-    //         $query->where('longitude', '>', $end_area[1])
-    //             ->where('longitude', '<', $end_area[3])
-    //             ->where('latitude', '>', $end_area[0])
-    //             ->where('latitude', '<', $end_area[2]);
-    //     })->groupBy('transport_offer_id')->havingRaw('COUNT(*) > 1')->where('longitude', '>', $end_area[1])
-    //         ->where('longitude', '<', $end_area[3])
-    //         ->where('latitude', '>', $end_area[0])
-    //         ->where('latitude', '<', $end_area[2])->get();
-    
+
         
         $offers = DB::select(
             'SELECT transport_offer_id
@@ -143,24 +104,32 @@ class TransportOffersController extends Controller {
                 'lat_end_max' => $end_area[2],
             ]
         );
+
+
+        $results = array();
+        foreach($offers as $offer){
+            $results[] = $offer->transport_offer_id;
+        }
+
+        $view_offers = TransportOffer::whereIn('id', $results)->get();
+
+        $city_steps = array();
+        foreach ($view_offers as $view_offer){
+
+            $steps = $view_offer->steps;
+            foreach ($steps as $step){
+                $geocode=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng='. $step['latitude'] .','. $step['longitude'] .'&sensor=false');
+
+                $output= json_decode($geocode);
+
+                if(isset($output->results[0])){
+                    $city_steps[$view_offer->id][$step->step] = $output->results[0]->address_components[1]->long_name;
+                }
+            }
+        }
+
         
-        /*
-        $offers = DB::table('transport_steps AS tr')->where(function ($query) use($start_area, $end_area){
-              $query->where('longitude', '>', $start_area[1])
-                  ->where('longitude', '<', $start_area[3])
-                  ->where('latitude', '>', $start_area[0])
-                  ->where('latitude', '<', $start_area[2]);
-        })->whereIn('transport_offer_id', DB::table('transport_steps AS td')->where(function ($query) use($start_area, $end_area){
-              $query->where('longitude', '>', $end_area[1])
-                  ->where('longitude', '<', $end_area[3])
-                  ->where('latitude', '>', $end_area[0])
-                  ->where('latitude', '<', $end_area[2])->where('tr.step','<','td.step')
-                  ->pluck('transport_offer_id')->toArray();
-        }))->get()->toArray();
-        */
-        
-        
-        return view('front.transport.list_trie', ['offers' => $offers]);
+        return view('front.transport.list', ['offers' => $view_offers, 'steps' => $city_steps]);
     }
 
 
