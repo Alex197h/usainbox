@@ -46,12 +46,11 @@ class AboutController extends Controller{
                 }
             }
         }
-        
         return view('front.pages.test', ['transport_offers' => $transport_offers]);
     }
     
     public function ptest(){
-        $offer = TransportOffer::find($_POST['transport']);
+        $offer = TransportOffer::whereIn('id', $_POST['transport'])->get();
         echo json_encode($offer->toArray());
     }
 }

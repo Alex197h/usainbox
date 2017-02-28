@@ -7,14 +7,9 @@
     <style>
         #map{height: 700px;}
     </style>
+    <div id="result"></div>
     <div id="map"></div>
-    <div id="show">
-        <h4 class="title"></h4>
-        <b class="description"></b>
-        <div class="offer">
-            
-        </div>
-    </div>
+    <div id="transport_offers"></div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
         var MapElement = document.getElementById('map');
@@ -97,6 +92,7 @@
                     if(!this.path) this.path = setPath(this.cities);
                     this.setVisible(true);
                     this.path.setMap(map);
+                    MarkersHidden = true;
                 });
                 
                 marker.addListener('mouseout', function() {
@@ -107,111 +103,58 @@
                             }
                         }
                         this.path.setMap(null);
+                        MarkersHidden = false;
                     }
                 });
                 
                 marker.addListener('click', function() {
                     var clone = this;
+                    var offers = this.transport;
                     
-                    if(!this.showPath){
-                        $.ajax({
-                            url: 'ptest',
-                            method: 'POST',
-                            dataType: 'json',
-                            data: {
-                                '_token': '{{ csrf_token() }}',
-                                'transport': clone.transport,
-                            },
-                            success: (function(result){
-                                for(m in Markers){
-                                    for(n in Markers[m]){
-                                        Markers[m][n].setVisible(false);
-                                    }
+                    $.ajax({
+                        url: 'ptest',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            '_token': '{{ csrf_token() }}',
+                            'transport': offers,
+                        },
+                        success: (function(result){
+                            for(m in Markers){
+                                for(n in Markers[m]){
+                                    Markers[m][n].setVisible(false);
                                 }
-                                clone.setVisible(true);
-                                clone.path.setMap(map);
-                                
-                                clone.showPath = true;
-                                MarkerClicked = true;
-                                $(ShowElement).find('.title').text(result.date_start+' ('+result.id+')');
-                                $(ShowElement).find('.description').text(result.description);
-                                $(ShowElement).find('.offer').html(
-                                    'Autoroute: '+(result.highway ? 'Oui' : 'Non')
-                                    +'<br>Trajet: '+(result.is_regular ? 'Régulier' : 'Occasionnel')
-                                );
-                            }),
-                        });
-                    }
+                            }
+                            clone.setVisible(true);
+                            clone.path.setMap(map);
+                            clone.showPath = true;
+                            
+                            MarkersHidden = true;
+                            MarkerClicked = true;
+                            
+                            var div = $('#transport_offers');
+                            div.html('')
+                            for(r in result){
+                                console.log(result[r])
+                                let offer = $('<div>');
+                                offer.append('<h4>'+result[r].date_start+' ('+result[r].id+')</h4>');
+                                offer.append('<div>'+result[r].description+'</div>');
+                                div.append(offer);
+                            }
+                            
+                            // $(ShowElement).find('.title').text();
+                            // $(ShowElement).find('.description').text(result.description);
+                            // $(ShowElement).find('.offer').html(
+                                // 'Autoroute: '+(result.highway ? 'Oui' : 'Non')
+                                // +'<br>Trajet: '+(result.is_regular ? 'Régulier' : 'Occasionnel')
+                            // );
+                        }),
+                    });
                 });
                 
                 if(!Markers[marker.title]) Markers[marker.title] = [];
                 Markers[marker.title].push(marker);
             }
-            
-            /*
-            for(i in Cities){
-                if(Cities[i][0]){
-                    var marker = new google.maps.Marker({
-                        position: {lng: Cities[i][0].lng, lat: Cities[i][0].lat},
-                        map: map,
-                        icon: icon,
-                        title: Cities[i][0].label,
-                        cities: Cities[i],
-                        transport: i,
-                        showPath: false,
-                        path: null,
-                    });
-                    
-                    marker.addListener('mouseover', function() {
-                        for(m in Markers){
-                            for(n in Markers[m]){
-                                Markers[m][n].setVisible(false);
-                            }
-                        }
-                        this.setVisible(true);
-                        this.path = setPath(this.cities);
-                    });
-                    
-                    marker.addListener('mouseout', function() {
-                        if(!this.showPath){
-                            for(m in Markers){
-                                for(n in Markers[m]){
-                                    Markers[m][n].setVisible(true);
-                                }
-                            }
-                            this.path.setMap(null);
-                        }
-                    });
-                    
-                    marker.addListener('click', function() {
-                        var clone = this;
-                        
-                        $.ajax({
-                            url: 'ptest',
-                            method: 'POST',
-                            dataType: 'json',
-                            data: {
-                                '_token': '{{ csrf_token() }}',
-                                'transport': clone.transport,
-                            },
-                            success: (function(result){
-                                clone.showPath = true;
-                                MarkerClicked = true;
-                                $(ShowElement).find('.title').text(result.date_start+' ('+result.id+')');
-                                $(ShowElement).find('.description').text(result.description);
-                                $(ShowElement).find('.offer').html(
-                                    'Autoroute: '+(result.highway ? 'Oui' : 'Non')
-                                    +'<br>Trajet: '+(result.is_regular ? 'Régulier' : 'Occasionnel')
-                                );
-                            }),
-                        });
-                    });
-                    if(!Markers[marker.title]) Markers[marker.title] = [];
-                    Markers[marker.title].push(marker);
-                }
-            }
-            */
-            
             
             map.addListener('click', function() {
                 for(m in Markers){
@@ -223,31 +166,8 @@
                         }
                     }
                 }
+                MarkerClicked = false;
             });
-            
-            /*
-            map.addListener('mousemove', function() {
-                if(!MarkerClicked && MarkersHidden){
-                    for(m in Markers){
-                        Markers[m].setVisible(true);
-                        if(Markers[m].path){
-                            Markers[m].path.setMap(null);
-                            Markers[m].path = null;
-                        }
-                    }
-                    // Directions.setMap(null);
-                    MarkersHidden = false;
-                }
-            });
-            
-            map.addListener('mousedown', function() {
-                if(MarkerClicked){
-                    // Directions.setDirections();
-                    MarkerClicked = false;
-                }
-            });
-            */
-            
             
             /** Route */
             function setPath(cities) {

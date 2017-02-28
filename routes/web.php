@@ -10,7 +10,6 @@ Route::get('/map', function() {
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/transport-offers', 'TransportOffersController@index')->name('transport-offers');
 Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
 
 Route::get('/offer/transport/create', 'TransportOffersController@create')->name('create_transport_offer');
