@@ -114,23 +114,53 @@ class TransportOffersController extends Controller {
     //         ->where('longitude', '<', $end_area[3])
     //         ->where('latitude', '>', $end_area[0])
     //         ->where('latitude', '<', $end_area[2])->get();
-
-    $offers = TransportStep::select('transport_offer_id','step AS a')->where(function ($query) use($start_area, $end_area){
-          $query->where('longitude', '>', $start_area[1])
-              ->where('longitude', '<', $start_area[3])
-              ->where('latitude', '>', $start_area[0])
-              ->where('latitude', '<', $start_area[2]);
-      })->whereIn('transport_offer_id', TransportStep::select('transport_offer_id')->where(function ($query) use($start_area, $end_area){
-          $query->where('longitude', '>', $end_area[1])
-              ->where('longitude', '<', $end_area[3])
-              ->where('latitude', '>', $end_area[0])
-              ->where('latitude', '<', $end_area[2])->where('a','<','step');
-      })->get()->toArray())->get();
-
-
-      dd($start_city,$end_city, $offers);
-      //$data['city_start'] = $request->input('city_start')
-      //return redirect()->view('front.transport.list_trie', $data);
+    
+        
+        $offers = DB::select(
+            'SELECT transport_offer_id
+            FROM transport_steps tr
+                WHERE longitude >= :long_start_min
+                AND longitude <= :long_start_max
+                AND latitude >= :lat_start_min
+                AND latitude <= :lat_start_max
+            AND transport_offer_id IN (
+                SELECT transport_offer_id
+                FROM transport_steps td
+                WHERE longitude >= :long_end_min
+                AND longitude <= :long_end_max
+                AND latitude >= :lat_end_min
+                AND latitude <= :lat_end_max
+                AND tr.step <= td.step
+            )',
+            [
+                'long_start_min' => $start_area[1],
+                'long_start_max' => $start_area[3],
+                'lat_start_min' => $start_area[0],
+                'lat_start_max' => $start_area[2],
+                'long_end_min' => $end_area[1],
+                'long_end_max' => $end_area[3],
+                'lat_end_min' => $end_area[0],
+                'lat_end_max' => $end_area[2],
+            ]
+        );
+        
+        /*
+        $offers = DB::table('transport_steps AS tr')->where(function ($query) use($start_area, $end_area){
+              $query->where('longitude', '>', $start_area[1])
+                  ->where('longitude', '<', $start_area[3])
+                  ->where('latitude', '>', $start_area[0])
+                  ->where('latitude', '<', $start_area[2]);
+        })->whereIn('transport_offer_id', DB::table('transport_steps AS td')->where(function ($query) use($start_area, $end_area){
+              $query->where('longitude', '>', $end_area[1])
+                  ->where('longitude', '<', $end_area[3])
+                  ->where('latitude', '>', $end_area[0])
+                  ->where('latitude', '<', $end_area[2])->where('tr.step','<','td.step')
+                  ->pluck('transport_offer_id')->toArray();
+        }))->get()->toArray();
+        */
+        
+        
+        return view('front.transport.list_trie', ['offers' => $offers]);
     }
 
 

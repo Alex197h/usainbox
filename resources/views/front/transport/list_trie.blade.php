@@ -6,5 +6,5 @@
 
 
 <div class="row">
-{{var_dump($city_start)}}
+{{var_dump($offers)}}
 </div>
