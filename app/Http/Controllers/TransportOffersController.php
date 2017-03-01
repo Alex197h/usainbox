@@ -10,6 +10,7 @@ use App\Http\Controllers\Controller;
 use App\TransportOffer;
 use App\TransportStep;
 use App\Vehicle;
+use App\TypeVehicle;
 use Auth;
 
 class TransportOffersController extends Controller {
@@ -21,11 +22,12 @@ class TransportOffersController extends Controller {
         $auth = Auth::user();
         $vehicles = $auth->vehicles;
         if($vehicles == '[]'){
-            return view('front.vehicle.add_vehicle');
+            $types = TypeVehicle::all();
+            $data = array(
+                'type_vehicles' => $types
+            );
+            return view('user.vehicles', $data);
         }
-        $data = array(
-            'vehicles' => $vehicles
-        );
         return view('front.transport.create', $data);
     }
 

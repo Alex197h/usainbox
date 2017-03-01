@@ -4,37 +4,6 @@
 
 @section('content')
     <div class="row">
-
-        <div class="col s12 section center">
-            <h4>Vos véhicules</h4>
-        </div>
-        @foreach($vehicles as $vehicle)
-            <div class="col l6 m10 s12 offset-l3 offset-m1 card-panel">
-                <div class="section center">
-                    <h5>{{ ucfirst($vehicle->car_brand) }} {{ ucfirst($vehicle->car_model) }}</h5>
-                </div>
-                <div class="section">
-                    @if($vehicle->typeVehicle->id == 1)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_car</i>
-                    @elseif($vehicle->typeVehicle->id == 2)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">local_shipping</i>
-                    @elseif($vehicle->typeVehicle->id == 3)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">motorcycle</i>
-                    @elseif($vehicle->typeVehicle->id == 4)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bike</i>
-                    @elseif($vehicle->typeVehicle->id == 5)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">flight</i>
-                    @elseif($vehicle->typeVehicle->id == 12)
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_boat</i>
-                    @else
-                        <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bus</i>
-                    @endif
-                    {!! ($vehicle->default) ? '<i class="material-icons tooltipped" data-tooltip="Véhicule par défaut">check_circle</i>' : '' !!}
-                    <p><b>Volume:</b> {{ $vehicle->max_volume }}</p>
-                </div>
-            </div>
-        @endforeach
-
         <div class="col s12 section center">
             <h4>Ajouter un véhicule</h4>
         </div>

@@ -25,7 +25,6 @@ class UserController extends Controller {
         $auth = Auth::user();
         $type_vehicles = TypeVehicle::all();
         $data = array(
-            'vehicles' => $auth->vehicles,
             'type_vehicles' => $type_vehicles
         );
 
