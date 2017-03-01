@@ -18,7 +18,7 @@
         <label style="display: none;" for="city_end">Ville arrivée</label>
       </div>
       <div class="input-field col s12 m2 l2">
-        <input type="date" class="datepicker white" placeholder="Date">
+        <input type="date" name="date" class="datepicker white" placeholder="Date" value="{{ date('Y-m-d') }}">
       </div>
       <div class="input-field col s12 m6 l2">
         <button type="submit" class="col s12 btn waves-effect waves-light white black-text">

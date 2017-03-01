@@ -141,13 +141,6 @@
                                 offer.append('<div>'+result[r].description+'</div>');
                                 div.append(offer);
                             }
-                            
-                            // $(ShowElement).find('.title').text();
-                            // $(ShowElement).find('.description').text(result.description);
-                            // $(ShowElement).find('.offer').html(
-                                // 'Autoroute: '+(result.highway ? 'Oui' : 'Non')
-                                // +'<br>Trajet: '+(result.is_regular ? 'Régulier' : 'Occasionnel')
-                            // );
                         }),
                     });
                 });
@@ -167,6 +160,7 @@
                     }
                 }
                 MarkerClicked = false;
+                $('#transport_offers').html('');
             });
             
             /** Route */
