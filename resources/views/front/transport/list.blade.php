@@ -14,7 +14,7 @@
                 @if(isset($steps[$offer->id]))
                     @foreach($steps[$offer->id] as $step)
 
-                        <span>{{ $step }}  @if(!$loop->last) -> @endif </span>
+                        <span>{{ $step }}  @if(!$loop->last) → @endif </span>
 
                     @endforeach
                 @endif

@@ -148,3 +148,42 @@ input[type="date"]::-webkit-inner-spin-button {
 .card-panel{
     text-align: justify;
 }
+
+#map{
+    height: 60vh;
+}
+#transport_offers{
+    float: right;
+    width: 40%;
+    height: 60vh;
+    overflow: auto;
+    /*display: none;*/
+}
+
+#transport_offers .offer{
+    color: grey;
+}
+#transport_offers .offer h4{
+    font-size: 1.2em;
+}
+#transport_offers .offer .card-action, #transport_offers .offer .detail-offer{
+    display: none;
+}
+#transport_offers .offer.selected{
+    font-weight: bold;
+    color: black;
+    box-shadow: 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12), 0 3px 5px -1px rgba(0,0,0,0.3);
+}
+#transport_offers .offer.selected h4{
+    font-size: 1.5em;
+}
+#transport_offers .offer.selected .card-action, #transport_offers .offer.selected .detail-offer{
+    display: block;
+}
+
+#transport_offers .offer img.circle{
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    margin: 0 auto;
+}
