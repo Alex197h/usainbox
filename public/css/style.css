@@ -157,7 +157,8 @@ input[type="date"]::-webkit-inner-spin-button {
     width: 40%;
     height: 60vh;
     overflow: auto;
-    /*display: none;*/
+    position: absolute;
+    background: white;
 }
 
 #transport_offers .offer{
