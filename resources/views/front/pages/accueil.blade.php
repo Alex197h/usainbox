@@ -51,100 +51,7 @@
     <div class="col s12">
         <div id="resss"></div>
         <div class="col s12 right" id="map"></div>
-        <div id="transport_offers">
-            <div class="offer card horizontal ">
-                <div class="card-image valign-wrapper">
-                    <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
-
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <div class="section center">
-                            <h4>Mardi 15 mars</h4>
-                            <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
-                        </div>
-                        <div class="section detail-offer">
-                            <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
-                            <i class="small material-icons">star_border</i><span> 4.8/5</span>
-                            <br>
-                            <br>
-                            <b>Heure de départ:</b> 04:20
-                            <br>
-                            <b>Description:</b>Ceci est une description
-                            <br>
-                            <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-                            <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
-                        </div>
-
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Voir l'annonce</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offer card horizontal selected">
-                <div class="card-image valign-wrapper">
-                    <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
-
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <div class="section center">
-                            <h4>Mardi 15 mars</h4>
-                            <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
-                        </div>
-                        <div class="section detail-offer">
-                            <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
-                            <i class="small material-icons">star_border</i><span> 4.8/5</span>
-                            <br>
-                            <br>
-                            <b>Heure de départ:</b> 04:20
-                            <br>
-                            <b>Description:</b>Ceci est une description
-                            <br>
-                            <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-                            <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
-                        </div>
-
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Voir l'annonce</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="offer card horizontal ">
-                <div class="card-image valign-wrapper">
-                    <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
-                </div>
-                <div class="card-stacked">
-                    <div class="card-content">
-                        <div class="section center">
-                            <h4>Mardi 15 mars</h4>
-                            <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
-                        </div>
-                        <div class="section detail-offer">
-                            <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
-                            <i class="small material-icons">star_border</i><span> 4.8/5</span>
-                            <br>
-                            <br>
-                            <b>Heure de départ:</b> 04:20
-                            <br>
-                            <b>Description:</b>Ceci est une description
-                            <br>
-                            <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-                            <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
-                        </div>
-
-                    </div>
-                    <div class="card-action">
-                        <a href="#">Voir l'annonce</a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+        <div id="transport_offers"></div>
     </div>
 
     <section class="col s12 m8 offset-m2 home-img" id="video-pres">
@@ -152,7 +59,34 @@
             <source src="public/video/pres.mp4" type="video/mp4"/>
         </video>
     </section>
-
+    
+    <div id="offercopy" hidden>
+        <div class="offer card horizontal selected">
+            <div class="card-image valign-wrapper">
+                <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+            </div>
+            <div class="card-stacked">
+                <div class="card-content">
+                    <div class="section center">
+                        <h4>$date</h4>
+                        <span>$itinerary</span>
+                    </div>
+                    <div class="section detail-offer">
+                        <i class="small material-icons" style="color:#$gender">account_circle</i><span> <a href="#">$name</a> ($age ans)</span><br>
+                        <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
+                        <b>Heure de départ:</b> $hour<br>
+                        <b>Description:</b> $description<br><br>
+                        <i class="small material-icons tooltipped" data-tooltip="$regular.text">$regular.icon</i>
+                        <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <a href="#">Voir l\'annonce</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
@@ -164,30 +98,6 @@
         
         var map;
         
-        var divOffer = '<div class="offer card horizontal selected">'
-            +'<div class="card-image valign-wrapper">'
-                +'<img class="circle valign" src="http://lorempixel.com/100/190/nature/6">'
-            +'</div>'
-            +'<div class="card-stacked">'
-                +'<div class="card-content">'
-                    +'<div class="section center">'
-                        +'<h4>$date</h4>'
-                        +'<span>$itinerary</span>'
-                    +'</div>'
-                    +'<div class="section detail-offer">'
-                        +'<i class="small material-icons" style="color:#$gender">account_circle</i><span> <a href="#">$name</a> ($age ans)</span><br>'
-                        +'<i class="small material-icons">star_border</i><span> $note/5</span><br><br>'
-                        +'<b>Heure de départ:</b> $hour<br>'
-                        +'<b>Description:</b> $description<br><br>'
-                        +'<i class="small material-icons tooltipped" style="color:#$regular" data-tooltip="Trajet régulier">restore</i>'
-                        +'<i class="small material-icons tooltipped" style="color:#$highway" data-tooltip="Autoroute">surround_sound</i>'
-                    +'</div>'
-                +'</div>'
-                +'<div class="card-action">'
-                    +'<a href="#">Voir l\'annonce</a>'
-                +'</div>'
-            +'</div>'
-        +'</div>';
         
         function initMap() {
             map = new google.maps.Map(MapElement, {
@@ -289,8 +199,6 @@
                             'transport': offers,
                         },
                         success: (function(result) {
-                            console.log(result)
-                            
                             for (m in Markers) {
                                 for (n in Markers[m]) {
                                     Markers[m][n].setVisible(false);
@@ -307,8 +215,8 @@
                             var div = $('#transport_offers');
                             div.html('')
                             for(r in result) {
-                                var divo = divOffer;
-                                // console.log(result[r])
+                                var divo = $('#offercopy').html();
+                                console.log(result[r])
                                 var d = result[r].date_start;
                                 
                                 var arr = {
@@ -318,21 +226,30 @@
                                     gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
                                     age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
                                     description: result[r].description,
-                                    regular: '',
-                                    highway: '',
+                                    regular: {
+                                        text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
+                                        icon: result[r].is_regular ? 'restore' : 'schedule',
+                                    },
+                                    highway: {
+                                        color: result[r].highway == 1 ? '333' : 'CCC',
+                                        message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                                    },
                                 };
-                                divo = divo.replace(/[$]([a-z]+)(|[.][a-z]+)/g, function(matches, a){
-                                    if(arr[a]) return arr[a];
-                                    else return '';
+                                divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
+                                    var res = '';
+                                    if(c){
+                                        if(arr[a] && arr[a][c]) res = arr[a][c];
+                                    }
+                                    else if(arr[a]) res = arr[a];
+                                    
+                                    return res;
                                 });
                                 
-                                // let offer = $('<div class="offer">');
-                                // offer.append('<h4>' + result[r].date_start + ' (' + result[r].id + ')</h4>');
-                                // offer.append('<div>' + result[r].description + '</div>');
                                 div.append(divo);
                             }
                             // $("#map").animate({"width": "60%"}, 500);
                             div.show(500);
+                            $('.tooltipped').tooltip({delay: 50});
                         })
                     });
                 });
