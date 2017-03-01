@@ -54,10 +54,13 @@ class UserController extends Controller {
             Vehicle::where('user_id', Auth::user()->id)->where('default', 1)->update(['default' => 0]);
         }
         $vehicle->default = $request->input('default_vehicle') ? 1 : 0;
-        $vehicle->max_width = $request->input('width');
+        if ($request->has('width')) $vehicle->max_width = $request->input('width');
+        if ($request->has('length'))
         $vehicle->max_length = $request->input('length');
+        if ($request->has('height'))
         $vehicle->max_height = $request->input('height');
         $vehicle->max_volume = $request->input('volume');
+        if ($request->has('weight'))
         $vehicle->max_weight = $request->input('weight');
         $vehicle->car_brand = $request->input('vehicle_brand');
         $vehicle->car_model = $request->input('vehicle_model');

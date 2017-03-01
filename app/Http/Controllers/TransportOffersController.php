@@ -28,6 +28,9 @@ class TransportOffersController extends Controller {
             );
             return view('user.vehicles', $data);
         }
+        $data = array(
+            'vehicles' => $vehicles
+        );
         return view('front.transport.create', $data);
     }
 
