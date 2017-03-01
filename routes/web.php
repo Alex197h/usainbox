@@ -1,14 +1,11 @@
 <?php
 
-Route::get('/', function () {
-    return view('front/pages/accueil');
-})->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
 
 Route::get('/map', function() {
     return view('map');
 });
-
-Route::get('/home', 'HomeController@index');
 
 Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
 

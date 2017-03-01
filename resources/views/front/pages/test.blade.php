@@ -135,7 +135,6 @@
                             var div = $('#transport_offers');
                             div.html('')
                             for(r in result){
-                                console.log(result[r])
                                 let offer = $('<div>');
                                 offer.append('<h4>'+result[r].date_start+' ('+result[r].id+')</h4>');
                                 offer.append('<div>'+result[r].description+'</div>');
