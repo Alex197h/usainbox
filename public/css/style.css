@@ -145,9 +145,6 @@ input[type="date"]::-webkit-inner-spin-button {
     font-size: 1.90rem !important;
     text-align: center;
 }
-.card-panel{
-    text-align: justify;
-}
 
 #map{
     height: 60vh;
