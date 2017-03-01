@@ -20,6 +20,9 @@ class TransportOffersController extends Controller {
     public function create(){
         $auth = Auth::user();
         $vehicles = $auth->vehicles;
+        if($vehicles == '[]'){
+            return view('front.vehicle.add_vehicle');
+        }
         $data = array(
             'vehicles' => $vehicles
         );
@@ -57,14 +60,14 @@ class TransportOffersController extends Controller {
         $plus_new_lat_start =  $start_city->lat + ( 5000 / $earthRadius) * (180/pi());
         $plus_new_lng_start =  $start_city->lng + ( 5000 / $earthRadius) * (180/pi()) / cos($start_city->lat * pi() / 180);
         $start_area = array($min_new_lat_start, $min_new_lng_start, $plus_new_lat_start, $plus_new_lng_start);
-        
+
         $min_new_lat_end =  $end_city->lat - ( 5000 / $earthRadius) * (180/pi());
         $min_new_lng_end =  $end_city->lng - ( 5000 / $earthRadius) * (180/pi()) / cos($end_city->lat * pi() / 180);
         $plus_new_lat_end =  $end_city->lat + ( 5000 / $earthRadius) * (180/pi());
         $plus_new_lng_end =  $end_city->lng + ( 5000 / $earthRadius) * (180/pi()) / cos($end_city->lat * pi() / 180);
         $end_area = array($min_new_lat_end, $min_new_lng_end, $plus_new_lat_end, $plus_new_lng_end);
-        
-        
+
+
         $offers = DB::select(
             'SELECT transport_offer_id
             FROM transport_steps tr
@@ -98,9 +101,9 @@ class TransportOffersController extends Controller {
         foreach($offers as $offer){
             $results[] = $offer->transport_offer_id;
         }
-        
+
         $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->get();
-        
+
         $city_steps = array();
         foreach ($view_offers as $view_offer){
 
@@ -116,7 +119,7 @@ class TransportOffersController extends Controller {
             }
         }
 
-        
+
         return view('front.transport.list', ['offers' => $view_offers, 'steps' => $city_steps]);
     }
 
