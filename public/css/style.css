@@ -145,9 +145,6 @@ input[type="date"]::-webkit-inner-spin-button {
     font-size: 1.90rem !important;
     text-align: center;
 }
-.card-panel{
-    text-align: justify;
-}
 
 #map{
     height: 60vh;
@@ -157,7 +154,8 @@ input[type="date"]::-webkit-inner-spin-button {
     width: 40%;
     height: 60vh;
     overflow: auto;
-    /*display: none;*/
+    position: absolute;
+    background: white;
 }
 
 #transport_offers .offer{

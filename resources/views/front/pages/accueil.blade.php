@@ -49,6 +49,7 @@
     </div>
 
     <div class="col s12">
+        <div id="resss"></div>
         <div class="col s12 right" id="map"></div>
         <div id="transport_offers">
             <div class="offer card horizontal ">
@@ -116,7 +117,6 @@
             <div class="offer card horizontal ">
                 <div class="card-image valign-wrapper">
                     <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
-
                 </div>
                 <div class="card-stacked">
                     <div class="card-content">
@@ -161,10 +161,34 @@
         var MapElement = document.getElementById('map');
         var ShowElement = document.getElementById('show');
         var Cities = <?= json_encode($transport_offers) ?>;
-
+        
         var map;
-
-
+        
+        var divOffer = '<div class="offer card horizontal selected">'
+            +'<div class="card-image valign-wrapper">'
+                +'<img class="circle valign" src="http://lorempixel.com/100/190/nature/6">'
+            +'</div>'
+            +'<div class="card-stacked">'
+                +'<div class="card-content">'
+                    +'<div class="section center">'
+                        +'<h4>$date</h4>'
+                        +'<span>$itinerary</span>'
+                    +'</div>'
+                    +'<div class="section detail-offer">'
+                        +'<i class="small material-icons" style="color:#$gender">account_circle</i><span> <a href="#">$name</a> ($age ans)</span><br>'
+                        +'<i class="small material-icons">star_border</i><span> $note/5</span><br><br>'
+                        +'<b>Heure de départ:</b> $hour<br>'
+                        +'<b>Description:</b> $description<br><br>'
+                        +'<i class="small material-icons tooltipped" style="color:#$regular" data-tooltip="Trajet régulier">restore</i>'
+                        +'<i class="small material-icons tooltipped" style="color:#$highway" data-tooltip="Autoroute">surround_sound</i>'
+                    +'</div>'
+                +'</div>'
+                +'<div class="card-action">'
+                    +'<a href="#">Voir l\'annonce</a>'
+                +'</div>'
+            +'</div>'
+        +'</div>';
+        
         function initMap() {
             map = new google.maps.Map(MapElement, {
                 center: {lng: 2.70263671875, lat: 46.255846818480315},
@@ -257,14 +281,16 @@
                     var offers = this.transport;
 
                     $.ajax({
-                        url: 'ptest',
+                        url: 'gettransportmap',
                         method: 'POST',
                         dataType: 'json',
                         data: {
                             '_token': '{{ csrf_token() }}',
                             'transport': offers,
                         },
-                        success: (function (result) {
+                        success: (function(result) {
+                            console.log(result)
+                            
                             for (m in Markers) {
                                 for (n in Markers[m]) {
                                     Markers[m][n].setVisible(false);
@@ -277,19 +303,36 @@
                             MarkersHidden = true;
                             MarkerClicked = true;
 
-
+                            
                             var div = $('#transport_offers');
                             div.html('')
-                            for (r in result) {
-                                console.log(result[r])
-                                let offer = $('<div class="offer">');
-                                offer.append('<h4>' + result[r].date_start + ' (' + result[r].id + ')</h4>');
-                                offer.append('<div>' + result[r].description + '</div>');
-                                div.append(offer);
+                            for(r in result) {
+                                var divo = divOffer;
+                                // console.log(result[r])
+                                var d = result[r].date_start;
+                                
+                                var arr = {
+                                    date: (new Date(d.split(' ')[0])).toLocaleDateString(),
+                                    hour: d.split(' ')[1],
+                                    name: result[r].user.first_name+' '+result[r].user.last_name,
+                                    gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
+                                    age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
+                                    description: result[r].description,
+                                    regular: '',
+                                    highway: '',
+                                };
+                                divo = divo.replace(/[$]([a-z]+)(|[.][a-z]+)/g, function(matches, a){
+                                    if(arr[a]) return arr[a];
+                                    else return '';
+                                });
+                                
+                                // let offer = $('<div class="offer">');
+                                // offer.append('<h4>' + result[r].date_start + ' (' + result[r].id + ')</h4>');
+                                // offer.append('<div>' + result[r].description + '</div>');
+                                div.append(divo);
                             }
-                            $("#map").animate({"width": "60%"}, 500);
+                            // $("#map").animate({"width": "60%"}, 500);
                             div.show(500);
-
                         })
                     });
                 });
@@ -309,8 +352,8 @@
                     }
                 }
                 MarkerClicked = false;
-                $('#transport_offers').html('').hide();
-                $("#map").animate({"width": "100%"}, 500);
+                $('#transport_offers').html('').hide(500);
+                // $("#map").animate({"width": "100%"}, 500);
 
             });
 

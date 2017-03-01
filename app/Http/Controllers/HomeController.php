@@ -43,7 +43,15 @@ class HomeController extends Controller
     }
 
     public function ptest(){
-        $offer = TransportOffer::whereIn('id', $_POST['transport'])->get();
-        echo json_encode($offer->toArray());
+        if(isset($_POST['transport'])){
+            $result = [];
+            $offers = TransportOffer::whereIn('id', $_POST['transport'])->get();
+            
+            foreach($offers as $offer){
+                $result[] = array_merge($offer->toArray(), ['user' => $offer->user->toArray()]);
+            }
+            
+            echo json_encode($result);
+        }
     }
 }

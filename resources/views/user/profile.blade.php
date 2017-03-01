@@ -18,7 +18,7 @@
 
         <div class="row card-panel">
             <h2>Mes informations</h2>
-            <form>
+            <form method="post" action="">
 
                 <p class="input-field col s12 m6">
                     <input class="with-gap" name="gender" value="1" type="radio" id="male" {{ ($user->gender) ? 'checked' : '' }}>
@@ -35,8 +35,8 @@
                     <label for="tel">Téléphone</label>
                 </div>
                 <div class="input-field col s12 m6">
-                    <input placeholder="Date de naissance" class="datepicker" name="birth" id="birth" type="date" value="{{$user->birthday}}">
-                    <label for="birth">Date de naissance</label>
+                    <input placeholder="" class="datepicker" name="birth" id="birth" type="date" value="{{$user->birthday}}">
+                    <label for="birth" class="hide">Date de naissance</label>
                 </div>
                 <div class="input-field col s12 m6">
                     <textarea id="description" placeholder="Description" class="materialize-textarea" name="description">{{ $user->description }}</textarea>
