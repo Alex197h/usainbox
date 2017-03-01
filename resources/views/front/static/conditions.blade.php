@@ -8,7 +8,7 @@
         <div class="col s12 ">
             <h3>Conditions générales</h3>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Inscription à Usain Box</h4>
                     <p>
                         L’utilisation de Usain Box est réservée aux personnes physiques âgées de 18 ans ou plus.
@@ -18,7 +18,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Création de compte</h4>
                     <p>
                         Usain Box permet aux membres de publier et consulter des annonces ainsi que d’interagir
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Publication des annonces</h4>
                     <p>
                         En tant que membre,vous pouvez créer et publier des annonces sur Usain Box en indiquant
@@ -95,7 +95,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Réservation d’une Place</h4>
                     <p>
                         Lorsqu’un expéditeur est intéressé par une annonce, il peut effectuer une demande de réservation en ligne.
@@ -106,7 +106,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Système d’avis</h4>
                     <p>
                         Usain Box vous encourage à laisser un avis sur un transporteur ou un expéditeur avec lequel vous avez
@@ -117,7 +117,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Conditions financières</h4>
                     <p>
                         L’accès et l’inscription à Usain Box, de même que la recherche, la consultation et la publication
@@ -127,7 +127,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Politique d’annulation</h4>
                     <p>
                         Seuls les trajets avec réservation font l’objet de la présente politique d’annulation, Usain Box
@@ -137,7 +137,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Engagement de tous les utilisateurs</h4>
                     <p>
                         Vous reconnaissez être seul responsable du respect de l’ensemble des lois, règlements et
@@ -177,7 +177,7 @@
                 </div>
             </div>
             <div class="col s10 offset-s1">
-                <div class="card-panel">
+                <div class="card-panel textJ">
                     <h4>Données personnelles</h4>
                     <p>
                         Dans le cadre de votre utilisation, Usain Box est amenée à collecter et traiter certaines de vos

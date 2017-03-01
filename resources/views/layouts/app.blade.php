@@ -87,7 +87,7 @@
 </head>
 <body>
 
-    <header class="row" style="margin:0;">
+    <header class="row navbar-fixed" style="margin:0;">
         <nav>
             <div class="white nav-wrapper">
                 <a href="{{route('home')}}" class="brand-logo">{{ Html::image('public/img/logo.png', 'UBox') }}</a>

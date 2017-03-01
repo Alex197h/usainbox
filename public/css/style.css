@@ -9,6 +9,11 @@ footer{
     background: #786A6A !important;
 }
 
+.h3{
+    text-align: center;
+    padding: 55px;
+}
+
 button{
     height: 45px;
 }
@@ -140,6 +145,9 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 .what i,.what p{
     text-align: center;
+}
+.textJ{
+    text-align: justify;
 }
 .contact h3{
     font-size: 1.90rem !important;
