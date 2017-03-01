@@ -48,25 +48,99 @@
   <div class="col s12">
     <div class="col s12 right" id="map"></div>
     <div id="transport_offers">
-      <div class="offer card horizontal">
-        <div class="card-image">
-          <img src="http://lorempixel.com/100/190/nature/6">
+      <div class="offer card horizontal ">
+        <div class="card-image valign-wrapper">
+          <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+
         </div>
         <div class="card-stacked">
           <div class="card-content">
-            <h4>Mardi 15 mars</h4>
-            <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
-            <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-            <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-            <b>Heure de départ:</b> 04:20
-            <br>
-            <b>Description:</b>
+            <div class="section center">
+              <h4>Mardi 15 mars</h4>
+              <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
+            </div>
+            <div class="section detail-offer">
+              <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
+              <i class="small material-icons">star_border</i><span> 4.8/5</span>
+              <br>
+              <br>
+              <b>Heure de départ:</b> 04:20
+              <br>
+              <b>Description:</b>Ceci est une description
+              <br>
+              <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
+              <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
+            </div>
+
           </div>
           <div class="card-action">
-            <a href="#">This is a link</a>
+            <a href="#">Voir l'annonce</a>
           </div>
         </div>
       </div>
+
+      <div class="offer card horizontal selected">
+        <div class="card-image valign-wrapper">
+          <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <div class="section center">
+              <h4>Mardi 15 mars</h4>
+              <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
+            </div>
+            <div class="section detail-offer">
+              <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
+              <i class="small material-icons">star_border</i><span> 4.8/5</span>
+              <br>
+              <br>
+              <b>Heure de départ:</b> 04:20
+              <br>
+              <b>Description:</b>Ceci est une description
+              <br>
+              <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
+              <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
+            </div>
+
+          </div>
+          <div class="card-action">
+            <a href="#">Voir l'annonce</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer card horizontal ">
+        <div class="card-image valign-wrapper">
+          <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <div class="section center">
+              <h4>Mardi 15 mars</h4>
+              <span>Paris &rarr; Gap &rarr; Aix en Provence </span>
+            </div>
+            <div class="section detail-offer">
+              <i class="small material-icons">account_circle</i><span> <a href="#">Toto Titi</a> (52 ans)</span><br>
+              <i class="small material-icons">star_border</i><span> 4.8/5</span>
+              <br>
+              <br>
+              <b>Heure de départ:</b> 04:20
+              <br>
+              <b>Description:</b>Ceci est une description
+              <br>
+              <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
+              <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
+            </div>
+
+          </div>
+          <div class="card-action">
+            <a href="#">Voir l'annonce</a>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
