@@ -26,7 +26,7 @@ Route::post('contact', 'AboutController@postcontact')->name('contact_post');
 
 /* A supprimer */
 Route::get('test', 'AboutController@test')->name('test');
-Route::post('ptest', 'AboutController@ptest')->name('ptest');
+Route::any('gettransportmap', 'HomeController@ptest')->name('gettransportmap');
 
 
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');

@@ -76,12 +76,15 @@
                     map: map,
                     icon: icon,
                     title: cityStart.label,
-                    
+                    /* Set array of cities for multi */
                     cities: cities,
                     transport: transport,
                     showPath: false,
                     path: null,
                 });
+                
+                console.log(transport)
+                console.log(cities)
                 
                 marker.addListener('mouseover', function() {
                     for(m in Markers){
@@ -149,17 +152,19 @@
             }
             
             map.addListener('click', function() {
-                for(m in Markers){
-                    for(n in Markers[m]){
-                        Markers[m][n].setVisible(true);
-                        Markers[m][n].showPath = false;
-                        if(Markers[m][n].path){
-                            Markers[m][n].path.setMap(null);
+                if(MarkersHidden){
+                    for(m in Markers){
+                        for(n in Markers[m]){
+                            Markers[m][n].setVisible(true);
+                            Markers[m][n].showPath = false;
+                            if(Markers[m][n].path){
+                                Markers[m][n].path.setMap(null);
+                            }
                         }
                     }
+                    MarkerClicked = false;
+                    $('#transport_offers').html('');
                 }
-                MarkerClicked = false;
-                $('#transport_offers').html('');
             });
             
             /** Route */
