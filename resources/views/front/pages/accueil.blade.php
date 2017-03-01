@@ -81,7 +81,7 @@
                     </div>
                 </div>
                 <div class="card-action">
-                    <a href="#">Voir l\'annonce</a>
+                    <a href="#">Voir l'annonce</a>
                 </div>
             </div>
         </div>
