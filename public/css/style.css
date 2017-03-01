@@ -148,3 +148,12 @@ input[type="date"]::-webkit-inner-spin-button {
 .card-panel{
     text-align: justify;
 }
+
+#map{
+    height: 700px;
+}
+#transport_offers{
+    float: right;
+    width: 40%;
+
+}
