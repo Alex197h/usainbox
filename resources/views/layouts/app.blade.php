@@ -11,7 +11,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
     <style type="text/css">
     html, body { height: 100%; margin: 0; padding: 0; }
-    #map { height: 60vh; }
     </style>
     <script type="text/javascript">
     function statusChangeCallback(response) {

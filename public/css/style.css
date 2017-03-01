@@ -150,10 +150,19 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 #map{
-    height: 700px;
+    height: 60vh;
 }
 #transport_offers{
     float: right;
     width: 40%;
+    height: 60vh;
+    overflow: auto;
+    /*display: none;*/
+}
 
+#transport_offers .offer{
+
+}
+#transport_offers .offer.selected{
+    font-weight: bold;
 }
