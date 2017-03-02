@@ -113,9 +113,8 @@
                                 </span>
                         @endif
                     </div>
-
                     <p class="col s12{{ $errors->has('default_vehicle') ? ' has-error' : '' }}">
-                        <input type="checkbox" name="default_vehicle" id="default_vehicle" value="1"/>
+                        <input type="checkbox" name="default_vehicle" id="default_vehicle" value="1"{{ $vehicles == '[]' ? 'checked disabled':'' }} />
                         <label for="default_vehicle">Véhicule utilisé par défaut</label>
 
                         @if ($errors->has('default_vehicle'))
