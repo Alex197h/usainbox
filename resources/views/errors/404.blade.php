@@ -15,7 +15,7 @@
                 Merci ☺</p>
               </section>
               <section class="col s6 offset-s3">
-                {{ Html::image('public/img/404.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                {{ Html::image('public/img/erreur/404.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
               </section>
             </div>
           </div>
