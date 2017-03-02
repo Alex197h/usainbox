@@ -11,11 +11,8 @@
                     </div>
                     <div class="section">
                         <h6>En 2 secondes avec Facebook</h6>
-                        {{--<button class="fbbtn btn blue">Connexion Facebook</button>--}}
-                        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                        </fb:login-button>
-
-                        <div id="status">
+                        <div class="section center">
+                            <a href="{{url('/auth/facebook')}}" class="btn btn-link">Facebook</a>
                         </div>
                     </div>
                 </div>
