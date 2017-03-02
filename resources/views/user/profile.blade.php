@@ -11,12 +11,26 @@
                 </div>
                 <div class="col s9">
                     <h4>{{$user->last_name}} {{$user->first_name}}</h4>
-                    <p><span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span></p>
+                    <p>
+                        <span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span>
+                    </p>
+                    <div class="col s11">
+                        <nav>
+                            <div class="white nav-wrapper">
+                                <ul class="">
+                                    <li><a href="{{route('user_vehicles')}}" class="black-text">Ajouter un vehicule</a></li>
+                                    <li><a href="#" class="black-text">Liste des vehicules</a></li>
+                                    <li><a href="#" class="black-text">Liste de vos annonces</a></li>
+                                    <li><a href="#" class="black-text">Liste de vos reservations</a></li>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
 
             <div class="row card-panel">
-                <h2>Mes informations</h2>
+                <h4>Mes informations</h4>
                 <form method="post" action="{{ route('update_user_profile') }}">
 
                     {{ csrf_field() }}
@@ -94,7 +108,7 @@
                         @endif
                     </div>
                     <div class="col s12">
-                        <button type="submit" class="btn jaune black-text right">
+                        <button type="submit" class="btn yellow black-text right">
                             Enregistrer
                         </button>
                     </div>
