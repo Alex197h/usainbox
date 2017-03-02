@@ -64,7 +64,7 @@
 </section> -->
 
 <div id="offercopy" hidden>
-    <div class="offer card horizontal$selected">
+    <div class="offer card horizontal$selected" offer-id="$offerid">
         <div class="card-image valign-wrapper">
             <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
         </div>
@@ -121,6 +121,7 @@ function initMap() {
     };
 
     var Markers = {};
+    var Paths = [];
     var MarkersHidden = false;
     var MarkerClicked = false;
 
@@ -138,7 +139,7 @@ function initMap() {
         var cityStart = preMarkers[i][0][0];
         var cities = preMarkers[i][0];
         var transport = [];
-
+        
         if (preMarkers[i].length == 1) {
             transport.push(cities.transport);
             delete cities.transport;
@@ -171,6 +172,7 @@ function initMap() {
                     Markers[m][n].setVisible(false);
                 }
             }
+            
             if (!this.path) this.path = setPath(this.cities);
             this.setVisible(true);
             this.path.setMap(map);
@@ -221,12 +223,11 @@ function initMap() {
                     var count = 1;
                     for(r in result) {
                         var divo = $('#offercopy').html();
-                        console.log(result[r])
                         var d = result[r].date_start;
-
                         var arr = {
                             selected: count==1 ? ' selected' : '',
                             date: (new Date(d.split(' ')[0])).toLocaleDateString(),
+                            offerid: result[r].id,
                             hour: d.split(' ')[1],
                             name: result[r].user.first_name+' '+result[r].user.last_name,
                             gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
@@ -322,8 +323,15 @@ function initMap() {
     var options = {types: ['(cities)']};
     new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
     new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
-
 }
+
+$(document).on('click', '#transport_offers .offer', function(){
+    if(!$(this).hasClass('selected')){
+        $('#transport_offers .offer.selected').removeClass('selected');
+        $(this).addClass('selected');
+    }
+});
+
 </script>
 
 
