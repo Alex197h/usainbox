@@ -126,7 +126,7 @@
 
 
                             <div class="col s12">
-                                <button type="submit" class="btn jaune black-text right">
+                                <button type="submit" class="btn yellow black-text right">
                                     Enregistrer
                                 </button>
                             </div>
