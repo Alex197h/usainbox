@@ -61,8 +61,10 @@ class UserController extends Controller {
     public function getVehicles(){
         $auth = Auth::user();
         $type_vehicles = TypeVehicle::all();
+        $vehicles = $auth->vehicles;
         $data = array(
-            'type_vehicles' => $type_vehicles
+            'type_vehicles' => $type_vehicles,
+            'vehicles' => $vehicles
         );
 
         return view('user.vehicles', $data);
@@ -97,8 +99,7 @@ class UserController extends Controller {
         if ($request->has('height'))
         $vehicle->max_height = $request->input('height');
         $vehicle->max_volume = $request->input('volume');
-        if ($request->has('weight'))
-        $vehicle->max_weight = $request->input('weight');
+        if ($request->has('weight')) $vehicle->max_weight = $request->input('weight');
         $vehicle->car_brand = $request->input('vehicle_brand');
         $vehicle->car_model = $request->input('vehicle_model');
 
