@@ -16,6 +16,9 @@ footer{
 .jaune{
     background-color: #FFDA44;
 }
+/*.jaune:hover{
+    background-color: #FFDA44;
+}*/
 
 button{
     height: 45px;
