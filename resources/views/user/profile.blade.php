@@ -30,7 +30,7 @@
             </div>
 
             <div class="row card-panel">
-                <h2>Mes informations</h2>
+                <h4>Mes informations</h4>
                 <form method="post" action="{{ route('update_user_profile') }}">
 
                     {{ csrf_field() }}
