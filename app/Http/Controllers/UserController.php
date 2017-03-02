@@ -15,7 +15,10 @@ use App\User;
 class UserController extends Controller {
 
     public function getProfile(User $user){
-        return view('user.other_profile', ['user' => $user]);
+        if($user->id == Auth::user()->id)
+            return redirect()->route('user_profile');
+        else
+            return view('user.other_profile', ['user' => $user]);
     }
 
     public function getProfileAuth(){
