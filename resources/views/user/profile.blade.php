@@ -24,14 +24,14 @@
                     <div class="input-field col s12 m6{{ $errors->has('gender') ? ' has-error' : '' }}">
                         <input class="with-gap" name="gender" value="1" type="radio" id="male" {{ ($user->gender) ? 'checked' : '' }}>
                         <label class="col s6" for="male">
-                            {{ Html::image('public/img/user/man.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
                             Homme
+                            {{ Html::image('public/img/user/man.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
                         </label>
 
                         <input class="with-gap" name="gender" value="0" type="radio" id="female" {{ ($user->gender) ? '' : 'checked' }}>
                         <label class="col s6" for="female">
-                            {{ Html::image('public/img/user/girl.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
                             Femme
+                            {{ Html::image('public/img/user/girl.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
                         </label>
 
 
@@ -54,20 +54,6 @@
                             </span>
                         @endif
                     </div>
-
-                    <div class="input-field col s12 m6{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                        <input placeholder="" class="datepicker" name="birthday" id="birthday" type="date" value="{{$user->birthday}}">
-                        <label for="birthday" class="hide">
-                            {{ Html::image('public/img/user/anniv.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
-                            Date de naissance
-                        </label>
-
-                        @if ($errors->has('birthday'))
-                            <span class="col s12">
-                                <strong>{{ $errors->first('birthday') }}</strong>
-                            </span>
-                        @endif
-                    </div>
                     <div class="input-field col s12 m6{{ $errors->has('phone') ? ' has-error' : '' }}">
                         <input placeholder="Numéro de téléphone" name="phone" id="phone" type="tel" value="{{$user->phone}}">
                         <label for="phone">
@@ -81,7 +67,19 @@
                             </span>
                         @endif
                     </div>
+                    <div class="input-field col s12 m6{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                        <input placeholder="" class="datepicker" name="birthday" id="birthday" type="date" value="{{$user->birthday}}">
+                        <label for="birthday" class="hide">
+                            {{ Html::image('public/img/user/anniv.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                            Date de naissance
+                        </label>
 
+                        @if ($errors->has('birthday'))
+                            <span class="col s12">
+                                <strong>{{ $errors->first('birthday') }}</strong>
+                            </span>
+                        @endif
+                    </div>
                     <div class="input-field col s12 m6{{ $errors->has('description') ? ' has-error' : '' }}">
                         <textarea id="description" placeholder="Description" class="materialize-textarea" name="description">{{ $user->description }}</textarea>
                         <label for="description">
