@@ -113,7 +113,7 @@
                     <ul class="right hide-on-med-and-down">
                         <li><a href="#" class="black-text"> Rechercher</a></li>
                         <li><a href="{{route('create_transport_offer')}}" class="black-text">Déposer une annonce</a></li>
-                        <li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">{{$User->first_name}}<i class="material-icons right">arrow_drop_down</i></a></li>
+                        <li><a class="dropdown-button black-text" href="#!" data-activates="dropdown1">{{$User->last_name}} {{$User->first_name}}<i class="material-icons right">arrow_drop_down</i></a></li>
                     </ul>
                     <ul class="side-nav" id="mobile-demo">
                         <li><a href="#" class="black-text"> Rechercher</a></li>
