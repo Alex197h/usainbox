@@ -38,14 +38,16 @@
                     <div class="input-field col s12 m6{{ $errors->has('gender') ? ' has-error' : '' }}">
                         <input class="with-gap" name="gender" value="1" type="radio" id="male" {{ ($user->gender) ? 'checked' : '' }}>
                         <label class="col s6" for="male">
-                            Homme
                             {{ Html::image('public/img/user/man.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                            Homme
+
                         </label>
 
                         <input class="with-gap" name="gender" value="0" type="radio" id="female" {{ ($user->gender) ? '' : 'checked' }}>
                         <label class="col s6" for="female">
-                            Femme
                             {{ Html::image('public/img/user/girl.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                            Femme
+
                         </label>
 
 

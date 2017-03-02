@@ -24,8 +24,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $offers = TransportOffer::all();
-
+        $offers = TransportOffer::with('steps')->get();
+        
         $transport_offers = [];
         foreach($offers as $offer){
             if($offer->steps){
