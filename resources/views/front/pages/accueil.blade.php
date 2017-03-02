@@ -9,11 +9,14 @@
         {{ csrf_field() }}
         <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
         <div class="row">
-            <div class="input-field col s12 m5 l4">
+            <div class="input-field col s12 m5 l3">
                 <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start">
                 <label style="display: none;" for="city_start">Ville départ</label>
             </div>
-            <div class="input-field col s12 m5 l4">
+            <div class="input-field col s12 m5 l1">
+                <a id="switch" class="waves-effect waves-light btn"><i class="material-icons small">repeat</i></a>
+            </div>
+            <div class="input-field col s12 m5 l3">
                 <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end">
                 <label style="display: none;" for="city_end">Ville arrivée</label>
             </div>
@@ -32,6 +35,15 @@
     class="hide-on-small-only waves-light transparent white-text"><i
     class="material-icons floating">expand_more</i></a>
 </div>
+
+<script>
+    $('#switch').on('click', function(){
+        var first = $('#city_start').val();
+        var last = $('#city_end').val();
+        $('#city_start').val(last);
+        $('#city_end').val(first);
+    });
+</script>
 
 <div id="introduction"><br></div>
 
@@ -52,7 +64,7 @@
 </section> -->
 
 <div id="offercopy" hidden>
-    <div class="offer card horizontal selected">
+    <div class="offer card horizontal$selected" offer-id="$offerid">
         <div class="card-image valign-wrapper">
             <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
         </div>
@@ -61,9 +73,9 @@
                 <div class="section center">
                     <h4>$date</h4>
                     <span>$itinerary</span>
+                    <i class="small material-icons" style="color:#$gender">account_circle</i><span> <a href="#">$name</a> ($age ans)</span><br>
                 </div>
                 <div class="section detail-offer">
-                    <i class="small material-icons" style="color:#$gender">account_circle</i><span> <a href="#">$name</a> ($age ans)</span><br>
                     <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                     <b>Heure de départ:</b> $hour<br>
                     <b>Description:</b> $description<br><br>
@@ -109,6 +121,7 @@ function initMap() {
     };
 
     var Markers = {};
+    var Paths = [];
     var MarkersHidden = false;
     var MarkerClicked = false;
 
@@ -126,7 +139,7 @@ function initMap() {
         var cityStart = preMarkers[i][0][0];
         var cities = preMarkers[i][0];
         var transport = [];
-
+        
         if (preMarkers[i].length == 1) {
             transport.push(cities.transport);
             delete cities.transport;
@@ -159,6 +172,7 @@ function initMap() {
                     Markers[m][n].setVisible(false);
                 }
             }
+            
             if (!this.path) this.path = setPath(this.cities);
             this.setVisible(true);
             this.path.setMap(map);
@@ -204,14 +218,16 @@ function initMap() {
 
 
                     var div = $('#transport_offers');
-                    div.html('')
+                    div.html('');
+                    
+                    var count = 1;
                     for(r in result) {
                         var divo = $('#offercopy').html();
-                        console.log(result[r])
                         var d = result[r].date_start;
-
                         var arr = {
+                            selected: count==1 ? ' selected' : '',
                             date: (new Date(d.split(' ')[0])).toLocaleDateString(),
+                            offerid: result[r].id,
                             hour: d.split(' ')[1],
                             name: result[r].user.first_name+' '+result[r].user.last_name,
                             gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
@@ -237,6 +253,7 @@ function initMap() {
                         });
 
                         div.append(divo);
+                        count++;
                     }
                     // $("#map").animate({"width": "60%"}, 500);
                     div.show(500);
@@ -306,8 +323,15 @@ function initMap() {
     var options = {types: ['(cities)']};
     new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
     new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
-
 }
+
+$(document).on('click', '#transport_offers .offer', function(){
+    if(!$(this).hasClass('selected')){
+        $('#transport_offers .offer.selected').removeClass('selected');
+        $(this).addClass('selected');
+    }
+});
+
 </script>
 
 

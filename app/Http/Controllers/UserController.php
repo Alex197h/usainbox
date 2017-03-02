@@ -10,16 +10,52 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\User;
 
 class UserController extends Controller {
+
+    public function getProfile(User $user){
+        if($user->id == Auth::user()->id)
+            return redirect()->route('user_profile');
+        else
+            return view('user.other_profile', ['user' => $user]);
+    }
+
     public function getProfileAuth(){
         $auth = Auth::user();
+//        var_dump($auth->notation());
         $data = array(
             'user' => $auth
         );
 
         return view('user.profile', $data);
     }
+
+    public function updateProfileAuth(Request $request){
+        $rules = array(
+            'email' => 'required|email|max:255|unique:users',
+            'gender' => 'required|boolean',
+            'birthday' => 'required|date',
+            'phone' => 'required|max:20',
+        );
+
+        $this->validate($request, $rules);
+
+        $auth = Auth::user();
+
+        $auth->email = $request->input('email');
+        $auth->gender = $request->input('gender');
+        $auth->birthday = $request->input('birthday');
+        $auth->phone = $request->input('phone');
+        $auth->description = $request->input('description');
+
+        if($auth->save())
+            return redirect()->route('user_profile');
+        else
+            return redirect()->back()->withInput();
+    }
+
+
 
     public function getVehicles(){
         $auth = Auth::user();

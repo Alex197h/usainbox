@@ -48,4 +48,10 @@ class User extends Authenticatable {
     public function getIsTransporterAttribute(){
         return Vehicle::where('user_id', $this->id)->first() != NULL;
     }
+
+    public function notation(){
+
+        $transport_offers = TransportOffer::where('user_id', $this->id)->get();
+        return Reservation::whereIn('user_id', $transport_offers)->avg();
+    }
 }

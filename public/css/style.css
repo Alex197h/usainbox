@@ -13,6 +13,9 @@ footer{
     text-align: center;
     padding: 55px;
 }
+.jaune{
+    background-color: #FFDA44;
+}
 
 button{
     height: 45px;
@@ -155,12 +158,12 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 #map{
-    height: 60vh;
+    height: 80vh;
 }
 #transport_offers{
     float: right;
     width: 40%;
-    height: 60vh;
+    height: 80vh;
     overflow: auto;
     position: absolute;
     background: white;

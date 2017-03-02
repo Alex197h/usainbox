@@ -2,10 +2,9 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::post('gettransportmap', 'HomeController@ptest')->name('gettransportmap');
 
-Route::get('/map', function() {
-    return view('map');
-});
+Route::get('/map', function() {return view('map');});
 
 Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
 
@@ -24,12 +23,12 @@ Route::get('page/{page}', 'AboutController@page')->name('page');
 Route::get('contact', 'AboutController@contact')->name('contact');
 Route::post('contact', 'AboutController@postcontact')->name('contact_post');
 
-/* A supprimer */
-Route::get('test', 'AboutController@test')->name('test');
-Route::any('gettransportmap', 'HomeController@ptest')->name('gettransportmap');
+Route::model('user', App\User::class);
 
 
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
+Route::post('user/profile', 'UserController@updateProfileAuth')->name('update_user_profile');
+Route::get('user/{user}', 'UserController@getProfile')->name('profile');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 
