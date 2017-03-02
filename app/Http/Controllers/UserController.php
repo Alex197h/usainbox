@@ -21,6 +21,23 @@ class UserController extends Controller {
         return view('user.profile', $data);
     }
 
+    public function updateProfileAuth(Request $request){
+        $rules = array(
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6|confirmed',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required|boolean',
+            'birthday' => 'required|date',
+            'phone' => 'required|max:20',
+        );
+
+        $this->validate($request, $rules);
+
+        $auth = Auth::user();
+
+    }
+
     public function getVehicles(){
         $auth = Auth::user();
         $type_vehicles = TypeVehicle::all();

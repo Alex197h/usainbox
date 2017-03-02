@@ -18,7 +18,7 @@
 
         <div class="row card-panel">
             <h2>Mes informations</h2>
-            <form method="post" action="">
+            <form method="post" action="{{ route('update_user_profile') }}">
 
                 <p class="input-field col s12 m6">
                     <input class="with-gap" name="gender" value="1" type="radio" id="male" {{ ($user->gender) ? 'checked' : '' }}>
