@@ -23,6 +23,7 @@ class UserController extends Controller {
 
     public function getProfileAuth(){
         $auth = Auth::user();
+//        var_dump($auth->notation());
         $data = array(
             'user' => $auth
         );
