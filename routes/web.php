@@ -23,14 +23,14 @@ Route::get('page/{page}', 'AboutController@page')->name('page');
 Route::get('contact', 'AboutController@contact')->name('contact');
 Route::post('contact', 'AboutController@postcontact')->name('contact_post');
 
-Route::model('user', App\User::class);
-
 
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
 Route::post('user/profile', 'UserController@updateProfileAuth')->name('update_user_profile');
-Route::get('user/{user}', 'UserController@getProfile')->name('profile');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
+
+Route::model('user_id', App\User::class);
+Route::get('user/{user_id}', 'UserController@getProfile')->name('profile');
 
 
 

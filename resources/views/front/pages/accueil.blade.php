@@ -137,56 +137,72 @@ function initMap() {
 
     for (i in preMarkers) {
         var cityStart = preMarkers[i][0][0];
-        var cities = preMarkers[i][0];
+        var cities = [];
         var transport = [];
         
-        if (preMarkers[i].length == 1) {
-            transport.push(cities.transport);
-            delete cities.transport;
+        if(preMarkers[i].length == 1) {
+            cities.push(preMarkers[i][0]);
+            transport.push(preMarkers[i][0].transport);
         }
         /* Else if cities are stacked */
         else {
-            for (j in preMarkers[i]) {
+            for(var j in preMarkers[i]) {
+                cities.push(preMarkers[i][j]);
                 transport.push(preMarkers[i][j].transport);
-                delete preMarkers[i][j].transport;
-
             }
         }
-
-
+        
         var marker = new google.maps.Marker({
             position: {lng: cityStart.lng, lat: cityStart.lat},
             map: map,
             icon: icon,
             title: cityStart.label,
-
             cities: cities,
             transport: transport,
+            clicked: false,
             showPath: false,
             path: null,
+            paths: [],
+            infowindow: null,
         });
 
-        marker.addListener('mouseover', function () {
-            for (m in Markers) {
-                for (n in Markers[m]) {
-                    Markers[m][n].setVisible(false);
-                }
-            }
+        marker.addListener('mouseover', function() {
+            var count = this.cities.length;
             
-            if (!this.path) this.path = setPath(this.cities);
-            this.setVisible(true);
-            this.path.setMap(map);
-            MarkersHidden = true;
+            if(count == 1){
+                for(m in Markers) {
+                    for (n in Markers[m]) {
+                        Markers[m][n].setVisible(false);
+                    }
+                }
+                this.setVisible(true);
+                
+                if(!this.path) this.path = setPath(this.cities[0]);
+                this.path.setMap(map);
+                this.showPath = true;
+                
+                MarkersHidden = true;
+            } else {
+                this.infowindow = new google.maps.InfoWindow({
+                    content: count+' offres'
+                });
+                this.infowindow.open(map, this);
+            }
         });
 
         marker.addListener('mouseout', function () {
-            if (!this.showPath) {
+            if(this.infowindow){
+                this.infowindow.close();
+                this.infowindow = null;
+            }
+            if(this.showPath && !MarkerClicked) {
                 for (m in Markers) {
                     for (n in Markers[m]) {
                         Markers[m][n].setVisible(true);
                     }
                 }
                 this.path.setMap(null);
+                this.path = null;
                 MarkersHidden = false;
             }
         });
@@ -194,7 +210,7 @@ function initMap() {
         marker.addListener('click', function () {
             var clone = this;
             var offers = this.transport;
-
+            
             $.ajax({
                 url: 'gettransportmap',
                 method: 'POST',
@@ -204,19 +220,23 @@ function initMap() {
                     'transport': offers,
                 },
                 success: (function(result) {
-                    for (m in Markers) {
+                    for(m in Markers) {
                         for (n in Markers[m]) {
                             Markers[m][n].setVisible(false);
                         }
                     }
                     clone.setVisible(true);
+                    
+                    if(clone.cities.length > 1){
+                        clone.path = setPath(clone.cities[0]);
+                    }
+                    
                     clone.path.setMap(map);
                     clone.showPath = true;
-
+                    
                     MarkersHidden = true;
                     MarkerClicked = true;
-
-
+                    
                     var div = $('#transport_offers');
                     div.html('');
                     
@@ -227,7 +247,7 @@ function initMap() {
                         var arr = {
                             selected: count==1 ? ' selected' : '',
                             date: (new Date(d.split(' ')[0])).toLocaleDateString(),
-                            offerid: result[r].id,
+                            offerid: count,
                             hour: d.split(' ')[1],
                             name: result[r].user.first_name+' '+result[r].user.last_name,
                             gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
