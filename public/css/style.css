@@ -13,6 +13,9 @@ footer{
     text-align: center;
     padding: 55px;
 }
+.jaune{
+    background-color: #FFDA44;
+}
 
 button{
     height: 45px;
