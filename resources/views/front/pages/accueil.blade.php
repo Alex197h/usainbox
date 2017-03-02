@@ -206,80 +206,91 @@ function initMap() {
                 MarkersHidden = false;
             }
         });
-
+        
         marker.addListener('click', function () {
             var clone = this;
             var offers = this.transport;
+            MarkerClicked = true;
+            for(m in Markers) {
+                for (n in Markers[m]) {
+                    Markers[m][n].setVisible(false);
+                }
+            }
+            this.setVisible(true);
             
-            $.ajax({
-                url: 'gettransportmap',
-                method: 'POST',
-                dataType: 'json',
-                data: {
-                    '_token': '{{ csrf_token() }}',
-                    'transport': offers,
-                },
-                success: (function(result) {
-                    for(m in Markers) {
-                        for (n in Markers[m]) {
-                            Markers[m][n].setVisible(false);
+            if(clone.cities.length == 1 || (!clone.showPath && clone.cities.length > 1)){
+                $.ajax({
+                    url: 'gettransportmap',
+                    method: 'POST',
+                    dataType: 'json',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'transport': offers,
+                    },
+                    success: (function(result) {
+                        if(clone.cities.length > 1){
+                            clone.path = setPath(clone.cities[0]);
                         }
-                    }
-                    clone.setVisible(true);
-                    
-                    if(clone.cities.length > 1){
-                        clone.path = setPath(clone.cities[0]);
-                    }
-                    
-                    clone.path.setMap(map);
-                    clone.showPath = true;
-                    
-                    MarkersHidden = true;
-                    MarkerClicked = true;
-                    
-                    var div = $('#transport_offers');
-                    div.html('');
-                    
-                    var count = 1;
-                    for(r in result) {
-                        var divo = $('#offercopy').html();
-                        var d = result[r].date_start;
-                        var arr = {
-                            selected: count==1 ? ' selected' : '',
-                            date: (new Date(d.split(' ')[0])).toLocaleDateString(),
-                            offerid: count,
-                            hour: d.split(' ')[1],
-                            name: result[r].user.first_name+' '+result[r].user.last_name,
-                            gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
-                            age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
-                            description: result[r].description,
-                            regular: {
-                                text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
-                                icon: result[r].is_regular ? 'restore' : 'schedule',
-                            },
-                            highway: {
-                                color: result[r].highway == 1 ? '333' : 'CCC',
-                                message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
-                            },
-                        };
-                        divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
-                            var res = '';
-                            if(c){
-                                if(arr[a] && arr[a][c]) res = arr[a][c];
-                            }
-                            else if(arr[a]) res = arr[a];
+                        
+                        clone.path.setMap(map);
+                        clone.showPath = true;
+                        
+                        MarkersHidden = true;
+                        
+                        var div = $('#transport_offers');
+                        div.html('');
+                        
+                        var count = 1;
+                        for(r in result) {
+                            var divo = $('#offercopy').html();
+                            var d = result[r].date_start;
+                            var arr = {
+                                selected: count==1 ? ' selected' : '',
+                                date: (new Date(d.split(' ')[0])).toLocaleDateString(),
+                                offerid: count,
+                                hour: d.split(' ')[1],
+                                name: result[r].user.first_name+' '+result[r].user.last_name,
+                                gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
+                                age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
+                                description: result[r].description,
+                                regular: {
+                                    text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
+                                    icon: result[r].is_regular ? 'restore' : 'schedule',
+                                },
+                                highway: {
+                                    color: result[r].highway == 1 ? '333' : 'CCC',
+                                    message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                                },
+                            };
+                            divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
+                                var res = '';
+                                if(c){
+                                    if(arr[a] && arr[a][c]) res = arr[a][c];
+                                }
+                                else if(arr[a]) res = arr[a];
 
-                            return res;
-                        });
-
-                        div.append(divo);
-                        count++;
-                    }
-                    // $("#map").animate({"width": "60%"}, 500);
-                    div.show(500);
-                    $('.tooltipped').tooltip({delay: 50});
-                })
-            });
+                                return res;
+                            });
+                            
+                            var Newdiv = $(divo);
+                            
+                            Newdiv.on('click', function(){
+                                if(!$(this).hasClass('selected')){
+                                    clone.path.setMap(null);
+                                    clone.path = setPath(clone.cities[$(this).attr('offer-id')-1]);
+                                    clone.path.setMap(map);
+                                }
+                            });
+                            
+                            div.append(Newdiv);
+                            count++;
+                        }
+                        // $("#map").animate({"width": "60%"}, 500);
+                        div.show(500);
+                        $('.tooltipped').tooltip({delay: 50});
+                    })
+                });
+            }
         });
 
         if (!Markers[marker.title]) Markers[marker.title] = [];
