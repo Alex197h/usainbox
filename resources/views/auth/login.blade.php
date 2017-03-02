@@ -7,12 +7,7 @@
             <div class="col l6 m8 s12 offset-l3 offset-m2 card-panel">
 
                 <div class="section center">
-                    {{--<button class="fbbtn btn blue">Connexion Facebook</button>--}}
-                    <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-                    </fb:login-button>
-
-                    <div id="status">
-                    </div>
+                    <a href="{{url('/auth/facebook')}}" class="btn btn-link">Facebook</a>
                 </div>
 
                 <div class="divider"></div>
