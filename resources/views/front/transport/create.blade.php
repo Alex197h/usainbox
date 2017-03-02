@@ -46,7 +46,7 @@
                     <label for="max_width">Largeur maximale du colis acceptée</label>
 
                     <input id="max_width" type="number" class="form-control" placeholder="Largeur max en cm"
-                           name="max_width" oninput="calcVolume()" value="{{ old('max_width') }}">
+                           name="max_width" value="{{ old('max_width') }}">
 
                     @if ($errors->has('max_width'))
                         <span class="col s12">
@@ -59,7 +59,7 @@
                     <label for="max_length">Longueur maximum du colis acceptée</label>
 
                     <input id="max_length" type="number" class="form-control" placeholder="Longueur max en cm"
-                           name="max_length" oninput="calcVolume()" value="{{ old('max_length') }}">
+                           name="max_length" value="{{ old('max_length') }}">
 
                     @if ($errors->has('max_length'))
                         <span class="col s12">
@@ -72,7 +72,7 @@
                     <label for="max_height">Hauteur maximum du colis acceptée</label>
 
                     <input id="max_height" type="number" class="form-control" placeholder="Hauteur max en cm"
-                           name="max_height" oninput="calcVolume()" value="{{ old('max_height') }}">
+                           name="max_height" value="{{ old('max_height') }}">
 
                     @if ($errors->has('max_height'))
                         <span class="col s12">
@@ -193,22 +193,26 @@
                     $('#max_length').val(vehicle.max_length != 0 ? vehicle.max_length : '');
                     $('#max_volume').val(vehicle.max_volume != 0 ? vehicle.max_volume : '');
                     $('#max_weight').val(vehicle.max_weight);
-                    console.log(this.value);
                 });
                 $(document).ready(function(){
                     $('#vehicle').change();
                 });
 
-                function calcVolume(){
-                    var vehicle = Vehicles[this.value];
+                $('#max_width, #max_height, #max_length').on('input', function(id){
+                    var vehicle = Vehicles[$('#vehicle').val()];
+
+                    var width = $('#max_width').val();
+                    var height = $('#max_height').val();
+                    var length = $('#max_length').val();
 
                     if(
-                        $('#max_width').val != '' && $('#max_height').val != '' && $('#max_length').val != '' ||
-                    $('#max_width').val != 0 && $('#max_height').val != 0 && $('#max_length').val != 0)
-                    $('#max_volume').val($('#max_width').val() * $('#max_height').val() * $('#max_length').val());
-                    else
+                        width == '' || height == '' || length == '' ||
+                    width == 0 || height == 0 || length == 0)
                     $('#max_volume').val(vehicle.max_volume);
-                }
+                    else
+                        $('#max_volume').val(width * height * length);
+
+                });
 
 
             </script>
