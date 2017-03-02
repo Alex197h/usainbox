@@ -23,7 +23,6 @@ class UserController extends Controller {
 
     public function getProfileAuth(){
         $auth = Auth::user();
-//        var_dump($auth->notation());
         $data = array(
             'user' => $auth
         );
@@ -32,18 +31,20 @@ class UserController extends Controller {
     }
 
     public function updateProfileAuth(Request $request){
+        $auth = Auth::user();
+
         $rules = array(
-            'email' => 'required|email|max:255|unique:users',
             'gender' => 'required|boolean',
             'birthday' => 'required|date',
             'phone' => 'required|max:20',
         );
+        if ($auth->email != $request->input('email'))
+            $rules['email'] = 'required|email|max:255|unique:users';
 
         $this->validate($request, $rules);
 
-        $auth = Auth::user();
-
-        $auth->email = $request->input('email');
+        if ($auth->email != $request->input('email'))
+            $auth->email = $request->input('email');
         $auth->gender = $request->input('gender');
         $auth->birthday = $request->input('birthday');
         $auth->phone = $request->input('phone');
