@@ -10,8 +10,14 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Auth;
+use App\User;
 
 class UserController extends Controller {
+
+    public function getProfile(User $user){
+        return view('user.other_profile', ['user' => $user]);
+    }
+
     public function getProfileAuth(){
         $auth = Auth::user();
         $data = array(
@@ -44,6 +50,8 @@ class UserController extends Controller {
         else
             return redirect()->back()->withInput();
     }
+
+
 
     public function getVehicles(){
         $auth = Auth::user();
