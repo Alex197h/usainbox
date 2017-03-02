@@ -24,9 +24,6 @@ class UserController extends Controller {
     public function updateProfileAuth(Request $request){
         $rules = array(
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-            'first_name' => 'required|max:255',
-            'last_name' => 'required|max:255',
             'gender' => 'required|boolean',
             'birthday' => 'required|date',
             'phone' => 'required|max:20',
@@ -36,6 +33,16 @@ class UserController extends Controller {
 
         $auth = Auth::user();
 
+        $auth->email = $request->input('email');
+        $auth->gender = $request->input('gender');
+        $auth->birthday = $request->input('birthday');
+        $auth->phone = $request->input('phone');
+        $auth->description = $request->input('description');
+
+        if($auth->save())
+            return redirect()->route('user_profile');
+        else
+            return redirect()->back()->withInput();
     }
 
     public function getVehicles(){

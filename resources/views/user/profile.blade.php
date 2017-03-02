@@ -20,27 +20,59 @@
             <h2>Mes informations</h2>
             <form method="post" action="{{ route('update_user_profile') }}">
 
-                <p class="input-field col s12 m6">
+                {{ csrf_field() }}
+
+                <p class="input-field col s12 m6{{ $errors->has('gender') ? ' has-error' : '' }}">
                     <input class="with-gap" name="gender" value="1" type="radio" id="male" {{ ($user->gender) ? 'checked' : '' }}>
                     <label class="col s6" for="male">Homme</label>
                     <input class="with-gap" name="gender" value="0" type="radio" id="female" {{ ($user->gender) ? '' : 'checked' }}>
                     <label class="col s6" for="female">Femme</label>
+
+                    @if ($errors->has('gender'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('gender') }}</strong>
+                        </span>
+                    @endif
                 </p>
-                <div class="input-field col s12 m6">
-                    <input placeholder="Adresse e-mail" name="mail" id="mail" type="email" value="{{ $user->email }}">
-                    <label for="mail">Adresse e-mail</label>
+                <div class="input-field col s12 m6{{ $errors->has('email') ? ' has-error' : '' }}">
+                    <input placeholder="Adresse e-mail" name="email" id="email" type="email" value="{{ $user->email }}">
+                    <label for="email">Adresse e-mail</label>
+
+                    @if ($errors->has('email'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="input-field col s12 m6">
-                    <input placeholder="Numéro de téléphone" name="tel" id="tel" type="tel" value="{{$user->phone}}">
-                    <label for="tel">Téléphone</label>
+                <div class="input-field col s12 m6{{ $errors->has('phone') ? ' has-error' : '' }}">
+                    <input placeholder="Numéro de téléphone" name="phone" id="phone" type="tel" value="{{$user->phone}}">
+                    <label for="phone">Téléphone</label>
+
+                    @if ($errors->has('phone'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('phone') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="input-field col s12 m6">
-                    <input placeholder="" class="datepicker" name="birth" id="birth" type="date" value="{{$user->birthday}}">
-                    <label for="birth" class="hide">Date de naissance</label>
+                <div class="input-field col s12 m6{{ $errors->has('birthday') ? ' has-error' : '' }}">
+                    <input placeholder="" class="datepicker" name="birthday" id="birthday" type="date" value="{{$user->birthday}}">
+                    <label for="birthday" class="hide">Date de naissance</label>
+
+                    @if ($errors->has('birthday'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('birthday') }}</strong>
+                        </span>
+                    @endif
                 </div>
-                <div class="input-field col s12 m6">
+                <div class="input-field col s12 m6{{ $errors->has('description') ? ' has-error' : '' }}">
                     <textarea id="description" placeholder="Description" class="materialize-textarea" name="description">{{ $user->description }}</textarea>
                     <label for="description">Description</label>
+
+                    @if ($errors->has('description'))
+                        <span class="col s12">
+                            <strong>{{ $errors->first('description') }}</strong>
+                        </span>
+                    @endif
                 </div>
                 <button type="submit" class="btn waves-effect waves-light white black-text col s12">
                     Enregistrer
