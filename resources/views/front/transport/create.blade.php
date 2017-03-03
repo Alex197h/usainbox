@@ -17,7 +17,7 @@
                     <div id="transport_offers"></div>
                 </div>
 
-                <div id="offercopy" hidden>
+                <div id="offercopy">
                     <div class="offer card horizontal$selected" offer-id="$offerid">
                         <div class="card-image valign-wrapper">
                             <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
@@ -30,16 +30,47 @@
                                 <div class="section detail-steps">
                                     <label for="start_city">Ville de départ</label>
                                     <input id="start_city" type="text" class="form-control"
-                                           name="start_city" value="{{ old('start_city') }}">
+                                           name="start_city" value="{{ old('start_city') }}" draggable="true">
 
                                     @if ($errors->has('start_city'))
                                         <span class="col s12">
                                             <strong>{{ $errors->first('start_city') }}</strong>
                                         </span>
                                     @endif
+
+                                    <label for="step1">Etape n°1</label>
+                                    <input id="step1" type="text" class="form-control"
+                                           name="step1" value="{{ old('step1') }}" draggable="true">
+
+                                    @if ($errors->has('step1'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step1') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="step2">Etape n°2</label>
+                                    <input id="step2" type="text" class="form-control"
+                                           name="step2" value="{{ old('step2') }}" draggable="true">
+
+                                    @if ($errors->has('step2'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step2') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="step3">Etape n°3</label>
+                                    <input id="step3" type="text" class="form-control"
+                                           name="step3" value="{{ old('step3') }}" draggable="true">
+
+                                    @if ($errors->has('step3'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step3') }}</strong>
+                                        </span>
+                                    @endif
+
                                     <label for="end_city">Ville d'arrivé</label>
                                     <input id="end_city" type="text" class="form-control"
-                                           name="end_city" value="{{ old('end_city') }}">
+                                           name="end_city" value="{{ old('end_city') }}" draggable="true">
 
                                     @if ($errors->has('end_city'))
                                         <span class="col s12">
@@ -291,6 +322,69 @@
                 var MarkerClicked = false;
                         this.setVisible(true);
                 }
+
+                var dropedElementSortingOrder;
+                var draggedElementSortingOrder;
+                var cols;
+                 $(function () {
+                     cols = document.querySelectorAll('.ProcedureDrag');
+                     [].forEach.call(cols, function (col) {
+                         col.addEventListener('dragstart', handleDragStart, false);
+                         col.addEventListener('dragenter', handleDragEnter, false);
+                         col.addEventListener('dragover', handleDragOver, false);
+                         col.addEventListener('dragleave', handleDragLeave, false);
+                         col.addEventListener('drop', handleDrop, false);
+                         col.addEventListener('dragend', handleDragEnd, false);
+                     });
+                 });
+
+                 function handleDragStart(e) {
+                     this.style.opacity = '0.5';
+                     dragSrcEl = this;
+                     e.dataTransfer.effectAllowed = 'move';
+                     dropedElementSortingOrder = $(this).find(".SortingOrderHidden");
+                     e.dataTransfer.setData('text/html', this.innerHTML);
+                 }
+
+                 function handleDragOver(e) {
+                     if (e.preventDefault) {
+                         e.preventDefault();
+                     }
+                     return false;
+                 }
+
+                 function handleDragEnter(e) {
+                     this.classList.add('over');
+                 }
+
+                 function handleDragLeave(e) {
+                     this.classList.remove('over');
+                 }
+
+                 function handleDrop(e) {
+                     if (e.stopPropagation) {
+                         e.stopPropagation();
+                     }
+                     if (dragSrcEl != this) {
+                         draggedElementSortingOrder = $(this).find(".SortingOrderHidden");
+                         var a = dropedElementSortingOrder.val();
+                         var b = draggedElementSortingOrder.val();
+                         dropedElementSortingOrder.val(b);
+                         draggedElementSortingOrder.val(a);
+                         var c = dropedElementSortingOrder.val();
+                         var d = draggedElementSortingOrder.val();
+                         dragSrcEl.innerHTML = this.innerHTML;
+                         this.innerHTML = e.dataTransfer.getData('text/html');
+                     }
+                     return false;
+                 }
+
+ function handleDragEnd(e) {
+     [].forEach.call(cols, function (col) {
+         col.classList.remove('over');
+     });
+     this.style.opacity = '1.0';
+ }
 
             </script>
             </div>
