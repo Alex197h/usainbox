@@ -55,24 +55,17 @@
             <h3 class="h3">Retrouver des transport partout en France</h3>
         </div>
 
-<<<<<<< HEAD
-        <div class="col s12">
-            <div id="resss"></div>
-            <div class="col s12 right" id="map"></div>
-            <div id="transport_offers"></div>
-        </div>
-=======
+
 <div class="col s12">
     <div id="resss"></div>
     <div class="col s12 right" id="map"></div>
     <div id="transport_offers" class="col s12"></div>
 </div>
->>>>>>> refs/remotes/origin/master
 
-        <!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
-        <video class="col s12 valign" autoplay loop muted class="responsive-video">
-        <source src="public/video/pres.mp4" type="video/mp4"/>
-    </video>
+<!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
+<video class="col s12 valign" autoplay loop muted class="responsive-video">
+<source src="public/video/pres.mp4" type="video/mp4"/>
+</video>
 </section> -->
 
 <div id="offercopy" hidden>

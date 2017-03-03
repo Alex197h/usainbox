@@ -162,7 +162,6 @@ return array(
     'PHPUnit_Framework_IncompleteTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
     'PHPUnit_Framework_InvalidCoversTargetException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
     'PHPUnit_Framework_MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/MissingCoversAnnotationException.php',
-<<<<<<< HEAD
     'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Builder/Identity.php',
     'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Builder/InvocationMocker.php',
@@ -206,59 +205,6 @@ return array(
     'PHPUnit_Framework_MockObject_Stub_ReturnSelf' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Stub/ReturnSelf.php',
     'PHPUnit_Framework_MockObject_Stub_ReturnValueMap' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Stub/ReturnValueMap.php',
     'PHPUnit_Framework_MockObject_Verifiable' => $vendorDir . '/phpunit/phpunit-mock-objects/src/framework/MockObject/Verifiable.php',
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-=======
->>>>>>> refs/remotes/origin/master
->>>>>>> bb5105d75fda7939b5adbdc04d295fc8d1aa8154
->>>>>>> 7fdf6d6c4e94cd8bc2452ad08c13396148cc84c2
-    'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
-    'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
-    'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',
-    'PHPUnit_Framework_MockObject_Builder_Match' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Match.php',
-    'PHPUnit_Framework_MockObject_Builder_MethodNameMatch' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/MethodNameMatch.php',
-    'PHPUnit_Framework_MockObject_Builder_Namespace' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Namespace.php',
-    'PHPUnit_Framework_MockObject_Builder_ParametersMatch' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/ParametersMatch.php',
-    'PHPUnit_Framework_MockObject_Builder_Stub' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Stub.php',
-    'PHPUnit_Framework_MockObject_Exception' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/Exception.php',
-    'PHPUnit_Framework_MockObject_Generator' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Generator.php',
-    'PHPUnit_Framework_MockObject_Invocation' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation.php',
-    'PHPUnit_Framework_MockObject_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/InvocationMocker.php',
-    'PHPUnit_Framework_MockObject_Invocation_Object' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation/Object.php',
-    'PHPUnit_Framework_MockObject_Invocation_Static' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invocation/Static.php',
-    'PHPUnit_Framework_MockObject_Invokable' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Invokable.php',
-    'PHPUnit_Framework_MockObject_Matcher' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher.php',
-    'PHPUnit_Framework_MockObject_Matcher_AnyInvokedCount' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/AnyInvokedCount.php',
-    'PHPUnit_Framework_MockObject_Matcher_AnyParameters' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/AnyParameters.php',
-    'PHPUnit_Framework_MockObject_Matcher_ConsecutiveParameters' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/ConsecutiveParameters.php',
-    'PHPUnit_Framework_MockObject_Matcher_Invocation' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/Invocation.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedAtIndex' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedAtIndex.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedAtLeastCount' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedAtLeastCount.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedAtLeastOnce' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedAtLeastOnce.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedAtMostCount' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedAtMostCount.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedCount' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedCount.php',
-    'PHPUnit_Framework_MockObject_Matcher_InvokedRecorder' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/InvokedRecorder.php',
-    'PHPUnit_Framework_MockObject_Matcher_MethodName' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/MethodName.php',
-    'PHPUnit_Framework_MockObject_Matcher_Parameters' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/Parameters.php',
-    'PHPUnit_Framework_MockObject_Matcher_StatelessInvocation' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Matcher/StatelessInvocation.php',
-    'PHPUnit_Framework_MockObject_MockBuilder' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/MockBuilder.php',
-    'PHPUnit_Framework_MockObject_MockObject' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/MockObject.php',
-    'PHPUnit_Framework_MockObject_RuntimeException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/RuntimeException.php',
-    'PHPUnit_Framework_MockObject_Stub' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub.php',
-    'PHPUnit_Framework_MockObject_Stub_ConsecutiveCalls' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ConsecutiveCalls.php',
-    'PHPUnit_Framework_MockObject_Stub_Exception' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/Exception.php',
-    'PHPUnit_Framework_MockObject_Stub_MatcherCollection' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/MatcherCollection.php',
-    'PHPUnit_Framework_MockObject_Stub_Return' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/Return.php',
-    'PHPUnit_Framework_MockObject_Stub_ReturnArgument' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ReturnArgument.php',
-    'PHPUnit_Framework_MockObject_Stub_ReturnCallback' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ReturnCallback.php',
-    'PHPUnit_Framework_MockObject_Stub_ReturnReference' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ReturnReference.php',
-    'PHPUnit_Framework_MockObject_Stub_ReturnSelf' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ReturnSelf.php',
-    'PHPUnit_Framework_MockObject_Stub_ReturnValueMap' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Stub/ReturnValueMap.php',
-    'PHPUnit_Framework_MockObject_Verifiable' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Verifiable.php',
->>>>>>> refs/remotes/origin/master
     'PHPUnit_Framework_OutputError' => $vendorDir . '/phpunit/phpunit/src/Framework/OutputError.php',
     'PHPUnit_Framework_RiskyTest' => $vendorDir . '/phpunit/phpunit/src/Framework/RiskyTest.php',
     'PHPUnit_Framework_RiskyTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/RiskyTestError.php',
