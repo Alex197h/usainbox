@@ -227,7 +227,7 @@
             <script type="text/javascript">
             var MapElement = document.getElementById('map');
             //var ShowElement = document.getElementById('show');
-            
+
 
             var map;
 
