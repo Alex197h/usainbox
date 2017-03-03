@@ -116,20 +116,20 @@ input[type="date"]::-webkit-inner-spin-button {
     font-size: 80px;
 }
 
-.login-form{
-    margin-top: 50px;
-}
+/*.login-form{*/
+    /*margin-top: 50px;*/
+/*}*/
 
-.login-form{
-    background: white;
-    margin-top: 15vh;
-    margin-bottom: 10vh;
-    padding-bottom: 20px !important;
-    padding-top: 10px !important;
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
-}
+/*.login-form{*/
+    /*background: white;*/
+    /*margin-top: 15vh;*/
+    /*margin-bottom: 10vh;*/
+    /*padding-bottom: 20px !important;*/
+    /*padding-top: 10px !important;*/
+    /*-webkit-border-radius:3px;*/
+    /*-moz-border-radius:3px;*/
+    /*border-radius:3px;*/
+/*}*/
 
 .collapsible-body{
   padding: 2rem !important;
