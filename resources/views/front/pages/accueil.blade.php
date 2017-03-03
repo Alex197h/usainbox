@@ -85,8 +85,10 @@
                         <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
-                        <i class="small material-icons tooltipped" data-tooltip="$regular.text">$regular.icon</i>
-                        <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i>
+                        {{ Html::image('public/img/trajet/$regular.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$regular.text')) }}
+                        {{ Html::image('public/img/trajet/$highway.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$highway.text')) }}
+
+                        {{-- <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i> --}}
                     </div>
                 </div>
                 <div class="card-action">
@@ -263,11 +265,11 @@
                                     description: result[r].description,
                                     regular: {
                                         text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
-                                        icon: result[r].is_regular ? 'restore' : 'schedule',
+                                        icon: result[r].is_regular ? 'regularYes' : 'regularYes',
                                     },
                                     highway: {
-                                        color: result[r].highway == 1 ? '333' : 'CCC',
-                                        message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                                        icon: result[r].highway == 1 ? 'highwayYes' : 'highwayNo',
+                                        text: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
                                     },
                                 };
                                 divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
