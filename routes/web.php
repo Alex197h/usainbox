@@ -33,6 +33,9 @@ Route::model('user_id', App\User::class);
 Route::get('user/{user_id}', 'UserController@getProfile')->name('profile');
 
 
+Route::get('admin', 'AdminController@home')->name('admin');
+
+
 
 
 // Authentication Routes...
