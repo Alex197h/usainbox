@@ -248,6 +248,7 @@
 
                             var count = 1;
                             for(r in result) {
+                                console.log(result[r]);
                                 var divo = $('#offercopy').html();
                                 var d = result[r].date_start;
                                 var arr = {
