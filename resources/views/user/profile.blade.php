@@ -118,5 +118,91 @@
                 </form>
             </div>
 
+            <div class="row">
+                <div class="section center">
+                    <h4>Mes véhicules</h4>
+                </div>
+                @foreach($vehicles as $vehicle)
+                    <div class="col l4 m6 s12">
+                        <div class=" card-panel">
+                            <div class="section center">
+                                <h5>{{ ucfirst($vehicle->car_brand) }} {{ ucfirst($vehicle->car_model) }}</h5>
+                            </div>
+                            <div class="section">
+                                @if($vehicle->typeVehicle->id == 1)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_car</i>
+                                @elseif($vehicle->typeVehicle->id == 2)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">local_shipping</i>
+                                @elseif($vehicle->typeVehicle->id == 3)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">motorcycle</i>
+                                @elseif($vehicle->typeVehicle->id == 4)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bike</i>
+                                @elseif($vehicle->typeVehicle->id == 5)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">flight</i>
+                                @elseif($vehicle->typeVehicle->id == 12)
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_boat</i>
+                                @else
+                                    <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bus</i>
+                                @endif
+                                {!! ($vehicle->default) ? '<i class="material-icons tooltipped" data-tooltip="Véhicule par défaut">check_circle</i>' : '' !!}
+                                <p><b>Volume:</b> {{ $vehicle->max_volume }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                @endforeach
+            </div>
+
+
+            <div class="row">
+                <div class="section center">
+                    <h4>Mes dernières annonces</h4>
+                </div>
+                @foreach($transport_offers as $offer)
+                    <div class="col s12">
+                        <div class=" card-panel">
+                            <div class="section center">
+                                <h5>{!! ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))) !!}</h5>
+                                @if(isset($steps[$offer->id]))
+                                    @foreach($steps[$offer->id] as $step)
+
+                                        <span>{{ $step }}  @if(!$loop->last) → @endif </span>
+
+                                    @endforeach
+                                @endif
+                            </div>
+                            <div class="section">
+                                @if($offer->is_regular)
+                                    <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
+                                @else
+                                    <i class="small material-icons tooltipped" data-tooltip="Trajet occasionnel">schedule</i>
+                                @endif
+                                @if($offer->highway)
+                                    <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
+                                @endif
+                                <br>
+
+                                <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
+                                <br>
+
+                                <b>Volume:</b> {{ $offer->volume }}
+                                <br>
+
+                                <b>Description:</b>
+                                {{ $offer->description }}
+                                <br>
+
+                                <b>Détour:</b>
+                                {{ $offer->start_detour ? 'Aller' : '' }}
+                                {{ $offer->end_detour ? 'Retour' : '' }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+
+            </div>
+
+
         </div>
     @endsection

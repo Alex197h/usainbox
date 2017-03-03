@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\TransportOffer;
 use App\TypeVehicle;
 use App\Vehicle;
 use Illuminate\Http\Request;
@@ -23,8 +24,34 @@ class UserController extends Controller {
 
     public function getProfileAuth(){
         $auth = Auth::user();
+        $type_vehicles = TypeVehicle::all();
+        $vehicles = $auth->vehicles;
+        $vehicles_id = array();
+        foreach ($vehicles as $vehicle){
+            $vehicles_id[] = $vehicle->id;
+        }
+        $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
+        $city_steps = array();
+        foreach ($transport_offers as $transport_offer){
+
+            $steps = $transport_offer->steps;
+            foreach ($steps as $step){
+                $geocode=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng='. $step['latitude'] .','. $step['longitude'] .'&sensor=false');
+
+                $output= json_decode($geocode);
+
+                if(isset($output->results[0])){
+
+                    $city_steps[$transport_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                }
+            }
+        }
         $data = array(
-            'user' => $auth
+            'user' => $auth,
+            'type_vehicles' => $type_vehicles,
+            'transport_offers' => $transport_offers,
+            'steps' => $city_steps,
+            'vehicles' => $vehicles
         );
 
         return view('user.profile', $data);
@@ -104,7 +131,7 @@ class UserController extends Controller {
         $vehicle->car_model = $request->input('vehicle_model');
 
         if($vehicle->save()){
-            return redirect()->route('user_vehicles', [Auth::user()->id]);
+            return redirect()->route('user_profile');
         }else{
             return redirect()->back()->withInput();
         }
