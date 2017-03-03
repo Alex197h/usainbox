@@ -1,3 +1,4 @@
+*vendor*
 /node_modules
 /public/storage
 *.filerun.*
@@ -5,5 +6,4 @@
 Homestead.json
 Homestead.yaml
 .env
-vendor/*
 .dropbox
