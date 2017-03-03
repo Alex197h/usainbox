@@ -119,7 +119,7 @@ class TransportOffersController extends Controller {
                 $output= json_decode($geocode);
 
                 if(isset($output->results[0])){
-                    $city_steps[$view_offer->id][$step->step] = $output->results[0]->address_components[1]->long_name;
+                    $city_steps[$view_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
                 }
             }
         }
