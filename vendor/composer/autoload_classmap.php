@@ -209,9 +209,12 @@ return array(
 =======
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
 =======
 >>>>>>> refs/remotes/origin/master
 >>>>>>> bb5105d75fda7939b5adbdc04d295fc8d1aa8154
+>>>>>>> 7fdf6d6c4e94cd8bc2452ad08c13396148cc84c2
     'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
     'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',
