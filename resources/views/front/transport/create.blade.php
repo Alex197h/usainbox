@@ -5,11 +5,83 @@
 @section('content')
     <div class="row">
         <div class="col s12 section center">
-            <h5>Proposez d'envoyer un colis</h5>
+            <h5>Proposez vos services en tant que Transporteur</h5>
         </div>
 
         <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
             <div class="section">
+
+                <div class="col s12">
+                    <div id="resss"></div>
+                    <div class="col s12 right" id="map"></div>
+                    <div id="transport_offers"></div>
+                </div>
+
+                <div id="offercopy">
+                    <div class="offer card horizontal$selected" offer-id="$offerid">
+                        <div class="card-image valign-wrapper">
+                            <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+                        </div>
+                        <div class="card-stacked">
+                            <div class="card-content">
+                                <div class="section center">
+                                    <h4>Ajouter vos villes étapes</h4>
+                                </div>
+                                <div class="section detail-steps">
+                                    <label for="start_city">Ville de départ</label>
+                                    <input id="start_city" type="text" class="form-control"
+                                           name="start_city" value="{{ old('start_city') }}" draggable="true">
+
+                                    @if ($errors->has('start_city'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('start_city') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="step1">Etape n°1</label>
+                                    <input id="step1" type="text" class="form-control"
+                                           name="step1" value="{{ old('step1') }}" draggable="true">
+
+                                    @if ($errors->has('step1'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step1') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="step2">Etape n°2</label>
+                                    <input id="step2" type="text" class="form-control"
+                                           name="step2" value="{{ old('step2') }}" draggable="true">
+
+                                    @if ($errors->has('step2'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step2') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="step3">Etape n°3</label>
+                                    <input id="step3" type="text" class="form-control"
+                                           name="step3" value="{{ old('step3') }}" draggable="true">
+
+                                    @if ($errors->has('step3'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('step3') }}</strong>
+                                        </span>
+                                    @endif
+
+                                    <label for="end_city">Ville d'arrivé</label>
+                                    <input id="end_city" type="text" class="form-control"
+                                           name="end_city" value="{{ old('end_city') }}" draggable="true">
+
+                                    @if ($errors->has('end_city'))
+                                        <span class="col s12">
+                                            <strong>{{ $errors->first('end_city') }}</strong>
+                                        </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="col s12{{ $errors->has('vehicle') ? ' has-error' : '' }}">
                     <label for="vehicle">Véhicule utilisé</label>
@@ -214,6 +286,105 @@
 
                 });
 
+
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+            <script type="text/javascript">
+            var MapElement = document.getElementById('map');
+            //var ShowElement = document.getElementById('show');
+
+
+            var map;
+
+
+            function initMap() {
+                map = new google.maps.Map(MapElement, {
+                    center: {lng: 2.70263671875, lat: 46.255846818480315},
+                    navigationControl: false,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    draggable: true,
+                    scrollwheel: false,
+                    zoom: 6
+                });
+
+                var icon = {
+                    url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
+                    scaledSize: new google.maps.Size(25, 25),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(0, 0)
+                };
+
+                var Markers = {};
+                var Paths = [];
+                var MarkersHidden = false;
+                var MarkerClicked = false;
+                        this.setVisible(true);
+                }
+
+                var dropedElementSortingOrder;
+                var draggedElementSortingOrder;
+                var cols;
+                 $(function () {
+                     cols = document.querySelectorAll('.ProcedureDrag');
+                     [].forEach.call(cols, function (col) {
+                         col.addEventListener('dragstart', handleDragStart, false);
+                         col.addEventListener('dragenter', handleDragEnter, false);
+                         col.addEventListener('dragover', handleDragOver, false);
+                         col.addEventListener('dragleave', handleDragLeave, false);
+                         col.addEventListener('drop', handleDrop, false);
+                         col.addEventListener('dragend', handleDragEnd, false);
+                     });
+                 });
+
+                 function handleDragStart(e) {
+                     this.style.opacity = '0.5';
+                     dragSrcEl = this;
+                     e.dataTransfer.effectAllowed = 'move';
+                     dropedElementSortingOrder = $(this).find(".SortingOrderHidden");
+                     e.dataTransfer.setData('text/html', this.innerHTML);
+                 }
+
+                 function handleDragOver(e) {
+                     if (e.preventDefault) {
+                         e.preventDefault();
+                     }
+                     return false;
+                 }
+
+                 function handleDragEnter(e) {
+                     this.classList.add('over');
+                 }
+
+                 function handleDragLeave(e) {
+                     this.classList.remove('over');
+                 }
+
+                 function handleDrop(e) {
+                     if (e.stopPropagation) {
+                         e.stopPropagation();
+                     }
+                     if (dragSrcEl != this) {
+                         draggedElementSortingOrder = $(this).find(".SortingOrderHidden");
+                         var a = dropedElementSortingOrder.val();
+                         var b = draggedElementSortingOrder.val();
+                         dropedElementSortingOrder.val(b);
+                         draggedElementSortingOrder.val(a);
+                         var c = dropedElementSortingOrder.val();
+                         var d = draggedElementSortingOrder.val();
+                         dragSrcEl.innerHTML = this.innerHTML;
+                         this.innerHTML = e.dataTransfer.getData('text/html');
+                     }
+                     return false;
+                 }
+
+ function handleDragEnd(e) {
+     [].forEach.call(cols, function (col) {
+         col.classList.remove('over');
+     });
+     this.style.opacity = '1.0';
+ }
 
             </script>
             </div>
