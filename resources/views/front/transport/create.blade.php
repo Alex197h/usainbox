@@ -11,6 +11,12 @@
         <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
             <div class="section">
 
+                <div class="col s12">
+                    <div id="resss"></div>
+                    <div class="col s12 right" id="map"></div>
+                    <div id="transport_offers"></div>
+                </div>
+
                 <div class="col s12{{ $errors->has('vehicle') ? ' has-error' : '' }}">
                     <label for="vehicle">Véhicule utilisé</label>
                     <select id="vehicle" type="text" class="form-control" name="vehicle" required>
@@ -214,6 +220,279 @@
 
                 });
 
+
+            </script>
+            <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+            <script type="text/javascript">
+            var MapElement = document.getElementById('map');
+            //var ShowElement = document.getElementById('show');
+
+
+            var map;
+
+
+            function initMap() {
+                map = new google.maps.Map(MapElement, {
+                    center: {lng: 2.70263671875, lat: 46.255846818480315},
+                    navigationControl: false,
+                    mapTypeControl: false,
+                    scaleControl: false,
+                    draggable: true,
+                    scrollwheel: false,
+                    zoom: 6
+                });
+
+                var icon = {
+                    url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
+                    scaledSize: new google.maps.Size(25, 25),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(0, 0)
+                };
+
+                var Markers = {};
+                var Paths = [];
+                var MarkersHidden = false;
+                var MarkerClicked = false;
+
+
+                // var preMarkers = {};
+                // for (i in Cities) {
+                //     if (Cities[i][0]) {
+                //         if (!preMarkers[Cities[i][0].label]) preMarkers[Cities[i][0].label] = [];
+                //         Cities[i].transport = i;
+                //         preMarkers[Cities[i][0].label].push(Cities[i]);
+                //     }
+                // }
+
+                // for (i in preMarkers) {
+                //     var cityStart = preMarkers[i][0][0];
+                //     var cities = [];
+                //     var transport = [];
+
+                    // if(preMarkers[i].length == 1) {
+                    //     cities.push(preMarkers[i][0]);
+                    //     transport.push(preMarkers[i][0].transport);
+                    // }
+                    /* Else if cities are stacked */
+                    // else {
+                    //     for(var j in preMarkers[i]) {
+                    //         cities.push(preMarkers[i][j]);
+                    //         transport.push(preMarkers[i][j].transport);
+                    //     }
+                    // }
+
+                    // var marker = new google.maps.Marker({
+                    //     position: {lng: cityStart.lng, lat: cityStart.lat},
+                    //     map: map,
+                    //     icon: icon,
+                    //     title: cityStart.label,
+                    //     cities: cities,
+                    //     transport: transport,
+                    //     clicked: false,
+                    //     showPath: false,
+                    //     path: null,
+                    //     paths: [],
+                    //     infowindow: null,
+                    // });
+
+                    // marker.addListener('mouseover', function() {
+                    //     var count = this.cities.length;
+                    //
+                    //     if(count == 1){
+                    //         for(m in Markers) {
+                    //             for (n in Markers[m]) {
+                    //                 Markers[m][n].setVisible(false);
+                    //             }
+                    //         }
+                    //         this.setVisible(true);
+                    //
+                    //         if(!this.path) this.path = setPath(this.cities[0]);
+                    //         this.path.setMap(map);
+                    //         this.showPath = true;
+                    //
+                    //         MarkersHidden = true;
+                    //     } else {
+                    //         this.infowindow = new google.maps.InfoWindow({
+                    //             content: count+' offres'
+                    //         });
+                    //         this.infowindow.open(map, this);
+                    //     }
+                    // });
+
+                    // marker.addListener('mouseout', function () {
+                    //     if(this.infowindow){
+                    //         this.infowindow.close();
+                    //         this.infowindow = null;
+                    //     }
+                    //     if(this.showPath && !MarkerClicked) {
+                    //         for (m in Markers) {
+                    //             for (n in Markers[m]) {
+                    //                 Markers[m][n].setVisible(true);
+                    //             }
+                    //         }
+                    //         this.path.setMap(null);
+                    //         this.path = null;
+                    //         MarkersHidden = false;
+                    //     }
+                    // });
+                    //
+                    // marker.addListener('click', function () {
+                    //     var clone = this;
+                    //     var offers = this.transport;
+                    //     MarkerClicked = true;
+                    //     for(m in Markers) {
+                    //         for (n in Markers[m]) {
+                    //             Markers[m][n].setVisible(false);
+                    //         }
+                    //     }
+                        this.setVisible(true);
+
+                    //     if(clone.cities.length == 1 || (!clone.showPath && clone.cities.length > 1)){
+                    //         $.ajax({
+                    //             url: 'gettransportmap',
+                    //             method: 'POST',
+                    //             dataType: 'json',
+                    //             data: {
+                    //                 '_token': '{{ csrf_token() }}',
+                    //                 'transport': offers,
+                    //             },
+                    //             success: (function(result) {
+                    //                 if(clone.cities.length > 1){
+                    //                     clone.path = setPath(clone.cities[0]);
+                    //                 }
+                    //
+                    //                 clone.path.setMap(map);
+                    //                 clone.showPath = true;
+                    //
+                    //                 MarkersHidden = true;
+                    //
+                    //                 var div = $('#transport_offers');
+                    //                 div.html('');
+                    //
+                    //                 var count = 1;
+                    //                 for(r in result) {
+                    //                     var divo = $('#offercopy').html();
+                    //                     var d = result[r].date_start;
+                    //                     var arr = {
+                    //                         selected: count==1 ? ' selected' : '',
+                    //                         date: (new Date(d.split(' ')[0])).toLocaleDateString(),
+                    //                         offerid: count,
+                    //                         user: result[r].user.id,
+                    //                         hour: d.split(' ')[1],
+                    //                         name: result[r].user.first_name+' '+result[r].user.last_name,
+                    //                         gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
+                    //                         age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
+                    //                         description: result[r].description,
+                    //                         regular: {
+                    //                             text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
+                    //                             icon: result[r].is_regular ? 'restore' : 'schedule',
+                    //                         },
+                    //                         highway: {
+                    //                             color: result[r].highway == 1 ? '333' : 'CCC',
+                    //                             message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                    //                         },
+                    //                     };
+                    //                     divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
+                    //                         var res = '';
+                    //                         if(c){
+                    //                             if(arr[a] && arr[a][c]) res = arr[a][c];
+                    //                         }
+                    //                         else if(arr[a]) res = arr[a];
+                    //
+                    //                         return res;
+                    //                     });
+                    //
+                    //                     var Newdiv = $(divo);
+                    //
+                    //                     Newdiv.on('click', function(){
+                    //                         if(!$(this).hasClass('selected')){
+                    //                             clone.path.setMap(null);
+                    //                             clone.path = setPath(clone.cities[$(this).attr('offer-id')-1]);
+                    //                             clone.path.setMap(map);
+                    //                         }
+                    //                     });
+                    //
+                    //                     div.append(Newdiv);
+                    //                     count++;
+                    //                 }
+                    //                 // $("#map").animate({"width": "60%"}, 500);
+                    //                 div.show(500);
+                    //                 $('.tooltipped').tooltip({delay: 50});
+                    //             })
+                    //         });
+                    //     }
+                    // });
+
+                    // if (!Markers[marker.title]) Markers[marker.title] = [];
+                    // Markers[marker.title].push(marker);
+                }
+
+                // map.addListener('click', function () {
+                //     for (m in Markers) {
+                //         for (n in Markers[m]) {
+                //             Markers[m][n].setVisible(true);
+                //             Markers[m][n].showPath = false;
+                //             if (Markers[m][n].path) {
+                //                 Markers[m][n].path.setMap(null);
+                //             }
+                //         }
+                //     }
+                //     MarkerClicked = false;
+                //     $('#transport_offers').html('').hide(500);
+                //     // $("#map").animate({"width": "100%"}, 500);
+                //
+                // });
+
+
+                /** Route */
+                // function setPath(cities) {
+                //     var Directions = new google.maps.DirectionsRenderer({
+                //         map: null,
+                //         preserveViewport: true,
+                //     });
+                //     var origin = {lng: cities[0].lng, lat: cities[0].lat};
+                //     var destination = {lng: cities[cities.length - 1].lng, lat: cities[cities.length - 1].lat};
+                //     var waypoints = [];
+                //
+                //     if (cities.length > 2) {
+                //         for (var i = 1; i < cities.length - 1; i++) {
+                //             waypoints.push({
+                //                 location: {
+                //                     lng: cities[i].lng,
+                //                     lat: cities[i].lat,
+                //                 }, stopover: true
+                //             });
+                //         }
+                //     }
+
+                    // var request = {
+                    //     travelMode: google.maps.DirectionsTravelMode.DRIVING,
+                    //     avoidTolls: false,
+                    //     origin: origin,
+                    //     destination: destination,
+                    //     waypoints: waypoints
+                    // }
+                //     var directionsService = new google.maps.DirectionsService();
+                //     directionsService.route(request, function (response, status) {
+                //         if (status == google.maps.DirectionsStatus.OK) {
+                //             Directions.setDirections(response);
+                //         }
+                //     });
+                //     return Directions;
+                // }
+
+            //     var options = {types: ['(cities)']};
+            //     new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
+            //     new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
+            // }
+            //
+            // $(document).on('click', '#transport_offers .offer', function(){
+            //     if(!$(this).hasClass('selected')){
+            //         $('#transport_offers .offer.selected').removeClass('selected');
+            //         $(this).addClass('selected');
+            //     }
+            // });
 
             </script>
             </div>
