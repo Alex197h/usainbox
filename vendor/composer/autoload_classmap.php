@@ -162,6 +162,11 @@ return array(
     'PHPUnit_Framework_IncompleteTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
     'PHPUnit_Framework_InvalidCoversTargetException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
     'PHPUnit_Framework_MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/MissingCoversAnnotationException.php',
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> refs/remotes/origin/master
+>>>>>>> bb5105d75fda7939b5adbdc04d295fc8d1aa8154
     'PHPUnit_Framework_MockObject_BadMethodCallException' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit_Framework_MockObject_Builder_Identity' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/Identity.php',
     'PHPUnit_Framework_MockObject_Builder_InvocationMocker' => $vendorDir . '/phpunit/phpunit-mock-objects/src/Framework/MockObject/Builder/InvocationMocker.php',

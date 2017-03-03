@@ -54,7 +54,7 @@
 <div class="col s12">
     <div id="resss"></div>
     <div class="col s12 right" id="map"></div>
-    <div id="transport_offers"></div>
+    <div id="transport_offers" class="col s12"></div>
 </div>
 
 <!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
@@ -64,7 +64,7 @@
 </section> -->
 
 <div id="offercopy" hidden>
-    <div class="offer card horizontal$selected" offer-id="$offerid">
+    <div class="col s12 offer card horizontal$selected" offer-id="$offerid">
         <div class="card-image valign-wrapper">
             <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
         </div>
