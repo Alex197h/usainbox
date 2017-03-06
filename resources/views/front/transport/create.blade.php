@@ -27,7 +27,7 @@
                                 <div class="section center">
                                     <h4>Ajouter vos villes étapes</h4>
                                 </div>
-                                <div class="section detail-steps" id="stepsArea">
+                                <div class="section detail-steps"  id="stepsArea">
                                     <div col s12 m6{{ $errors->has('start_city') ? ' has-error' : '' }}>
                                         <label for="start_city">Ville de départ</label>
                                         <input id="start_city" type="text" class="form-control step"
@@ -40,9 +40,7 @@
                                         @endif
                                     </div>
                                     <button id="addstep" onclick="addStep()">+</button>
-                                    <button id="delstep" onclick="removeStep()">-</button>
-
-                                    <div col s12 m6{{ $errors->has('end_city') ? ' has-error' : '' }}>
+                                    <div col s12 m6{{ $errors->has('end_city') ? ' has-error' : '' }} id='endstep'>
                                         <label for="end_city">Ville d'arrivé</label>
                                         <input id="end_city" type="text" class="form-control step"
                                                name="end_city" value="{{ old('end_city') }}" draggable="true">
@@ -156,7 +154,7 @@
                 </div>
 
                 <p class="col s12">
-                    <div class="col s2 {{ $errors->has('is_regular') ? ' has-error' : '' }}">
+                    <div class="col s3 {{ $errors->has('is_regular') ? ' has-error' : '' }}">
                         <input  type="checkbox" name="is_regular" id="is_regular" value="1"/>
                         <label for="is_regular"> Trajet régulier </label>
 
@@ -167,7 +165,7 @@
                         @endif
                     </div>
 
-                    <div class="col s2 {{ $errors->has('highway') ? ' has-error' : '' }}">
+                    <div class="col s3 {{ $errors->has('highway') ? ' has-error' : '' }}">
                         <input type="checkbox" name="highway" id="highway" value="1"/>
                         <label for="highway">Passer par l'autoroute </label>
 
@@ -178,24 +176,13 @@
                         @endif
                     </div>
 
-                    <div class="col s2 {{ $errors->has('start_detour') ? ' has-error' : '' }}">
+                    <div class="col s3 {{ $errors->has('start_detour') ? ' has-error' : '' }}">
                         <input type="checkbox" name="start_detour" id="start_detour" value="1"/>
-                        <label for="start_detour">Détour possible au départ </label>
+                        <label for="start_detour">Détour possible</label>
 
                         @if ($errors->has('start_detour'))
                             <span class="col s12">
                                 <strong>{{ $errors->first('start_detour') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-
-                    <div class="col s2 {{ $errors->has('end_detour') ? ' has-error' : '' }}">
-                        <input type="checkbox" name="end_detour" id="end_detour" value="1"/>
-                        <label for="end_detour">Détour possible à l'arrivé </label>
-
-                        @if ($errors->has('end_detour'))
-                            <span class="col s12">
-                                <strong>{{ $errors->first('end_detour') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -262,20 +249,23 @@
 
                 });
 
-                var nbSteps = 0;
+                var nbSteps = 1;
                 function addStep(){
-                    var div = document.createElement("div");
-                    div.setAttribute('col', '');
-                    div.setAttribute('s12', '');
-                    div.setAttribute('m6', '');
-                    // var label = document.createElement("label");
-                    // var input = document.createElement("input");
-                    // input.setAttribute('type', 'texte');
-                    // input.setAttribute('id', 'input'+elem);
-                    // input.setAttribute('onblur', 'stopfocus('+elem+')');
-                    // div.appendChild
-                    div.insertAfter(document.getElementById('stepsArea').childNodes[6+nbSteps]);
-                    nbSteps +=2;
+                    if (nbSteps < 6){
+                        var div = $('<div class="col s12">');
+                        var label = $('<label class="col s12" for="step'+nbSteps+'">'+'Etape n°'+nbSteps+'</label>');
+                        div.append(label);
+                        var input = $('<input id="step'+nbSteps+'" class="form-control col s11 step" name="step'+nbSteps+'" draggable="true">');
+                        div.append(input);
+                        var del = $('<button id="'+nbSteps+'" onclick="removeStep()">X</button>');
+                        div.append(del);
+                        $('#endstep').before(div);
+                        nbSteps +=1;
+                    }
+                }
+
+                function removeStep(){
+                    console.log(this.id);
                 }
             </script>
             <script async defer
@@ -316,44 +306,52 @@
                 var dropedElementSortingOrder;
                 var draggedElementSortingOrder;
                 var cols;
-                 $(function () {
+
+                $(document)
+                    .on('dragstart', '.step', handleDragStart)
+                    .on('dragenter', '.step', handleDragEnter)
+                    .on('dragover', '.step', handleDragOver)
+                    .on('dragleave', '.step', handleDragLeave)
+                    .on('drop', '.step', handleDrop)
+                    .on('dragend', '.step', handleDragEnd)
+                 /*$(function () {
                      cols = document.querySelectorAll('.step');
                      [].forEach.call(cols, function (col) {
-                         col.addEventListener('dragstart', handleDragStart, false);
-                         col.addEventListener('dragenter', handleDragEnter, false);
-                         col.addEventListener('dragover', handleDragOver, false);
-                         col.addEventListener('dragleave', handleDragLeave, false);
-                         col.addEventListener('drop', handleDrop, false);
-                         col.addEventListener('dragend', handleDragEnd, false);
+                         col.addEventListener('dragstart', handleDragStart, true);
+                         col.addEventListener('dragenter', handleDragEnter, true);
+                         col.addEventListener('dragover', handleDragOver, true);
+                         col.addEventListener('dragleave', handleDragLeave, true);
+                         col.addEventListener('drop', handleDrop, true);
+                         col.addEventListener('dragend', handleDragEnd, true);
                      });
-                 });
+                 });*/
 
-                 function handleDragStart(e) {
+                 function handleDragStart() {
                      this.style.opacity = '0.5';
                      dragSrcEl = this;
-                     e.dataTransfer.effectAllowed = 'move';
+                     event.dataTransfer.effectAllowed = 'move';
                      dropedElementSortingOrder = $(this);
-                     e.dataTransfer.setData('text/html', this.innerHTML);
+                     event.dataTransfer.setData('text/html', this.innerHTML);
                  }
 
-                 function handleDragOver(e) {
-                     if (e.preventDefault) {
-                         e.preventDefault();
+                 function handleDragOver() {
+                     if (event.preventDefault) {
+                         event.preventDefault();
                      }
                      return false;
                  }
 
-                 function handleDragEnter(e) {
-                     this.classList.add('over');
+                 function handleDragEnter() {
+                     $(this).addClass('over');
                  }
 
-                 function handleDragLeave(e) {
-                     this.classList.remove('over');
+                 function handleDragLeave() {
+                     $(this).removeClass('over');
                  }
 
-                 function handleDrop(e) {
-                     if (e.stopPropagation) {
-                         e.stopPropagation();
+                 function handleDrop() {
+                     if (event.stopPropagation) {
+                         event.stopPropagation();
                      }
                      if (dragSrcEl != this) {
                          draggedElementSortingOrder = $(this);
@@ -364,15 +362,13 @@
                          var c = dropedElementSortingOrder.val();
                          var d = draggedElementSortingOrder.val();
                          dragSrcEl.innerHTML = this.innerHTML;
-                         this.innerHTML = e.dataTransfer.getData('text/html');
+                         this.innerHTML = event.dataTransfer.getData('text/html');
                      }
                      return false;
                  }
 
-                 function handleDragEnd(e) {
-                     [].forEach.call(cols, function (col) {
-                         col.classList.remove('over');
-                     });
+                 function handleDragEnd() {
+                     $('.step').removeClass('over');
                      this.style.opacity = '1.0';
                  }
 
