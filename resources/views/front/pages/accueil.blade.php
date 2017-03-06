@@ -15,7 +15,7 @@
                     </div>
                     <div style="text-align: center;"class="input-field col s12 l1">
                         <a style="height: 44px;" id="switch" class="btn white black-text">
-                            {{ Html::image('public/img/switch.png', 'Lorem Ipsum', array('class' => 'responsive-img', 'style' => 'vertical-align: middle;')) }}
+                            {{ Html::image('public/img/switch.svg', 'Lorem Ipsum', array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
                         </a>
                     </div>
                     <div class="input-field col s12 l3">
@@ -29,7 +29,7 @@
                     <div class="input-field col s12 l3">
                         <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
                             Transporter
-                            {{ Html::image('public/img/transport.png', 'Lorem Ipsum', array('class' => 'responsive-img', 'style' => 'vertical-align: middle;')) }}
+                            {{ Html::image('public/img/transport.svg', 'Lorem Ipsum', array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
 
                         </button>
                     </div>
@@ -85,10 +85,12 @@
                         <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
-                        {{ Html::image('public/img/trajet/$regular.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$regular.text')) }}
-                        {{ Html::image('public/img/trajet/$highway.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$highway.text')) }}
+                        {{ Html::image('public/img/trajet/$regular.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped icon', 'data-tooltip' => '$regular.text')) }}
+                        {{ Html::image('public/img/trajet/$highway.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped icon', 'data-tooltip' => '$highway.text')) }}
+                        {{ Html::image('public/img/trajet/$charge.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped icon', 'data-tooltip' => '$charge.text')) }}
+                        {{ Html::image('public/img/trajet/$start.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped icon', 'data-tooltip' => '$start.text')) }}
+                        {{ Html::image('public/img/trajet/$end.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped icon', 'data-tooltip' => '$end.text')) }}
 
-                        {{-- <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i> --}}
                     </div>
                 </div>
                 <div class="card-action">
@@ -264,12 +266,24 @@
                                     age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
                                     description: result[r].description,
                                     regular: {
+                                        icon: result[r].is_regular ? 'regularYes' : 'regularNo',
                                         text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
-                                        icon: result[r].is_regular ? 'regularYes' : 'regularYes',
                                     },
                                     highway: {
                                         icon: result[r].highway == 1 ? 'highwayYes' : 'highwayNo',
                                         text: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                                    },
+                                    charge: {
+                                        icon: result[r].user.help_charge == 1 ? 'cartYes' : 'cartNo',
+                                        text: result[r].user.help_charge == 1 ? 'Aide pour le chargement' : 'N\'aide pas pour le chargement',
+                                    },
+                                    start: {
+                                        icon: result[r].start_detour == 1 ? 'allerYes' : 'allerNo',
+                                        text: result[r].start_detour == 1 ? 'Detour possible à l\'aller' : 'Pas de détour possible à l\'aller',
+                                    },
+                                    end: {
+                                        icon: result[r].end_detour == 1 ? 'retourYes' : 'retourNo',
+                                        text: result[r].end_detour == 1 ? 'Detour possible au retour' : 'Pas de détour possible au retour',
                                     },
                                 };
                                 divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
