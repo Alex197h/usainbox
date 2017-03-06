@@ -15,7 +15,10 @@
                     </div>
                     <div style="text-align: center;"class="input-field col s12 l1">
                         <button type="button" style="height: 44px;" id="switch" class="btn white black-text">
-                            {{ Html::image('public/img/switch.svg', 'Lorem Ipsum', array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
+                            {{ Html::image('public/img/switch.svg',
+                                'Deux flèches pour switch',
+                                array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;'))
+                            }}
                         </button>
                     </div>
                     <div class="input-field col s12 l3">
@@ -30,8 +33,9 @@
                         <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
                             Transporter
                             {{ Html::image('public/img/transport.svg',
-                                'Lorem Ipsum',
-                                array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
+                                'Camion de transport',
+                                array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;'))
+                            }}
 
                         </button>
                     </div>
@@ -58,16 +62,16 @@
         </div>
 
 
-<div class="col s12">
-    <div id="resss"></div>
-    <div class="col s12 right" id="map"></div>
-    <div id="transport_offers" class="col s12"></div>
-</div>
+        <div class="col s12">
+            <div id="resss"></div>
+            <div class="col s12 right" id="map"></div>
+            <div id="transport_offers" class="col s12"></div>
+        </div>
 
-<!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
-<video class="col s12 valign" autoplay loop muted class="responsive-video">
-<source src="public/video/pres.mp4" type="video/mp4"/>
-</video>
+        <!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
+        <video class="col s12 valign" autoplay loop muted class="responsive-video">
+        <source src="public/video/pres.mp4" type="video/mp4"/>
+    </video>
 </section> -->
 
 <div id="offercopy" hidden>
@@ -87,7 +91,10 @@
                         <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
-                        {{ Html::image('public/img/trajet/$regular.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text')) }}
+                        {{ Html::image('public/img/trajet/$regular.icon.svg',
+                            'Calendrier',
+                            array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text'))
+                        }}
 
                         $highway $charge $detour
 
@@ -270,19 +277,25 @@
                                         text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
                                     },
                                     highway : result[r].highway == 1 ?
-                                    '{{ Html::image('public/img/trajet/highwayYes.svg', 'Lorem Ipsum',
+                                    '{{ Html::image('public/img/trajet/highwayYes.svg',
+                                        'Icon de l\'autoroute',
                                         array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Prend l\'autoroute')) }}' : '',
+                                        'data-tooltip' => 'Prend l\'autoroute'))
+                                    }}' : '',
 
                                     charge: result[r].user.help_charge == 1 ?
-                                    '{{ Html::image('public/img/trajet/cartYes.svg', 'Lorem Ipsum',
+                                    '{{ Html::image('public/img/trajet/cartYes.svg',
+                                        'Icon d\'un diable pour le transport',
                                         array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Aide pour le chargement')) }}' : '',
+                                        'data-tooltip' => 'Aide pour le chargement'))
+                                    }}' : '',
 
-                                    detour: result[r].end_detour == 1 ?
-                                    '{{ Html::image('public/img/trajet/detour.svg', 'Lorem Ipsum',
+                                    detour: result[r].detour == 1 ?
+                                    '{{ Html::image('public/img/trajet/detour.svg',
+                                        'Icon de deux flèche pour le détour',
                                         array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Détour possible')) }}' : '',
+                                        'data-tooltip' => 'Détour possible'))
+                                    }}' : '',
                                 };
                                 divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
                                     var res = '';
