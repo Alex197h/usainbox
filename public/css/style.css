@@ -201,7 +201,9 @@ input[type="date"]::-webkit-inner-spin-button {
 
 .iconR{
     width: 40px;
+    margin-right: 8px;
 }
+
 .iconT{
     width: 40px;
     margin-right: 15px;
