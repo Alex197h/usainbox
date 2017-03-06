@@ -27,7 +27,7 @@
                                 <div class="section center">
                                     <h4>Ajouter vos villes étapes</h4>
                                 </div>
-                                <div class="section detail-steps">
+                                <div class="section detail-steps" id="stepsArea">
                                     <div col s12 m6{{ $errors->has('start_city') ? ' has-error' : '' }}>
                                         <label for="start_city">Ville de départ</label>
                                         <input id="start_city" type="text" class="form-control step"
@@ -39,39 +39,9 @@
                                             </span>
                                         @endif
                                     </div>
-                                    <div col s12 m6{{ $errors->has('step1') ? ' has-error' : '' }}>
-                                        <label for="step1">Etape n°1</label>
-                                        <input id="step1" type="text" class="form-control step"
-                                               name="step1" value="{{ old('step1') }}" draggable="true">
+                                    <button id="addstep" onclick="addStep()">+</button>
+                                    <button id="delstep" onclick="removeStep()">-</button>
 
-                                        @if ($errors->has('step1'))
-                                            <span class="col s12">
-                                                <strong>{{ $errors->first('step1') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div col s12 m6{{ $errors->has('step2') ? ' has-error' : '' }}>
-                                        <label for="step2">Etape n°2</label>
-                                        <input id="step2" type="text" class="form-control step"
-                                               name="step2" value="{{ old('step2') }}" draggable="true">
-
-                                        @if ($errors->has('step2'))
-                                            <span class="col s12">
-                                                <strong>{{ $errors->first('step2') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
-                                    <div col s12 m6{{ $errors->has('step3') ? ' has-error' : '' }}>
-                                        <label for="step3">Etape n°3</label>
-                                        <input id="step3" type="text" class="form-control step"
-                                               name="step3" value="{{ old('step3') }}" draggable="true">
-
-                                        @if ($errors->has('step3'))
-                                            <span class="col s12">
-                                                <strong>{{ $errors->first('step3') }}</strong>
-                                            </span>
-                                        @endif
-                                    </div>
                                     <div col s12 m6{{ $errors->has('end_city') ? ' has-error' : '' }}>
                                         <label for="end_city">Ville d'arrivé</label>
                                         <input id="end_city" type="text" class="form-control step"
@@ -292,7 +262,21 @@
 
                 });
 
-
+                var nbSteps = 0;
+                function addStep(){
+                    var div = document.createElement("div");
+                    div.setAttribute('col', '');
+                    div.setAttribute('s12', '');
+                    div.setAttribute('m6', '');
+                    // var label = document.createElement("label");
+                    // var input = document.createElement("input");
+                    // input.setAttribute('type', 'texte');
+                    // input.setAttribute('id', 'input'+elem);
+                    // input.setAttribute('onblur', 'stopfocus('+elem+')');
+                    // div.appendChild
+                    div.insertAfter(document.getElementById('stepsArea').childNodes[6+nbSteps]);
+                    nbSteps +=2;
+                }
             </script>
             <script async defer
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
