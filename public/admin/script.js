@@ -3863,7 +3863,7 @@ function init_echarts() {
                 title: {
                     text: "World Population (2010)", subtext: "from United Nations, Total population, both sexes combined, as of 1 July (thousands)", x: "center", y: "top"
                 }
-                ,
+                /*,
                 tooltip: {
                     trigger:"item",
                     formatter:function(a) {
@@ -3877,7 +3877,7 @@ function init_echarts() {
                         )+(?!\d))/g, "$1,")+"."+b[1],
                         a.seriesName+"<br/>"+a.name+" : "+b
                     }
-                }
+                }*/
                 ,
                 toolbox: {
                     show:!0,

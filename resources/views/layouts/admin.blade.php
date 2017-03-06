@@ -164,6 +164,11 @@
                 </div>
             </div>
             <div class="right_col" role="main">
+                <div class="page-title">
+                    <div class="title_left">
+                        <h3>@yield('title', '')</h3>
+                    </div>
+                </div>
                 @yield('content')
                 <footer>
                     <div class="pull-right">

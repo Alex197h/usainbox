@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Utilisateurs')
+@section('title', 'Liste des Utilisateurs')
 
 @section('content')
 
@@ -27,7 +27,7 @@
                         @foreach($users as $user)
                         <tr>
                             <td><th><input type="checkbox" class="tocheck flat"></th></td>
-                            <td><a href="">{{ $user->full_name }}</a></td>
+                            <td><a href="{{ route('admin_page', ['users', 'edit', $user->id]) }}">{{ $user->full_name }}</a></td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->gender }}</td>
                             <td>{{ $user->is_admin }}</td>
