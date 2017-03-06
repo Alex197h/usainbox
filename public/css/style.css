@@ -208,3 +208,7 @@ input[type="date"]::-webkit-inner-spin-button {
     width: 40px;
     margin-right: 15px;
 }
+
+.iconS{
+    width: 60px;
+}

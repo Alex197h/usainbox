@@ -12,7 +12,11 @@
                     <div class="col s6">
                         <h4>Donner de véritables <br> informations</h4>
                         <p>
-                          {{ Html::image('public/img/info.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/info.svg',
+                              'Icon d\'un profile',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>
                             Je complèterai mon profil avec mon vrai prénom et une vraie photo.
@@ -22,7 +26,11 @@
                     <div class="col s6">
                         <h4>Être <br> fiable</h4>
                         <p>
-                          {{ Html::image('public/img/clock.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/clock.svg',
+                              'Icon d\'une horloge',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>
                             Je serai à l'heure pour le colis voiturage, et je respecterai les
@@ -34,7 +42,11 @@
                     <div class="col s6">
                         <h4>Privilégier la <br> sécurité</h4>
                         <p>
-                          {{ Html::image('public/img/drive.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/drive.svg',
+                              'Icon d\'un volant de voiture',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>
                             Je respecterai le code de la route pour veiller à
@@ -44,7 +56,11 @@
                     <div class="col s6">
                         <h4>Être prévenant <br> et accueillant</h4>
                         <p>
-                          {{ Html::image('public/img/hand.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/hand.svg',
+                              'Icon d\'une poignée de main',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>
                             Je serai sensible aux demande des expéditeurs,
@@ -56,14 +72,22 @@
                     <div class="col s6">
                         <h4>Laisser des <br> avis honnêtes</h4>
                         <p>
-                          {{ Html::image('public/img/com.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/com.svg',
+                              'Icon d\'une bulle de conversation',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>Je laisserai des avis honnêtes, justes et polis envers les autres voyageurs.</p>
                     </div>
                     <div class="col s6">
                         <h4>Profiter <br> du voyage !</h4>
                         <p>
-                          {{ Html::image('public/img/cup.png', 'Lorem Ipsum', array('class' => 'responsive-img')) }}
+                          {{
+                              Html::image('public/img/static/charter/cup.svg',
+                              'Icon d\'une tasse à café',
+                              array('class' => 'responsive-img iconS'))
+                          }}
                         </p>
                         <p>
                             Je profiterai au maximum du voyage et je ferai en sorte que les autres l'apprécient aussi !
