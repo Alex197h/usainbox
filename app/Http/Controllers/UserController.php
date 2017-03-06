@@ -14,7 +14,10 @@ use Auth;
 use App\User;
 
 class UserController extends Controller {
-
+    public function __construct(){
+        $this->middleware('guest', ['except' => 'logout']);
+    }
+    
     public function getProfile(User $user){
         if($user->id == Auth::user()->id)
             return redirect()->route('user_profile');

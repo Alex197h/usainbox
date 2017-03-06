@@ -30,7 +30,7 @@
                     <thead>
                         <tr>
                             <th>
-                                <th><input id="checker" type="checkbox" id="check-all" class="flat"></th>
+                                <th><input type="checkbox" id="check-all" class="flat"></th>
                             </th>
                             <th>Nom</th>
                             <th>Email</th>
@@ -41,7 +41,7 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td><th><input type="checkbox" id="check-all" class="flat"><label class="checkbox-label"></label></th></td>
+                            <td><th><input type="checkbox" class="tocheck flat"><label class="checkbox-label"></label></th></td>
                             <td><a href="">{{ $user->full_name }}</a></td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->gender }}</td>
@@ -53,10 +53,9 @@
             </div>
             <script>
                 var Allchecked = false;
-                $('#checker').change(function(){
-                    console.log('ok')
-                    $('.flat').prop('checked', Allchecked);
+                $('#check-all').on('ifClicked', function(event){
                     Allchecked = !Allchecked;
+                    $('.tocheck.flat').iCheck(Allchecked ? 'check' : 'uncheck');
                 });
             </script>
         </div>

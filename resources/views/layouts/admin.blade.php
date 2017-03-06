@@ -18,6 +18,7 @@
         {{ Html::style('public/admin/libs/tables/scroller.css') }}
         {{ HTML::script('public/admin/libs/jquery.min.js') }}
         {{ HTML::script('public/admin/libs/bootstrap.min.js') }}
+        {{ HTML::script('public/admin/libs/icheck.min.js') }}
     </head>
     <body class="nav-md">
         <div class="container body">
@@ -175,7 +176,6 @@
         </div>
         {{ HTML::script('public/admin/libs/fastclick.js') }}
         {{ HTML::script('public/admin/libs/nprogress.js') }}
-        {{ HTML::script('public/admin/libs/icheck.min.js') }}
         {{ HTML::script('public/admin/libs/date.js') }}
         {{ HTML::script('public/admin/libs/moment.min.js') }}
         {{ HTML::script('public/admin/libs/bootstrap-progressbar.min.js') }}
