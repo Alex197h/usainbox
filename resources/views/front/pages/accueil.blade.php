@@ -55,13 +55,11 @@
         });
         </script>
 
-
-        <div class="row">
-            <h3 class="h3">Retrouver des transport partout en France</h3>
+        <div id="introduction" class="row">
+            <h3 class="center" style="padding: 55px;">Retrouver des transport partout en France</h3>
         </div>
 
-
-        <div class="col s12 scrollspy" id="introduction">
+        <div class="col s12 scrollspy" >
             <div id="resss"></div>
             <div class="col s12 right" id="map"></div>
             <div id="transport_offers" class="col s12"></div>

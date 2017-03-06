@@ -166,7 +166,19 @@
                 <div class="col l4 m6 s12">
                     <div class="">
                         <div class="section center">
-                            <h5>{!! ($vehicle->default) ? '<i class="material-icons tooltipped" data-tooltip="Véhicule par défaut">check_circle</i>' : '' !!} {{ ucfirst($vehicle->car_brand) }} {{ ucfirst($vehicle->car_model) }}</h5>
+                            <h5>
+                                @if($vehicle->default == 1)
+                                    {{ Html::image('public/img/vehicles/checked.svg',
+                                        'Icon validation',
+                                        array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Vehicule par défaut'))
+                                    }}
+                                @endif
+                                {{ ucfirst($vehicle->car_brand) }}
+                                {{ ucfirst($vehicle->car_model) }}
+
+
+
+                            </h5>
                         </div>
                         <div class="section center">
                             @if($vehicle->typeVehicle->id == 1)

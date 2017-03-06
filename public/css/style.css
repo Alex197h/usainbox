@@ -4,16 +4,9 @@ body{
 header .brand-logo img{
     padding: 5px;
 }
-
 footer{
     background: #786A6A !important;
 }
-
-.h3{
-    text-align: center;
-    padding: 55px;
-}
-
 button{
     height: 45px;
 }
@@ -194,7 +187,6 @@ input[type="date"]::-webkit-inner-spin-button {
     border-radius: 50%;
     margin: 0 auto;
 }
-
 .icon{
     width: 30px;
 }
@@ -209,6 +201,9 @@ input[type="date"]::-webkit-inner-spin-button {
 .iconS{
     width: 60px;
 }
+.iconC{
+    width: 20px;
+}
 .iconP{
     width: 25px;
 }
@@ -217,6 +212,15 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 .pac-container:after{
     content:none !important;
+}
+.btnAdd{
+    background-color: #786A6A !important;
+    margin-bottom: 20px;
+}
+.btnSupp{
+    background-color: #786A6A !important;
+    border: none;
+    border-radius: 2px;
 }
 .btnValider{
     background-color: #786A6A !important;
@@ -237,4 +241,8 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 .btnProfile:hover{
     background-color: #786A6A !important;
+}
+.obligatoire{
+    color: #FFDA44;
+    font-size: 20px;
 }
