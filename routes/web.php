@@ -12,8 +12,8 @@ Route::get('offer/transport/create', 'TransportOffersController@create')->name('
 Route::post('offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
 
 
-Route::get('shipping-offers', 'ShippingOffersController@index')->name('shippin-offers');
-Route::get('alert/create', 'ShippingOffersController@index')->name('create_alert');
+Route::any('alert/create', 'ShippingOffersController@index')->name('create_alert');
+Route::post('alert/save', 'ShippingOffersController@save')->name('save_alert');
 
 Route::get('offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
 Route::post('offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');
