@@ -19,7 +19,7 @@ class UsersSeeder extends Seeder{
                 'phone' => $faker->e164PhoneNumber,
                 'description' => $faker->paragraph,
                 'help_charge' => $faker->boolean,
-                'is_admin' => $faker->boolean(5),
+                'is_admin' => $faker->boolean(20),
             ]);
         }
     }
