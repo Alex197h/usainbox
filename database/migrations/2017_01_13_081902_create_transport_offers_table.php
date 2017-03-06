@@ -8,8 +8,7 @@ class CreateTransportOffersTable extends Migration {
     public function up() {
         Schema::create('transport_offers', function (Blueprint $table) {
             $table->increments('id');
-            $table->boolean('start_detour')->default(false);
-            $table->boolean('end_detour')->default(false);
+            $table->boolean('detour')->default(false);
             $table->boolean('highway')->default(false);
             $table->boolean('is_regular')->default(false);
             $table->datetime('date_start');

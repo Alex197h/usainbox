@@ -25,8 +25,7 @@ class TransportOffersSeeder extends Seeder{
             $date = $faker->dateTimeBetween($startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get());
             
             $to = TransportOffer::create([
-                'start_detour' => $faker->boolean,
-                'end_detour' => $faker->boolean,
+                'detour' => $faker->boolean,
                 'highway' => $faker->boolean,
                 'is_regular' => $faker->boolean,
                 'date_start' => $date,

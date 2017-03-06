@@ -26,7 +26,7 @@
                     <tbody>
                         @foreach($users as $user)
                         <tr>
-                            <td><th><input type="checkbox" class="tocheck flat"><label class="checkbox-label"></label></th></td>
+                            <td><th><input type="checkbox" class="tocheck flat"></th></td>
                             <td><a href="">{{ $user->full_name }}</a></td>
                             <td>{{ $user->email }}</td>
                             <td>{{ $user->gender }}</td>
@@ -36,19 +36,30 @@
                     </tbody>
                 </table>
             </div>
-            <script>
-                var Allchecked = false;
-                $('#check-all').on('ifClicked', function(event){
-                    Allchecked = !Allchecked;
-                    $('.tocheck.flat').iCheck(Allchecked ? 'check' : 'uncheck');
-                });
-                
-                $('#datatable-checkbox').on('page.dt', function() {
-                    console.log( 'Page' );
-                });
-            </script>
         </div>
     </div>
 </div>
 
+@endsection
+
+@section('script')
+<script>
+    var Allchecked = false;
+    $('#check-all').on('ifClicked', function(event){
+        Allchecked = !Allchecked;
+        $('.tocheck.flat').iCheck(Allchecked ? 'check' : 'uncheck');
+    });
+    
+    $(document).on('mouseup', '.paginate_button', function(){
+        $(".tocheck.flat").iCheck({
+            checkboxClass: "icheckbox_flat-green"
+        });
+    });
+    
+    // $('#datatable-checkbox').on('page.dt', function() {
+        // $(".tocheck.flat").iCheck({
+            // checkboxClass: "icheckbox_flat-green"
+        // });
+    // }).DataTable();
+</script>
 @endsection

@@ -1459,7 +1459,7 @@ function init_DataTables() {
         ),
         b.on("draw.dt",
         function() {
-            $("checkbox input").iCheck( {
+            $(".tocheck.flat").iCheck( {
                 checkboxClass: "icheckbox_flat-green"
             }
             )
