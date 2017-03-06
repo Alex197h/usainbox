@@ -7,7 +7,7 @@
 
 
     <div class="row">
-        <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form" method="POST"
+        <form class="col s10 offset-s1" role="form" method="POST"
               action="{{ route('transport') }}">
             {{ csrf_field() }}
             <div class="row">
@@ -109,6 +109,13 @@
         @endif
     </div>
     <script>
+
+        $('#switch').on('click', function(){
+            var first = $('#city_start').val();
+            var last = $('#city_end').val();
+            $('#city_start').val(last);
+            $('#city_end').val(first);
+        });
 
         function initMap() {
             var options = {types: ['(cities)']};
