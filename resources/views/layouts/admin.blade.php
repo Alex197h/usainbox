@@ -26,7 +26,7 @@
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-bolt"></i> <span>Usainbox Admin</span></a>
+                        <a href="{{ route('admin') }}" class="site_title"><i class="fa fa-bolt"></i> <span>Usainbox Admin</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <br>
@@ -37,7 +37,7 @@
                                 <li>
                                     <a><i class="fa fa-users"></i> Membres <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="">Liste</a></li>
+                                        <li><a href="{{ route('admin_page', 'users') }}">Liste</a></li>
                                         <li><a href="">Ajouter</a></li>
                                     </ul>
                                 </li>

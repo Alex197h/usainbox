@@ -32,8 +32,11 @@ Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_veh
 Route::model('user_id', App\User::class);
 Route::get('user/{user_id}', 'UserController@getProfile')->name('profile');
 
+Route::get('alert/create', 'ShippingOffersController@index')->name('create_alert');
+
 
 Route::get('admin', 'AdminController@home')->name('admin');
+Route::get('admin/{page}', 'AdminController@page')->name('admin_page');
 
 
 
