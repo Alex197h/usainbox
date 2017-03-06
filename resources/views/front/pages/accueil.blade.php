@@ -14,9 +14,9 @@
                         <label style="display: none;" for="city_start">Ville départ</label>
                     </div>
                     <div style="text-align: center;"class="input-field col s12 l1">
-                        <a style="height: 44px;" id="switch" class="btn white black-text">
-                            {{ Html::image('public/img/switch.png', 'Lorem Ipsum', array('class' => 'responsive-img', 'style' => 'vertical-align: middle;')) }}
-                        </a>
+                        <button type="button" style="height: 44px;" id="switch" class="btn white black-text">
+                            {{ Html::image('public/img/switch.svg', 'Lorem Ipsum', array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
+                        </button>
                     </div>
                     <div class="input-field col s12 l3">
                         <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end">
@@ -29,7 +29,9 @@
                     <div class="input-field col s12 l3">
                         <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
                             Transporter
-                            {{ Html::image('public/img/transport.png', 'Lorem Ipsum', array('class' => 'responsive-img', 'style' => 'vertical-align: middle;')) }}
+                            {{ Html::image('public/img/transport.svg',
+                                'Lorem Ipsum',
+                                array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;')) }}
 
                         </button>
                     </div>
@@ -85,10 +87,10 @@
                         <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
-                        {{ Html::image('public/img/trajet/$regular.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$regular.text')) }}
-                        {{ Html::image('public/img/trajet/$highway.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$highway.text')) }}
+                        {{ Html::image('public/img/trajet/$regular.icon.svg', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text')) }}
 
-                        {{-- <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i> --}}
+                        $highway $charge $detour
+
                     </div>
                 </div>
                 <div class="card-action">
@@ -264,13 +266,23 @@
                                     age: (new Date().getFullYear())-(new Date(result[r].user.birthday).getFullYear()),
                                     description: result[r].description,
                                     regular: {
+                                        icon: result[r].is_regular ? 'regularYes' : 'regularNo',
                                         text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
-                                        icon: result[r].is_regular ? 'regularYes' : 'regularYes',
                                     },
-                                    highway: {
-                                        icon: result[r].highway == 1 ? 'highwayYes' : 'highwayNo',
-                                        text: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
-                                    },
+                                    highway : result[r].highway == 1 ?
+                                    '{{ Html::image('public/img/trajet/highwayYes.svg', 'Lorem Ipsum',
+                                        array('class' => 'responsive-img tooltipped iconT',
+                                        'data-tooltip' => 'Prend l\'autoroute')) }}' : '',
+
+                                    charge: result[r].user.help_charge == 1 ?
+                                    '{{ Html::image('public/img/trajet/cartYes.svg', 'Lorem Ipsum',
+                                        array('class' => 'responsive-img tooltipped iconT',
+                                        'data-tooltip' => 'Aide pour le chargement')) }}' : '',
+
+                                    detour: result[r].end_detour == 1 ?
+                                    '{{ Html::image('public/img/trajet/detour.svg', 'Lorem Ipsum',
+                                        array('class' => 'responsive-img tooltipped iconT',
+                                        'data-tooltip' => 'Détour possible')) }}' : '',
                                 };
                                 divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
                                     var res = '';

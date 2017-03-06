@@ -180,19 +180,19 @@
                     <ul>
                         <li style="display:inline;">
                             <a class="grey-text text-lighten-3 " href="https://twitter.com/UBox12" target="_blank">
-                                {{ Html::image('public/img/social/twitter.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 8px;')) }}
+                                {{ Html::image('public/img/social/twitter.svg', 'Lorem Ipsum', array('class' => 'responsive-img valign iconR', 'style' => 'margin-right: 8px;')) }}
                             </a>
                         </li>
 
                         <li style="display:inline;">
                             <a class="grey-text text-lighten-3 " href="https://www.facebook.com/UBox-1837407246530068/" target="_blank">
-                                {{ Html::image('public/img/social/facebook.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 8px;')) }}
+                                {{ Html::image('public/img/social/facebook.svg', 'Lorem Ipsum', array('class' => 'responsive-img valign iconR', 'style' => 'margin-right: 8px;')) }}
                             </a>
                         </li>
 
                         <li style="display:inline;">
                             <a class="grey-text text-lighten-3 " href="https://plus.google.com/u/3/109901738787479044420" target="_blank">
-                                {{ Html::image('public/img/social/google.png', 'Lorem Ipsum', array('class' => 'responsive-img valign', 'style' => 'margin-right: 8px;')) }}
+                                {{ Html::image('public/img/social/google.svg', 'Lorem Ipsum', array('class' => 'responsive-img valign iconR', 'style' => 'margin-right: 8px;')) }}
                             </a>
                         </li>
                     </ul>

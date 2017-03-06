@@ -14,7 +14,6 @@ use Auth;
 use App\User;
 
 class UserController extends Controller {
-
     public function getProfile(User $user){
         if($user->id == Auth::user()->id)
             return redirect()->route('user_profile');

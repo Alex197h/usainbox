@@ -6,9 +6,5 @@
 Homestead.json
 Homestead.yaml
 .env
-<<<<<<< HEAD
-*vendor*
-=======
->>>>>>> refs/remotes/origin/master
 .dropbox
 /bootstrap/compiled.php

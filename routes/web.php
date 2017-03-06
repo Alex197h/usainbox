@@ -4,18 +4,19 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('gettransportmap', 'HomeController@ptest')->name('gettransportmap');
 
-Route::get('/map', function() {return view('map');});
+Route::get('map', function() {return view('map');});
 
-Route::post('/transport-search', 'TransportOffersController@search')->name('transport');
+Route::post('transport-search', 'TransportOffersController@search')->name('transport');
 
-Route::get('/offer/transport/create', 'TransportOffersController@create')->name('create_transport_offer');
-Route::post('/offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
+Route::get('offer/transport/create', 'TransportOffersController@create')->name('create_transport_offer');
+Route::post('offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
 
 
-Route::get('/shipping-offers', 'ShippingOffersController@index')->name('shippin-offers');
+Route::get('shipping-offers', 'ShippingOffersController@index')->name('shippin-offers');
+Route::get('alert/create', 'ShippingOffersController@index')->name('create_alert');
 
-Route::get('/offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
-Route::post('/offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');
+Route::get('offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
+Route::post('offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');
 
 
 
@@ -33,7 +34,9 @@ Route::model('user_id', App\User::class);
 Route::get('user/{user_id}', 'UserController@getProfile')->name('profile');
 
 
+
 Route::get('admin', 'AdminController@home')->name('admin');
+Route::get('admin/{page}', 'AdminController@page')->name('admin_page');
 
 
 
