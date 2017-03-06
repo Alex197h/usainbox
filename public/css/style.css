@@ -196,9 +196,13 @@ input[type="date"]::-webkit-inner-spin-button {
 }
 
 .icon{
-    width: 8%;
+    width: 30px;
 }
 
 .iconR{
-    width: 15%;
+    width: 40px;
+}
+.iconT{
+    width: 40px;
+    margin-right: 15px;
 }
