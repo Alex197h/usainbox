@@ -212,6 +212,9 @@ input[type="date"]::-webkit-inner-spin-button {
 .iconP{
     width: 25px;
 }
+.iconV{
+    width: 80px;
+}
 .pac-container:after{
     content:none !important;
 }

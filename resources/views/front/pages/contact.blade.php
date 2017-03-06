@@ -31,7 +31,7 @@
                             {{ csrf_field() }}
 
                             <div class="col s12{{ $errors->has('name') ? ' has-error' : '' }}">
-                                <label for="name">Nom Prénom</label>
+                                <label for="name" class="col-md-4 control-label">Nom Prénom</label>
                                 <input id="name" type="text" class="white col s12" placeholder="Nom Prénom" name="name" required autofocus>
 
                                 @if ($errors->has('name'))
@@ -63,7 +63,7 @@
                                 @endif
                             </div>
                             <div class="right-align">
-                                <button type="submit" class="btn waves-effect waves-light white black-text">
+                                <button type="submit" class="btn btnValider waves-light white-text">
                                     Envoyer
                                 </button>
                             </div>

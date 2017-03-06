@@ -5,9 +5,12 @@
     <div class="container">
         <div class="row">
             <div class="col l6 m8 s12 offset-l3 offset-m2 card-panel">
-
                 <div class="section center">
-                    <a href="{{url('/auth/facebook')}}" class="btn btn-link">Facebook</a>
+                    <div class="section">
+                        <h5>Connectez vous rapidement</h5>
+                    </div>
+                    <h6>En 2 secondes avec Facebook</h6>
+                    <a href="{{url('/auth/facebook')}}" class="btn btnValider btn-link">Facebook</a>
                 </div>
 
                 <div class="divider"></div>
@@ -40,11 +43,13 @@
                             <input type="checkbox" name="remember" id="remember"/>
                             <label for="remember"> Se souvenir de moi</label>
                         </p>
-                        <button type="submit" class="btn waves-effect waves-light white black-text col s12">
-                            Se connecter
-                        </button>
+                        <div class="col s12">
+                            <button type="submit" class="btn btnValider col s12 waves-light white-text">
+                                Se connecter
+                            </button>
+                        </div>
                         <div class="right-align">
-                            <a href="{{ url('/password/reset') }}" class="waves-effect waves-teal btn-flat right-align">
+                            <a href="{{ url('/password/reset') }}" class="btn-flat right-align">
                                 Mot de passe oublié ?
                             </a>
                         </div>

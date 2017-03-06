@@ -123,14 +123,11 @@
                                     </span>
                                 @endif
                             </div>
-
-
                             <div class="col s12">
-                                <button type="submit" class="btn yellow black-text right">
+                                <button type="submit" class="btn btnValider white-text right">
                                     Enregistrer
                                 </button>
                             </div>
-
                         </form>
                     </div>
                 </div>

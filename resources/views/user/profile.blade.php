@@ -170,21 +170,55 @@
                         </div>
                         <div class="section center">
                             @if($vehicle->typeVehicle->id == 1)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_car</i>
+                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                    {{ Html::image('public/img/vehicles/car.svg',
+                                        'Icon d\'une voiture',
+                                        array('class' => 'responsive-img iconV'))
+                                    }}
+                                </p>
                             @elseif($vehicle->typeVehicle->id == 2)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">local_shipping</i>
+                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                    {{ Html::image('public/img/vehicles/truck.svg',
+                                        'Icon d\'un camion',
+                                        array('class' => 'responsive-img iconV'))
+                                    }}
+                                </p>
                             @elseif($vehicle->typeVehicle->id == 3)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">motorcycle</i>
+                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                    {{ Html::image('public/img/vehicles/motorcycle.svg',
+                                        'Icon d\'une moto',
+                                        array('class' => 'responsive-img iconV'))
+                                    }}
+                                </p>
                             @elseif($vehicle->typeVehicle->id == 4)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bike</i>
+                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                    {{ Html::image('public/img/vehicles/bike.svg',
+                                        'Icon d\'un vélo',
+                                        array('class' => 'responsive-img iconV'))
+                                    }}
+                                </p>
                             @elseif($vehicle->typeVehicle->id == 5)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">flight</i>
+                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                {{ Html::image('public/img/vehicles/plane.svg',
+                                    'Icon d\'un avion',
+                                    array('class' => 'responsive-img iconV'))
+                                }}
+                            </p>
                             @elseif($vehicle->typeVehicle->id == 12)
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_boat</i>
+                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                {{ Html::image('public/img/vehicles/boat.svg',
+                                    'Icon d\'un bateau',
+                                    array('class' => 'responsive-img iconV'))
+                                }}
+                            </p>
                             @else
-                                <i class="material-icons tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">directions_bus</i>
+                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                {{ Html::image('public/img/vehicles/what.svg',
+                                    'Icon d\'un bateau',
+                                    array('class' => 'responsive-img iconV'))
+                                }}
+                            </p>
                             @endif
-
                         </div>
                     </div>
                 </div>
@@ -192,8 +226,7 @@
             @endforeach
         </div>
 
-
-        <div class="row">
+        <div class="row card-panel scrollspy">
             <div class="section center">
                 <h4>Mes dernières annonces</h4>
             </div>

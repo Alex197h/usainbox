@@ -12,7 +12,7 @@
                     <div class="section">
                         <h6>En 2 secondes avec Facebook</h6>
                         <div class="section center">
-                            <a href="{{url('/auth/facebook')}}" class="btn btn-link">Facebook</a>
+                            <a href="{{url('/auth/facebook')}}" class="btn btnValider btn-link">Facebook</a>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                             @endif
                         </div>
                         <div class="right-align">
-                            <button type="submit" class=" btn waves-effect waves-light white black-text">
+                            <button type="submit" class=" btn btnValider white-text">
                                 S'enregistrer
                             </button>
                         </div>
