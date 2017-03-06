@@ -61,7 +61,7 @@ class UserController extends Controller {
 
         $rules = array(
             'gender' => 'required|boolean',
-            'birthday' => 'required|date',
+            'birthday' => 'required',
             'phone' => 'required|max:20',
         );
         if ($auth->email != $request->input('email'))
@@ -72,7 +72,7 @@ class UserController extends Controller {
         if ($auth->email != $request->input('email'))
             $auth->email = $request->input('email');
         $auth->gender = $request->input('gender');
-        $auth->birthday = $request->input('birthday');
+        $auth->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $auth->phone = $request->input('phone');
         $auth->description = $request->input('description');
 

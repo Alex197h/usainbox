@@ -26,7 +26,7 @@
                         <label style="display: none;" for="city_end">Ville arrivée</label>
                     </div>
                     <div class="input-field col s12 l2">
-                        <input type="date" name="date" class="datepicker white" placeholder="Date"
+                        <input type="date" name="date" class=" white" placeholder="Date"
                         value="{{ date('Y-m-d') }}">
                     </div>
                     <div class="input-field col s12 l3">
@@ -55,14 +55,13 @@
         });
         </script>
 
-        <div id="introduction"><br></div>
 
         <div class="row">
             <h3 class="h3">Retrouver des transport partout en France</h3>
         </div>
 
 
-        <div class="col s12">
+        <div class="col s12 scrollspy" id="introduction">
             <div id="resss"></div>
             <div class="col s12 right" id="map"></div>
             <div id="transport_offers" class="col s12"></div>

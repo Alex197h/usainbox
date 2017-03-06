@@ -56,10 +56,7 @@
     </div>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script>
-        $('.datepicker').pickadate({
-            selectMonths: true, // Creates a dropdown to control month
-            selectYears: 15 // Creates a dropdown of 15 years to control year
-        });
+
         function initMap(){
             var options = {types: ['(cities)']};
             new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
