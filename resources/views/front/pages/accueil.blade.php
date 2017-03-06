@@ -55,24 +55,17 @@
             <h3 class="h3">Retrouver des transport partout en France</h3>
         </div>
 
-<<<<<<< HEAD
-        <div class="col s12">
-            <div id="resss"></div>
-            <div class="col s12 right" id="map"></div>
-            <div id="transport_offers"></div>
-        </div>
-=======
+
 <div class="col s12">
     <div id="resss"></div>
     <div class="col s12 right" id="map"></div>
     <div id="transport_offers" class="col s12"></div>
 </div>
->>>>>>> refs/remotes/origin/master
 
-        <!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
-        <video class="col s12 valign" autoplay loop muted class="responsive-video">
-        <source src="public/video/pres.mp4" type="video/mp4"/>
-    </video>
+<!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
+<video class="col s12 valign" autoplay loop muted class="responsive-video">
+<source src="public/video/pres.mp4" type="video/mp4"/>
+</video>
 </section> -->
 
 <div id="offercopy" hidden>
@@ -92,8 +85,10 @@
                         <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
-                        <i class="small material-icons tooltipped" data-tooltip="$regular.text">$regular.icon</i>
-                        <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i>
+                        {{ Html::image('public/img/trajet/$regular.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$regular.text')) }}
+                        {{ Html::image('public/img/trajet/$highway.icon.png', 'Lorem Ipsum', array('class' => 'responsive-img tooltipped', 'data-tooltip' => '$highway.text')) }}
+
+                        {{-- <i class="small material-icons tooltipped" style="color:#$highway.color" data-tooltip="$highway.message">surround_sound</i> --}}
                     </div>
                 </div>
                 <div class="card-action">
@@ -255,6 +250,7 @@
 
                             var count = 1;
                             for(r in result) {
+                                console.log(result[r]);
                                 var divo = $('#offercopy').html();
                                 var d = result[r].date_start;
                                 var arr = {
@@ -269,11 +265,11 @@
                                     description: result[r].description,
                                     regular: {
                                         text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
-                                        icon: result[r].is_regular ? 'restore' : 'schedule',
+                                        icon: result[r].is_regular ? 'regularYes' : 'regularYes',
                                     },
                                     highway: {
-                                        color: result[r].highway == 1 ? '333' : 'CCC',
-                                        message: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
+                                        icon: result[r].highway == 1 ? 'highwayYes' : 'highwayNo',
+                                        text: result[r].highway == 1 ? 'Prend l\'autoroute' : 'Ne prend pas l\'autoroute',
                                     },
                                 };
                                 divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function(matches, a, b, c){
