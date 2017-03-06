@@ -43,7 +43,9 @@
                     $('.tocheck.flat').iCheck(Allchecked ? 'check' : 'uncheck');
                 });
                 
-                $('#datatable-checkbox').on( 'page.dt',   function () { eventFired( 'Page' ); } )
+                $('#datatable-checkbox').on('page.dt', function() {
+                    console.log( 'Page' );
+                });
             </script>
         </div>
     </div>
