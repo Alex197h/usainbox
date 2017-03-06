@@ -10,7 +10,7 @@
                 <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
                 <div class="row">
                     <div class="input-field col s12 l3">
-                        <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start">
+                        <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start" required>
                         <label style="display: none;" for="city_start">Ville départ</label>
                     </div>
                     <div style="text-align: center;"class="input-field col s12 l1">
@@ -22,7 +22,7 @@
                         </button>
                     </div>
                     <div class="input-field col s12 l3">
-                        <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end">
+                        <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end" required>
                         <label style="display: none;" for="city_end">Ville arrivée</label>
                     </div>
                     <div class="input-field col s12 l2">
