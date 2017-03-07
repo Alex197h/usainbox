@@ -3,7 +3,7 @@
 @section('title', 'Accueil')
 
 @section('content')
-<div class="row ">
+<div class="row header-search">
     <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form"
     method="POST" action="{{ route('transport') }}">
     {{ csrf_field() }}
