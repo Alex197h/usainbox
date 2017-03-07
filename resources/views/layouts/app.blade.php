@@ -152,7 +152,7 @@
                     </ul>
                 </div>
                 <div class="col l3">
-                    <h5 class="white-text">Mention légales</h5>
+                    <h5 class="white-text">Mentions légales</h5>
                     <ul>
                         <li>
                             <a class="grey-text text-lighten-3" href="{{route('page', 'conditions')}}">Conditions générales</a>
