@@ -62,7 +62,6 @@
                 <div class="col s12 infoProfile" {{ $errors->has('vehicle') ? ' has-error' : '' }}>
                     <label for="vehicle">Véhicule utilisé</label>
                     <select id="vehicle" type="text" class="form-control" name="vehicle" required>
-                        <option value="" disabled selected>Choisir votre véhicule</option>
                         @foreach($vehicles as $vehicle)
                         <option value="{{ $vehicle->id }}"{{ $vehicle->default ? ' selected':'' }}>{{ $vehicle->car_brand }} {{ $vehicle->car_model }}</option>
                         @endforeach
@@ -226,7 +225,6 @@
 
                 $('#vehicle').on('change', function(){
                     var vehicle = Vehicles[this.value];
-
                     $('#max_width').val(vehicle.max_width != 0 ? vehicle.max_width : '');
                     $('#max_height').val(vehicle.max_height != 0 ? vehicle.max_height : '');
                     $('#max_length').val(vehicle.max_length != 0 ? vehicle.max_length : '');
@@ -256,24 +254,31 @@
                     var nbSteps = 1;
                     function addStep(){
                         if (nbSteps < 6){
-                            var div = $('<div class="col s12 infoProfile">');
+                            var div = $('<div class="col s12 infoProfile etape" id="etape'+nbSteps+'">');
                             var label = $('<label class="col s12" for="step'+nbSteps+'">'+'Etape n°'+nbSteps+'</label>');
                             div.append(label);
-                            var input = $('<input id="step'+nbSteps+'" class="form-control col s8 step" name="step'+nbSteps+'" draggable="true">');
+                            var input = $('<input id="step'+nbSteps+'" class="form-control col s8 step inpetape" name="step'+nbSteps+'" draggable="true">');
                             div.append(input);
-                            var del = $('<button class="btn btnAdd white-text right" id="'+nbSteps+'" onclick="removeStep()">{{
-                                Html::image('public/img/annonce/dustbin.svg',
-                                'Icon d\'une poubelle',
-                                array('class' => 'responsive-img iconC','style' => 'vertical-align: middle;'))
-                            }}</button>');
+                            var del = $('<button class="btn btnAdd btnRm white-text right" data-btn="'+nbSteps+'">X</button>');
                             div.append(del);
                             $('#endstep').before(div);
                             nbSteps +=1;
                         }
                     }
 
+                    $(document).on('click', '.btnRm', function(){
+                        var step = $(this).attr('data-btn') - 1;
+                        console.log(step);
+                        var divs = $('.etape');
+                        var buttons = $('.etape input');
+                         for (var i = step; i < buttons.length - 1; i++) {
+                            buttons[i].value = buttons[i+1].value
+                        }
+                        $('#'+divs[divs.length-1].id).remove();
+                        nbSteps -=1;
+                    });
+
                     function removeStep(){
-                        console.log(this.id);
                     }
                     </script>
                     <script async defer
@@ -296,19 +301,6 @@
                             scrollwheel: false,
                             zoom: 6
                         });
-
-                        var icon = {
-                            url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
-                            scaledSize: new google.maps.Size(25, 25),
-                            origin: new google.maps.Point(0, 0),
-                            anchor: new google.maps.Point(0, 0)
-                        };
-
-                        var Markers = {};
-                        var Paths = [];
-                        var MarkersHidden = false;
-                        var MarkerClicked = false;
-                        this.setVisible(true);
                     }
 
                     var dropedElementSortingOrder;
