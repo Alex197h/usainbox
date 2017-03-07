@@ -262,13 +262,14 @@
                             var del = $('<button class="btn btnAdd btnRm white-text right" data-btn="'+nbSteps+'">X</button>');
                             div.append(del);
                             $('#endstep').before(div);
+                            var options = {types: ['(cities)']};
+                            new google.maps.places.Autocomplete(document.getElementById('step'+nbSteps), options);
                             nbSteps +=1;
                         }
                     }
 
                     $(document).on('click', '.btnRm', function(){
                         var step = $(this).attr('data-btn') - 1;
-                        console.log(step);
                         var divs = $('.etape');
                         var buttons = $('.etape input');
                          for (var i = step; i < buttons.length - 1; i++) {
@@ -277,19 +278,13 @@
                         $('#'+divs[divs.length-1].id).remove();
                         nbSteps -=1;
                     });
-
-                    function removeStep(){
-                    }
                     </script>
                     <script async defer
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
                     <script type="text/javascript">
                     var MapElement = document.getElementById('map');
                     //var ShowElement = document.getElementById('show');
-
-
                     var map;
-
 
                     function initMap() {
                         map = new google.maps.Map(MapElement, {
@@ -301,6 +296,9 @@
                             scrollwheel: false,
                             zoom: 6
                         });
+                        var options = {types: ['(cities)']};
+                        new google.maps.places.Autocomplete(document.getElementById('start_city'), options);
+                        new google.maps.places.Autocomplete(document.getElementById('end_city'), options);
                     }
 
                     var dropedElementSortingOrder;
