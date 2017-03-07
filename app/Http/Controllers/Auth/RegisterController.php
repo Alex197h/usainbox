@@ -53,7 +53,7 @@ class RegisterController extends Controller
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
             'gender' => 'required|boolean',
-            'birthday' => 'required|date',
+            'birthday' => 'required',
             'phone' => 'required|max:20',
         ]);
     }
@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'gender' => $data['gender'],
-            'birthday' => $data['birthday'],
+            'birthday' => date('Y-m-d', strtotime($data['birthday'])),
             'phone' => $data['phone'],
         ]);
     }
