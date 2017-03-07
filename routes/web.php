@@ -36,7 +36,7 @@ Route::get('user/{user_id}', 'UserController@getProfile')->name('profile');
 
 
 Route::get('admin', 'AdminController@home')->name('admin');
-Route::get('admin/{page}/{type?}/{id?}', 'AdminController@page')->name('admin_page');
+Route::any('admin/{page}/{type?}/{id?}', 'AdminController@page')->name('admin_page');
 
 
 

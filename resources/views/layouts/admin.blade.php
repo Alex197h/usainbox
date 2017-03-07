@@ -6,11 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Usainbox Admin Panel </title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.min.css">
+        {{ Html::style('public/css/font-awesome.min.css') }}
+        {{ Html::style('public/css/bootstrap.min.css') }}
         {{ Html::style('public/admin/style.css') }}
         {{ Html::style('public/admin/libs/nprogress.css') }}
         {{ Html::style('public/admin/libs/green.css') }}
+        {{ Html::style('public/admin/libs/select2.min.css') }}
+        {{ Html::style('public/admin/libs/switchery.min.css') }}
         {{ Html::style('public/admin/libs/tables/tables.css') }}
         {{ Html::style('public/admin/libs/tables/buttons.css') }}
         {{ Html::style('public/admin/libs/tables/fixheader.css') }}
@@ -172,7 +174,7 @@
                 @yield('content')
                 <footer>
                     <div class="pull-right">
-                        Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                        
                     </div>
                     <div class="clearfix"></div>
                 </footer>
@@ -183,6 +185,9 @@
         {{ HTML::script('public/admin/libs/icheck.min.js') }}
         {{ HTML::script('public/admin/libs/date.js') }}
         {{ HTML::script('public/admin/libs/moment.min.js') }}
+        {{ HTML::script('public/admin/libs/switchery.min.js') }}
+        {{ HTML::script('public/admin/libs/select2.min.js') }}
+        {{ HTML::script('public/admin/libs/validator.js') }}
         {{ HTML::script('public/admin/libs/bootstrap-progressbar.min.js') }}
         
         {{ HTML::script('public/admin/libs/tables/tables.js') }}
