@@ -21,7 +21,7 @@
                             <div class="card-content">
                                 <div class="section detail-steps"  id="stepsArea">
                                     <div class="col s12 infoProfile"{{ $errors->has('start_city') ? ' has-error' : '' }}>
-                                        <label for="start_city">Ville de départ</label>
+                                        <label for="start_city">Ville de départ*</label>
                                         <input id="start_city" type="text" class="form-control step"
                                         name="start_city" value="{{ old('start_city') }}" draggable="true">
 
@@ -43,7 +43,7 @@
 
                                     </div>
                                     <div id="endstep" class="col s12 infoProfile"{{ $errors->has('end_city') ? ' has-error' : '' }} >
-                                        <label for="end_city">Ville d'arrivé</label>
+                                        <label for="end_city">Ville d'arrivé*</label>
                                         <input id="end_city" type="text" class="form-control step"
                                         name="end_city" value="{{ old('end_city') }}" draggable="true">
 
@@ -77,7 +77,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile "{{ $errors->has('date_start') ? ' has-error' : '' }}>
-                    <label for="date_start">Date et heure de départ</label>
+                    <label for="date_start">Date et heure de départ*</label>
 
                     <input id="date_start" type="datetime" class="form-control" placeholder="jj/mm/aaaa hh:mm"
                     name="date_start" value="{{ old('date_start') }}">
@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_width') ? ' has-error' : '' }}>
-                    <label for="max_width">Largeur maximale du colis</label>
+                    <label for="max_width">Largeur maximale des colis accepté</label>
 
                     <input id="max_width" type="number" class="form-control" placeholder="Largeur max en cm"
                     name="max_width" value="{{ old('max_width') }}">
@@ -103,7 +103,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_length') ? ' has-error' : '' }}>
-                    <label for="max_length">Longueur maximum du colis</label>
+                    <label for="max_length">Longueur maximum des colis accepté</label>
 
                     <input id="max_length" type="number" class="form-control" placeholder="Longueur max en cm"
                     name="max_length" value="{{ old('max_length') }}">
@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile "{{ $errors->has('max_height') ? ' has-error' : '' }}>
-                    <label for="max_height">Hauteur maximum du colis</label>
+                    <label for="max_height">Hauteur maximum des colis accepté</label>
 
                     <input id="max_height" type="number" class="form-control" placeholder="Hauteur max en cm"
                     name="max_height" value="{{ old('max_height') }}">
@@ -129,7 +129,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
-                    <label for="max_volume">Volume du colis</label>
+                    <label for="max_volume">Volume total des colis accepté*</label>
 
                     <input id="max_volume" type="number" class="form-control" placeholder="Volume max en cm3"
                     name="max_volume" value="{{ old('max_volume') }}">
@@ -142,7 +142,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_weight') ? ' has-error' : '' }}>
-                    <label for="max_weight">Poids du colis</label>
+                    <label for="max_weight">Poids maximum des colis accepté</label>
 
                     <input id="max_weight" type="number" class="form-control" placeholder="Poids max en g"
                     name="max_weight" value="{{ old('max_weight') }}">
@@ -183,17 +183,6 @@
                     @if ($errors->has('start_detour'))
                     <span class="col s12">
                         <strong>{{ $errors->first('start_detour') }}</strong>
-                    </span>
-                    @endif
-                </div>
-
-                <div class="col s12 m6 infoProfile" {{ $errors->has('help_charge') ? ' has-error' : '' }}>
-                    <input type="checkbox" name="help_charge" id="help_charge" value="1"/>
-                    <label for="help_charge">Je peux aider pour le chargement </label>
-
-                    @if ($errors->has('help_charge'))
-                    <span class="col s12">
-                        <strong>{{ $errors->first('help_charge') }}</strong>
                     </span>
                     @endif
                 </div>
@@ -312,17 +301,6 @@
                     .on('dragleave', '.step', handleDragLeave)
                     .on('drop', '.step', handleDrop)
                     .on('dragend', '.step', handleDragEnd)
-                    /*$(function () {
-                        cols = document.querySelectorAll('.step');
-                        [].forEach.call(cols, function (col) {
-                            col.addEventListener('dragstart', handleDragStart, true);
-                            col.addEventListener('dragenter', handleDragEnter, true);
-                            col.addEventListener('dragover', handleDragOver, true);
-                            col.addEventListener('dragleave', handleDragLeave, true);
-                            col.addEventListener('drop', handleDrop, true);
-                            col.addEventListener('dragend', handleDragEnd, true);
-                        });
-                    });*/
 
                     function handleDragStart() {
                         this.style.opacity = '0.5';

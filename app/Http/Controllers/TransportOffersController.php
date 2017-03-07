@@ -34,6 +34,42 @@ class TransportOffersController extends Controller {
         return view('front.transport.create', $data);
     }
 
+    public function postCreate(){
+        $rules = array(
+            'start_city' => 'required|max:255',
+            'end_city' => 'required|max:255',
+            'vehicle' => 'required|numeric',
+            'date_start' => 'datetime|numeric',
+            'max_volume' => 'required|numeric',
+            'max_length' => 'numeric',
+            'max_width' => 'numeric',
+            'max_height' => 'numeric',
+            'max_weight' => 'numeric',
+        );
+        $this->validate($request, $rules);
+
+        $transport = new TransportOffer();
+        if ($request->has('max_width')) $transport->max_width = $request->input('max_width');
+        if ($request->has('max_length')) $transport->max_length = $request->input('max_length');
+        if ($request->has('max_height')) $transport->max_height = $request->input('max_height');
+        if ($request->has('max_weight')) $transport->max_weight = $request->input('max_weight');
+        $transport->max_volume = $request->input('max_volume');
+        $transport->date_start = $request->input('date_start');
+
+        $transport->is_regular = $request->input('is_regular') ? 1 : 0;
+        $transport->highway = $request->input('highway') ? 1 : 0;
+        $transport->detour = $request->input('start_detour') ? 1 : 0;
+        if ($request->has('description')) $transport->description = $request->input('description');
+        $transport->vehicle_id = $request->input('vehicle');
+
+        $step1 = new TransportStep();
+        $step1->transport_offer_id = $transport->idea
+        // IDEA: Je me suis arreté la, à finir
+        $step1->step = 1;
+
+    }
+
+
     public function search(Request $request){
         if ($request->input('city_start') != "") {
             $infoPositionStart = str_replace(", ", '+',$request->input('city_start'));

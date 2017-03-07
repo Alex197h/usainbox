@@ -216,7 +216,7 @@
                                     array('class' => 'responsive-img iconV'))
                                 }}
                             </p>
-                            @elseif($vehicle->typeVehicle->id == 12)
+                        @elseif($vehicle->typeVehicle->id == 6)
                             <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
                                 {{ Html::image('public/img/vehicles/boat.svg',
                                     'Icon d\'un bateau',
