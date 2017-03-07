@@ -3,7 +3,7 @@
 @section('title', 'Accueil')
 
 @section('content')
-<div class="row ">
+<div class="row header-search">
     <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form"
     method="POST" action="{{ route('transport') }}">
     {{ csrf_field() }}
@@ -32,7 +32,7 @@
         </div>
         <div class="input-field col s12 l3">
             <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
-                Transporter
+                Expédier
                 {{
                     Html::image('public/img/transport.svg',
                     'Camion de transport',
@@ -44,7 +44,7 @@
 </form>
 <a id="scrollDown" href="#introduction"
 class="hide-on-small-only waves-light transparent white-text"><i
-class="material-icons floating">expand_more</i></a>
+class="material-icons floating scrollspy">expand_more</i></a>
 </div>
 
 <script>
@@ -56,11 +56,11 @@ $('#switch').on('click', function(){
 });
 </script>
 
-<div id="introduction" class="row">
+<div id="introduction" class="row scrollspy">
     <h3 class="center" style="padding: 55px;">Retrouver des transport partout en France</h3>
 </div>
 
-<div class="col s12 scrollspy" >
+<div class="col s12" >
     <div id="resss"></div>
     <div class="col s12 right" id="map"></div>
     <div id="transport_offers" class="col s12"></div>
