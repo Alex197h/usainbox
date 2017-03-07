@@ -25,7 +25,7 @@
                             <p class="col s6">
                                 {{
                                     Html::image('public/img/static/who/clara.svg',
-                                    'Icon d\'un profile',
+                                    'Icon d\'une personnage feminin',
                                     array('class' => 'responsive-img iconS'))
                                 }}
                                 Clara Bouyer
@@ -33,7 +33,7 @@
                             <p class="col s6">
                                 {{
                                     Html::image('public/img/static/who/alexandre.svg',
-                                    'Icon d\'un profile',
+                                    'Icon d\'un personnage mario',
                                     array('class' => 'responsive-img iconS'))
                                 }}
                                 Alexandre Hennequin
@@ -43,7 +43,7 @@
                             <p class="col s6">
                                 {{
                                     Html::image('public/img/static/who/adrien.svg',
-                                    'Icon d\'un profile',
+                                    'Icon d\'un personnage',
                                     array('class' => 'responsive-img iconS'))
                                 }}
                                 Adrien Michel
@@ -51,7 +51,7 @@
                             <p class="col s6">
                                 {{
                                     Html::image('public/img/static/who/quentin.svg',
-                                    'Icon d\'un profile',
+                                    'Icon d\'un personnage ',
                                     array('class' => 'responsive-img iconS'))
                                 }}
                                 Quentin Picard

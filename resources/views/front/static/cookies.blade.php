@@ -6,7 +6,14 @@
 <div class="container">
     <div class="row">
         <div class="col s12 ">
-            <h3>Utilisation des cookies</h3>
+            <h3>
+                Utilisation des cookies
+                {{
+                    Html::image('public/img/static/cookies/cookies.svg',
+                    'Icon d\'un cookies',
+                    array('class' => 'responsive-img iconS'))
+                }}
+            </h3>
             <div class="col s10 offset-s1">
                 <div class="card-panel">
                     <h4>Qu’est-ce c'est et à quoi ça sert ?</h4>

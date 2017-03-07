@@ -6,7 +6,14 @@
 <div class="container">
     <div class="row">
         <div class="col s12 ">
-            <h3>Politique de confidentialité</h3>
+            <h3>
+                Politique de confidentialité
+                {{
+                    Html::image('public/img/static/confidentiel/agent.svg',
+                    'Icon d\'un inspecteur secret',
+                    array('class' => 'responsive-img iconS'))
+                }}
+            </h3>
             <div class="col s10 offset-s1">
                 <div class="card-panel">
                     <h4>Les informations que nous recueillons</h4>

@@ -6,7 +6,14 @@
 <div class="container">
     <div class="row">
         <div class="col s12 ">
-            <h3>Conditions générales</h3>
+            <h3>
+                Conditions générales
+                {{
+                    Html::image('public/img/static/condition/text.svg',
+                    'Icon de feuille de papier',
+                    array('class' => 'responsive-img iconS'))
+                }}
+            </h3>
             <div class="col s10 offset-s1">
                 <div class="card-panel">
                     <h4>Inscription à Usain Box</h4>
