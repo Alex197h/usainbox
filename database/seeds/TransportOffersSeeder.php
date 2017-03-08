@@ -9,10 +9,10 @@ use App\Vehicle;
 class TransportOffersSeeder extends Seeder{
     public function run(){
         $faker = Faker::create();
-        
-        
+
+
         $Vehicles = Vehicle::all()->pluck('id')->toArray();
-        
+
         for($i = 0; $i < 20; $i++){
             $volume = $faker->numberBetween(-5, 15);
             if($volume < 0){
@@ -21,9 +21,9 @@ class TransportOffersSeeder extends Seeder{
                 $height = $faker->randomFloat(2, 1, $width*2);
                 $length = $faker->randomFloat(2, 1, $width);
             } else {$width = 0; $height = 0; $length = 0;}
-            
+
             $date = $faker->dateTimeBetween($startDate = 'now', $endDate = '+7 days', $timezone = date_default_timezone_get());
-            
+
             $to = TransportOffer::create([
                 'detour' => $faker->boolean,
                 'highway' => $faker->boolean,
@@ -38,7 +38,7 @@ class TransportOffersSeeder extends Seeder{
                 'full' => $faker->boolean,
                 'vehicle_id' => !empty($Vehicles) ? $faker->randomElement($Vehicles) : 0,
             ]);
-            
+
             $n = rand(3, 5);
             for($j = 1; $j <= $n; $j++){
                 TransportStep::create([

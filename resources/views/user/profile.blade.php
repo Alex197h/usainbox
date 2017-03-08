@@ -261,8 +261,8 @@
                                 'Icon d\'un panneau de signalisation',
                                 array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
                             }}
-                             Vous n'avez pas encore ajouté de véhicule. Vous pouvez en ajouté en cliquant
-                            <a href="{{route('user_vehicles')}}">ici</a>.
+                             Vous n'avez pas encore ajouté de véhicule. Vous pouvez en ajouter en
+                             <a href="{{route('user_vehicles')}}">cliquant ici</a>.
                             {{ Html::image('public/img/vehicles/warning.svg',
                                 'Icon d\'un panneau de signalisation',
                                 array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
