@@ -4,6 +4,13 @@
 
     @section('content')
         <div class="container">
+
+
+            @if(session('message'))
+                <div class="btn" onload="Materialize.toast('{{ $message }}', 4000)"></div>
+            @endif
+
+
             <form method="post" action="{{ route('update_user_profile') }}" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="row card-panel">

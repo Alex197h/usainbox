@@ -145,4 +145,10 @@ class UserController extends Controller {
         }
 
     }
+
+
+    public function deleteVehicle(Vehicle $vehicle){
+        $vehicle->delete();
+        return redirect()->route('user_profile')->with('message', 'Véhicule supprimé !');
+    }
 }
