@@ -108,6 +108,8 @@ class TransportOffersController extends Controller {
             $outputStart= json_decode($geocodeStart);
             if(isset($outputStart->results[0])){
                 $start_city = $outputStart->results[0]->geometry->location;
+            }else{
+                return redirect()->back()->withInput()->with('message_error', 'La ville de départ n\'est pas valide');
             }
         }
         else{
@@ -120,6 +122,8 @@ class TransportOffersController extends Controller {
             $outputEnd= json_decode($geocodeEnd);
             if(isset($outputEnd->results[0])){
                 $end_city = $outputEnd->results[0]->geometry->location;
+            }else{
+                return redirect()->back()->withInput()->with('message_error', 'La ville d\'arrivée n\'est pas valide');
             }
         }
         else{
