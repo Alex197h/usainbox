@@ -57,7 +57,6 @@ class TransportOffersController extends Controller {
         $transport->detour = $request->input('start_detour') ? 1 : 0;
         if ($request->has('description')) $transport->description = $request->input('description');
         $transport->vehicle_id = $request->input('vehicle');
-
         if($transport->save()){
             $step1 = new TransportStep();
             $step1->transport_offer_id = $transport->id;
@@ -68,35 +67,37 @@ class TransportOffersController extends Controller {
             $step1->latitude = $output->results[0]->geometry->location->lat;
             $step1->longitude = $output->results[0]->geometry->location->lng;
             $step1->step = 1;
-            // if($step1->save()){
-            //
-            //     for( $i=0; $i<sizeof($request->steps); $i++){
-            //         $step = new TransportStep();
-            //         $step->transport_offer_id = $transport->id;
-            //         $step->label = $request->steps[$i];
-            //         $infoPositionStep = str_replace(", ", '+',$request->steps[$i]);
-            //         $geocodeStep = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionStep.'&sensor=false');
-            //         $outputStep = json_decode($geocodeStep);
-            //         $step->latitude = $outputStep->results[0]->geometry->location->lat;
-            //         $step->longitude = $outputStep->results[0]->geometry->location->lng;
-            //         $step->step = $i+1;
-            //         if($step->save);
-            //         else return redirect()->back()->withInput();
-            //     }
-            //     $steplast = new TransportStep();
-            //     $steplast->transport_offer_id = $transport->id;
-            //     $steplast->label = $request->input('start_city');
-            //     $infoPositionEnd = str_replace(", ", '+',$request->input('start_city'));
-            //     $geocodeEnd = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionEnd.'&sensor=false');
-            //     $outputEnd = json_decode($geocodeEnd);
-            //     $steplast->latitude = $outputEnd->results[0]->geometry->location->lat;
-            //     $steplast->longitude = $outputEnd->results[0]->geometry->location->lng;
-            //     $steplast->step = sizeof($request->steps)+1;
-            //     if($steplast->save()){
-            //         return redirect()->route('detail_transport_offer');
-            //     }else return redirect()->back()->withInput();
-            // }else return redirect()->back()->withInput();
-        }else return redirect()->back()->withInput();
+            $tabSteps = array();
+                for( $i=0; $i<sizeof($request->steps); $i++){
+                    $step = new TransportStep();
+                    $step->transport_offer_id = $transport->id;
+                    $step->label = $request->steps[$i];
+                    $infoPositionStep = str_replace(", ", '+',$request->steps[$i]);
+                    $geocodeStep = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionStep.'&sensor=false');
+                    $outputStep = json_decode($geocodeStep);
+                    $step->latitude = $outputStep->results[0]->geometry->location->lat;
+                    $step->longitude = $outputStep->results[0]->geometry->location->lng;
+                    $step->step = $i+1;
+                    $tabSteps[] = $step;
+                }
+                $steplast = new TransportStep();
+                $steplast->transport_offer_id = $transport->id;
+                $steplast->label = $request->input('start_city');
+                $infoPositionEnd = str_replace(", ", '+',$request->input('start_city'));
+                $geocodeEnd = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionEnd.'&sensor=false');
+                $outputEnd = json_decode($geocodeEnd);
+                $steplast->latitude = $outputEnd->results[0]->geometry->location->lat;
+                $steplast->longitude = $outputEnd->results[0]->geometry->location->lng;
+                $steplast->step = sizeof($request->steps)+1;
+                $step1->save();
+                foreach ($tabSteps as $onestep) {
+                    $onestep->save();
+                }
+                $steplast->save();
+                return redirect()->route('detail_transport_offer');
+            }else return redirect()->back()->withInput();
+
+
     }
 
 
