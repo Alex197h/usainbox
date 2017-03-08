@@ -116,7 +116,7 @@
         </div>
     </div>
 @else
-    <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card-panel">
+    <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 annoncepanel">
         <div class="section center">
             <h4>Aucune offre n'est disponible</h4>
             <form method="post" action="{{ route('create_alert') }}">
