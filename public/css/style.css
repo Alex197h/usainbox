@@ -239,3 +239,20 @@ input[type="date"]::-webkit-inner-spin-button {
     color: #FFDA44;
     font-size: 20px;
 }
+
+.rechercheV input::-webkit-input-placeholder {
+    color:grey;
+}
+.rechercheV input:-moz-placeholder {
+    color:grey;
+}
+.rechercheV input{
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+.annoncepanel{
+    border: solid;
+    border-color: #786A6A;
+    margin-top: 25px;
+}
