@@ -118,7 +118,8 @@ class UserController extends Controller {
         if($auth_vehicle_default == 1 && $request->input('default_vehicle')){
             Vehicle::where('user_id', Auth::user()->id)->where('default', 1)->update(['default' => 0]);
         }
-        $vehicle->default = $request->input('default_vehicle') ? 1 : 0;
+
+        $vehicle->default = ($auth_vehicle_default == 0) ? 1 : $request->input('default_vehicle') ? 1 : 0;
         if ($request->has('width')) $vehicle->max_width = $request->input('width');
         if ($request->has('length'))
         $vehicle->max_length = $request->input('length');
