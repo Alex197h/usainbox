@@ -56,7 +56,7 @@
                 @if (Auth::check())
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a href="#" class="black-text"> Rechercher</a>
+                            <a href="{{route('home')}}" class="black-text"> Rechercher</a>
                         </li>
                         <li>
                             <a href="{{route('create_transport_offer')}}" class="black-text">Déposer une annonce</a>
