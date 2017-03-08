@@ -6,8 +6,13 @@
         <div class="container">
 
 
-            @if(session('message'))
-                <div class="btn" onload="Materialize.toast('{{ $message }}', 4000)"></div>
+            @if (session('message'))
+                <script type="text/javascript">
+                    function toast() {
+                        Materialize.toast('{{ session('message') }}', 4000)
+                    }
+                    window.onload = toast;
+                </script>
             @endif
 
 
@@ -259,10 +264,10 @@
                                             array('class' => 'responsive-img icon'))
                                         }}
                                     </a>
-                                    <a class="tooltipped" data-tooltip="Supprimer le véhicule" href="{{ route('delete_vehicle', $vehicle->id) }}">
+                                    <a class="tooltipped" data-tooltip="Supprimer le véhicule">
                                         {{ Html::image('public/img/user/dustbin.svg',
                                             'Icon d\'une poubelle',
-                                            array('class' => 'responsive-img icon'))
+                                            array('class' => 'responsive-img icon deletevehicle', 'data-id' => $vehicle->id))
                                         }}
                                     </a>
                                 </div>
@@ -342,5 +347,15 @@
 
         </div>
 
+        <script>
+            $('.deletevehicle').on('click', function(){
+                var id = $(this).attr('data-id');
+                var r = confirm("Etes-vous sûr de vouloir supprimer le véhicule ?");
+                if(r == true) {
+                    location.href = '{{ route('delete_vehicle')}}'+'/'+id;
+                }
+            });
+
+        </script>
 
     @endsection

@@ -32,7 +32,7 @@ Route::model('vehicle_id', App\Vehicle::class);
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
 Route::post('user/profile', 'UserController@updateProfileAuth')->name('update_user_profile');
 Route::any('user/vehicles/modify/{vehicle_id}', 'UserController@modifyVehicles')->name('modify_vehicle');
-Route::get('user/vehicles/delete/{vehicle_id}', 'UserController@deleteVehicle')->name('delete_vehicle');
+Route::get('user/vehicles/delete/{vehicle_id?}', 'UserController@deleteVehicle')->name('delete_vehicle');
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
 
