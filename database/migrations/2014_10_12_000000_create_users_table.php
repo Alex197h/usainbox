@@ -16,7 +16,7 @@ class CreateUsersTable extends Migration {
             $table->date('birthday')->nullable();
             $table->string('phone')->nullable();
             $table->text('description')->nullable();
-            $table->string('avatar')->nullable();
+            $table->string('avatar')->default('default.jpg');
             $table->boolean('help_charge')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->string('provider')->nullable();

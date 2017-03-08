@@ -56,7 +56,7 @@
                 @if (Auth::check())
                     <ul class="right hide-on-med-and-down">
                         <li>
-                            <a href="#" class="black-text"> Rechercher</a>
+                            <a href="{{route('home')}}" class="black-text"> Rechercher</a>
                         </li>
                         <li>
                             <a href="{{route('create_transport_offer')}}" class="black-text">Déposer une annonce</a>
@@ -211,10 +211,22 @@
     </footer>
 
     <script>
+//    var d = new Date();
+//    var year = d.getFullYear();
+//    var month = d.getMonth()+1;
+//    var day = d.getDate();
+//    if(month < 10) month = '0'+month;
+//    if(day < 10) day = '0'+day;
 
+    var d = new Date();
+    d.setFullYear( d.getFullYear() - 100 );
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
-        selectYears: 15 // Creates a dropdown of 15 years to control year
+        selectYears: 100, // Creates a dropdown of 15 years to control year
+        min: d,
+        max: new Date(),
+        closeOnSelect: true,
+        closeOnClear: true
     });
 
     $(".button-collapse").sideNav();
