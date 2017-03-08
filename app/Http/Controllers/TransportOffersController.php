@@ -63,7 +63,7 @@ class TransportOffersController extends Controller {
         $transport->vehicle_id = $request->input('vehicle');
 
         $step1 = new TransportStep();
-        $step1->transport_offer_id = $transport->idea
+        $step1->transport_offer_id = $transport->idea;
         // IDEA: Je me suis arreté la, à finir
         $step1->step = 1;
 
