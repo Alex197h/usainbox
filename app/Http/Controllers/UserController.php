@@ -151,4 +151,63 @@ class UserController extends Controller {
         $vehicle->delete();
         return redirect()->route('user_profile')->with('message', 'Véhicule supprimé !');
     }
+
+    public function modifyVehicles(Vehicle $vehicle, Request $request){
+        if($request->isMethod('post')){
+
+            $rules = array(
+                'vehicle_type' => 'required|numeric',
+                'vehicle_brand' => 'max:255',
+                'vehicle_model' => 'max:255',
+                'volume' => 'required|numeric',
+                'length' => 'numeric',
+                'width' => 'numeric',
+                'height' => 'numeric',
+                'weight' => 'numeric'
+
+            );
+
+            $this->validate($request, $rules);
+
+            $vehicle->user_id = Auth::user()->id;
+
+            $vehicle->type_vehicle_id = $request->input('vehicle_type');
+            if($request->input('default_vehicle')){
+                Vehicle::where('user_id', Auth::user()->id)->where('default', 1)->update(['default' => 0]);
+            }
+
+            if($request->has('default_vehicle')) $vehicle->default = $request->input('default_vehicle') ? 1 : 0;
+
+            if ($request->has('width'))
+                $vehicle->max_width = $request->input('width');
+            else $vehicle->max_width = '';
+
+            if ($request->has('length'))
+                $vehicle->max_length = $request->input('length');
+            else $vehicle->max_length = '';
+
+            if ($request->has('height'))
+                $vehicle->max_height = $request->input('height');
+            else $vehicle->max_height = '';
+
+            if ($request->has('weight'))
+                $vehicle->max_weight = $request->input('weight');
+            else $vehicle->max_weight = '';
+
+            $vehicle->max_volume = $request->input('volume');
+            $vehicle->car_brand = $request->input('vehicle_brand');
+            $vehicle->car_model = $request->input('vehicle_model');
+
+            if($vehicle->save()){
+                return redirect()->route('user_profile')->with('message', 'Véhicule modifé !');
+            }else{
+                return redirect()->back()->withInput();
+            }
+
+        }else{
+
+            $type_vehicles = TypeVehicle::all();
+            return view('user.modify_vehicle', array('vehicle' => $vehicle, 'vehicle_types' => $type_vehicles));
+        }
+    }
 }

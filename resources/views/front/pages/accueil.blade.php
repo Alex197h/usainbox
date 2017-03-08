@@ -3,6 +3,17 @@
 @section('title', 'Accueil')
 
     @section('content')
+
+        @if (session('message_error'))
+            <script type="text/javascript">
+                function toast() {
+                    Materialize.toast('{{ session('message_error') }}', 4000)
+                }
+                window.onload = toast;
+            </script>
+        @endif
+
+
         <div class="row header-search">
             <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form"
             method="POST" action="{{ route('transport') }}">
@@ -10,7 +21,7 @@
             <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
             <div class="row">
                 <div class="input-field col s12 l3">
-                    <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start" required>
+                    <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start" value="{{ old('city_start') }}" required>
                     <label style="display: none;" for="city_start">Ville départ</label>
                 </div>
                 <div style="text-align: center;"class="input-field col s12 l1">
@@ -23,7 +34,7 @@
                     </button>
                 </div>
                 <div class="input-field col s12 l3">
-                    <input id="city_end" class="white" placeholder="Ville arrivée" type="text" name="city_end" required>
+                    <input id="city_end" class="white" placeholder="Ville arrivée" type="text" value="{{ old('city_end') }}" name="city_end" required>
                     <label style="display: none;" for="city_end">Ville arrivée</label>
                 </div>
                 <div class="input-field col s12 l2">
