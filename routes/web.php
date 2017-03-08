@@ -11,6 +11,8 @@ Route::post('transport-search', 'TransportOffersController@search')->name('trans
 Route::get('offer/transport/create', 'TransportOffersController@create')->name('create_transport_offer');
 Route::post('offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
 
+Route::get('offer/transport/detail', 'TransportOffersController@detail')->name('detail_transport_offer');
+
 
 Route::any('alert/create', 'ShippingOffersController@index')->name('create_alert');
 Route::post('alert/save', 'ShippingOffersController@save')->name('save_alert');
