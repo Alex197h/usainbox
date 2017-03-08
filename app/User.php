@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Vehicle;
+use Storage;
 
 class User extends Authenticatable {
     use Notifiable;
@@ -44,7 +45,9 @@ class User extends Authenticatable {
         return $this->hasMany('App\Question');
     }
     
-    
+    public function getAvatarPathAttribute(){
+        return Storage::url('app/img/avatar/'.(($this->avatar != null) ? $this->avatar : 'default.jpg'));
+    }
     
     public function getFullNameAttribute(){
         return $this->first_name.' '.$this->last_name;

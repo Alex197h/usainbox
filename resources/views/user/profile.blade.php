@@ -4,53 +4,66 @@
 
 @section('content')
     <div class="container">
-        <div class="row card-panel">
-            <div class="col s3">
-                {{
-                    Html::image('public/img/avatar/default.jpg',
-                    'Avatar par default de l\'utilisateur',
-                    array('class' => 'responsive-img'))
-                }}
+        <form method="post" action="{{ route('update_user_profile') }}" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="row card-panel">
+
+                <div class="col s3">
+                    {{
+                        Html::image($user->avatar_path,
+                        'Avatar par default de l\'utilisateur',
+                        array('class' => 'responsive-img'))
+                    }}
+                    <div class=" file-field input-field">
+                        <div class="btn btnProfile">
+                            <span>Modifier votre photo</span>
+                            <input name="avatar" type="file">
+                        </div>
+                        <div class="file-path-wrapper hide">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s9">
+                    <h4>{{$user->last_name}} {{$user->first_name}}</h4>
+                    <p>
+                        <span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span>
+                    </p>
+
+                </div>
+                <div class="col s9">
+                    <a href="{{route('user_vehicles')}}" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Ajouter un vehicule
+                        </button>
+                    </a>
+
+                    <a href="#vehicles" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Vos vehicule
+                        </button>
+                    </a>
+
+                    <a href="#" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Vos annonces
+                        </button>
+                    </a>
+
+                    <a href="#" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Vos reservations
+                        </button>
+                    </a>
+
+                </div>
             </div>
-            <div class="col s9">
-                <h4>{{$user->last_name}} {{$user->first_name}}</h4>
-                <p>
-                    <span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span>
-                </p>
 
-            </div>
-            <div class="col s9">
-                <a href="{{route('user_vehicles')}}" class="white-text">
-                    <button type="button" class="btn btnProfile">
-                        Ajouter un vehicule
-                    </button>
-                </a>
+            <div class="row card-panel">
+                <h4>Mes informations</h4>
 
-                <a href="#vehicles" class="white-text">
-                    <button type="button" class="btn btnProfile">
-                        Vos vehicule
-                    </button>
-                </a>
 
-                <a href="#" class="white-text">
-                    <button type="button" class="btn btnProfile">
-                        Vos annonces
-                    </button>
-                </a>
-
-                <a href="#" class="white-text">
-                    <button type="button" class="btn btnProfile">
-                        Vos reservations
-                    </button>
-                </a>
-
-            </div>
-        </div>
-
-        <div class="row card-panel">
-            <h4>Mes informations</h4>
-            <form method="post" action="{{ route('update_user_profile') }}">
-                {{ csrf_field() }}
                 <div class="input-field infoProfile col s12 m6{{ $errors->has('gender') ? ' has-error' : '' }}">
                     <input class="with-gap" name="gender" value="1" type="radio"
                            id="male" {{ ($user->gender) ? 'checked' : '' }}>
@@ -155,138 +168,152 @@
                     </button>
                 </div>
 
-            </form>
-        </div>
 
+            </div>
+        </form>
         <div id="vehicles" class="row card-panel scrollspy">
             <div class="section center">
                 <h4>Mes véhicules</h4>
             </div>
-            @foreach($vehicles as $vehicle)
-                <div class="col l4 m6 s12">
-                    <div class="">
-                        <div class="section center">
-                            <h5>
-                                @if($vehicle->default == 1)
-                                    {{ Html::image('public/img/vehicles/checked.svg',
-                                        'Icon validation',
-                                        array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Vehicule par défaut'))
-                                    }}
+
+            @if(!$vehicles->isEmpty())
+
+                @foreach($vehicles as $vehicle)
+                    <div class="col l4 m6 s12">
+                        <div class="">
+                            <div class="section center">
+                                <h5>
+                                    @if($vehicle->default == 1)
+                                        {{ Html::image('public/img/vehicles/checked.svg',
+                                            'Icon validation',
+                                            array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Vehicule par défaut'))
+                                        }}
+                                    @endif
+                                    {{ ucfirst($vehicle->car_brand) }}
+                                    {{ ucfirst($vehicle->car_model) }}
+
+
+                                </h5>
+                            </div>
+                            <div class="section center">
+                                @if($vehicle->typeVehicle->id == 1)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/car.svg',
+                                            'Icon d\'une voiture',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @elseif($vehicle->typeVehicle->id == 2)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/truck.svg',
+                                            'Icon d\'un camion',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @elseif($vehicle->typeVehicle->id == 3)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/motorcycle.svg',
+                                            'Icon d\'une moto',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @elseif($vehicle->typeVehicle->id == 4)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/bike.svg',
+                                            'Icon d\'un vélo',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @elseif($vehicle->typeVehicle->id == 5)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/plane.svg',
+                                            'Icon d\'un avion',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @elseif($vehicle->typeVehicle->id == 6)
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/boat.svg',
+                                            'Icon d\'un bateau',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
+                                @else
+                                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
+                                        {{ Html::image('public/img/vehicles/what.svg',
+                                            'Icon d\'un bateau',
+                                            array('class' => 'responsive-img iconV'))
+                                        }}
+                                    </p>
                                 @endif
-                                {{ ucfirst($vehicle->car_brand) }}
-                                {{ ucfirst($vehicle->car_model) }}
-
-
-
-                            </h5>
-                        </div>
-                        <div class="section center">
-                            @if($vehicle->typeVehicle->id == 1)
-                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                    {{ Html::image('public/img/vehicles/car.svg',
-                                        'Icon d\'une voiture',
-                                        array('class' => 'responsive-img iconV'))
-                                    }}
-                                </p>
-                            @elseif($vehicle->typeVehicle->id == 2)
-                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                    {{ Html::image('public/img/vehicles/truck.svg',
-                                        'Icon d\'un camion',
-                                        array('class' => 'responsive-img iconV'))
-                                    }}
-                                </p>
-                            @elseif($vehicle->typeVehicle->id == 3)
-                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                    {{ Html::image('public/img/vehicles/motorcycle.svg',
-                                        'Icon d\'une moto',
-                                        array('class' => 'responsive-img iconV'))
-                                    }}
-                                </p>
-                            @elseif($vehicle->typeVehicle->id == 4)
-                                <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                    {{ Html::image('public/img/vehicles/bike.svg',
-                                        'Icon d\'un vélo',
-                                        array('class' => 'responsive-img iconV'))
-                                    }}
-                                </p>
-                            @elseif($vehicle->typeVehicle->id == 5)
-                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                {{ Html::image('public/img/vehicles/plane.svg',
-                                    'Icon d\'un avion',
-                                    array('class' => 'responsive-img iconV'))
-                                }}
-                            </p>
-                        @elseif($vehicle->typeVehicle->id == 6)
-                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                {{ Html::image('public/img/vehicles/boat.svg',
-                                    'Icon d\'un bateau',
-                                    array('class' => 'responsive-img iconV'))
-                                }}
-                            </p>
-                            @else
-                            <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                                {{ Html::image('public/img/vehicles/what.svg',
-                                    'Icon d\'un bateau',
-                                    array('class' => 'responsive-img iconV'))
-                                }}
-                            </p>
-                            @endif
+                                <a href="{{ route('modify_vehicle', $vehicle->id) }}">Modifier</a>
+                                <a href="{{ route('delete_vehicle', $vehicle->id) }}">Supprimer</a>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            @endforeach
+                @endforeach
+
+            @else
+                <div class="section center">
+                    <a href="{{route('user_vehicles')}}" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Ajouter un vehicule
+                        </button>
+                    </a>
+                </div>
+            @endif
         </div>
 
-        <div class="row card-panel scrollspy">
-            <div class="section center">
-                <h4>Mes dernières annonces</h4>
-            </div>
-            @foreach($transport_offers as $offer)
-                <div class="col s12">
-                    <div class=" card-panel">
-                        <div class="section center">
-                            <h5>{!! ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))) !!}</h5>
-                            @if(isset($steps[$offer->id]))
-                                @foreach($steps[$offer->id] as $step)
+        {{--<div class="row card-panel scrollspy">--}}
+        {{--<div class="section center">--}}
+        {{--<h4>Mes dernières annonces</h4>--}}
+        {{--</div>--}}
+        {{--@foreach($transport_offers as $offer)--}}
+        {{--<div class="col s12">--}}
+        {{--<div class=" card-panel">--}}
+        {{--<div class="section center">--}}
+        {{--<h5>{!! ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))) !!}</h5>--}}
+        {{--@if(isset($steps[$offer->id]))--}}
+        {{--@foreach($steps[$offer->id] as $step)--}}
 
-                                    <span>{{ $step }}  @if(!$loop->last) → @endif </span>
+        {{--<span>{{ $step }}  @if(!$loop->last) → @endif </span>--}}
 
-                                @endforeach
-                            @endif
-                        </div>
-                        <div class="section">
-                            @if($offer->is_regular)
-                                <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-                            @else
-                                <i class="small material-icons tooltipped"
-                                   data-tooltip="Trajet occasionnel">schedule</i>
-                            @endif
-                            @if($offer->highway)
-                                <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
-                            @endif
-                            <br>
+        {{--@endforeach--}}
+        {{--@endif--}}
+        {{--</div>--}}
+        {{--<div class="section">--}}
+        {{--@if($offer->is_regular)--}}
+        {{--<i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>--}}
+        {{--@else--}}
+        {{--<i class="small material-icons tooltipped"--}}
+        {{--data-tooltip="Trajet occasionnel">schedule</i>--}}
+        {{--@endif--}}
+        {{--@if($offer->highway)--}}
+        {{--<i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>--}}
+        {{--@endif--}}
+        {{--<br>--}}
 
-                            <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
-                            <br>
+        {{--<b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}--}}
+        {{--<br>--}}
 
-                            <b>Volume:</b> {{ $offer->volume }}
-                            <br>
+        {{--<b>Volume:</b> {{ $offer->volume }}--}}
+        {{--<br>--}}
 
-                            <b>Description:</b>
-                            {{ $offer->description }}
-                            <br>
+        {{--<b>Description:</b>--}}
+        {{--{{ $offer->description }}--}}
+        {{--<br>--}}
 
-                            <b>Détour:</b>
-                            {{ $offer->start_detour ? 'Aller' : '' }}
-                            {{ $offer->end_detour ? 'Retour' : '' }}
-                            <br>
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+        {{--<b>Détour:</b>--}}
+        {{--{{ $offer->start_detour ? 'Aller' : '' }}--}}
+        {{--{{ $offer->end_detour ? 'Retour' : '' }}--}}
+        {{--<br>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--@endforeach--}}
 
-        </div>
+        {{--</div>--}}
 
 
     </div>

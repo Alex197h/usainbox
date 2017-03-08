@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
 use Auth;
 use App\User;
 
@@ -63,6 +62,7 @@ class UserController extends Controller {
             'gender' => 'required|boolean',
             'birthday' => 'required',
             'phone' => 'required|max:20',
+            'avatar' => 'image',
         );
         if ($auth->email != $request->input('email'))
             $rules['email'] = 'required|email|max:255|unique:users';
@@ -75,6 +75,12 @@ class UserController extends Controller {
         $auth->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $auth->phone = $request->input('phone');
         $auth->description = $request->input('description');
+        if ($request->hasFile('avatar')) {
+            if($request->avatar->isValid()){
+                $myAvatar = $request->avatar->storeAs('img/avatar', 'avatar'.$auth->id.'.'.$request->avatar->extension());
+                $auth->avatar = 'avatar'.$auth->id.'.'.$request->avatar->extension();
+            }
+        }
 
         if($auth->save())
             return redirect()->route('user_profile');
