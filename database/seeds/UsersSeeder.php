@@ -7,7 +7,7 @@ use App\User;
 class UsersSeeder extends Seeder{
     public function run(){
         $faker = Faker::create();
-        
+
         for ($i = 0; $i < 50; $i++) {
             User::create([
                 'first_name' => $faker->firstName,

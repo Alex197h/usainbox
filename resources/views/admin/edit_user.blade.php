@@ -151,12 +151,16 @@
                                     @endforeach
                                 </form>
                                 <script>
-                                    $('.check_default').on('click', function(){
-                                        // console.log(this.checked)
-                                        // if(this.checked){
-                                            // $('.check_default').prop('checked', false);
+                                    $('.check_default').on('change', function(){
+                                        console.log(this.checked)
+                                        if(this.checked){
+                                            $('.check_default').each(function(index){
+                                                this.checked = false;
+                                            });
                                             // $(this).prop('checked', true);
-                                        // } else event.preventDefault();
+                                            this.checked = true;
+                                        }
+                                        else this.checked = true;
                                     });
                                 </script>
                             </div>
