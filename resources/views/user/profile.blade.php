@@ -246,8 +246,18 @@
                                             }}
                                         </p>
                                     @endif
-                                    <a href="{{ route('modify_vehicle', $vehicle->id) }}">Modifier</a>
-                                    <a href="{{ route('delete_vehicle', $vehicle->id) }}">Supprimer</a>
+                                    <a class="tooltipped" data-tooltip="Éditer le véhicule" href="{{ route('modify_vehicle', $vehicle->id) }}">
+                                        {{ Html::image('public/img/user/file.svg',
+                                            'Icon d\'un fichier',
+                                            array('class' => 'responsive-img icon'))
+                                        }}
+                                    </a>
+                                    <a class="tooltipped" data-tooltip="Supprimer le véhicule" href="{{ route('delete_vehicle', $vehicle->id) }}">
+                                        {{ Html::image('public/img/user/dustbin.svg',
+                                            'Icon d\'une poubelle',
+                                            array('class' => 'responsive-img icon'))
+                                        }}
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -261,8 +271,8 @@
                                 'Icon d\'un panneau de signalisation',
                                 array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
                             }}
-                             Vous n'avez pas encore ajouté de véhicule. Vous pouvez en ajouter en
-                             <a href="{{route('user_vehicles')}}">cliquant ici</a>.
+                            Vous n'avez pas encore ajouté de véhicule. Vous pouvez en ajouter en
+                            <a href="{{route('user_vehicles')}}">cliquant ici</a>.
                             {{ Html::image('public/img/vehicles/warning.svg',
                                 'Icon d\'un panneau de signalisation',
                                 array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
