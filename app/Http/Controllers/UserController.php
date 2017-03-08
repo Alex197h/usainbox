@@ -180,19 +180,19 @@ class UserController extends Controller {
 
             if ($request->has('width'))
                 $vehicle->max_width = $request->input('width');
-            else $vehicle->max_width = '';
+            else $vehicle->max_width = 0;
 
             if ($request->has('length'))
                 $vehicle->max_length = $request->input('length');
-            else $vehicle->max_length = '';
+            else $vehicle->max_length = 0;
 
             if ($request->has('height'))
                 $vehicle->max_height = $request->input('height');
-            else $vehicle->max_height = '';
+            else $vehicle->max_height = 0;
 
             if ($request->has('weight'))
                 $vehicle->max_weight = $request->input('weight');
-            else $vehicle->max_weight = '';
+            else $vehicle->max_weight = 0;
 
             $vehicle->max_volume = $request->input('volume');
             $vehicle->car_brand = $request->input('vehicle_brand');
