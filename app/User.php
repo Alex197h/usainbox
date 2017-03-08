@@ -46,7 +46,13 @@ class User extends Authenticatable {
     }
     
     public function getAvatarPathAttribute(){
-        return Storage::url('app/img/avatar/'.(($this->avatar != null) ? $this->avatar : 'default.jpg'));
+        if(!file_exists('public/img/avatar/'.$this->avatar)){
+            $this->avatar = 'default.jpg';
+            $this->save();
+        }
+
+
+        return asset('public/img/avatar/'.(($this->avatar != null) ? $this->avatar : 'default.jpg'));
     }
     
     public function getFullNameAttribute(){

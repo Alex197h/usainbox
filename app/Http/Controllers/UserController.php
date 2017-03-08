@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
 use Auth;
 use App\User;
-use Storage;
+use File;
 
 class UserController extends Controller {
     public function getProfile(User $user){
@@ -78,8 +78,8 @@ class UserController extends Controller {
         $auth->description = $request->input('description');
         if ($request->hasFile('avatar')) {
             if($request->avatar->isValid()){
-                if($auth->avatar != 'default.jpg') Storage::delete('img/avatar/'.$auth->avatar);
-                $myAvatar = $request->avatar->storeAs('img/avatar', 'avatar'.$auth->id.'.'.$request->avatar->extension());
+                if($auth->avatar != 'default.jpg') $t = File::delete(public_path().'img/avatar/'.$auth->avatar);
+                $myAvatar = $request->avatar->storeAs('img/avatar', 'avatar'.$auth->id.'.'.$request->avatar->extension(), 'public');
                 $auth->avatar = 'avatar'.$auth->id.'.'.$request->avatar->extension();
             }
         }
