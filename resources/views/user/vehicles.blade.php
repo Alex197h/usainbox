@@ -124,8 +124,8 @@
                                         Enregistrer
                                     </button>
                                 </div>
-                                <div class="section">
-                                    <p><span class="obligatoire">*</span> champ obligatoire</p>
+                                <div class="input-field col s12">
+                                    <span><span class="obligatoire">*</span> Champs obligatoires</span>
                                 </div>
                             </form>
                         </div>

@@ -13,7 +13,7 @@
 
                     <div class="input-field col s12{{ $errors->has('city_start') ? ' has-error' : '' }}">
                         <input id="city_start" class="white" placeholder="Ville départ" type="text" value="{{ $city_start ? $city_start : old('city_start') }}" name="city_start">
-                        <label for="city_start">Ville de départ*</label>
+                        <label for="city_start">Ville de départ<span class="obligatoire">*</span></label>
                         @if($errors->has('city_start'))
                             <span class="col s12">
                                 <strong>{{ $errors->first('city_start') }}</strong>
@@ -23,7 +23,7 @@
 
                     <div class="input-field col s12{{ $errors->has('city_end') ? ' has-error' : '' }}">
                         <input id="city_end" class="white" placeholder="Ville arrivée" value="{{ $city_end ? $city_end : old('city_end') }}" type="text" name="city_end">
-                        <label for="city_end">Ville d'arrivée*</label>
+                        <label for="city_end">Ville d'arrivée<span class="obligatoire">*</span></label>
                         @if($errors->has('city_end'))
                             <span class="col s12">
                                 <strong>{{ $errors->first('city_end') }}</strong>
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="input-field col s12{{ $errors->has('date') ? ' has-error' : '' }}">
-                        <label for="date">Date de l'expédition*</label>
+                        <label for="date">Date de l'expédition<span class="obligatoire">*</span></label>
                         <input type="date" name="date" class="datepicker white" placeholder="Date" value="{{ old('date') }}">
                         @if($errors->has('date'))
                             <span class="col s12">
@@ -41,13 +41,13 @@
                         @endif
                     </div>
 
-                    <div class="input-field col s12">
-                        <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
+                    <div class="col s12">
+                        <button type="submit" class="btn btnValider white-text right">
                             M'alerter
                         </button>
                     </div>
                     <div class="input-field col s12">
-                        <span>* Champs obligatoires</span>
+                        <span><span class="obligatoire">*</span> Champs obligatoires</span>
                     </div>
                 </div>
 

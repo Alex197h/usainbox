@@ -102,10 +102,11 @@
         <div class="section center">
             <h4>Aucune offre ne vous convient ?</h4>
             <form method="post" action="{{ route('create_alert') }}">
+                {{ csrf_field() }}
                 <input type="hidden" value="{{ $city_start }}" name="city_start">
                 <input type="hidden" value="{{ $city_end }}" name="city_end">
-                <button class="btn btn-primary btnValider">
-                    Créer une alerte
+                <button class="btn btn-primary btnProfile">
+                    M'alerter en cas de nouvelle offre
                     {{
                         Html::image('public/img/recherche/bell.svg',
                         'Icon d\'une cloche',
@@ -123,8 +124,8 @@
                 {{ csrf_field() }}
                 <input type="hidden" value="{{ $city_start }}" name="city_start">
                 <input type="hidden" value="{{ $city_end }}" name="city_end">
-                <button class="btn btn-primary btnValider">
-                    Créer une alerte
+                <button class="btn btn-primary btnProfile">
+                    M'alerter en cas de nouvelle offre
                     {{
                         Html::image('public/img/recherche/bell.svg',
                         'Icon d\'une cloche',
