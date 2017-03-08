@@ -15,6 +15,8 @@
                     <div class="col s12 right" id="map"></div>
                     <div id="transport_offers"></div>
                 </div>
+                <form method="post" action="{{route('post_create_transport_offer')}}">
+                    {{ csrf_field() }}
                 <div id="offercopy">
                     <div class="offer horizontal$selected" offer-id="$offerid">
                         <div class="card-stacked">
@@ -33,7 +35,7 @@
                                     </div>
                                     <div class="col s12 infoProfile">
                                         <p>Ajouter des villes étapes</p>
-                                        <button class="btn btnAdd white-text" id="addstep" onclick="addStep()">
+                                        <button type="button" class="btn btnAdd white-text" id="addstep" onclick="addStep()">
                                             {{
                                                 Html::image('public/img/annonce/add.svg',
                                                 'Icon d\'un plus',
@@ -204,6 +206,9 @@
                 <div class="section">
                     <p><span class="obligatoire">*</span> champ obligatoire</p>
                 </div>
+                </form>
+
+
 
                 <script>
                 <?php
@@ -246,9 +251,9 @@
                             var div = $('<div class="col s12 infoProfile etape" id="etape'+nbSteps+'">');
                             var label = $('<label class="col s12" for="step'+nbSteps+'">'+'Etape n°'+nbSteps+'</label>');
                             div.append(label);
-                            var input = $('<input id="step'+nbSteps+'" class="form-control col s8 step inpetape" name="step'+nbSteps+'" draggable="true">');
+                            var input = $('<input id="step'+nbSteps+'" class="form-control col s8 step inpetape" name="steps[]" draggable="true">');
                             div.append(input);
-                            var del = $('<button class="btn btnAdd btnRm white-text right" data-btn="'+nbSteps+'">X</button>');
+                            var del = $('<button type="button" class="btn btnAdd btnRm white-text right" data-btn="'+nbSteps+'">X</button>');
                             div.append(del);
                             $('#endstep').before(div);
                             var options = {types: ['(cities)']};

@@ -21,12 +21,8 @@ class TransportOffersController extends Controller {
     public function create(){
         $auth = Auth::user();
         $vehicles = $auth->vehicles;
-        if($vehicles == '[]'){
-            $types = TypeVehicle::all();
-            $data = array(
-                'type_vehicles' => $types
-            );
-            return view('user.vehicles', $data);
+        if($vehicles && $vehicles->isEmpty()){
+            return redirect()->route('user_vehicles');
         }
         $data = array(
             'vehicles' => $vehicles
@@ -34,12 +30,12 @@ class TransportOffersController extends Controller {
         return view('front.transport.create', $data);
     }
 
-    public function postCreate(){
+    public function postCreate(Request $request){
         $rules = array(
             'start_city' => 'required|max:255',
             'end_city' => 'required|max:255',
             'vehicle' => 'required|numeric',
-            'date_start' => 'datetime|numeric',
+            'date_start' => 'date_format:Y-m-d H:i|required',
             'max_volume' => 'required|numeric',
             'max_length' => 'numeric',
             'max_width' => 'numeric',
@@ -63,9 +59,33 @@ class TransportOffersController extends Controller {
         $transport->vehicle_id = $request->input('vehicle');
 
         $step1 = new TransportStep();
-        $step1->transport_offer_id = $transport->idea;
-        // IDEA: Je me suis arreté la, à finir
+        $step1->transport_offer_id = $transport->id;
+        $step1->label = $request->input('start_city');
+        $infoPosition = str_replace(", ", '+',$request->input('start_city'));
+        $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPosition.'&sensor=false');
+        $output = json_decode($geocode);
+        $step1->latitude = $output->results[0]->geometry->location->lat;
+        $step1->longitude = $output->results[0]->geometry->location->lng;
         $step1->step = 1;
+
+        for( $i=0; $i<sizeof($request->steps); $i++){
+            $step = new TransportStep();
+            $step->transport_offer_id = $transport->id;
+            $step->label = $request->steps[$i];
+            $infoPositionStep = str_replace(", ", '+',$request->steps[$i]);
+            $geocodeStep = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionStep.'&sensor=false');
+            $outputStep = json_decode($geocodeStep);
+            $step->latitude = $outputStep->results[0]->geometry->location->lat;
+            $step->longitude = $outputStep->results[0]->geometry->location->lng;
+            $step->step = $i+1;
+        }
+
+        $steplast = new TransportStep();
+        $steplast->transport_offer_id = $transport->id;
+
+        $steplast->step = sizeof($request->steps)+1;
+
+        dd($request->steps[0]);
 
     }
 
