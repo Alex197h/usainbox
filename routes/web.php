@@ -12,7 +12,7 @@ Route::get('offer/transport/create', 'TransportOffersController@create')->name('
 Route::post('offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
 
 
-Route::model('vehicle_id', App\TransportOffer::class);
+Route::model('transport_id', App\TransportOffer::class);
 Route::get('offer/transport/detail/{transport_id}', 'TransportOffersController@detail')->name('detail_transport_offer');
 
 
