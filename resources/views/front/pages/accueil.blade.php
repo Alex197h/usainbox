@@ -110,7 +110,7 @@
                     </div>
                 </div>
                 <div class="card-action">
-                    <a href="#">Voir l'annonce</a>
+                    <a href="{{ route('detail_transport_offer') }}/$offerid">Voir l'annonce</a>
                 </div>
             </div>
         </div>
@@ -268,13 +268,12 @@
 
                             var count = 1;
                             for(r in result) {
-                                console.log(result[r]);
                                 var divo = $('#offercopy').html();
                                 var d = result[r].date_start;
                                 var arr = {
                                     selected: count==1 ? ' selected' : '',
                                     date: (new Date(d.split(' ')[0])).toLocaleDateString(),
-                                    offerid: count,
+                                    offerid: result[r].id,
                                     user: result[r].user.id,
                                     hour: d.split(' ')[1],
                                     name: result[r].user.first_name+' '+result[r].user.last_name,

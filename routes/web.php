@@ -13,7 +13,7 @@ Route::post('offer/transport/create', 'TransportOffersController@postCreate')->n
 
 
 Route::model('transport_id', App\TransportOffer::class);
-Route::get('offer/transport/detail/{transport_id}', 'TransportOffersController@detail')->name('detail_transport_offer');
+Route::get('offer/transport/detail/{transport_id?}', 'TransportOffersController@detail')->name('detail_transport_offer');
 
 
 Route::any('alert/create', 'ShippingOffersController@index')->name('create_alert');
