@@ -94,7 +94,7 @@ class TransportOffersController extends Controller {
                     $onestep->save();
                 }
                 $steplast->save();
-                return redirect()->route('detail_transport_offer');
+                return redirect()->route('detail_transport_offer', $transport->id);
             }else return redirect()->back()->withInput();
 
 
@@ -199,8 +199,8 @@ class TransportOffersController extends Controller {
         return view('front.transport.list', ['offers' => $view_offers, 'steps' => $city_steps, 'city_start' => $request->input('city_start'), 'city_end' => $request->input('city_end')]);
     }
 
-    public function detail(){
-        return view('front.transport.detail');
+    public function detail(TransportOffer $transportOffer){
+        return view('front.transport.detail', array('offer' => $transportOffer));
     }
 
 
