@@ -16,4 +16,10 @@ class Vehicle extends Model {
     public function typeVehicle(){
         return $this->belongsTo('App\TypeVehicle');
     }
+    
+    public function setDefault(){
+        $vehicles = $this->user->vehicles();
+        $vehicles->where('default', 1)->update(['default' => 0]);
+        $this->default = 1;
+    }
 }
