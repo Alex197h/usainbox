@@ -4,129 +4,105 @@
 
 @section('content')
 
-    <div class="row">
-
-        <div class="col s8 offset-s2 card">
-            <div class="section center">
+<div class="row">
+    <div class="col s8 offset-s2">
+        <div class="row card-panel">
+            <div class="center">
                 <h4>{!! ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))) !!}</h4>
                 @if(isset($steps[$offer->id]))
-                    @foreach($steps[$offer->id] as $step)
+                @foreach($steps[$offer->id] as $step)
 
-                        <span>{{ $step }}  @if(!$loop->last) → @endif </span>
+                <span>{{ $step }}  @if(!$loop->last) → @endif </span>
 
-                    @endforeach
+                @endforeach
                 @endif
             </div>
 
             <div class="card-content">
-                @if($offer->is_regular)
-                    <i class="small material-icons tooltipped" data-tooltip="Trajet régulier">restore</i>
-                @else
-                    <i class="small material-icons tooltipped"
-                       data-tooltip="Trajet occasionnel">schedule</i>
-                @endif
-                @if($offer->highway)
-                    <i class="small material-icons tooltipped" data-tooltip="Autoroute">surround_sound</i>
-                @endif
-                <br>
+                <div class="col s7 annoncepanel">
+                    <h5>Détail du voyage</h5>
 
-                @if($vehicle->typeVehicle->id == 1)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/car.svg',
-                            'Icon d\'une voiture',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @elseif($vehicle->typeVehicle->id == 2)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/truck.svg',
-                            'Icon d\'un camion',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @elseif($vehicle->typeVehicle->id == 3)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/motorcycle.svg',
-                            'Icon d\'une moto',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @elseif($vehicle->typeVehicle->id == 4)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/bike.svg',
-                            'Icon d\'un vélo',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @elseif($vehicle->typeVehicle->id == 5)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/plane.svg',
-                            'Icon d\'un avion',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @elseif($vehicle->typeVehicle->id == 6)
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/boat.svg',
-                            'Icon d\'un bateau',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @else
-                    <p class="tooltipped" data-tooltip="{{ $vehicle->typeVehicle->label }}">
-                        {{ Html::image('public/img/vehicles/what.svg',
-                            'Icon d\'un bateau',
-                            array('class' => 'responsive-img iconV'))
-                        }}
-                    </p>
-                @endif
+                    @if($offer->is_regular)
+                    {{
+                        Html::image('public/img/trajet/regularYes.svg',
+                        'Calendrier',
+                        array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet régulier'))
+                    }}
+                    @else
+                    {{
+                        Html::image('public/img/trajet/regularNo.svg',
+                        'Calendrier',
+                        array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet occasionnel'))
+                    }}
+                    @endif
+                    @if($offer->highway)
+                    {{
+                        Html::image('public/img/trajet/highwayYes.svg',
+                        'Icon de l\'autoroute',
+                        array('class' => 'responsive-img tooltipped iconT',
+                        'data-tooltip' => 'Prend l\'autoroute'))
+                    }}
+                    @endif
 
-                <b>Marque du véhicule:</b> {{ $vehicle->car_brand }}
-                <br>
+                    @if($offer->detour)
+                    {{
+                        Html::image('public/img/trajet/detour.svg',
+                        'Icon de deux flèche pour le détour',
+                        array('class' => 'responsive-img tooltipped iconT',
+                        'data-tooltip' => 'Détour possible'))
+                    }}
+                    @endif
+                    <br>
+                    <?php echo ($offer->full) ? 'Véhicule plein' : '';  ?>
+                    <br>
+                    <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
+                    <br>
 
-                <b>Modèle du véhicule:</b> {{ $vehicle->car_model }}
-                <br>
+                    <b>Volume disponible:</b> {{ $offer->volume }}
+                    <br>
 
-                <b>Conducteur:</b> <a href="{{ route('profile', $user->id) }}">{{ $user->fullname }}</a>
-                <br>
+                    <b>Poids maximum du colis:</b> {{ $offer->max_weight }}
+                    <br>
 
-                <b>Note du conducteur:</b> /5
-                <br>
+                    <b>Longueur maximum du colis:</b> {{ $offer->max_length }}
+                    <br>
 
-                <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
-                <br>
+                    <b>Largeur maximum du colis:</b> {{ $offer->max_width }}
+                    <br>
 
-                <b>Volume disponible:</b> {{ $offer->volume }}
-                <br>
+                    <b>Hauteur maximum du colis:</b> {{ $offer->max_height }}
+                    <br>
 
-                <b>Poids maximum du colis:</b> {{ $offer->max_weight }}
-                <br>
+                    <b>Description:</b>
+                    {{ $offer->description }}
+                    <br>
 
-                <b>Longueur maximum du colis:</b> {{ $offer->max_length }}
-                <br>
+                </div>
 
-                <b>Largeur maximum du colis:</b> {{ $offer->max_width }}
-                <br>
+                <div class="col s4 offset-s1 annoncepanel">
+                    <h5>Véhicule</h5>
+                    <b>Marque :</b> {{ $vehicle->car_brand }}
+                    <br>
+                    <b>Modèle :</b> {{ $vehicle->car_model }}
+                    <br>
+                </div>
 
-                <b>Hauteur maximum du colis:</b> {{ $offer->max_height }}
-                <br>
-
-                <?php echo ($offer->full) ? 'Véhicule plein' : '';  ?>
-
-                <b>Description:</b>
-                {{ $offer->description }}
-                <br>
-
-                <b>Détour:</b>
-                {{ $offer->start_detour ? 'Aller' : '' }}
-                {{ $offer->end_detour ? 'Retour' : '' }}
-                <br>
+                <div class="col s4 offset-s1 annoncepanel">
+                    <h5>Conducteur</h5>
+                    <a href="{{ route('profile', $user->id) }}">{{ $user->fullname }}</a>
+                    <br>
+                    <b>Note :</b> /5
+                    <br>
+                </div>
             </div>
-            <div class="card-action right-align">
-                <a href="#" class="brown-text">Réserver l'annonce</a>
+            <div class="col s12">
+                <button type="submit" class="btn btnValider white-text right">
+                    Envoyer une demande
+                </button>
             </div>
         </div>
     </div>
+</div>
 
 
 @endsection

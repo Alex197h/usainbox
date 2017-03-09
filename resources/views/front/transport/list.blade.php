@@ -60,25 +60,29 @@
                     </div>
                     <div class="section">
                         @if($offer->is_regular)
-                            {{ Html::image('public/img/trajet/regularYes.svg',
+                            {{
+                                Html::image('public/img/trajet/regularYes.svg',
                                 'Calendrier',
                                 array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet régulier'))
                             }}
                         @else
-                            {{ Html::image('public/img/trajet/regularNo.svg',
+                            {{
+                                Html::image('public/img/trajet/regularNo.svg',
                                 'Calendrier',
                                 array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet occasionnel'))
                             }}
                         @endif
                         @if($offer->highway)
-                            {{ Html::image('public/img/trajet/highwayYes.svg',
+                            {{
+                                Html::image('public/img/trajet/highwayYes.svg',
                                 'Icon de l\'autoroute',
                                 array('class' => 'responsive-img tooltipped iconT',
                                 'data-tooltip' => 'Prend l\'autoroute'))
                             }}
                         @endif
                         @if($offer->detour)
-                            {{ Html::image('public/img/trajet/detour.svg',
+                            {{
+                                Html::image('public/img/trajet/detour.svg',
                                 'Icon de deux flèche pour le détour',
                                 array('class' => 'responsive-img tooltipped iconT',
                                 'data-tooltip' => 'Détour possible'))
