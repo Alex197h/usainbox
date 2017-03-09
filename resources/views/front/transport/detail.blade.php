@@ -122,6 +122,9 @@
                 {{ $offer->end_detour ? 'Retour' : '' }}
                 <br>
             </div>
+            <div class="card-action right-align">
+                <a href="#" class="brown-text">Réserver l'annonce</a>
+            </div>
         </div>
     </div>
 
