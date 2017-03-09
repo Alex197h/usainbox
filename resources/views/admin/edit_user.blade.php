@@ -9,15 +9,11 @@
                 <div class="col-md-12 col-sm-12 col-xs-12">
                     <div class="" role="tabpanel" data-example-id="togglable-tabs">
                         <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-                            <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Informations</a>
-                            </li>
-                            <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Véhicules</a>
-                            </li>
-                            <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Profile</a>
-                            </li>
+                            <li role="presentation" class="{{$part=='profil'?'active':''}}"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Informations</a></li>
+                            <li role="presentation" class="{{$part=='vehicle'?'active':''}}"><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Véhicules</a></li>
                         </ul>
                         <div id="myTabContent" class="tab-content">
-                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                            <div role="tabpanel" class="tab-pane fade {{$part=='profil'?'active in':''}}" id="tab_content1" aria-labelledby="home-tab">
                                 <form class="form-horizontal form-label-left input_mask" method="post" action="">
                                     
                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
@@ -92,39 +88,39 @@
                                     {{ csrf_field() }}
                                 </form>
                             </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                                <form method="POST" action="">
-                                    @foreach($user->vehicles as $vehicle)
+                            <div role="tabpanel" class="tab-pane fade {{$part=='vehicle'?'active in':''}}" id="tab_content2" aria-labelledby="profile-tab">
+                                @foreach($vehicles as $vehicle)
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <div class="x_panel">
                                             <div class="x_title">
-                                                <h2><i class="fa fa-bars"></i> {{ $vehicle->car_brand }} {{ $vehicle->car_model }}</h2>
-                                                <ul class="nav navbar-right panel_toolbox">
-                                                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
-                                                    <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                                        <ul class="dropdown-menu" role="menu">
-                                                            <li><a href="#">Supprimer</a></li>
-                                                            <li><a href="#">Settings 2</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li><a class="close-link"><i class="fa fa-close"></i></a></li>
-                                                </ul>
+                                                <h2><i class="fa fa-bars"></i> {{ $vehicle->car_brand ?: "Nouveau Véhicule" }} {{ $vehicle->car_model }}</h2>
+                                                 <form method="POST" action="">
+                                                    <ul class="nav navbar-right panel_toolbox">
+                                                        <li class="dropdown">
+                                                            <a href="#" class="dropdown-toggle" style="float:right" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                                                            <ul class="dropdown-menu" role="menu">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="rem_vehicle" value="{{ $vehicle->id }}">
+                                                                <li><button type="submit" class="btn-link">Supprimer</button></li>
+                                                            </ul>
+                                                        </li>
+                                                    </ul>
+                                                </form>
                                                 <div class="clearfix"></div>
                                             </div>
                                             <div class="x_content">
-                                                {{-- var_dump($vehicle->toArray()) --}}
-                                                <!--<form class="form-horizontal form-label-left input_mask" method="post" action="">-->
+                                                <form method="POST" action="">
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                        <input name="car_brand" placeholder="Marque" value="{{ Input::get('car_brand', $vehicle->car_brand) }}" class="form-control has-feedback-left">
+                                                        <input name="car_brand" placeholder="Marque" value="{{ $vehicle->car_brand }}" class="form-control has-feedback-left">
                                                         <span class="fa fa-car form-control-feedback left" aria-hidden="true"></span>
                                                     </div>
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
-                                                        <input name="car_model" placeholder="Modèle" value="{{ Input::get('car_model', $vehicle->car_model) }}" class="form-control">
+                                                        <input name="car_model" placeholder="Modèle" value="{{ $vehicle->car_model }}" class="form-control">
                                                         <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
                                                     </div>
+                                                    
                                                     <div class="col-md-6 col-sm-6 col-xs-12 form-group">
-                                                        <select class="form-control">
+                                                        <select class="form-control" name="type_vehicle_id">
                                                             @foreach($type_vehicles as $type)
                                                                 <option value="{{ $type->id }}" {{ $type->id == $vehicle->type_vehicle_id ? 'selected' : '' }}>{{ $type->label }}</option>
                                                             @endforeach
@@ -136,38 +132,58 @@
                                                         </label>
                                                     </div>
                                                     
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        <input name="max_volume" placeholder="Volume" value="{{ $vehicle->max_volume }}" class="form-control has-feedback-left">
+                                                        <span class="fa fa-arrows-alt form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        <span class="fa fa-car form-control-feedback right" aria-hidden="true"></span>
+                                                        <input name="max_weight" placeholder="Poids" value="{{ $vehicle->max_weight }}" class="form-control">
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        <input name="max_width" placeholder="Largeur" value="{{ $vehicle->max_width }}" class="form-control has-feedback-left">
+                                                        <span class="fa fa-car form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        <span class="fa fa-arrows-h form-control-feedback right" aria-hidden="true"></span>
+                                                        <input name="max_length" placeholder="Longueur" value="{{ $vehicle->max_length }}" class="form-control">
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
+                                                        <input name="max_height" placeholder="Hauteur" value="{{ $vehicle->max_height }}" class="form-control has-feedback-left">
+                                                        <span class="fa fa-arrows-v form-control-feedback left" aria-hidden="true"></span>
+                                                    </div>
+                                                    
                                                     
                                                     <div class="form-group">
                                                         <div class="col-md-9 col-sm-9 col-xs-12">
                                                             <button type="submit" class="btn btn-success">Enregistrer</button>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="save_vehicle" value="true">
+                                                    <input type="hidden" name="save_vehicle" value="{{ $vehicle->id }}">
                                                     {{ csrf_field() }}
-                                                <!--</form>-->
+                                                </form>
                                             </div>
                                         </div>
-                                    </div>
-                                    @endforeach
-                                </form>
+                                </div>
+                                @endforeach
                                 <script>
-                                    $('.check_default').on('change', function(){
-                                        console.log(this.checked)
+                                    $('.check_default').on('click', function(){
                                         if(this.checked){
-                                            $('.check_default').each(function(index){
-                                                this.checked = false;
-                                            });
-                                            // $(this).prop('checked', true);
+                                            $('.check_default').prop('checked', false);
                                             this.checked = true;
                                         }
-                                        else this.checked = true;
+                                        // if(this.checked){
+                                            // $('.check_default').each(function(index){
+                                                // this.checked = false;
+                                            // });
+                                            // $(this).prop('checked', true);
+                                            // this.checked = true;
+                                        // }
+                                        // else this.checked = true;
                                     });
                                 </script>
-                            </div>
-                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
-                                <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                                    photo booth letterpress, commodo enim craft beer mlkshk 
-                                </p>
                             </div>
                         </div>
                     </div>

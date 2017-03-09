@@ -35,25 +35,11 @@
                         <div class="menu_section">
                             <h3>General</h3>
                             <ul class="nav side-menu">
-                                <li>
-                                    <a><i class="fa fa-users"></i> Membres <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="{{ route('admin_page', 'users') }}">Liste</a></li>
-                                        <li><a href="">Ajouter</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-car"></i> Vehicules</a>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-car"></i> Transports</a>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-car"></i> Réservations</a>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-comments-o"></i> Commentaires</a>
-                                </li>
+                                <li><a href="{{ route('admin_page', 'users') }}"><i class="fa fa-users"></i> Membres</a></li>
+                                <li><a><i class="fa fa-car"></i> Vehicules</a></li>
+                                <li><a><i class="fa fa-car"></i> Transports</a></li>
+                                <li><a><i class="fa fa-car"></i> Réservations</a></li>
+                                <li><a><i class="fa fa-comments-o"></i> Commentaires</a></li>
                             </ul>
                         </div>
                     </div>
