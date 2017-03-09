@@ -222,7 +222,9 @@ class TransportOffersController extends Controller
 
         $vehicle = $transportOffer->vehicle;
 
-        return view('front.transport.detail', array('offer' => $transportOffer, 'vehicle' => $vehicle, 'steps' => $city_steps));
+        $user = $transportOffer->user;
+
+        return view('front.transport.detail', array('offer' => $transportOffer, 'user' => $user, 'vehicle' => $vehicle, 'steps' => $city_steps));
     }
 
 

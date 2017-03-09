@@ -81,6 +81,18 @@
                     </p>
                 @endif
 
+                <b>Marque du véhicule:</b> {{ $vehicle->car_brand }}
+                <br>
+
+                <b>Modèle du véhicule:</b> {{ $vehicle->car_model }}
+                <br>
+
+                <b>Conducteur:</b> <a href="{{ route('profile', $user->id) }}">{{ $user->fullname }}</a>
+                <br>
+
+                <b>Note du conducteur:</b> /5
+                <br>
+
                 <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
                 <br>
 
