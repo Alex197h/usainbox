@@ -16,14 +16,14 @@ class AdminController extends Controller {
         return view('admin.home');
     }
     
-    public function page($page, $type = '', $id = null, Request $request = null){
+    public function page(Request $request = null, $page, $type = '', $id = null){
         $this->post = $request && $request->isMethod('post');
         if(method_exists($this, $page)) return $this->$page($type, $id, $request);
         else return $this->home();
         
     }
     
-    public function users($page, $id, $request){
+    public function users($page = '', $id = null, $request){
         if($page == 'edit'){
             $user = User::find($id);
             if($user){
@@ -82,8 +82,9 @@ class AdminController extends Controller {
                 $v = new Vehicle();
                 $user->vehicles->push($v);
                 
+                $part = session()->has('part') ? session('part') : 'profil';
                 return view('admin.edit_user', [
-                    'part' => session()->has('part') ? session('part') : $request->has('save_vehicle') ? 'vehicle' : 'profil',
+                    'part' => $part,
                     'user' => $user,
                     'vehicles' => $user->vehicles,
                     'type_vehicles' => TypeVehicle::all()
@@ -94,6 +95,48 @@ class AdminController extends Controller {
         $users = User::all();
         return view('admin.users', [
             'users' => $users
+        ]);
+    }
+    
+    public function vehicles($page = '', $id = null, $request){
+        if($this->post){
+            if($page == 'remove'){
+                $type = TypeVehicle::find($id);
+                if($type && $type->delete()){
+                    Vehicle::where('type_vehicle_id', $type->id)->update(['type_vehicle_id' => '1']);
+                    return '{"delete": true, "name": "'.$type->label.'"}';
+                } else return '{"delete": false}';
+            }
+            else if($page == 'save'){
+                $type = TypeVehicle::find($id);
+                $t = 'none';
+                $old = $type ? $type->label : '';
+                
+                if($request->label && $request->label != ''){
+                    if(!$type){
+                        $type = new TypeVehicle();
+                        $t = 'create';
+                    }
+                    $type->label = $request->label;
+                    
+                    if($type->isDirty()){
+                        $type->save();
+                        if($t == 'none') $t = 'update';
+                    }
+                }
+                
+                return json_encode([
+                    'type' => $t,
+                    'id' => $type->id,
+                    'label' => ($type ? $type->label : ''),
+                    'old' => $old,
+                ]);
+            }
+        }
+        
+        $vehicles = TypeVehicle::orderBy('label')->get();
+        return view('admin.vehicles', [
+            'types_vehicles' => $vehicles
         ]);
     }
 }
