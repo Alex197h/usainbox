@@ -15,7 +15,7 @@ use File;
 
 class UserController extends Controller {
     public function getProfile(User $user){
-        if($user->id == Auth::user()->id)
+        if(isset(Auth::user()->id) && $user->id == Auth::user()->id)
             return redirect()->route('user_profile');
         else
             return view('user.other_profile', ['user' => $user]);
