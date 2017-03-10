@@ -29,8 +29,8 @@
                             <td><th><input type="checkbox" class="tocheck flat"></th></td>
                             <td><a href="{{ route('admin_page', ['users', 'edit', $user->id]) }}">{{ $user->full_name }}</a></td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->gender }}</td>
-                            <td>{{ $user->is_admin }}</td>
+                            <td><i class="fa fa-{{ $user->gender ? 'mars' : 'venus' }}"></i></td>
+                            <td>{!! $user->is_admin ? '<i class="fa fa-user"></i>' : '' !!}</td>
                         </tr>
                         @endforeach
                     </tbody>

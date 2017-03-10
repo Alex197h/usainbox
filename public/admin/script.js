@@ -1436,23 +1436,25 @@ function init_DataTables() {
         }
         );
         var b=$("#datatable-checkbox");
-        b.dataTable( {
-            order:[[1,
-            "asc"]],
-            columnDefs:[ {
-                orderable: !1, targets: [0]
+        // if(b){
+            b.dataTable( {
+                order:[[1,
+                "asc"]],
+                columnDefs:[ {
+                    orderable: !1, targets: [0]
+                }
+                ]
             }
-            ]
-        }
-        ),
-        b.on("draw.dt",
-        function() {
-            $(".tocheck.flat").iCheck( {
-                checkboxClass: "icheckbox_flat-green"
+            );
+            b.on("draw.dt",
+            function() {
+                $(".tocheck.flat").iCheck( {
+                    checkboxClass: "icheckbox_flat-green"
+                }
+                )
             }
-            )
-        }
-        ),
+            );
+        // }
         TableManageButtons.init()
     }
 }

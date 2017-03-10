@@ -134,8 +134,17 @@ class AdminController extends Controller {
             }
         }
         
+        $res_brands = Vehicle::select('car_brand', 'car_model')->orderBy('car_brand')->distinct()->get();
+        
+        $brands = [];
+        foreach($res_brands as $res){
+            $brands[$res->car_brand][] = $res->car_model;
+        }
+        
         $vehicles = TypeVehicle::orderBy('label')->get();
         return view('admin.vehicles', [
+            'part' => 'default',
+            'brands' => $brands,
             'types_vehicles' => $vehicles
         ]);
     }
