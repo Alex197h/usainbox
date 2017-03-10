@@ -7,7 +7,11 @@
         <div class="row card-panel">
             <div class="col s3">
 
-                {{ Html::image('public/img/avatar/default.jpg', 'UBox', array('class' => 'responsive-img')) }}
+                {{
+                    Html::image($user->avatar_path,
+                    'Avatar de l\'utilisateur',
+                    array('class' => 'responsive-img'))
+                }}
             </div>
             <div class="col s9">
                 <h4>{{$user->last_name}} {{$user->first_name}}</h4>
@@ -16,7 +20,6 @@
                 <p>{{ $user->description }}</p>
             </div>
         </div>
-
 
 
     </div>

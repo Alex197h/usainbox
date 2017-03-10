@@ -86,7 +86,11 @@
 <div id="offercopy" hidden>
     <div class="col s12 offer card horizontal$selected" offer-id="$offerid">
         <div class="card-image valign-wrapper">
-            <img class="circle valign" src="http://lorempixel.com/100/190/nature/6">
+            {{
+                Html::image(App\User::getAvatarPath().'/$avatar',
+                'Avatar par default de l\'utilisateur',
+                array('class' => 'responsive-img circle valign'))
+            }}
         </div>
         <div class="card-stacked">
             <div class="card-content">
@@ -140,7 +144,7 @@
         });
 
         var icon = {
-            url: "http://maps.google.com/mapfiles/kml/shapes/cabs.png",
+            url: "https://maps.google.com/mapfiles/kml/shapes/cabs.png",
             scaledSize: new google.maps.Size(25, 25),
             origin: new google.maps.Point(0, 0),
             anchor: new google.maps.Point(0, 0)
@@ -275,6 +279,7 @@
                                     date: (new Date(d.split(' ')[0])).toLocaleDateString(),
                                     offerid: result[r].id,
                                     user: result[r].user.id,
+                                    avatar: result[r].user.avatar,
                                     hour: d.split(' ')[1],
                                     name: result[r].user.first_name+' '+result[r].user.last_name,
                                     gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',

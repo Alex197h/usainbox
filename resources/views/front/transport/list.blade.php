@@ -101,7 +101,8 @@
                         <br>
                     </div>
                     <div class="card-action right-align">
-                        <a href="{{ route('detail_transport_offer', $offer->id) }}" class="brown-text">Voir l'annonce</a>
+                        <a href="{{ route('detail_transport_offer', $offer->id) }}" class="brown-text">Voir
+                            l'annonce</a>
                     </div>
                 </div>
 
@@ -110,25 +111,7 @@
                     <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 annoncepanel">
                         <div class="section center">
                             <h4>Aucune offre ne vous convient ?</h4>
-                            <form method="post" action="{{ route('create_alert') }}">
-                                {{ csrf_field() }}
-                                <input type="hidden" value="{{ $city_start }}" name="city_start">
-                                <input type="hidden" value="{{ $city_end }}" name="city_end">
-                                <button class="btn btn-primary btnProfile">
-                                    M'alerter en cas de nouvelle offre
-                                    {{
-                                        Html::image('public/img/recherche/bell.svg',
-                                        'Icon d\'une cloche',
-                                        array('class' => 'responsive-img iconC', 'style' => 'vertical-align: middle;'))
-                                    }}
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    @else
-                        <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 annoncepanel">
-                            <div class="section center">
-                                <h4>Aucune offre n'est disponible</h4>
+                            @if(Auth::check())
                                 <form method="post" action="{{ route('create_alert') }}">
                                     {{ csrf_field() }}
                                     <input type="hidden" value="{{ $city_start }}" name="city_start">
@@ -142,6 +125,48 @@
                                         }}
                                     </button>
                                 </form>
+                            @else
+                                <a class="btn btn-primary btnProfile" href="{{ route('login') }}">
+                                    M'alerter en cas de nouvelle offre
+                                    {{
+                                        Html::image('public/img/recherche/bell.svg',
+                                        'Icon d\'une cloche',
+                                        array('class' => 'responsive-img iconC', 'style' => 'vertical-align: middle;'))
+                                    }}
+                                </a>
+
+                            @endif
+                        </div>
+                    </div>
+                    @else
+                        <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 annoncepanel">
+                            <div class="section center">
+                                <h4>Aucune offre n'est disponible</h4>
+                                @if(Auth::check())
+                                <form method="post" action="{{ route('create_alert') }}">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" value="{{ $city_start }}" name="city_start">
+                                    <input type="hidden" value="{{ $city_end }}" name="city_end">
+                                    <button class="btn btn-primary btnProfile">
+                                        M'alerter en cas de nouvelle offre
+                                        {{
+                                            Html::image('public/img/recherche/bell.svg',
+                                            'Icon d\'une cloche',
+                                            array('class' => 'responsive-img iconC', 'style' => 'vertical-align: middle;'))
+                                        }}
+                                    </button>
+                                </form>
+                                @else
+                                    <a class="btn btn-primary btnProfile" href="{{ route('login') }}">
+                                        M'alerter en cas de nouvelle offre
+                                        {{
+                                            Html::image('public/img/recherche/bell.svg',
+                                            'Icon d\'une cloche',
+                                            array('class' => 'responsive-img iconC', 'style' => 'vertical-align: middle;'))
+                                        }}
+                                    </a>
+
+                                @endif
                             </div>
                         </div>
                 </div>

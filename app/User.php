@@ -52,6 +52,10 @@ class User extends Authenticatable {
         }
         return asset('public/img/avatar/'.(($this->avatar != null) ? $this->avatar : 'default.jpg'));
     }
+
+    public static function getAvatarPath(){
+        return asset('public/img/avatar/');
+    }
     
     public function getFullNameAttribute(){
         return $this->first_name.' '.$this->last_name;
