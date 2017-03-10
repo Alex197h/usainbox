@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reservation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\DB;
@@ -228,4 +229,50 @@ class TransportOffersController extends Controller
     }
 
 
+    public function booking(Request $request){
+        $rules = array(
+            'transporter_id' => 'required|numeric',
+            'transport_offer_id' => 'required|numeric'
+        );
+
+        $this->validate($request, $rules);
+
+        $transport_offer = TransportOffer::where('id', $request->input('transport_offer_id'))->first();
+        $steps = $transport_offer->steps;
+
+        $city_steps = array();
+
+        foreach ($steps as $step) {
+            $geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+
+            $output = json_decode($geocode);
+
+            if (isset($output->results[0])) {
+                $city_steps[$step->step] = $output->results[0]->address_components[2]->long_name;
+            }
+        }
+
+        return view('front.transport.form_booking', array('city_steps' => $city_steps, 'transporter_id' => $request->input('transporter_id'), 'transport_offer_id' => $request->input('transport_offer_id')));
+
+    }
+
+    public function booking_validate(Request $request){
+        $rules = array(
+            'transporter_id' => 'required|numeric',
+            'transport_offer_id' => 'required|numeric'
+        );
+
+        $this->validate($request, $rules);
+
+        $transport_offer = TransportOffer::where('id', $request->input('transport_offer_id'))->first();
+//        dd($transport_offer->date_start);
+        $booking = new Reservation();
+
+        $booking->passage_date = date('Y-m-d', strtotime($transport_offer->date_start));
+        $booking->time = date('H:i:s', strtotime($transport_offer->date_start));
+        $booking->transport_offer_id = $request->input('transport_offer_id');
+        $booking->shipper_id = Auth::user()->id;
+
+
+    }
 }

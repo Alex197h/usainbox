@@ -102,7 +102,7 @@
 
                         <div class="col s12 m6{{ $errors->has('birthday') ? ' has-error' : '' }}">
                             <label class="col-md-4 control-label" for="birthday">Date de naissance</label>
-                            <input type="date" placeholder="Date de naissance" class="datepicker" id="birthday" name="birthday" value="{{ old('birthday') }}">
+                            <input type="date" placeholder="Date de naissance" class="datepicker2" id="birthday" name="birthday" value="{{ old('birthday') }}">
                             @if ($errors->has('birthday'))
                                 <span class="col s12">
                                     <strong>{{ $errors->first('birthday') }}</strong>
