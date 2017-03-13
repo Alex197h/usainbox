@@ -16,7 +16,7 @@ class CreateTransportOffersTable extends Migration {
             $table->float('max_length')->default(0);
             $table->float('max_height')->default(0);
             $table->float('max_volume')->default(0);
-            $table->float('max_weight');
+            $table->float('max_weight')->default(0);
             $table->text('description')->nullable();
             $table->boolean('full')->default(false);
             $table->integer('vehicle_id');
