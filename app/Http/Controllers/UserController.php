@@ -69,8 +69,11 @@ class UserController extends Controller {
 
         $users = array();
         foreach($reservations as $reservation){
-            $users[$reservation->id] = User::where('id', $reservation->shipper_id);
+            $users[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
+//            dd($users[$reservation->id][0]->id);
         }
+
+
 
         return view('user.booking', array('reservations' => $reservations, 'users' => $users));
     }

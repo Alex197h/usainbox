@@ -63,10 +63,8 @@
                             </button>
                         </a>
 
-                        <a href="#" class="white-text">
-                            <button type="button" class="btn btnProfile">
+                        <a href="{{ route('my_bookings') }}" class="white-text btn btnProfile">
                                 Vos reservations  @if($reservations > 0)<div class="chip"> {{ $reservations }}</div>@endif
-                            </button>
                         </a>
 
                     </div>
