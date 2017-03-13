@@ -280,3 +280,6 @@ input[type="date"]::-webkit-inner-spin-button {
 .picker__nav--prev:hover, .picker__nav--next:hover{
     background : rgba(138, 123, 123, 0.33) !important;
 }
+.picker__day.picker__day--today{
+    color: #FFDA44 !important;
+}
