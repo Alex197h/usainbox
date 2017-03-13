@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Liste des Offres')
+@section('title', 'Offre de transport du '.ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))))
 
 @section('content')
 

@@ -10,7 +10,7 @@ class CreateReservationsTable extends Migration {
             $table->increments('id');
             $table->integer('price')->nullable();
             $table->date('passage_date');
-            $table->time('hour');
+            $table->time('hour')->nullable();
             $table->integer('shipping_note')->nullable();
             $table->integer('transport_note')->nullable();
             $table->string('shipping_review')->nullable();

@@ -247,31 +247,48 @@ class TransportOffersController extends Controller
 
             $output = json_decode($geocode);
 
-            if (isset($output->results[0])) {
-                $city_steps[$step->step] = $output->results[0]->address_components[2]->long_name;
+            if (isset($output->results[1])) {
+                $city_steps[$step->step] = $output->results[1]->address_components[1]->long_name;
+
             }
         }
-
-        return view('front.transport.form_booking', array('city_steps' => $city_steps, 'transporter_id' => $request->input('transporter_id'), 'transport_offer_id' => $request->input('transport_offer_id')));
+//        var_dump($city_steps);
+        return view('front.transport.form_booking', array('city_steps' => $city_steps, 'transporter_id' => $request->input('transporter_id'), 'transport_offer' => $transport_offer));
 
     }
 
     public function booking_validate(Request $request){
         $rules = array(
             'transporter_id' => 'required|numeric',
-            'transport_offer_id' => 'required|numeric'
+            'transport_offer_id' => 'required|numeric',
+            'step_start' => 'required|numeric',
+            'step_end' => 'required|numeric'
         );
 
         $this->validate($request, $rules);
 
         $transport_offer = TransportOffer::where('id', $request->input('transport_offer_id'))->first();
-//        dd($transport_offer->date_start);
+
         $booking = new Reservation();
 
         $booking->passage_date = date('Y-m-d', strtotime($transport_offer->date_start));
-        $booking->time = date('H:i:s', strtotime($transport_offer->date_start));
         $booking->transport_offer_id = $request->input('transport_offer_id');
         $booking->shipper_id = Auth::user()->id;
+
+        $transport_step_start = TransportStep::where('transport_offer_id', $request->input('transport_offer_id'))->where('step', $request->input('step_start'))->first();
+        $booking->city_start_longitude = $transport_step_start->longitude;
+        $booking->city_start_latitude = $transport_step_start->latitude;
+        $booking->city_start_label = $transport_step_start->label;
+
+        $transport_step_end = TransportStep::where('transport_offer_id', $request->input('transport_offer_id'))->where('step', $request->input('step_end'))->first();
+        $booking->city_end_longitude = $transport_step_end->longitude;
+        $booking->city_end_latitude = $transport_step_end->latitude;
+        $booking->city_end_label = $transport_step_end->label;
+
+        if($booking->save())
+            return redirect()->route('user_profile')->with('message', 'Réservation envoyée');
+        else
+            return redirect()->back()->withInput();
 
 
     }

@@ -15,6 +15,7 @@ Route::post('offer/transport/create', 'TransportOffersController@postCreate')->n
 Route::model('transport_id', App\TransportOffer::class);
 Route::get('offer/transport/detail/{transport_id?}', 'TransportOffersController@detail')->name('detail_transport_offer');
 Route::post('offer/transport/booking', 'TransportOffersController@booking')->name('booking');
+Route::post('offer/transport/booking/save', 'TransportOffersController@booking_validate')->name('booking_validate');
 
 
 Route::any('alert/create', 'ShippingOffersController@index')->name('create_alert');
