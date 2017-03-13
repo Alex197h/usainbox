@@ -15,23 +15,22 @@
         <div class="card col s12 l6">
             <form method="post" class="row card-content" action="{{route('post_create_transport_offer')}}">
                 {{ csrf_field() }}
-                <div id="offercopy">
+                <div id="offercopy col s12">
                     <div class="offer horizontal$selected" offer-id="$offerid">
                         <div class="card-stacked">
                             <div class="card-content">
                                 <div class="section detail-steps" id="stepsArea">
-                                    <div class="col s12 infoProfile"{{ $errors->has('start_city') ? ' has-error' : '' }}>
+                                    <div class="infoProfile"{{ $errors->has('start_city') ? ' has-error' : '' }}>
                                         <label for="start_city">Ville de départ*</label>
                                         <input id="start_city" type="text" class="form-control step"
                                                name="start_city" value="{{ old('start_city') }}" draggable="true">
-
                                         @if ($errors->has('start_city'))
                                             <span class="col s12">
                                             <strong>{{ $errors->first('start_city') }}</strong>
                                         </span>
                                         @endif
                                     </div>
-                                    <div class="col s12 infoProfile">
+                                    <div class="infoProfile">
                                         <p>Ajouter des villes étapes</p>
                                         <button type="button" class="btn btnAdd white-text" id="addstep"
                                                 onclick="addStep()">
@@ -44,7 +43,7 @@
 
                                     </div>
                                     <div id="endstep"
-                                         class="col s12 infoProfile"{{ $errors->has('end_city') ? ' has-error' : '' }} >
+                                         class="infoProfile"{{ $errors->has('end_city') ? ' has-error' : '' }} >
                                         <label for="end_city">Ville d'arrivé*</label>
                                         <input id="end_city" type="text" class="form-control step"
                                                name="end_city" value="{{ old('end_city') }}" draggable="true">
