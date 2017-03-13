@@ -263,3 +263,20 @@ input[type="date"]::-webkit-inner-spin-button {
     border-color: #786A6A;
     margin-top: 25px;
 }
+
+.picker__date-display{
+    background-color: #786A6A !important;
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected{
+    background-color: #FFDA44 !important;
+    color: black !important;
+}
+.picker__close, .picker__today{
+    color: #786A6A !important;
+}
+.picker__weekday-display{
+    background-color: #5c5050 !important;
+}
+.picker__nav--prev:hover, .picker__nav--next:hover{
+    background : rgba(138, 123, 123, 0.33) !important;
+}
