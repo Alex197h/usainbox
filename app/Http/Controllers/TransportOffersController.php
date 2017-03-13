@@ -40,7 +40,7 @@ class TransportOffersController extends Controller
             'start_city' => 'required|max:255',
             'end_city' => 'required|max:255',
             'vehicle' => 'required|numeric',
-            'date_start' => 'date_format:Y-m-d H:i|required',
+            'date_start' => 'required',
             'max_volume' => 'required|numeric',
             'max_length' => 'numeric',
             'max_width' => 'numeric',
@@ -55,7 +55,7 @@ class TransportOffersController extends Controller
         if ($request->has('max_height')) $transport->max_height = $request->input('max_height');
         if ($request->has('max_weight')) $transport->max_weight = $request->input('max_weight');
         $transport->max_volume = $request->input('max_volume');
-        $transport->date_start = $request->input('date_start');
+        $transport->date_start = date('Y-m-d', strtotime($request->input('date_start')));
 
         $transport->is_regular = $request->input('is_regular') ? 1 : 0;
         $transport->highway = $request->input('highway') ? 1 : 0;
@@ -82,18 +82,18 @@ class TransportOffersController extends Controller
                 $outputStep = json_decode($geocodeStep);
                 $step->latitude = $outputStep->results[0]->geometry->location->lat;
                 $step->longitude = $outputStep->results[0]->geometry->location->lng;
-                $step->step = $i + 1;
+                $step->step = $i + 2;
                 $tabSteps[] = $step;
             }
             $steplast = new TransportStep();
             $steplast->transport_offer_id = $transport->id;
-            $steplast->label = $request->input('start_city');
-            $infoPositionEnd = str_replace(", ", '+', $request->input('start_city'));
+            $steplast->label = $request->input('end_city');
+            $infoPositionEnd = str_replace(", ", '+', $request->input('end_city'));
             $geocodeEnd = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $infoPositionEnd . '&sensor=false');
             $outputEnd = json_decode($geocodeEnd);
             $steplast->latitude = $outputEnd->results[0]->geometry->location->lat;
             $steplast->longitude = $outputEnd->results[0]->geometry->location->lng;
-            $steplast->step = sizeof($request->steps) + 1;
+            $steplast->step = sizeof($request->steps) + 2;
             $step1->save();
             foreach ($tabSteps as $onestep) {
                 $onestep->save();
