@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Reservation;
 use App\TransportOffer;
 use App\TypeVehicle;
 use App\Vehicle;
@@ -23,6 +24,11 @@ class UserController extends Controller {
 
     public function getProfileAuth(){
         $auth = Auth::user();
+        $reservations = Reservation::where('transporter_id', Auth::user()->id)
+            ->where('validated', '0')
+            ->count();
+
+
         $type_vehicles = TypeVehicle::all();
         $vehicles = $auth->vehicles;
         $vehicles_id = array();
@@ -50,10 +56,23 @@ class UserController extends Controller {
             'type_vehicles' => $type_vehicles,
             'transport_offers' => $transport_offers,
             'steps' => $city_steps,
-            'vehicles' => $vehicles
+            'vehicles' => $vehicles,
+            'reservations' =>$reservations
         );
 
         return view('user.profile', $data);
+    }
+
+    public function getBookingAuth(){
+        $auth = Auth::user()->id;
+        $reservations = Reservation::where('transporter_id', $auth)->get();
+
+        $users = array();
+        foreach($reservations as $reservation){
+            $users[$reservation->id] = User::where('id', $reservation->shipper_id);
+        }
+
+        return view('user.booking', array('reservations' => $reservations, 'users' => $users));
     }
 
     public function updateProfileAuth(Request $request){

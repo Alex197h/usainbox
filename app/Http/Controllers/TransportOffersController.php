@@ -274,6 +274,7 @@ class TransportOffersController extends Controller
         $booking->passage_date = date('Y-m-d', strtotime($transport_offer->date_start));
         $booking->transport_offer_id = $request->input('transport_offer_id');
         $booking->shipper_id = Auth::user()->id;
+        $booking->transporter_id = $request->input('transporter_id');
 
         $transport_step_start = TransportStep::where('transport_offer_id', $request->input('transport_offer_id'))->where('step', $request->input('step_start'))->first();
         $booking->city_start_longitude = $transport_step_start->longitude;

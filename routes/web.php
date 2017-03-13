@@ -39,6 +39,7 @@ Route::any('user/vehicles/modify/{vehicle_id}', 'UserController@modifyVehicles')
 Route::get('user/vehicles/delete/{vehicle_id?}', 'UserController@deleteVehicle')->name('delete_vehicle');
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
+Route::get('user/my-bookings', 'UserController@getBookingAuth')->name('my_bookings');
 
 
 

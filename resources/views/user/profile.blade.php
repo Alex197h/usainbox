@@ -65,7 +65,7 @@
 
                         <a href="#" class="white-text">
                             <button type="button" class="btn btnProfile">
-                                Vos reservations
+                                Vos reservations  @if($reservations > 0)<div class="chip"> {{ $reservations }}</div>@endif
                             </button>
                         </a>
 
