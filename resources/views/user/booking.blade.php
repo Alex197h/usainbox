@@ -13,6 +13,7 @@
                     <th>Demandeur</th>
                     <th>Etape de départ</th>
                     <th>Etape d'arrivée</th>
+                    <th>Volume du colis</th>
                     <th>Prix</th>
                     <th>Heure de passage</th>
                     <th>Valider</th>
@@ -35,13 +36,17 @@
                         </td>
                         <td>{{ $reservation->city_start_label }}</td>
                         <td>{{ $reservation->city_end_label }}</td>
+                        <td>{{ $reservation->parcel_volume }}</td>
                         <td>{{ $reservation->price }}</td>
                         <td>{{ $reservation->hour }}</td>
                         <td>
                             @if($reservation->validated)
                                 <a class="btn green disabled">Validée</a>
                             @else
-                                <a class="waves-effect waves-light btn">A valider</a>
+                                <form method="post" action="{{ route('') }}">
+                                    <input type="hidden" value="{{ $reservation->id }}" name="booking_id">
+                                    <button type="submit" class="waves-effect waves-light btn">A valider</button>
+                                </form>
                             @endif
                         </td>
                     </tr>

@@ -70,12 +70,21 @@ class UserController extends Controller {
         $users = array();
         foreach($reservations as $reservation){
             $users[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
-//            dd($users[$reservation->id][0]->id);
         }
 
-
-
         return view('user.booking', array('reservations' => $reservations, 'users' => $users));
+    }
+
+    public function postBookingAuth(Request $request){
+        $rules = array(
+            'booking_id' => 'required|numeric'
+        );
+
+        $this->validate($request, $rules);
+
+        $booking = Reservation::where('id', $request->input('booking_id'))->first();
+
+        return view('user.validate_booking', array('booking' => $booking));
     }
 
     public function updateProfileAuth(Request $request){
