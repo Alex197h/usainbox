@@ -81,11 +81,9 @@
         <div id="transport_offers" class="col s12"></div>
     </div>
 
-    <!-- <section class="col s12 m8 offset-m2 home-img" id="video-pres">
-    <video class="col s12 valign" autoplay loop muted class="responsive-video">
-    <source src="public/video/pres.mp4" type="video/mp4"/>
-</video>
-</section> -->
+    <section class="col s12 m8 offset-m2 center" id="video-pres">
+        <iframe width="850" height="500" src="https://www.youtube.com/embed/QJRXN-AtUic?autoplay=1&playlist=QJRXN-AtUic&loop=1&controls=0" frameborder="0" allowfullscreen></iframe>
+    </section>
 
     <div id="offercopy" hidden>
         <div class="col s12 offer card horizontal$selected" offer-id="$offerid">
