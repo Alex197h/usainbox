@@ -262,7 +262,8 @@ class TransportOffersController extends Controller
             'transporter_id' => 'required|numeric',
             'transport_offer_id' => 'required|numeric',
             'step_start' => 'required|numeric',
-            'step_end' => 'required|numeric'
+            'step_end' => 'required|numeric',
+            'parcel_volume' => 'required|numeric'
         );
 
         $this->validate($request, $rules);
@@ -273,6 +274,7 @@ class TransportOffersController extends Controller
 
         $booking->passage_date = date('Y-m-d', strtotime($transport_offer->date_start));
         $booking->transport_offer_id = $request->input('transport_offer_id');
+        $booking->parcel_volume = $request->input('parcel_volume');
         $booking->shipper_id = Auth::user()->id;
         $booking->transporter_id = $request->input('transporter_id');
 

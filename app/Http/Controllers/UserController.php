@@ -87,6 +87,28 @@ class UserController extends Controller {
         return view('user.validate_booking', array('booking' => $booking));
     }
 
+    public function validateBookingAuth(Request $request){
+        $rules = array(
+            'booking_id' => 'required|numeric',
+            'price' => 'required|numeric',
+            'hour' => 'required|date_format:h:i'
+        );
+
+        $this->validate($request, $rules);
+
+        $booking = Reservation::where('id', $request->input('booking_id'))->first();
+
+        $booking->hour = $request->input('hour');
+        $booking->price = $request->input('price');
+        $booking->validated = 1;
+
+        if($booking->save()){
+            return redirect()->route('my_bookings')->with('message', 'Réservation acceptée');
+        }else{
+            return redirect()->back()->withInput();
+        }
+    }
+
     public function updateProfileAuth(Request $request){
         $auth = Auth::user();
 

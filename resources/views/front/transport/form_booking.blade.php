@@ -44,6 +44,10 @@
                             </select>
                             <label for="step_end">Ville d'arrivée*</label>
                         </div>
+                        <div class="input-field col s12">
+                            <input name="parcel_volume" type="number" id="parcel_volume" placeholder="Volume du colis en cm3" required>
+                            <label for="parcel_volume">Volume du colis*</label>
+                        </div>
                         <input type="hidden" value="{{ $transporter_id }}" name="transporter_id">
                         <input type="hidden" value="{{ $transport_offer->id }}" name="transport_offer_id">
                         <div class="input-field col s12">
