@@ -12,6 +12,9 @@ class CreateShippingOffersTable extends Migration
             $table->increments('id');
             $table->date('fixed_date');
             $table->time('fixed_hour')->nullable();
+            $table->string('libele')->nullable()->default(null);
+            $table->integer('volume')->nullable()->default(null);
+            $table->boolean('booked')->default(0);
             $table->float('longitude_start');
             $table->float('latitude_start');
             $table->float('longitude_end');

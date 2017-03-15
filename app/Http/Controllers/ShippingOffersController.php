@@ -20,7 +20,8 @@ class ShippingOffersController extends Controller{
         $rules = array(
             'city_start' => 'required',
             'city_end' => 'required',
-            'date' => 'required'
+            'date' => 'required',
+            'volume' => 'numeric'
         );
 
         $this->validate($request, $rules);
@@ -56,6 +57,10 @@ class ShippingOffersController extends Controller{
 
         $alert->fixed_date = date('Y-m-d',strtotime($request->input('date')));
         $alert->user_id = $auth->id;
+        if(!empty($request->input('libele')))
+            $alert->libele = $request->input('libele');
+        if(!empty($request->input('volume')))
+            $alert->volume = $request->input('volume');
 
         if($alert->save()){
             return redirect()->route('user_profile')->with('message', 'Alerte enregistrée !');

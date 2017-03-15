@@ -41,6 +41,26 @@
                         @endif
                     </div>
 
+                    <div class="input-field col s12{{ $errors->has('libele') ? ' has-error' : '' }}">
+                        <label for="libele">Libellé du colis</label>
+                        <input type="text" name="libele" class=" white" placeholder="Objet à envoyer" value="{{ old('libele') }}">
+                        @if($errors->has('libele'))
+                            <span class="col s12">
+                                <strong>{{ $errors->first('libele') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
+                    <div class="input-field col s12{{ $errors->has('volume') ? ' has-error' : '' }}">
+                        <label for="volume">Volume du colis</label>
+                        <input type="number" name="volume" class=" white" placeholder="Volume de votre colis en cm3" value="{{ old('volume') }}">
+                        @if($errors->has('volume'))
+                            <span class="col s12">
+                                <strong>{{ $errors->first('volume') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+
                     <div class="col s12">
                         <button type="submit" class="btn btnValider white-text right">
                             M'alerter
