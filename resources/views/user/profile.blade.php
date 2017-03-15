@@ -57,7 +57,7 @@
                             </button>
                         </a>
 
-                        <a href="#" class="white-text">
+                        <a href="{{ route('my_ads') }}" class="white-text">
                             <button type="button" class="btn btnProfile">
                                 Vos annonces
                             </button>

@@ -33,15 +33,21 @@ Route::post('contact', 'AboutController@postcontact')->name('contact_post');
 
 
 Route::model('vehicle_id', App\Vehicle::class);
+Route::model('ad_id', App\TransportOffer::class);
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
 Route::post('user/profile', 'UserController@updateProfileAuth')->name('update_user_profile');
+
 Route::any('user/vehicles/modify/{vehicle_id}', 'UserController@modifyVehicles')->name('modify_vehicle');
 Route::get('user/vehicles/delete/{vehicle_id?}', 'UserController@deleteVehicle')->name('delete_vehicle');
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
+
 Route::get('user/my-bookings', 'UserController@getBookingAuth')->name('my_bookings');
 Route::post('user/my-bookings/validate', 'UserController@postBookingAuth')->name('post_booking');
 Route::post('user/my-bookings/validate/post', 'UserController@validateBookingAuth')->name('validate_booking_auth');
+
+Route::get('user/my-ads', 'UserController@getAdAuth')->name('my_ads');
+Route::get('user/my-ads/delete/{ad_id?}', 'UserController@deleteAd')->name('delete_ad');
 
 
 

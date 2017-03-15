@@ -34,15 +34,11 @@ $User = Auth::user();
         </li>
         <li class="divider"></li>
         <li>
-            <a href="#">Vos annonces</a>
+            <a href="{{ route('my_ads') }}">Vos annonces</a>
         </li>
         <li class="divider"></li>
         <li>
-            <a href="#">Vos réservations</a>
-        </li>
-        <li class="divider"></li>
-        <li>
-            <a href="#">Créer une alerte</a>
+            <a href="{{ route('my_bookings') }}">Vos réservations</a>
         </li>
         <li class="divider"></li>
         <li>
@@ -87,10 +83,10 @@ $User = Auth::user();
                         <a href="{{route('user_vehicles')}}">Ajouter un vehicule</a>
                     </li>
                     <li>
-                        <a href="#">Vos annonces</a>
+                        <a href="{{ route('my_ads') }}">Vos annonces</a>
                     </li>
                     <li>
-                        <a href="#">Vos réservations</a>
+                        <a href="{{ route('my_bookings') }}">Vos réservations</a>
                     </li>
                     <li>
                         <a href="{{route('logout')}}">Se déconnecter</a>

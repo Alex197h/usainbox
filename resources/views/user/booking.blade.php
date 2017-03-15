@@ -37,7 +37,7 @@
                         <td>{{ $reservation->city_start_label }}</td>
                         <td>{{ $reservation->city_end_label }}</td>
                         <td>{{ $reservation->parcel_volume }} cm3</td>
-                        <td>{{ $reservation->price }}</td>
+                        <td>{{ $reservation->price }}€</td>
                         <td>{{ date('h:i', strtotime($reservation->hour)) }}</td>
                         <td>
                             @if($reservation->validated)
