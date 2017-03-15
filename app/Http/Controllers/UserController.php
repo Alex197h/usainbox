@@ -27,44 +27,49 @@ class UserController extends Controller
 
     public function getProfileAuth()
     {
-        $auth = Auth::user();
-        $reservations = Reservation::where('transporter_id', Auth::user()->id)
-            ->where('validated', '0')
-            ->count();
+        if(Auth::check()){
+            $auth = Auth::user();
+            $reservations = Reservation::where('transporter_id', Auth::user()->id)
+                ->where('validated', '0')
+                ->count();
 
 
-        $type_vehicles = TypeVehicle::all();
-        $vehicles = $auth->vehicles;
-        $vehicles_id = array();
-        foreach ($vehicles as $vehicle) {
-            $vehicles_id[] = $vehicle->id;
-        }
-        $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
-        $city_steps = array();
-        foreach ($transport_offers as $transport_offer) {
+            $type_vehicles = TypeVehicle::all();
+            $vehicles = $auth->vehicles;
+            $vehicles_id = array();
+            foreach ($vehicles as $vehicle) {
+                $vehicles_id[] = $vehicle->id;
+            }
+            $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
+            $city_steps = array();
+            foreach ($transport_offers as $transport_offer) {
 
-            $steps = $transport_offer->steps;
-            foreach ($steps as $step) {
-                $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+                $steps = $transport_offer->steps;
+                foreach ($steps as $step) {
+                    $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
-                $output = json_decode($geocode);
+                    $output = json_decode($geocode);
 
-                if (isset($output->results[0])) {
+                    if (isset($output->results[0])) {
 
-                    $city_steps[$transport_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                        $city_steps[$transport_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                    }
                 }
             }
-        }
-        $data = array(
-            'user' => $auth,
-            'type_vehicles' => $type_vehicles,
-            'transport_offers' => $transport_offers,
-            'steps' => $city_steps,
-            'vehicles' => $vehicles,
-            'reservations' => $reservations
-        );
+            $data = array(
+                'user' => $auth,
+                'type_vehicles' => $type_vehicles,
+                'transport_offers' => $transport_offers,
+                'steps' => $city_steps,
+                'vehicles' => $vehicles,
+                'reservations' => $reservations
+            );
 
-        return view('user.profile', $data);
+            return view('user.profile', $data);
+        }else{
+            return redirect()->route('login');
+        }
+
     }
 
     public function getBookingAuth()
@@ -79,19 +84,19 @@ class UserController extends Controller
         }
 
         $users_shipper = array();
-        foreach ($reservations_shipper as $reservation){
+        foreach ($reservations_shipper as $reservation) {
             $users_shipper[$reservation->id] = User::where('id', $reservation->transporter_id)->get();
         }
 
 
         return view('user.booking', array(
-            'reservations_transporter' => $reservations_transporter,
-            'reservations_shipper' => $reservations_shipper,
-            'users_transporter' => $users_transporter,
-            'users_shipper' => $users_shipper
+                'reservations_transporter' => $reservations_transporter,
+                'reservations_shipper' => $reservations_shipper,
+                'users_transporter' => $users_transporter,
+                'users_shipper' => $users_shipper
             )
 
-            );
+        );
     }
 
     public function postBookingAuth(Request $request)
@@ -165,24 +170,29 @@ class UserController extends Controller
             return redirect()->back()->withInput();
     }
 
-    public function getReviews(){
+    public function getReviews()
+    {
         $auth = Auth::user();
 
         $reviews_transporter = Reservation::where('passage_date', '<', date('Y-m-d'))
-                    ->where('transporter_id', $auth->id)
-                    ->get();
+            ->where('transporter_id', $auth->id)
+            ->where('validated', '1')
+            ->where('shipping_note', null)
+            ->get();
 
         $users_transporter = array();
-        foreach($reviews_transporter as $reservation){
+        foreach ($reviews_transporter as $reservation) {
             $users_transporter[] = User::where('id', $reservation->transporter_id);
         }
 
         $reviews_shipper = Reservation::where('passage_date', '<', date('Y-m-d'))
-                    ->where('shipper_id', $auth->id)
-                    ->get();
+            ->where('shipper_id', $auth->id)
+            ->where('validated', '1')
+            ->where('shipping_note', null)
+            ->get();
 
         $users_shipper = array();
-        foreach($users_shipper as $reservation){
+        foreach ($users_shipper as $reservation) {
             $users_shipper[] = User::where('id', $reservation->shipper_id);
         }
 
@@ -191,7 +201,32 @@ class UserController extends Controller
             'reviews_shipper' => $reviews_shipper,
             'users_transporter' => $users_transporter,
             'users_shipper' => $users_shipper
-            ));
+        ));
+    }
+
+    public function postReviews(Request $request)
+    {
+        $rules = array(
+            'booking_id' => 'required|numeric',
+            'review' => 'required|numeric|min:0|max:5'
+        );
+
+        $this->validate($request, $rules);
+
+        $auth = Auth::user();
+        $booking = Reservation::where('id', $request->input('booking_id'))->first();
+
+        if ($booking->shipper_id == $auth->id) {
+            $booking->transport_note = $request->input('review');
+        } else {
+            $booking->shipping_note = $request->input('review');
+        }
+
+        if ($booking->save())
+            return redirect()->route('user_profile')->with('message', 'Avis enregistré !');
+        else
+            return redirect()->back()->withInput();
+
     }
 
     public function getAdAuth()
@@ -200,12 +235,12 @@ class UserController extends Controller
         $ads = [];
         $steps = array();
         foreach ($auth->vehicles as $vehicle) {
-            foreach($vehicle->transportOffer as $t){
+            foreach ($vehicle->transportOffer as $t) {
                 $ads[] = $t;
             }
         }
 
-        foreach($ads as $ad){
+        foreach ($ads as $ad) {
             $steps[$ad->id][] = $ad->steps;
         }
 
