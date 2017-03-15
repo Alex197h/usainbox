@@ -263,6 +263,7 @@
                     }
                     $('#' + divs[divs.length - 1].id).remove();
                     nbSteps -= 1;
+                    updateMap();
                 });
             </script>
             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
@@ -274,6 +275,8 @@
                 var options = {types: ['(cities)']};
                 function addAutocomplete(e){
                     var a1 = new google.maps.places.Autocomplete(e, options);
+                    
+                    a1.input = e;
                     a1.addListener('place_changed', saveLocation);
                     a1.addListener('place_changed', updateMap);
                     return a1;
@@ -295,72 +298,113 @@
                 }
                 
                 var markers = [];
-                var locations = {
-                    start: ,
-                    end: ,
-                    steps: [],
-                };
-                function clearMarkers(){
-                    for(var i=0; i<markers.length; i++){
+                var paths = [];
+                var locations = {};
+                function clearAll(){
+                    for(var i in markers){
                         if(markers[i]) {
                             markers[i].setMap(null);
                         }
                     }
                     markers = [];
+                    for(var i in paths){
+                        if(paths[i]) {
+                            paths[i].setMap(null);
+                        }
+                    }
+                    paths = [];
+                }
+                function addMarker(name){
+                    var marker = new google.maps.Marker({
+                        position: locations[name],
+                        map: map,
+                    });
+                    
+                    markers.push(marker);
+                    return marker;
                 }
                 function saveLocation(){
-                    locations.push(this.getPlace().geometry.location);
+                    var place = this.getPlace();
+                    var name = this.input.value;
+                    
+                    // if(/[0-9]{5,6} /.test(name)){
+                        // name = name.replace(/[0-9]{5,6} /, '');
+                    // }
+                    locations[name] = place.geometry.location;
                 }
                 
                 function updateMap(){
-                    var cities = [];
-                    clearMarkers();
-                    
-                    for(i in locations){
-                        var marker = new google.maps.Marker({
-                            map: map,
-                            position: locations[i],
-                            animation: google.maps.Animation.DROP,
-                        });
-                        markers.push(marker);
-                        
-                        cities.push(locations[i]);
+                    var Cities = {
+                        start: null,
+                        end: null,
+                        steps: [],
                     }
+                    var cities = [];
                     
-                    /*
+                    clearAll();
                     
-                    var Directions = new google.maps.DirectionsRenderer({
-                        map: null,
-                        preserveViewport: true,
+                    $('.step').each(function(){
+                        if(this.value) cities.push(this.value)
                     });
-                    var origin = {lng: cities[0].lng, lat: cities[0].lat};
-                    var destination = {lng: cities[cities.length - 1].lng, lat: cities[cities.length - 1].lat};
-                    var waypoints = [];
-
-                    if (cities.length > 2) {
-                        for (var i = 1; i < cities.length - 1; i++) {
-                            waypoints.push({
-                                location: {
-                                    lng: cities[i].lng,
-                                    lat: cities[i].lat,
-                                }, stopover: true
+                    
+                    if(cities.length > 0){
+                        Cities.start = cities[0];
+                        addMarker(Cities.start);
+                        if(cities.length > 1){
+                            Cities.end = cities[cities.length-1];
+                            addMarker(Cities.end);
+                        }
+                        if(cities.length > 2){
+                            for(var i=1; i<=cities.length-2;i++){
+                                Cities.steps.push(cities[i]);
+                                addMarker(cities[i]);
+                            }
+                        }
+                        
+                        if(!Cities.end){
+                            
+                        }else {
+                            var Directions = new google.maps.DirectionsRenderer({
+                                map: null,
+                                preserveViewport: true,
+                            });
+                            var origin = {
+                                lng: locations[Cities.start].lng(),
+                                lat: locations[Cities.start].lat(),
+                            };
+                            var destination = {
+                                lng: locations[Cities.end].lng(),
+                                lat: locations[Cities.end].lat(),
+                            }
+                            var waypoints = [];
+                            
+                            if(Cities.steps.length > 0) {
+                                for(var i in Cities.steps) {
+                                    var city = locations[Cities.steps[i]];
+                                    waypoints.push({
+                                        location: {
+                                            lng: city.lng(),
+                                            lat: city.lat(),
+                                        }, stopover: true
+                                    });
+                                }
+                            }
+                            // console.log(waypoints)
+                            var request = {
+                                travelMode: google.maps.DirectionsTravelMode.DRIVING,
+                                avoidTolls: false,
+                                origin: origin,
+                                destination: destination,
+                                waypoints: waypoints
+                            }
+                            var directionsService = new google.maps.DirectionsService();
+                            directionsService.route(request, function (response, status) {
+                                if(status == google.maps.DirectionsStatus.OK) {
+                                    Directions.setDirections(response);
+                                }
                             });
                         }
                     }
-
-                    var request = {
-                        travelMode: google.maps.DirectionsTravelMode.DRIVING,
-                        avoidTolls: false,
-                        origin: origin,
-                        destination: destination,
-                        waypoints: waypoints
-                    }
-                    var directionsService = new google.maps.DirectionsService();
-                    directionsService.route(request, function (response, status) {
-                        if (status == google.maps.DirectionsStatus.OK) {
-                            Directions.setDirections(response);
-                        }
-                    });*/
                 }
                 
                 var dropedElementSortingOrder;
