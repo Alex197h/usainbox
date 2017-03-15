@@ -349,23 +349,24 @@
                     
                     if(cities.length > 0){
                         Cities.start = cities[0];
-                        addMarker(Cities.start);
+                        var ms = addMarker(Cities.start);
                         if(cities.length > 1){
                             Cities.end = cities[cities.length-1];
-                            addMarker(Cities.end);
+                            // addMarker(Cities.end);
                         }
                         if(cities.length > 2){
                             for(var i=1; i<=cities.length-2;i++){
                                 Cities.steps.push(cities[i]);
-                                addMarker(cities[i]);
+                                // addMarker(cities[i]);
                             }
                         }
                         
                         if(!Cities.end){
                             
                         }else {
+                            ms.setMap(null);
                             var Directions = new google.maps.DirectionsRenderer({
-                                map: null,
+                                map: map,
                                 preserveViewport: true,
                             });
                             var origin = {
@@ -376,6 +377,7 @@
                                 lng: locations[Cities.end].lng(),
                                 lat: locations[Cities.end].lat(),
                             }
+                            console.log(origin)
                             var waypoints = [];
                             
                             if(Cities.steps.length > 0) {
@@ -401,6 +403,7 @@
                             directionsService.route(request, function (response, status) {
                                 if(status == google.maps.DirectionsStatus.OK) {
                                     Directions.setDirections(response);
+                                    paths.push(Directions);
                                 }
                             });
                         }
@@ -413,11 +416,13 @@
 
                 $(document)
                     .on('dragstart', '.step', handleDragStart)
+                    .on('dragstart', '.step', updateMap)
                     .on('dragenter', '.step', handleDragEnter)
                     .on('dragover', '.step', handleDragOver)
                     .on('dragleave', '.step', handleDragLeave)
                     .on('drop', '.step', handleDrop)
                     .on('dragend', '.step', handleDragEnd)
+                    .on('dragend', '.step', updateMap)
 
                 function handleDragStart() {
                     this.style.opacity = '0.5';
