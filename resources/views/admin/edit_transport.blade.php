@@ -98,6 +98,7 @@
                                     $('.tstep').each(function(){
                                         new google.maps.places.Autocomplete(this, options);
                                     });
+                                    
                                 }
                             </script>
                         </div>

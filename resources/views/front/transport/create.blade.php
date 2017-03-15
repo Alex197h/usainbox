@@ -249,7 +249,7 @@
                         div.append(del);
                         $('#endstep').before(div);
                         var options = {types: ['(cities)']};
-                        new google.maps.places.Autocomplete(document.getElementById('step' + nbSteps), options);
+                        addAutocomplete(document.getElementById('step' + nbSteps));
                         nbSteps += 1;
                     }
                 }
@@ -265,12 +265,19 @@
                     nbSteps -= 1;
                 });
             </script>
-            <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
             <script type="text/javascript">
                 var MapElement = document.getElementById('map');
                 //var ShowElement = document.getElementById('show');
                 var map;
+                
+                var options = {types: ['(cities)']};
+                function addAutocomplete(e){
+                    var a1 = new google.maps.places.Autocomplete(e, options);
+                    a1.addListener('place_changed', saveLocation);
+                    a1.addListener('place_changed', updateMap);
+                    return a1;
+                }
 
                 function initMap() {
                     map = new google.maps.Map(MapElement, {
@@ -282,11 +289,80 @@
                         scrollwheel: false,
                         zoom: 6
                     });
-                    var options = {types: ['(cities)']};
-                    new google.maps.places.Autocomplete(document.getElementById('start_city'), options);
-                    new google.maps.places.Autocomplete(document.getElementById('end_city'), options);
+                    
+                    addAutocomplete(document.getElementById('start_city'));
+                    addAutocomplete(document.getElementById('end_city'));
                 }
+                
+                var markers = [];
+                var locations = {
+                    start: ,
+                    end: ,
+                    steps: [],
+                };
+                function clearMarkers(){
+                    for(var i=0; i<markers.length; i++){
+                        if(markers[i]) {
+                            markers[i].setMap(null);
+                        }
+                    }
+                    markers = [];
+                }
+                function saveLocation(){
+                    locations.push(this.getPlace().geometry.location);
+                }
+                
+                function updateMap(){
+                    var cities = [];
+                    clearMarkers();
+                    
+                    for(i in locations){
+                        var marker = new google.maps.Marker({
+                            map: map,
+                            position: locations[i],
+                            animation: google.maps.Animation.DROP,
+                        });
+                        markers.push(marker);
+                        
+                        cities.push(locations[i]);
+                    }
+                    
+                    /*
+                    
+                    var Directions = new google.maps.DirectionsRenderer({
+                        map: null,
+                        preserveViewport: true,
+                    });
+                    var origin = {lng: cities[0].lng, lat: cities[0].lat};
+                    var destination = {lng: cities[cities.length - 1].lng, lat: cities[cities.length - 1].lat};
+                    var waypoints = [];
 
+                    if (cities.length > 2) {
+                        for (var i = 1; i < cities.length - 1; i++) {
+                            waypoints.push({
+                                location: {
+                                    lng: cities[i].lng,
+                                    lat: cities[i].lat,
+                                }, stopover: true
+                            });
+                        }
+                    }
+
+                    var request = {
+                        travelMode: google.maps.DirectionsTravelMode.DRIVING,
+                        avoidTolls: false,
+                        origin: origin,
+                        destination: destination,
+                        waypoints: waypoints
+                    }
+                    var directionsService = new google.maps.DirectionsService();
+                    directionsService.route(request, function (response, status) {
+                        if (status == google.maps.DirectionsStatus.OK) {
+                            Directions.setDirections(response);
+                        }
+                    });*/
+                }
+                
                 var dropedElementSortingOrder;
                 var draggedElementSortingOrder;
                 var cols;
