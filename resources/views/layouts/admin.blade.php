@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Usainbox Admin Panel </title>
+        <title>Usainbox Admin Panel</title>
         {{ Html::style('public/css/font-awesome.min.css') }}
         {{ Html::style('public/css/bootstrap.min.css') }}
         {{ Html::style('public/admin/style.css') }}
@@ -40,7 +40,7 @@
                             <ul class="nav side-menu">
                                 <li><a href="{{ route('admin_page', 'users') }}"><i class="fa fa-users"></i> Membres</a></li>
                                 <li><a href="{{ route('admin_page', 'vehicles') }}"><i class="fa fa-car"></i> Vehicules</a></li>
-                                <li><a><i class="fa fa-car"></i> Transports</a></li>
+                                <li><a href="{{ route('admin_page', 'transports') }}"><i class="fa fa-car"></i> Transports</a></li>
                                 <li><a><i class="fa fa-car"></i> Réservations</a></li>
                                 <li><a><i class="fa fa-comments-o"></i> Commentaires</a></li>
                             </ul>
@@ -163,7 +163,7 @@
                 @yield('content')
                 <footer>
                     <div class="pull-right">
-                        
+                        &copy; Usainbox - Tous droits réservés - Administration
                     </div>
                     <div class="clearfix"></div>
                 </footer>

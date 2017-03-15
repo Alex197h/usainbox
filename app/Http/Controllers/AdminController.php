@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\TransportOffer;
+use App\TypeVehicle;
 use App\User;
 use App\Vehicle;
-use App\TypeVehicle;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -132,7 +133,23 @@ class AdminController extends Controller {
                     'old' => $old,
                 ]);
             }
+            else if($page == 'editmodel'){
+                foreach($request->models as $k => $a){
+                    Vehicle::where('car_model', $k)->update(['car_model' => $a]);
+                }
+                
+                return json_encode([
+                    'success' => 'update'
+                ]);
+            }
+            else if($page == 'editbrandname'){
+                Vehicle::where('car_brand', $request->old)->update(['car_brand' => $request->new]);
+                return json_encode([
+                    'success' => 'savedname'
+                ]);
+            }
         }
+        
         
         $res_brands = Vehicle::select('car_brand', 'car_model')->orderBy('car_brand')->distinct()->get();
         
@@ -146,6 +163,35 @@ class AdminController extends Controller {
             'part' => 'default',
             'brands' => $brands,
             'types_vehicles' => $vehicles
+        ]);
+    }
+    
+    public function transports($page = '', $id = null, $request){
+        if($page == 'edit'){
+            $part = 'default';
+            $transport = TransportOffer::with('vehicle.user', 'steps')->find($id);
+            if($transport){
+                if($this->post){
+                    if($request->has('save_infos')){
+                        var_dump('infos');
+                    }
+                    else if($request->has('save_steps')){
+                        
+                        $part = 'steps';
+                    }
+                }
+                var_dump($part);
+                return view('admin.edit_transport', [
+                    'part' => 'default',
+                    'transport' => $transport,
+                    'user' => $transport->user,
+                    'steps' => $transport->steps,
+                ]);
+            }
+        }
+        
+        return view('admin.transports', [
+            'transports' => TransportOffer::with('vehicle.user')->get()
         ]);
     }
 }
