@@ -194,9 +194,7 @@ input[type="date"]::-webkit-inner-spin-button {
     margin-right: 15px;
 }
 .iconW{
-    width: 50px;
-    margin-right: 15px;
-    margin-left: 15px;
+    width: 40px;
 }
 .iconS{
     width: 60px;

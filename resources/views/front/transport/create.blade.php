@@ -249,7 +249,7 @@
                         div.append(del);
                         $('#endstep').before(div);
                         var options = {types: ['(cities)']};
-                        new google.maps.places.Autocomplete(document.getElementById('step' + nbSteps), options);
+                        addAutocomplete(document.getElementById('step' + nbSteps));
                         nbSteps += 1;
                     }
                 }
@@ -263,14 +263,24 @@
                     }
                     $('#' + divs[divs.length - 1].id).remove();
                     nbSteps -= 1;
+                    updateMap();
                 });
             </script>
-            <script async defer
-                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
             <script type="text/javascript">
                 var MapElement = document.getElementById('map');
                 //var ShowElement = document.getElementById('show');
                 var map;
+                
+                var options = {types: ['(cities)']};
+                function addAutocomplete(e){
+                    var a1 = new google.maps.places.Autocomplete(e, options);
+                    
+                    a1.input = e;
+                    a1.addListener('place_changed', saveLocation);
+                    a1.addListener('place_changed', updateMap);
+                    return a1;
+                }
 
                 function initMap() {
                     map = new google.maps.Map(MapElement, {
@@ -282,22 +292,137 @@
                         scrollwheel: false,
                         zoom: 6
                     });
-                    var options = {types: ['(cities)']};
-                    new google.maps.places.Autocomplete(document.getElementById('start_city'), options);
-                    new google.maps.places.Autocomplete(document.getElementById('end_city'), options);
+                    
+                    addAutocomplete(document.getElementById('start_city'));
+                    addAutocomplete(document.getElementById('end_city'));
                 }
-
+                
+                var markers = [];
+                var paths = [];
+                var locations = {};
+                function clearAll(){
+                    for(var i in markers){
+                        if(markers[i]) {
+                            markers[i].setMap(null);
+                        }
+                    }
+                    markers = [];
+                    for(var i in paths){
+                        if(paths[i]) {
+                            paths[i].setMap(null);
+                        }
+                    }
+                    paths = [];
+                }
+                function addMarker(name){
+                    var marker = new google.maps.Marker({
+                        position: locations[name],
+                        map: map,
+                    });
+                    
+                    markers.push(marker);
+                    return marker;
+                }
+                function saveLocation(){
+                    var place = this.getPlace();
+                    var name = this.input.value;
+                    
+                    // if(/[0-9]{5,6} /.test(name)){
+                        // name = name.replace(/[0-9]{5,6} /, '');
+                    // }
+                    locations[name] = place.geometry.location;
+                }
+                
+                function updateMap(){
+                    var Cities = {
+                        start: null,
+                        end: null,
+                        steps: [],
+                    }
+                    var cities = [];
+                    
+                    clearAll();
+                    
+                    $('.step').each(function(){
+                        if(this.value) cities.push(this.value)
+                    });
+                    
+                    if(cities.length > 0){
+                        Cities.start = cities[0];
+                        var ms = addMarker(Cities.start);
+                        if(cities.length > 1){
+                            Cities.end = cities[cities.length-1];
+                            // addMarker(Cities.end);
+                        }
+                        if(cities.length > 2){
+                            for(var i=1; i<=cities.length-2;i++){
+                                Cities.steps.push(cities[i]);
+                                // addMarker(cities[i]);
+                            }
+                        }
+                        
+                        if(!Cities.end){
+                            
+                        }else {
+                            ms.setMap(null);
+                            var Directions = new google.maps.DirectionsRenderer({
+                                map: map,
+                                preserveViewport: true,
+                            });
+                            var origin = {
+                                lng: locations[Cities.start].lng(),
+                                lat: locations[Cities.start].lat(),
+                            };
+                            var destination = {
+                                lng: locations[Cities.end].lng(),
+                                lat: locations[Cities.end].lat(),
+                            }
+                            console.log(origin)
+                            var waypoints = [];
+                            
+                            if(Cities.steps.length > 0) {
+                                for(var i in Cities.steps) {
+                                    var city = locations[Cities.steps[i]];
+                                    waypoints.push({
+                                        location: {
+                                            lng: city.lng(),
+                                            lat: city.lat(),
+                                        }, stopover: true
+                                    });
+                                }
+                            }
+                            // console.log(waypoints)
+                            var request = {
+                                travelMode: google.maps.DirectionsTravelMode.DRIVING,
+                                avoidTolls: false,
+                                origin: origin,
+                                destination: destination,
+                                waypoints: waypoints
+                            }
+                            var directionsService = new google.maps.DirectionsService();
+                            directionsService.route(request, function (response, status) {
+                                if(status == google.maps.DirectionsStatus.OK) {
+                                    Directions.setDirections(response);
+                                    paths.push(Directions);
+                                }
+                            });
+                        }
+                    }
+                }
+                
                 var dropedElementSortingOrder;
                 var draggedElementSortingOrder;
                 var cols;
 
                 $(document)
                     .on('dragstart', '.step', handleDragStart)
+                    .on('dragstart', '.step', updateMap)
                     .on('dragenter', '.step', handleDragEnter)
                     .on('dragover', '.step', handleDragOver)
                     .on('dragleave', '.step', handleDragLeave)
                     .on('drop', '.step', handleDrop)
                     .on('dragend', '.step', handleDragEnd)
+                    .on('dragend', '.step', updateMap)
 
                 function handleDragStart() {
                     this.style.opacity = '0.5';
