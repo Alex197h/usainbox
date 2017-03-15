@@ -8,3 +8,4 @@ Homestead.yaml
 .env
 .dropbox
 /bootstrap/compiled.php
+.htaccess
