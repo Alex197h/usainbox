@@ -47,6 +47,7 @@ Route::post('user/my-bookings/validate', 'UserController@postBookingAuth')->name
 Route::post('user/my-bookings/validate/post', 'UserController@validateBookingAuth')->name('validate_booking_auth');
 
 Route::get('user/my-ads', 'UserController@getAdAuth')->name('my_ads');
+Route::any('user/my-ads/modify/{ad_id}', 'UserController@modifyAds')->name('modify_ad');
 Route::get('user/my-ads/delete/{ad_id?}', 'UserController@deleteAd')->name('delete_ad');
 
 

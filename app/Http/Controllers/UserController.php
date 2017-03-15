@@ -70,14 +70,28 @@ class UserController extends Controller
     public function getBookingAuth()
     {
         $auth = Auth::user()->id;
-        $reservations = Reservation::where('transporter_id', $auth)->get();
+        $reservations_transporter = Reservation::where('transporter_id', $auth)->get();
+        $reservations_shipper = Reservation::where('shipper_id', $auth)->get();
 
-        $users = array();
-        foreach ($reservations as $reservation) {
-            $users[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
+        $users_transporter = array();
+        foreach ($reservations_transporter as $reservation) {
+            $users_transporter[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
         }
 
-        return view('user.booking', array('reservations' => $reservations, 'users' => $users));
+        $users_shipper = array();
+        foreach ($reservations_shipper as $reservation){
+            $users_shipper[$reservation->id] = User::where('id', $reservation->transporter_id)->get();
+        }
+
+
+        return view('user.booking', array(
+            'reservations_transporter' => $reservations_transporter,
+            'reservations_shipper' => $reservations_shipper,
+            'users_transporter' => $users_transporter,
+            'users_shipper' => $users_shipper
+            )
+
+            );
     }
 
     public function postBookingAuth(Request $request)
