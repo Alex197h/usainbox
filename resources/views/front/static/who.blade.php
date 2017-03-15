@@ -12,7 +12,7 @@
                     <h4>Les fondateurs</h4>
                     <p style="text-align:justify;">
                         Au court de notre formation en licence professionnelle
-                        <a href="http://www.gap.univ-mrs.fr/miw/">
+                        <a href="http://www.gap.univ-mrs.fr/miw/" target=_blank>
                             Activités et Techniques de Communication,
                             Mention Multimédia Internet Webmaster,
                         </a>
