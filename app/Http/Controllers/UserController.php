@@ -165,6 +165,35 @@ class UserController extends Controller
             return redirect()->back()->withInput();
     }
 
+    public function getReviews(){
+        $auth = Auth::user();
+
+        $reviews_transporter = Reservation::where('passage_date', '<', date('Y-m-d'))
+                    ->where('transporter_id', $auth->id)
+                    ->get();
+
+        $users_transporter = array();
+        foreach($reviews_transporter as $reservation){
+            $users_transporter[] = User::where('id', $reservation->transporter_id);
+        }
+
+        $reviews_shipper = Reservation::where('passage_date', '<', date('Y-m-d'))
+                    ->where('shipper_id', $auth->id)
+                    ->get();
+
+        $users_shipper = array();
+        foreach($users_shipper as $reservation){
+            $users_shipper[] = User::where('id', $reservation->shipper_id);
+        }
+
+        return view('user.reviews', array(
+            'reviews_transporter' => $reviews_transporter,
+            'reviews_shipper' => $reviews_shipper,
+            'users_transporter' => $users_transporter,
+            'users_shipper' => $users_shipper
+            ));
+    }
+
     public function getAdAuth()
     {
         $auth = Auth::user();
