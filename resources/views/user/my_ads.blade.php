@@ -5,6 +5,10 @@
 @section('content')
     <div class="container">
         <div class="row">
+            <div class="col s12 ">
+            <h3>
+                Liste de vos annonces
+            </h3>
 
             @if (session('message'))
                 <script type="text/javascript">
@@ -61,23 +65,26 @@
                     </div>
                 @endforeach
             @else
-                <div class="card-panel">
-                    <div class="section center">
-                        <p>
-                            {{ Html::image('public/img/vehicles/warning.svg',
-                                'Icon d\'un panneau de signalisation',
-                                array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
-                            }}
-                            Vous n'avez pas encore ajouté d'annonce. Vous pouvez en ajouter en
-                            <a href="{{route('create_transport_offer')}}">cliquant ici</a>.
-                            {{ Html::image('public/img/vehicles/warning.svg',
-                                'Icon d\'un panneau de signalisation',
-                                array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
-                            }}
-                        </p>
+                <div class="col s10 offset-s1">
+                    <div class="card-panel">
+                        <div class="section center">
+                            <p>
+                                {{ Html::image('public/img/vehicles/warning.svg',
+                                    'Icon d\'un panneau de signalisation',
+                                    array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
+                                }}
+                                Vous n'avez pas encore ajouté d'annonce. Vous pouvez en ajouter en
+                                <a href="{{route('create_transport_offer')}}">cliquant ici</a>.
+                                {{ Html::image('public/img/vehicles/warning.svg',
+                                    'Icon d\'un panneau de signalisation',
+                                    array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
+                                }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             @endif
+        </div>
         </div>
     </div>
 
