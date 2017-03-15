@@ -27,44 +27,49 @@ class UserController extends Controller
 
     public function getProfileAuth()
     {
-        $auth = Auth::user();
-        $reservations = Reservation::where('transporter_id', Auth::user()->id)
-            ->where('validated', '0')
-            ->count();
+        if(Auth::check()){
+            $auth = Auth::user();
+            $reservations = Reservation::where('transporter_id', Auth::user()->id)
+                ->where('validated', '0')
+                ->count();
 
 
-        $type_vehicles = TypeVehicle::all();
-        $vehicles = $auth->vehicles;
-        $vehicles_id = array();
-        foreach ($vehicles as $vehicle) {
-            $vehicles_id[] = $vehicle->id;
-        }
-        $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
-        $city_steps = array();
-        foreach ($transport_offers as $transport_offer) {
+            $type_vehicles = TypeVehicle::all();
+            $vehicles = $auth->vehicles;
+            $vehicles_id = array();
+            foreach ($vehicles as $vehicle) {
+                $vehicles_id[] = $vehicle->id;
+            }
+            $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
+            $city_steps = array();
+            foreach ($transport_offers as $transport_offer) {
 
-            $steps = $transport_offer->steps;
-            foreach ($steps as $step) {
-                $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+                $steps = $transport_offer->steps;
+                foreach ($steps as $step) {
+                    $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
-                $output = json_decode($geocode);
+                    $output = json_decode($geocode);
 
-                if (isset($output->results[0])) {
+                    if (isset($output->results[0])) {
 
-                    $city_steps[$transport_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                        $city_steps[$transport_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                    }
                 }
             }
-        }
-        $data = array(
-            'user' => $auth,
-            'type_vehicles' => $type_vehicles,
-            'transport_offers' => $transport_offers,
-            'steps' => $city_steps,
-            'vehicles' => $vehicles,
-            'reservations' => $reservations
-        );
+            $data = array(
+                'user' => $auth,
+                'type_vehicles' => $type_vehicles,
+                'transport_offers' => $transport_offers,
+                'steps' => $city_steps,
+                'vehicles' => $vehicles,
+                'reservations' => $reservations
+            );
 
-        return view('user.profile', $data);
+            return view('user.profile', $data);
+        }else{
+            return redirect()->route('login');
+        }
+
     }
 
     public function getBookingAuth()

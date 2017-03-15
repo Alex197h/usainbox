@@ -68,6 +68,12 @@
                             <div class="chip"> {{ $reservations }}</div>@endif
                     </a>
 
+                    <a href="{{ route('my_reviews') }}" class="white-text">
+                        <button type="button" class="btn btnProfile">
+                            Vos avis
+                        </button>
+                    </a>
+
                 </div>
             </div>
 
