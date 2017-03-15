@@ -58,7 +58,7 @@ class ShippingOffersController extends Controller{
         $alert->user_id = $auth->id;
 
         if($alert->save()){
-            return redirect()->route('user_profile');
+            return redirect()->route('user_profile')->with('message', 'Alerte enregistrée !');
         }else{
             return redirect()->back()->withInput();
         }
