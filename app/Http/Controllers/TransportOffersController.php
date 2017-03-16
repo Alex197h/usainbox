@@ -186,7 +186,7 @@ class TransportOffersController extends Controller
             $results[] = $offer->transport_offer_id;
         }
 
-        $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->get();
+        $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->orderBy('date_start')->get();
 
         $city_steps = array();
         foreach ($view_offers as $view_offer) {
