@@ -145,7 +145,7 @@
                     @endif
                 </div>
                 <div class="input-field infoProfile col s12 m6{{ $errors->has('birthday') ? ' has-error' : '' }}">
-                    <input placeholder="" class="datepicker" name="birthday" id="birthday" type="date"
+                    <input placeholder="" class="datepicker2" name="birthday" id="birthday" type="date"
                            value="{{$user->birthday}}">
                     <label for="birthday">
                         {{

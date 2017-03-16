@@ -21,7 +21,7 @@
                 <h4>Ajouter un véhicule</h4>
             </div>
             <div class="section">
-                <form role="form" method="POST" action="{{ route('post_user_vehicles') }}">
+                <form role="form" method="POST" action="{{ route('post_user_vehicles') }}" novalidate>
                     {{ csrf_field() }}
                     <div class="col s12 m6{{ $errors->has('vehicle_type') ? ' has-error' : '' }}">
                         <label for="vehicle_type">Type de véhicule <span class="obligatoire">*</span></label>
