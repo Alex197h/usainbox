@@ -14,10 +14,12 @@
                 }}
             </div>
             <div class="col s9">
-                <h4>{{$user->last_name}} {{$user->first_name}}</h4>
+                <h4>{{$user->fullname}}</h4>
                 <p><span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span></p>
                 <p>Né le {{$user->birthday}}</p>
                 <p>{{ $user->description }}</p>
+                <a href="mailto:{{ $user->email }}" class="btn">Contacter {{ $user->fullname }}</a>
+                <p>(Si vous n'avez pas d'application de messagerie : {{ $user->email }})</p>
             </div>
         </div>
 
