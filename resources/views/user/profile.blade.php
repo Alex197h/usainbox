@@ -350,7 +350,7 @@
             }
         });
         $('.deleteprofile').on('click', function () {
-            var r = confirm("Etes-vous sûr de vouloir supprimer votre profile ?");
+            var r = confirm("Etes-vous sûr de vouloir supprimer votre compte ?");
             if (r == true) {
                 location.href = '{{ route('delete_auth_profile')}}'
             }

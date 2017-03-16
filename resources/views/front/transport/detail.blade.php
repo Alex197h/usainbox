@@ -114,36 +114,58 @@
                     @endif
                 @endif
             </div>
-            @foreach($questions as $question)
-                <div class="row card-panel">
-                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align green accent-1' : 'orange lighten-4' }}">
+            @if(!$questions->isEmpty())
+            <div class="row card-panel">
+                <div class="col s8 offset-s2">
+                    @foreach($questions as $question)
+
+                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align right reponse' : 'question' }}">
                         <a href="{{ route('profile', $question->user->id) }}" title="{{ $question->user->full_name }}">{{ $question->user->full_name }}</a>
                         <br>
                         {{ $question->question }}
                     </div>
+                    @endforeach
                 </div>
-            @endforeach
-            
+            </div>
+
+            @endif
             @if($auth)
             <div class="row card-panel">
                 <div class="row">
-                    <h5>Commentaires</h5>
+                    <h5>
+                        Commentaires
+                        {{
+                            Html::image('public/img/annonce/comments.svg',
+                            'Icon d\'une conversation',
+                            array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
+                        }}
+                    </h5>
                     <form class="col s12" action="" method="post">
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea name="question" class="materialize-textarea" required></textarea>
-                                <label for="question">Question</label>
+                                <label for="question">Pose ta question</label>
                             </div>
                             {{ csrf_field() }}
-                            <input class="waves-effect waves-light btn" type="submit" value="Envoyer">
+                            <input class="waves-effect waves-light btnValider btn right" type="submit" value="Envoyer">
                         </div>
                     </form>
                 </div>
             </div>
             @else
-                <div class="row card-panel orange accent-1">
+                <div class="row card-panel center accent-1">
                     <div class="row">
-                        Vous devez être connecté pour poster un commentaire.
+                        {{
+                            Html::image('public/img/annonce/comments.svg',
+                            'Icon d\'une conversation',
+                            array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
+                        }}
+                        Vous devez être <a href="{{route('login')}}">connecté </a> pour poster un commentaire.
+                        {{
+                            Html::image('public/img/annonce/comments.svg',
+                            'Icon d\'une conversation',
+                            array('class' => 'responsive-img iconW', 'style' => 'vertical-align:middle;'))
+                        }}
                     </div>
                 </div>
             @endif
