@@ -118,10 +118,9 @@
             <div class="row card-panel">
                 <div class="col s8 offset-s2">
                     @foreach($questions as $question)
-
-                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align right reponse' : 'question' }}">
+                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align reponse' : 'question' }}">
                         <a href="{{ route('profile', $question->user->id) }}" title="{{ $question->user->full_name }}">{{ $question->user->full_name }}</a>
-                        <br>
+                        <hr>
                         {{ $question->question }}
                     </div>
                     @endforeach
@@ -133,7 +132,7 @@
             <div class="row card-panel">
                 <div class="row">
                     <h5>
-                        Commentaires
+                        Une question ?
                         {{
                             Html::image('public/img/annonce/comments.svg',
                             'Icon d\'une conversation',
