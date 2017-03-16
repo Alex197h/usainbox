@@ -116,7 +116,7 @@
             </div>
             @foreach($questions as $question)
                 <div class="row card-panel">
-                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align' : '' }}">
+                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align green accent-1' : 'orange lighten-4' }}">
                         <a href="{{ route('profile', $question->user->id) }}" title="{{ $question->user->full_name }}">{{ $question->user->full_name }}</a>
                         <br>
                         {{ $question->question }}
