@@ -56,7 +56,9 @@ class TransportOffersController extends Controller
         if ($request->has('max_height')) $transport->max_height = $request->input('max_height');
         if ($request->has('max_weight')) $transport->max_weight = $request->input('max_weight');
         $transport->max_volume = $request->input('max_volume');
-        $transport->date_start = date('Y-m-d', strtotime($request->input('date_start')));
+        $datetime = $request->input('date_start').' '.$request->input('hour_start');
+
+        $transport->date_start = $datetime;
 
         $transport->is_regular = $request->input('is_regular') ? 1 : 0;
         $transport->highway = $request->input('highway') ? 1 : 0;

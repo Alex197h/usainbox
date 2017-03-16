@@ -71,31 +71,48 @@
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile infoDepAnnonce"{{ $errors->has('date_start') ? ' has-error' : '' }}>
+                <div class="col s12 m6 infoProfile"{{ $errors->has('date_start') ? ' has-error' : '' }}>
                     <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
 
-                    <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa hh:mm"
+                    <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
                            name="date_start" value="{{ old('date_start') }}">
 
                     @if ($errors->has('date_start'))
                         <span>
-                    <strong>{{ $errors->first('date_start') }}</strong>
-                </span>
+                            <strong>{{ $errors->first('date_start') }}</strong>
+                        </span>
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile infoDepAnnonce "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
-                    <label for="max_volume">Volume total des colis accepté <span class="obligatoire">*</span></label>
+
+                <div class="col s12 m6 infoProfile "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
+                    <label for="max_volume">Volume total des colis accepté <span
+                                class="obligatoire">*</span></label>
 
                     <input id="max_volume" type="number" class="form-control" placeholder="Volume max en cm3"
                            name="max_volume" value="{{ old('max_volume') }}">
 
                     @if ($errors->has('max_volume'))
                         <span>
-                    <strong>{{ $errors->first('max_volume') }}</strong>
-                </span>
+                                <strong>{{ $errors->first('max_volume') }}</strong>
+                            </span>
                     @endif
                 </div>
+
+
+                <div class="col s12 m6 infoProfile"{{ $errors->has('hour_start') ? ' has-error' : '' }}>
+                    <label for="hour_start">Heure de départ</label>
+
+                    <input id="hour_start" type="time" class="form-control" placeholder="hh:mm"
+                           name="hour_start" value="{{ old('hour_start') }}">
+
+                    @if ($errors->has('hour_start'))
+                        <span>
+                            <strong>{{ $errors->first('hour_start') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_width') ? ' has-error' : '' }}>
                     <label for="max_width">Largeur maximale des colis accepté</label>
@@ -105,10 +122,11 @@
 
                     @if ($errors->has('max_width'))
                         <span>
-                    <strong>{{ $errors->first('max_width') }}</strong>
-                </span>
+                                <strong>{{ $errors->first('max_width') }}</strong>
+                            </span>
                     @endif
                 </div>
+
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_length') ? ' has-error' : '' }}>
                     <label for="max_length">Longueur maximum des colis accepté</label>
@@ -118,8 +136,8 @@
 
                     @if ($errors->has('max_length'))
                         <span>
-                    <strong>{{ $errors->first('max_length') }}</strong>
-                </span>
+                                <strong>{{ $errors->first('max_length') }}</strong>
+                            </span>
                     @endif
                 </div>
 
@@ -266,16 +284,17 @@
                     updateMap();
                 });
             </script>
-            <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+            <script async defer
+                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
             <script type="text/javascript">
                 var MapElement = document.getElementById('map');
                 //var ShowElement = document.getElementById('show');
                 var map;
-                
+
                 var options = {types: ['(cities)']};
-                function addAutocomplete(e){
+                function addAutocomplete(e) {
                     var a1 = new google.maps.places.Autocomplete(e, options);
-                    
+
                     a1.input = e;
                     a1.addListener('place_changed', saveLocation);
                     a1.addListener('place_changed', updateMap);
@@ -292,78 +311,78 @@
                         scrollwheel: false,
                         zoom: 6
                     });
-                    
+
                     addAutocomplete(document.getElementById('start_city'));
                     addAutocomplete(document.getElementById('end_city'));
                 }
-                
+
                 var markers = [];
                 var paths = [];
                 var locations = {};
-                function clearAll(){
-                    for(var i in markers){
-                        if(markers[i]) {
+                function clearAll() {
+                    for (var i in markers) {
+                        if (markers[i]) {
                             markers[i].setMap(null);
                         }
                     }
                     markers = [];
-                    for(var i in paths){
-                        if(paths[i]) {
+                    for (var i in paths) {
+                        if (paths[i]) {
                             paths[i].setMap(null);
                         }
                     }
                     paths = [];
                 }
-                function addMarker(name){
+                function addMarker(name) {
                     var marker = new google.maps.Marker({
                         position: locations[name],
                         map: map,
                     });
-                    
+
                     markers.push(marker);
                     return marker;
                 }
-                function saveLocation(){
+                function saveLocation() {
                     var place = this.getPlace();
                     var name = this.input.value;
-                    
+
                     // if(/[0-9]{5,6} /.test(name)){
-                        // name = name.replace(/[0-9]{5,6} /, '');
+                    // name = name.replace(/[0-9]{5,6} /, '');
                     // }
                     locations[name] = place.geometry.location;
                 }
-                
-                function updateMap(){
+
+                function updateMap() {
                     var Cities = {
                         start: null,
                         end: null,
                         steps: [],
                     }
                     var cities = [];
-                    
+
                     clearAll();
-                    
-                    $('.step').each(function(){
-                        if(this.value) cities.push(this.value)
+
+                    $('.step').each(function () {
+                        if (this.value) cities.push(this.value)
                     });
-                    
-                    if(cities.length > 0){
+
+                    if (cities.length > 0) {
                         Cities.start = cities[0];
                         var ms = addMarker(Cities.start);
-                        if(cities.length > 1){
-                            Cities.end = cities[cities.length-1];
+                        if (cities.length > 1) {
+                            Cities.end = cities[cities.length - 1];
                             // addMarker(Cities.end);
                         }
-                        if(cities.length > 2){
-                            for(var i=1; i<=cities.length-2;i++){
+                        if (cities.length > 2) {
+                            for (var i = 1; i <= cities.length - 2; i++) {
                                 Cities.steps.push(cities[i]);
                                 // addMarker(cities[i]);
                             }
                         }
-                        
-                        if(!Cities.end){
-                            
-                        }else {
+
+                        if (!Cities.end) {
+
+                        } else {
                             ms.setMap(null);
                             var Directions = new google.maps.DirectionsRenderer({
                                 map: map,
@@ -379,9 +398,9 @@
                             }
                             console.log(origin)
                             var waypoints = [];
-                            
-                            if(Cities.steps.length > 0) {
-                                for(var i in Cities.steps) {
+
+                            if (Cities.steps.length > 0) {
+                                for (var i in Cities.steps) {
                                     var city = locations[Cities.steps[i]];
                                     waypoints.push({
                                         location: {
@@ -401,7 +420,7 @@
                             }
                             var directionsService = new google.maps.DirectionsService();
                             directionsService.route(request, function (response, status) {
-                                if(status == google.maps.DirectionsStatus.OK) {
+                                if (status == google.maps.DirectionsStatus.OK) {
                                     Directions.setDirections(response);
                                     paths.push(Directions);
                                 }
@@ -409,7 +428,7 @@
                         }
                     }
                 }
-                
+
                 var dropedElementSortingOrder;
                 var draggedElementSortingOrder;
                 var cols;

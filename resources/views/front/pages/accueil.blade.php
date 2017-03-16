@@ -25,9 +25,9 @@
                            value="{{ old('city_start') }}" required>
                     <label style="display: none;" for="city_start">Ville départ</label>
                 </div>
-                <div style="text-align: center;" class="input-field col s2 l1 offset-s5">
-                    <button type="button" style="height: 44px;" id="switch" class="col s12 btn white black-text">
-                        <i class="material-icons">compare_arrows</i>
+                <div style="text-align: center;" class="input-field col s4 l1 offset-s4">
+                    <button type="button" style="height: 44px;" id="switch" class="valign-wrapper col s12 btn white black-text">
+                        <i class="valign material-icons">compare_arrows</i>
                         {{--{{--}}
                         {{--Html::image('public/img/switch.svg',--}}
                         {{--'Deux flèches pour switch',--}}
