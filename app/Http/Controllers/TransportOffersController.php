@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\TransportOffer;
 use App\TransportStep;
 use App\Vehicle;
+use App\Question;
 use App\TypeVehicle;
 use Auth;
 
@@ -55,7 +56,9 @@ class TransportOffersController extends Controller
         if ($request->has('max_height')) $transport->max_height = $request->input('max_height');
         if ($request->has('max_weight')) $transport->max_weight = $request->input('max_weight');
         $transport->max_volume = $request->input('max_volume');
-        $transport->date_start = date('Y-m-d', strtotime($request->input('date_start')));
+        $datetime = $request->input('date_start').' '.$request->input('hour_start');
+
+        $transport->date_start = $datetime;
 
         $transport->is_regular = $request->input('is_regular') ? 1 : 0;
         $transport->highway = $request->input('highway') ? 1 : 0;
@@ -203,14 +206,13 @@ class TransportOffersController extends Controller
         return view('front.transport.list', ['offers' => $view_offers, 'steps' => $city_steps, 'city_start' => $request->input('city_start'), 'city_end' => $request->input('city_end')]);
     }
 
-    public function detail(TransportOffer $transportOffer)
-    {
-
-
+    public function detail(Request $request, TransportOffer $transportOffer){
         $city_steps = array();
 
         $steps = $transportOffer->steps;
-
+        $user = $transportOffer->user;
+        $auth = Auth::user();
+        
         foreach ($steps as $step) {
             $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
@@ -220,12 +222,29 @@ class TransportOffersController extends Controller
                 $city_steps[$transportOffer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
             }
         }
-
+        
+        if($request->has('question')){
+            $question = new Question();
+            
+            $question->user_id = $auth->id;
+            $question->transport_offer_id = $transportOffer->id;
+            $question->question = $request->question;
+            // dd($question->toArray());
+            $question->save();
+            return redirect()->back();
+        }
+        
         $vehicle = $transportOffer->vehicle;
-
-        $user = $transportOffer->user;
-
-        return view('front.transport.detail', array('offer' => $transportOffer, 'user' => $user, 'vehicle' => $vehicle, 'steps' => $city_steps));
+        
+        
+        return view('front.transport.detail', [
+            'offer' => $transportOffer,
+            'questions' => $transportOffer->questions,
+            'user' => $user,
+            'auth' => $auth,
+            'vehicle' => $vehicle,
+            'steps' => $city_steps
+        ]);
     }
 
 

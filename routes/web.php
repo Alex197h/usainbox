@@ -12,8 +12,10 @@ Route::get('offer/transport/create', 'TransportOffersController@create')->name('
 Route::post('offer/transport/create', 'TransportOffersController@postCreate')->name('post_create_transport_offer');
 
 
-Route::model('transport_id', App\TransportOffer::class);
-Route::get('offer/transport/detail/{transport_id?}', 'TransportOffersController@detail')->name('detail_transport_offer');
+Route::bind('transport_id', function($id) {
+    return App\TransportOffer::with('questions.user')->findOrFail($id);
+});
+Route::any('offer/transport/detail/{transport_id?}', 'TransportOffersController@detail')->name('detail_transport_offer');
 Route::post('offer/transport/booking', 'TransportOffersController@booking')->name('booking');
 Route::post('offer/transport/booking/save', 'TransportOffersController@booking_validate')->name('booking_validate');
 
