@@ -28,6 +28,8 @@ class AdminController extends Controller {
         if($page == 'edit'){
             $user = User::find($id);
             if($user){
+                $part = session()->has('part') ? session('part') : 'profil';
+                
                 if($this->post && $request->has('save_user')){
                     $user->last_name = $request->get('last_name');
                     $user->first_name = $request->get('first_name');
@@ -83,7 +85,7 @@ class AdminController extends Controller {
                 $v = new Vehicle();
                 $user->vehicles->push($v);
                 
-                $part = session()->has('part') ? session('part') : 'profil';
+                
                 return view('admin.edit_user', [
                     'part' => $part,
                     'user' => $user,
@@ -173,16 +175,30 @@ class AdminController extends Controller {
             if($transport){
                 if($this->post){
                     if($request->has('save_infos')){
-                        var_dump('infos');
+                        $transport->date_start = $request->date_start;
+                        $transport->max_weight = $request->max_weight ?: 0;
+                        $transport->max_volume = $request->max_volume ?: 0;
+                        $transport->max_length = $request->max_length ?: 0;
+                        $transport->max_width = $request->max_width ?: 0;
+                        $transport->max_height = $request->max_height ?: 0;
+                        $transport->description = $request->description;
+                        $transport->is_regular = $request->is_regular ?: 0;
+                        $transport->highway = $request->highway ?: 0;
+                        $transport->detour = $request->detour ?: 0;
+                        $transport->full = $request->full ?: 0;
+                        
+                        if($transport->isDirty()){
+                            $transport->save();
+                        }
+                        redirect()->back();
                     }
                     else if($request->has('save_steps')){
-                        
                         $part = 'steps';
                     }
                 }
-                var_dump($part);
+                
                 return view('admin.edit_transport', [
-                    'part' => 'default',
+                    'part' => $part,
                     'transport' => $transport,
                     'user' => $transport->user,
                     'steps' => $transport->steps,

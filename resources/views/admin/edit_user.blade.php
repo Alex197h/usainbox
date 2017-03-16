@@ -161,12 +161,12 @@
                                                             <button type="submit" class="btn btn-success">Enregistrer</button>
                                                         </div>
                                                     </div>
-                                                    <input type="hidden" name="save_vehicle" value="{{ $vehicle->id }}">
+                                                    <input type="hidden" name="save_vehicle" value="{{ $vehicle->id ?: 'new' }}">
                                                     {{ csrf_field() }}
                                                 </form>
                                             </div>
                                         </div>
-                                </div>
+                                    </div>
                                 @endforeach
                                 <script>
                                     $('.check_default').on('click', function(){
