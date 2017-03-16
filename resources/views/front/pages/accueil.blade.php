@@ -122,8 +122,7 @@
         </div>
     </div>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
 
 
@@ -208,7 +207,6 @@
                             }
                         }
                         this.setVisible(true);
-
                         if (!this.path) this.path = setPath(this.cities[0]);
                         this.path.setMap(map);
                         this.showPath = true;
@@ -327,7 +325,8 @@
                                     Newdiv.on('click', function () {
                                         if (!$(this).hasClass('selected')) {
                                             clone.path.setMap(null);
-                                            clone.path = setPath(clone.cities[$(this).attr('offer-id') - 1]);
+
+                                            clone.path = setPath(Cities[$(this).attr('offer-id')]);
                                             clone.path.setMap(map);
                                         }
                                     });

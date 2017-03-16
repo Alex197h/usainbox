@@ -14,6 +14,7 @@ use App\Vehicle;
 use App\Question;
 use App\TypeVehicle;
 use Auth;
+use Debugbar;
 
 class TransportOffersController extends Controller
 {
@@ -196,8 +197,16 @@ class TransportOffersController extends Controller
 
                 $output = json_decode($geocode);
 
+                $res = '';
+                foreach($output->results[0]->address_components as $e){
+                    if(in_array('locality', $e->types)){
+                        $res = $e->long_name;
+                        break;
+                    }
+                }
+
                 if (isset($output->results[0])) {
-                    $city_steps[$view_offer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                    $city_steps[$view_offer->id][$step->step] = $res;
                 }
             }
         }
@@ -212,20 +221,28 @@ class TransportOffersController extends Controller
         $steps = $transportOffer->steps;
         $user = $transportOffer->user;
         $auth = Auth::user();
-        
+
         foreach ($steps as $step) {
             $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
             $output = json_decode($geocode);
 
             if (isset($output->results[0])) {
-                $city_steps[$transportOffer->id][$step->step] = $output->results[0]->address_components[2]->long_name;
+                $res = '';
+                foreach($output->results[0]->address_components as $e){
+                    if(in_array('locality', $e->types)){
+                        $res = $e->long_name;
+                        break;
+                    }
+                }
+
+                $city_steps[$transportOffer->id][$step->step] = $res;
             }
         }
-        
+
         if($request->has('question')){
             $question = new Question();
-            
+
             $question->user_id = $auth->id;
             $question->transport_offer_id = $transportOffer->id;
             $question->question = $request->question;
@@ -233,10 +250,10 @@ class TransportOffersController extends Controller
             $question->save();
             return redirect()->back();
         }
-        
+
         $vehicle = $transportOffer->vehicle;
-        
-        
+
+
         return view('front.transport.detail', [
             'offer' => $transportOffer,
             'questions' => $transportOffer->questions,

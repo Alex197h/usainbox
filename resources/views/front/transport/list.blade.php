@@ -44,6 +44,14 @@
                 </div>
             </div>
         </form>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+        <script>
+            function initMap(){
+                var options = {types: ['(cities)']};
+                new google.maps.places.Autocomplete(document.getElementById('city_start'), options);
+                new google.maps.places.Autocomplete(document.getElementById('city_end'), options);
+            }
+        </script>
 
         @if(!$offers->isEmpty())
             @foreach($offers as $offer)
