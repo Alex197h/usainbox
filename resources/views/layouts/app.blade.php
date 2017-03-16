@@ -243,6 +243,7 @@ $User = Auth::user();
         labelMonthPrev:"Mois précedent",
         labelMonthSelect:"Sélectionner un mois",
         labelYearSelect:"Sélectionner une année",
+        format: 'yyyy-mm-dd'
 
     });
 
@@ -263,6 +264,7 @@ $User = Auth::user();
         labelMonthPrev:"Mois précedent",
         labelMonthSelect:"Sélectionner un mois",
         labelYearSelect:"Sélectionner une année",
+        format: 'yyyy-mm-dd'
 
     });
 

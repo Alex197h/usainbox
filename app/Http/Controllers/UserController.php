@@ -149,8 +149,8 @@ class UserController extends Controller
             $rules['email'] = 'required|email|max:255|unique:users';
 
         $this->validate($request, $rules);
-        dd($request->input('birthday'));
-        dd(date('Y-m-d', strtotime($request->input('birthday'))));
+//        dd($request->input('birthday'));
+//        dd(date('Y-m-d', strtotime($request->input('birthday'))));
 
         if ($auth->email != $request->input('email'))
             $auth->email = $request->input('email');
