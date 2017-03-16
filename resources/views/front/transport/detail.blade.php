@@ -95,23 +95,58 @@
                         <br>
                     </div>
                 </div>
-                @if (Auth::check())
-                    <form method="post" action="{{ route('booking') }}" class="col s12">
-                        {{ csrf_field() }}
-                        <input type="hidden" value="{{ $user->id }}" name="transporter_id">
-                        <input type="hidden" value="{{ $offer->id }}" name="transport_offer_id">
-                        <button type="submit" class="btn btnValider white-text right">
-                            Envoyer une demande
-                        </button>
-                    </form>
-                @else
-                    <div class="col s12">
-                        <a href="{{route('login')}}" class="btn btnValider white-text right">
-                            Envoyer une demande
-                        </a>
-                    </div>
+                @if($auth && $user->id != $auth->id || !$auth)
+                    @if($auth)
+                        <form method="post" action="{{ route('booking') }}" class="col s12">
+                            {{ csrf_field() }}
+                            <input type="hidden" value="{{ $user->id }}" name="transporter_id">
+                            <input type="hidden" value="{{ $offer->id }}" name="transport_offer_id">
+                            <button type="submit" class="btn btnValider white-text right">
+                                Envoyer une demande
+                            </button>
+                        </form>
+                    @else
+                        <div class="col s12">
+                            <a href="{{route('login')}}" class="btn btnValider white-text right">
+                                Envoyer une demande
+                            </a>
+                        </div>
+                    @endif
                 @endif
             </div>
+            @foreach($questions as $question)
+                <div class="row card-panel">
+                    <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align' : '' }}">
+                        <a href="{{ route('profile', $question->user->id) }}" title="{{ $question->user->full_name }}">{{ $question->user->full_name }}</a>
+                        <br>
+                        {{ $question->question }}
+                    </div>
+                </div>
+            @endforeach
+            
+            @if($auth)
+            <div class="row card-panel">
+                <div class="row">
+                    <h5>Commentaires</h5>
+                    <form class="col s12" action="" method="post">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <textarea name="question" class="materialize-textarea" required></textarea>
+                                <label for="question">Question</label>
+                            </div>
+                            {{ csrf_field() }}
+                            <input class="waves-effect waves-light btn" type="submit" value="Envoyer">
+                        </div>
+                    </form>
+                </div>
+            </div>
+            @else
+                <div class="row card-panel orange accent-1">
+                    <div class="row">
+                        Vous devez être connecté pour poster un commentaire.
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
