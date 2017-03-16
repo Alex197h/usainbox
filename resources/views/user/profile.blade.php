@@ -180,40 +180,37 @@
                             </span>
                     @endif
                 </div>
+
+
+                <div class="input-field infoProfile col s12 m6{{ $errors->has('help_charge') ? ' has-error' : '' }}">
+                    <input class="with-gap" name="charge" value="1" type="radio"
+                           id="help_charge" {{ ($user->help_charge) ? 'checked' : '' }}>
+                    <label class="col s6" for="help_charge">
+
+                        Aide pour porter les colis
+                    </label>
+
+                    <input class="with-gap" name="charge" value="0" type="radio"
+                           id="not_help_charge" {{ ($user->help_charge) ? '' : 'checked' }}>
+                    <label class="col s6" for="not_help_charge">
+
+                        N'aide pas pour porter les colis
+                    </label>
+                    @if ($errors->has('help_charge'))
+                        <span class="col s12">
+                                <strong>{{ $errors->first('help_charge') }}</strong>
+                            </span>
+                    @endif
+                </div>
+
+
                 <div class="col s12">
                     <button type="submit" class="btn btnValider white-text right">
                         Enregistrer
                     </button>
                 </div>
 
-                <div class="input-field infoProfile col s12 m6{{ $errors->has('help_charge') ? ' has-error' : '' }}">
-                    <input class="with-gap" name="help_charge" value="1" type="radio"
-                           id="male" {{ ($user->help_charge) ? 'checked' : '' }}>
-                    <label class="col s6" for="help_charge">
-                        {{
-                            Html::image('public/img/user/man.svg',
-                            'Icon du sexe masculin',
-                            array('class' => 'responsive-img iconP'))
-                        }}
-                        Homme
-                    </label>
 
-                    <input class="with-gap" name="gender" value="0" type="radio"
-                           id="female" {{ ($user->gender) ? '' : 'checked' }}>
-                    <label class="col s6" for="female">
-                        {{
-                            Html::image('public/img/user/girl.svg',
-                            'Icon du sexe feminin',
-                            array('class' => 'responsive-img iconP'))
-                        }}
-                        Femme
-                    </label>
-                    @if ($errors->has('gender'))
-                        <span class="col s12">
-                                <strong>{{ $errors->first('gender') }}</strong>
-                            </span>
-                    @endif
-                </div>
 
             </div>
         </form>
@@ -329,6 +326,18 @@
             @endif
         </div>
 
+        <div class="card-panel center">
+            <div class="row">
+                <div class="col s12">
+                    <h4>Supprimer définitivement votre compte</h4>
+                </div>
+                <div class="col s12">
+                    <button class="deleteprofile btn red">
+                        Supprimer le compte
+                    </button>
+                </div>
+            </div>
+        </div>
 
     </div>
 
@@ -338,6 +347,12 @@
             var r = confirm("Etes-vous sûr de vouloir supprimer le véhicule ?");
             if (r == true) {
                 location.href = '{{ route('delete_vehicle')}}' + '/' + id;
+            }
+        });
+        $('.deleteprofile').on('click', function () {
+            var r = confirm("Etes-vous sûr de vouloir supprimer votre profile ?");
+            if (r == true) {
+                location.href = '{{ route('delete_auth_profile')}}'
             }
         });
 

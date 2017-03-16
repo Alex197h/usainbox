@@ -25,6 +25,12 @@ class UserController extends Controller
             return view('user.other_profile', ['user' => $user]);
     }
 
+    public function deleteAuthProfile()
+    {
+        Auth::user()->delete();
+        return redirect()->route('home')->with('message', 'Profil supprimé !');
+    }
+
     public function getProfileAuth()
     {
         if(Auth::check()){
@@ -151,6 +157,7 @@ class UserController extends Controller
         if ($auth->email != $request->input('email'))
             $auth->email = $request->input('email');
         $auth->gender = $request->input('gender');
+        $auth->help_charge = $request->input('charge');
         $auth->birthday = date('Y-m-d', strtotime($request->input('birthday')));
         $auth->phone = $request->input('phone');
         $auth->description = $request->input('description');

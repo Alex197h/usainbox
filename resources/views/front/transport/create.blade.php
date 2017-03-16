@@ -19,8 +19,8 @@
                         <div class="card-stacked col s12">
                             <div class="section detail-steps " id="stepsArea">
                                 <div class="infoDepAnnonce" {{ $errors->has('start_city') ? ' has-error' : '' }}>
-                                    <label for="start_city">Ville de départ <span class="obligatoire">*</span></label>
-                                    <input id="start_city" type="text" class="form-control step"
+                                    <label class="col s12" for="start_city">Ville de départ <span class="obligatoire">*</span></label>
+                                    <input id="start_city" type="text" class="col s12 form-control step"
                                            name="start_city" value="{{ old('start_city') }}" draggable="true">
                                     @if ($errors->has('start_city'))
                                         <span>
@@ -42,8 +42,8 @@
                                 </div>
                                 <div class="col s12 infoDepAnnonce"
                                      id="endstep" {{ $errors->has('end_city') ? ' has-error' : '' }} >
-                                    <label for="end_city">Ville d'arrivée <span class="obligatoire">*</span></label>
-                                    <input id="end_city" type="text" class="form-control step" name="end_city"
+                                    <label class="col s12" for="end_city">Ville d'arrivée <span class="obligatoire">*</span></label>
+                                    <input id="end_city" type="text" class="col s12 form-control step" name="end_city"
                                            value="{{ old('end_city') }}" draggable="true">
 
                                     @if ($errors->has('end_city'))
@@ -59,7 +59,7 @@
 
                 <div class="infoProfile infoDepAnnonce col s12" {{ $errors->has('vehicle') ? ' has-error' : '' }}>
                     <label for="vehicle">Véhicule utilisé <span class="obligatoire">*</span></label>
-                    <select id="vehicle" type="text" class="form-control" name="vehicle" required>
+                    <select id="vehicle" type="text" class="col s12 form-control" name="vehicle" required>
                         @foreach($vehicles as $vehicle)
                             <option value="{{ $vehicle->id }}"{{ $vehicle->default ? ' selected':'' }}>{{ $vehicle->car_brand }} {{ $vehicle->car_model }}</option>
                         @endforeach
@@ -71,7 +71,7 @@
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile"{{ $errors->has('date_start') ? ' has-error' : '' }}>
+                <div class="col s12 m4 infoProfile"{{ $errors->has('date_start') ? ' has-error' : '' }}>
                     <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
 
                     <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
@@ -85,8 +85,8 @@
                 </div>
 
 
-                <div class="col s12 m6 infoProfile "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
-                    <label for="max_volume">Volume total des colis accepté <span
+                <div class="col s12 m4 infoProfile "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
+                    <label for="max_volume">Volume des colis <span
                                 class="obligatoire">*</span></label>
 
                     <input id="max_volume" type="number" class="form-control" placeholder="Volume max en cm3"
@@ -100,8 +100,9 @@
                 </div>
 
 
-                <div class="col s12 m6 infoProfile"{{ $errors->has('hour_start') ? ' has-error' : '' }}>
-                    <label for="hour_start">Heure de départ</label>
+                <div class="col s12 m4 infoProfile"{{ $errors->has('hour_start') ? ' has-error' : '' }}>
+                    <label for="hour_start">Heure de départ <span
+                                class="obligatoire">*</span></label>
 
                     <input id="hour_start" type="time" class="form-control" placeholder="hh:mm"
                            name="hour_start" value="{{ old('hour_start') }}">
