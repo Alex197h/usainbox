@@ -109,6 +109,7 @@
                             </span>
                     @endif
                 </div>
+
                 <div class="input-field infoProfile col s12 m6{{ $errors->has('email') ? ' has-error' : '' }}">
                     <input placeholder="Adresse e-mail" name="email" id="email" type="email" value="{{ $user->email }}">
                     <label for="email">
@@ -185,6 +186,34 @@
                     </button>
                 </div>
 
+                <div class="input-field infoProfile col s12 m6{{ $errors->has('help_charge') ? ' has-error' : '' }}">
+                    <input class="with-gap" name="help_charge" value="1" type="radio"
+                           id="male" {{ ($user->help_charge) ? 'checked' : '' }}>
+                    <label class="col s6" for="help_charge">
+                        {{
+                            Html::image('public/img/user/man.svg',
+                            'Icon du sexe masculin',
+                            array('class' => 'responsive-img iconP'))
+                        }}
+                        Homme
+                    </label>
+
+                    <input class="with-gap" name="gender" value="0" type="radio"
+                           id="female" {{ ($user->gender) ? '' : 'checked' }}>
+                    <label class="col s6" for="female">
+                        {{
+                            Html::image('public/img/user/girl.svg',
+                            'Icon du sexe feminin',
+                            array('class' => 'responsive-img iconP'))
+                        }}
+                        Femme
+                    </label>
+                    @if ($errors->has('gender'))
+                        <span class="col s12">
+                                <strong>{{ $errors->first('gender') }}</strong>
+                            </span>
+                    @endif
+                </div>
 
             </div>
         </form>

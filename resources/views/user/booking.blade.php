@@ -16,8 +16,8 @@
 
             @if(!$reservations->isEmpty())
                 <div class="card-panel">
-                    <table class="responsive-table ">
-                        <thead class="center">
+                    <table class="responsive-table">
+                        <thead class="">
                             <tr>
                                 <th>Date</th>
                                 <th>Type</th>
