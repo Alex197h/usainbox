@@ -75,25 +75,21 @@ class UserController extends Controller
     public function getBookingAuth()
     {
         $auth = Auth::user()->id;
-        $reservations_transporter = Reservation::where('transporter_id', $auth)->get();
-        $reservations_shipper = Reservation::where('shipper_id', $auth)->get();
+        $reservations = Reservation::where('transporter_id', $auth)
+        ->orWhere('shipper_id', $auth)
+        ->orderBy('passage_date', 'asc')
+        ->get();
 
-        $users_transporter = array();
-        foreach ($reservations_transporter as $reservation) {
-            $users_transporter[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
+        $users = array();
+        foreach ($reservations as $reservation) {
+            if($reservation->transporter_id == Auth::user()->id)
+                $users[$reservation->id] = User::where('id', $reservation->shipper_id)->get();
+            else
+                $users[$reservation->id] = User::where('id', $reservation->transporter_id)->get();
         }
-
-        $users_shipper = array();
-        foreach ($reservations_shipper as $reservation) {
-            $users_shipper[$reservation->id] = User::where('id', $reservation->transporter_id)->get();
-        }
-
-
         return view('user.booking', array(
-                'reservations_transporter' => $reservations_transporter,
-                'reservations_shipper' => $reservations_shipper,
-                'users_transporter' => $users_transporter,
-                'users_shipper' => $users_shipper
+                'reservations' => $reservations,
+                'users' => $users
             )
 
         );

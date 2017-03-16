@@ -287,3 +287,31 @@ label{
 .infoDepAnnonce{
     height: 125px !important;
 }
+.dataTables_wrapper .dataTables_paginate{
+    padding-top: 60px !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button.current{
+    background: #a7a6a2 !important;
+    color: black !important;
+    padding: 0.3em 0.8em !important;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button{
+    color: black !important;
+    padding: 0.3em 0.8em !important;
+    border: none !important;
+}
+.dataTables_wrapper .dataTables_info{
+    padding-top: 60px !important;
+}
+.odd{
+    height: 100px !important;
+}
+.dataTables_paginate{
+    text-align: right !important;
+}
+.dataTables_length{
+    display: none !important;
+}
+.paginate_button{
+    cursor: pointer !important;
+}

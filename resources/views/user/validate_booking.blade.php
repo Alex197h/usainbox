@@ -38,8 +38,8 @@
                 <input type="hidden" name="booking_id" value="{{ $booking->id }}">
 
                 <div class="input-field col s12 right-align">
-                    <button type="submit" class="btn btn-primary">
-                        Confirmer le réservation
+                    <button type="submit" class="btn btnValider">
+                        Confirmer la réservation
                     </button>
                 </div>
 
