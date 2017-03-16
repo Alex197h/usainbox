@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="col s12 m6 infoProfile infoDepAnnonce"{{ $errors->has('date_start') ? ' has-error' : '' }}>
-                    <label for="date_start">Date et heure de départ <span class="obligatoire">*</span></label>
+                    <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
 
                     <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa hh:mm"
                            name="date_start" value="{{ old('date_start') }}">

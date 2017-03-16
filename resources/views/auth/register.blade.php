@@ -21,7 +21,7 @@
 
                 <div class="section">
                     <h6 class="center">En 30 secondes avec une adresse e-mail</h6>
-                    <form role="form" method="POST" action="{{ url('/register') }}">
+                    <form role="form" method="POST" action="{{ url('/register') }}" class="row">
                         {{ csrf_field() }}
 
                         <div class="col s12 m6{{ $errors->has('last_name') ? ' has-error' : '' }}">
@@ -109,12 +109,12 @@
                                 </span>
                             @endif
                         </div>
-                        <div class="right-align">
+                        <div class="col s12 right-align">
                             <button type="submit" class=" btn btnValider white-text">
                                 S'enregistrer
                             </button>
                         </div>
-                        <p class="right-align">En cliquant sur S'enregistrer, vous certifiez avoir 18 ans et plus et vous acceptez les <a href="{{ route('page', 'conditions' )}}">Conditions Générales d'Utilisation</a> de Usain Box.</p>
+                        <p class="right-align col s12">En cliquant sur S'enregistrer, vous certifiez avoir 18 ans et plus et vous acceptez les <a href="{{ route('page', 'conditions' )}}">Conditions Générales d'Utilisation</a> de Usain Box.</p>
 
                     </form>
                 </div>
