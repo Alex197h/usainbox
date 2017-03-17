@@ -5,13 +5,25 @@
 @section('content')
     <div class="row">
         <div class="col s12 center">
-            <h4>Publier une annonce</h4>
+            <h4></h4>
         </div>
         <div class="col s12 l4 offset-l1">
             <div id="resss"></div>
             <div class="row" id="map"></div>
         </div>
         <div class="card col s12 l6">
+            <div class="section center">
+                <div class="section">
+                    <h5>
+                        Déposer une annonce
+                        {{
+                            Html::image('public/img/recherche/bell.svg',
+                            'Icon d\'une cloche',
+                            array('class' => 'responsive-img icon', 'style' => 'vertical-align:middle;'))
+                        }}
+                    </h5>
+                </div>
+            </div>
             <form method="post" class="row card-content" action="{{route('post_create_transport_offer')}}">
                 {{ csrf_field() }}
                 <div id="offercopy">
