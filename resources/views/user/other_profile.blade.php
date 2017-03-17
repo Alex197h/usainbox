@@ -14,7 +14,7 @@
                 }}
             </div>
             <div class="col s9">
-                <h4>{{$user->fullname}}</h4>
+                <h4>{{$user->fullname}} <small>({{ $user->note }}/5)</small></h4>
                 <p><span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span></p>
                 <p>Né le {{$user->birthday}}</p>
                 <p>{{ $user->description }}</p>

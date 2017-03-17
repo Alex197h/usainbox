@@ -283,8 +283,15 @@ class TransportOffersController extends Controller
 
             $output = json_decode($geocode);
 
-            if (isset($output->results[1])) {
-                $city_steps[$step->step] = $output->results[1]->address_components[1]->long_name;
+            if (isset($output->results[0])) {
+                $res = '';
+                foreach($output->results[0]->address_components as $e){
+                    if(in_array('locality', $e->types)){
+                        $res = $e->long_name;
+                        break;
+                    }
+                }
+                $city_steps[$step->step] = $res;
 
             }
         }
@@ -303,7 +310,7 @@ class TransportOffersController extends Controller
         );
 
         $this->validate($request, $rules);
-
+        
         $transport_offer = TransportOffer::where('id', $request->input('transport_offer_id'))->first();
 
         $booking = new Reservation();

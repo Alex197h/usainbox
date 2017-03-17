@@ -29,19 +29,20 @@
                                 <th>Prix</th>
                                 <th>Heure de passage</th>
                                 <th>Valider la réservation</th>
+                                <th>Laisser un avis</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             @foreach($reservations as $reservation)
 
-                                <tr>
+                                <tr class="res-line">
                                     <td>{!! date('Y/m/d', strtotime($reservation->passage_date)) !!}</td>
-                                    <td>
+                                    <td class="type_offer">
                                         @if($reservation->shipper_id == Auth::user()->id)
-                                            Expédition
+                                            <span data-type="E">Expédition</span>
                                         @else
-                                            Transport
+                                            <span data-type="T">Transport</span>
                                         @endif
                                     </td>
                                     <td>
@@ -78,6 +79,9 @@
                                                 </form>
                                             @endif
                                         </td>
+                                        <td>
+                                            <a type="button" class="waves-effect btnValider waves-light btn btn-modal" data-id="{{ $reservation->id }}" href="#modalAvis">Avis</a>
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -103,10 +107,50 @@
                     </div>
                 @endif
 
+                <div id="modalAvis" class="modal">
+                    <form method="post" action="" id="sendreview">
+                        <div class="modal-content">
+                            <h4>Laisser un avis</h4>
+                                <div class="row">
+                                    <div class="input-field col s12">
+                                        <select name="note" id="note">
+                                            <option value="0" disabled selected>Choisir une note</option>
+                                            @for($i=1;$i<=5;$i++)
+                                                <option value="{{ $i }}">{{ $i }}</option>
+                                            @endfor
+                                        </select>
+                                        <label>Note</label>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-field col s12">
+                                            <textarea id="review" name="review" class="materialize-textarea" required></textarea>
+                                            <label for="review">Laisser un avis</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{ csrf_field() }}
+                                <input type="hidden" name="reservation" id="reservation" value="">
+                                <input type="hidden" name="type" id="type" value="">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class=" modal-action modal-close waves-effect btnValider white-text waves-green btn-flat">Valider</button>
+                        </div>
+                    </form>
+                </div>
 
                 <script src="{!! asset('public/js/tables.min.js') !!}"></script>
                 <script>
+
                 $(document).ready(function(){
+                    $('.modal').modal();
+                    $('.btn-modal').on('click', function(){
+                        $('#sendreview')[0].reset();
+
+                        var id = $(this).attr('data-id');
+                        $('#reservation').val(id);
+                        var type = $(this).parents('.res-line').find('.type_offer span').attr('data-type');
+                        $('#type').val(type);
+                    });
                     $('table').DataTable();
                 });
                 </script>

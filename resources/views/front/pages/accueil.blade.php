@@ -274,12 +274,14 @@
                                 for (r in result) {
                                     var divo = $('#offercopy').html();
                                     var d = result[r].date_start;
+
                                     var arr = {
                                         selected: count == 1 ? ' selected' : '',
                                         date: (new Date(d.split(' ')[0])).toLocaleDateString(),
                                         offerid: result[r].id,
                                         user: result[r].user.id,
                                         avatar: result[r].user.avatar,
+                                        note: result[r].user.note || '0',
                                         hour: d.split(' ')[1],
                                         name: result[r].user.first_name + ' ' + result[r].user.last_name,
                                         gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',

@@ -28,7 +28,7 @@
                 <form class="container" method="post" action="{{ route('booking_validate') }}">
                     {{ csrf_field() }}
                     <div class="input-field col s12 infoProfile">
-                        <select id="step_start" name="step_start">
+                        <select id="step_start" name="step_start" required>
                             <option value="" disabled selected>Choisissez votre ville de départ</option>
                             @foreach($city_steps as $key => $city_step)
                             @if(!$loop->last)
@@ -39,7 +39,7 @@
                         <label for="step_start">Ville de départ <span class="obligatoire">*</span></label>
                     </div>
                     <div class="input-field col s12 infoProfile">
-                        <select id="step_end" name="step_end">
+                        <select id="step_end" name="step_end" required>
                             <option value="" disabled selected>Choisissez votre ville de livraison</option>
                             @foreach($city_steps as $key => $city_step)
                             @if(!$loop->first)

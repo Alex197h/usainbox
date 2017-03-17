@@ -78,8 +78,19 @@ class UserController extends Controller
 
     }
 
-    public function getBookingAuth()
+    public function getBookingAuth(Request $request)
     {
+        if($request->has('reservation')){
+            $r = Reservation::find($request->reservation);
+            if($r){
+                $type = $request->type == 'T' ? 'transport' : 'shipping';
+                $r->note = $request->note;
+                $r->review = $request->review;
+                $r->save();
+            }
+        }
+
+
         $auth = Auth::user()->id;
         $reservations = Reservation::where('transporter_id', $auth)
         ->orWhere('shipper_id', $auth)
