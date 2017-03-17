@@ -34,4 +34,9 @@ class TransportOffer extends Model {
     public function getVolumeAttribute(){
         return $this->max_volume == 0 ? $this->max_width * $this->max_length * $this->max_height : $this->max_volume;
     }
+
+    public function getReviewsAttribute(){
+        return Reservation::where('transport_offer_id', $this->id)->whereNotNull('shipping_review')
+            ->select('shipping_review as review', 'shipping_note as note')->limit(5)->inRandomOrder()->get();
+    }
 }

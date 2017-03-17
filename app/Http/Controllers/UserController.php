@@ -84,8 +84,10 @@ class UserController extends Controller
             $r = Reservation::find($request->reservation);
             if($r){
                 $type = $request->type == 'T' ? 'transport' : 'shipping';
-                $r->note = $request->note;
-                $r->review = $request->review;
+                $n = $type.'_note';
+                $v = $type.'_review';
+                $r->$n = $request->note;
+                $r->$v = $request->review;
                 $r->save();
             }
         }

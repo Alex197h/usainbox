@@ -57,25 +57,18 @@
                         <br>
                         <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
                         <br>
+                        
+                        <b>Poids maximum du colis:</b> {{ $offer->max_weight }}
+                        <br>
 
                         <b>Volume disponible:</b> {{ $offer->volume }}
                         <br>
 
-                        <b>Poids maximum du colis:</b> {{ $offer->max_weight }}
-                        <br>
-
-                        <b>Longueur maximum du colis:</b> {{ $offer->max_length }}
-                        <br>
-
-                        <b>Largeur maximum du colis:</b> {{ $offer->max_width }}
-                        <br>
-
-                        <b>Hauteur maximum du colis:</b> {{ $offer->max_height }}
-                        <br>
-
-                        <b>Description:</b>
-                        {{ $offer->description }}
-                        <br>
+                        @if($offer->description)
+                            <b>Description:</b>
+                            {{ $offer->description }}
+                            <br>
+                        @endif
 
                     </div>
 
@@ -91,7 +84,7 @@
                         <h5>Conducteur</h5>
                         <a href="{{ route('profile', $user->id) }}">{{ $user->fullname }}</a>
                         <br>
-                        <b>Note :</b> {{ $offer->note }}/5
+                        <b>Note:</b> {{ $user->transport_note }}/5
                         <br>
                     </div>
                 </div>
@@ -116,6 +109,9 @@
                     @endif
                 @endif
             </div>
+            @foreach($offer->reviews as $r)
+                <p>{{ $r->review }} ({{ $r->note }}/5)</p>
+            @endforeach
             @if(!$questions->isEmpty())
             <div class="row card-panel">
                 <div class="col s8 offset-s2">

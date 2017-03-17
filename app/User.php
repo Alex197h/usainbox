@@ -65,8 +65,13 @@ class User extends Authenticatable {
         return Vehicle::where('user_id', $this->id)->first() != NULL;
     }
 
-    public function getNoteAttribute(){
-        $note = Reservation::where('transporter_id', $this->id)->avg('shipping_note');
-        return round($note,1) ?: 0;
+    public function getTransportNoteAttribute(){
+        $note = Reservation::where('transporter_id', $this->id)->whereNotNull('shipping_note')->avg('shipping_note');
+        return $note ? round($note, 1) : '-';
+    }
+
+    public function getShippingNoteAttribute(){
+        $note = Reservation::where('shipper_id', $this->id)->whereNotNull('transport_note')->avg('transport_note');
+        return $note ? round($note, 1) : '-';
     }
 }
