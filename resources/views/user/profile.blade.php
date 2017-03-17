@@ -38,11 +38,10 @@
                 </div>
 
                 <div class="col s9">
-                    <h4>{{$user->last_name}} {{$user->first_name}}</h4>
+                    <h4>{{$user->last_name}} {{$user->first_name}} <small>({{ $user->note }}/5)</small></h4>
                     <p>
                         <span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span>
                     </p>
-
                 </div>
                 <div class="col s9">
                     <a href="{{route('user_vehicles')}}" class="white-text">
@@ -350,7 +349,7 @@
             }
         });
         $('.deleteprofile').on('click', function () {
-            var r = confirm("Etes-vous sûr de vouloir supprimer votre profile ?");
+            var r = confirm("Etes-vous sûr de vouloir supprimer votre compte ?");
             if (r == true) {
                 location.href = '{{ route('delete_auth_profile')}}'
             }

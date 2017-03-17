@@ -122,8 +122,7 @@
         </div>
     </div>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
 
 
@@ -208,7 +207,6 @@
                             }
                         }
                         this.setVisible(true);
-
                         if (!this.path) this.path = setPath(this.cities[0]);
                         this.path.setMap(map);
                         this.showPath = true;
@@ -276,12 +274,14 @@
                                 for (r in result) {
                                     var divo = $('#offercopy').html();
                                     var d = result[r].date_start;
+
                                     var arr = {
                                         selected: count == 1 ? ' selected' : '',
                                         date: (new Date(d.split(' ')[0])).toLocaleDateString(),
                                         offerid: result[r].id,
                                         user: result[r].user.id,
                                         avatar: result[r].user.avatar,
+                                        note: result[r].user.note || '0',
                                         hour: d.split(' ')[1],
                                         name: result[r].user.first_name + ' ' + result[r].user.last_name,
                                         gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
@@ -327,7 +327,8 @@
                                     Newdiv.on('click', function () {
                                         if (!$(this).hasClass('selected')) {
                                             clone.path.setMap(null);
-                                            clone.path = setPath(clone.cities[$(this).attr('offer-id') - 1]);
+
+                                            clone.path = setPath(Cities[$(this).attr('offer-id')]);
                                             clone.path.setMap(map);
                                         }
                                     });

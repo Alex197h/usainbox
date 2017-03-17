@@ -307,3 +307,32 @@ label{
 .paginate_button{
     cursor: pointer !important;
 }
+/*.question{
+    background: #d3f4ef;
+    padding: 15px;
+    border-radius: 5px 25px 25px 15px;
+    margin-bottom: 15px;
+    width: 330px;
+    border: solid #a5cbc6 2px;
+}
+.reponse{
+    background: #b2e9b2;
+    padding: 15px;
+    border-radius: 25px 5px 15px 25px;
+    margin-bottom: 15px;
+    width: 330px;
+    border: solid #93c193 2px;
+}*/
+
+.question{
+    background: rgba(231, 225, 225, 0.66);
+    padding: 15px;
+    margin-bottom: 15px;
+    border: solid rgba(210, 203, 203, 0.66) 2px;
+}
+.reponse{
+    background: rgba(222, 240, 240, 0.62);
+    padding: 15px;
+    margin-bottom: 15px;
+    border: solid rgba(208, 232, 232, 0.62) 2px;
+}

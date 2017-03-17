@@ -25,7 +25,7 @@ class HomeController extends Controller
     public function index()
     {
         $offers = TransportOffer::with('steps')->get();
-        
+
         $transport_offers = [];
         foreach($offers as $offer){
             if($offer->steps){
@@ -46,11 +46,12 @@ class HomeController extends Controller
         if(isset($_POST['transport'])){
             $result = [];
             $offers = TransportOffer::whereIn('id', $_POST['transport'])->get();
-            
+
             foreach($offers as $offer){
-                $result[] = array_merge($offer->toArray(), ['user' => $offer->user->toArray()]);
+                $user = $offer->user;
+                $result[] = array_merge($offer->toArray(), ['user' => array_merge($user->toArray(), ['note' => $user->note])]);
             }
-            
+
             echo json_encode($result);
         }
     }

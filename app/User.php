@@ -32,19 +32,19 @@ class User extends Authenticatable {
     public function vehicles(){
         return $this->hasMany('App\Vehicle');
     }
-    
+
     public function reservations(){
         return $this->hasMany('App\Reservation');
     }
-    
+
     public function shipping_offers(){
         return $this->hasMany('App\ShippingOffer');
     }
-    
+
     public function questions(){
         return $this->hasMany('App\Question');
     }
-    
+
     public function getAvatarPathAttribute(){
         if(!file_exists('public/img/avatar/'.$this->avatar)){
             $this->avatar = 'default.jpg';
@@ -56,7 +56,7 @@ class User extends Authenticatable {
     public static function getAvatarPath(){
         return asset('public/img/avatar/');
     }
-    
+
     public function getFullNameAttribute(){
         return $this->first_name.' '.$this->last_name;
     }
@@ -65,9 +65,8 @@ class User extends Authenticatable {
         return Vehicle::where('user_id', $this->id)->first() != NULL;
     }
 
-    public function notation(){
-
-        $transport_offers = TransportOffer::where('user_id', $this->id)->get();
-        return Reservation::whereIn('user_id', $transport_offers)->avg();
+    public function getNoteAttribute(){
+        $note = Reservation::where('transporter_id', $this->id)->avg('shipping_note');
+        return round($note,1) ?: 0;
     }
 }

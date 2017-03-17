@@ -45,7 +45,7 @@ Route::get('user/vehicles/delete/{vehicle_id?}', 'UserController@deleteVehicle')
 Route::post('user/vehicles', 'UserController@postVehicles')->name('post_user_vehicles');
 Route::get('user/vehicles', 'UserController@getVehicles')->name('user_vehicles');
 
-Route::get('user/bookings', 'UserController@getBookingAuth')->name('my_bookings');
+Route::any('user/bookings', 'UserController@getBookingAuth')->name('my_bookings');
 Route::post('user/bookings/validate', 'UserController@postBookingAuth')->name('post_booking');
 Route::post('user/bookings/validate/post', 'UserController@validateBookingAuth')->name('validate_booking_auth');
 

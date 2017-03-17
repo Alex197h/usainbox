@@ -24,7 +24,7 @@
                     @foreach($ads as $ad)
                         <div class="col s12">
                             <div class="card-panel">
-                                <h5>
+                                <h5><a href="{{ route('detail_transport_offer', $ad->id) }}">
                                     @foreach($steps[$ad->id] as $step)
                                         @foreach($step as $s)
                                             @if($loop->first)
@@ -34,7 +34,7 @@
                                             @endif
                                         @endforeach
                                     @endforeach
-                                </h5>
+                                </a></h5>
                                 <div class="divider"></div>
                                 <div class="section">
                                     <b>Résumé du trajet : </b>
