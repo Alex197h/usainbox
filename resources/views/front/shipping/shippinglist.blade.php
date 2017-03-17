@@ -23,7 +23,7 @@
                 <br>
 
                 <b>Volume:</b>
-                {{ $shipping->getVolumeAttribute() }} cm³
+                {{ $shipping->getVolumeAttribute() }} L
                 <br>
 
                 <b>Poid:</b>

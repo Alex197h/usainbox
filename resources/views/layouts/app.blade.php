@@ -224,9 +224,6 @@ $User = Auth::user();
                 </ul>
             </div>
         </div>
-        <div class="row">
-            <div class="col s4 offset-s2"
-        </div>
     </div>
     <div class="footer-copyright">
         <div class="container">
