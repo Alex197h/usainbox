@@ -41,9 +41,6 @@ class ShippingOffersController extends Controller{
             return redirect()->back()->withInput()->withErrors(['city_start' => 'L\'adresse n\'est pas valide']);
         }
 
-
-
-
         $infoPositionEnd = str_replace(' ', '+',$request->input('city_end'));
         $geocodeEnd=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionEnd.'&sensor=false');
         $outputEnd= json_decode($geocodeEnd);

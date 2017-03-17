@@ -50,8 +50,8 @@
                         <label for="step_end">Ville d'arrivée<span class="obligatoire">*</span></label>
                     </div>
                     <div class="input-field col s12 infoProfile">
-                        <input name="parcel_volume" type="number" id="parcel_volume" placeholder="Volume du colis en cm3" required>
-                        <label for="parcel_volume">Volume du colis <span class="obligatoire">*</span></label>
+                        <input name="parcel_volume" type="number" id="parcel_volume" placeholder="Volume du colis en Litres" required>
+                        <label for="parcel_volume">Volume du colis en Litres<span class="obligatoire">*</span></label>
                     </div>
                     <input type="hidden" value="{{ $transporter_id }}" name="transporter_id">
                     <input type="hidden" value="{{ $transport_offer->id }}" name="transport_offer_id">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="input-field col s12 right-align">
                         <p>En cliquant sur Réserver, vous acceptez de divulguer votre numéro de téléphone au conducteur.
-                            Après avoir réserver une place, attendez l'appel du conducteur pour fixer le prix et le lieux de rendez-vous.</p>
+                            Après avoir réservé une place, attendez l'appel du conducteur pour fixer le prix et le lieu de rendez-vous.</p>
                         </div>
                     </form>
                 </div>
