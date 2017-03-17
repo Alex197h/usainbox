@@ -56,9 +56,9 @@
                             @endif
                         </div>
                         <div class="col s12 m6{{ $errors->has('volume') ? ' has-error' : '' }}">
-                            <label for="volume" class="col-md-4 control-label">Volume <span
+                            <label for="volume" class="col-md-4 control-label">Volume en Litres<span
                                 class="obligatoire">*</span></label>
-                                <input id="volume" type="number" class="form-control" placeholder="Volume disponible"
+                                <input id="volume" type="number" class="form-control" placeholder="Volume disponible en Litres"
                                 name="volume" value="{{ $vehicle->max_volume }}" required>
                                 @if ($errors->has('volume'))
                                 <span class="col s12">
@@ -66,39 +66,10 @@
                                 </span>
                                 @endif
                             </div>
-                            <div class="col s12 m6 {{ $errors->has('length') ? ' has-error' : '' }}">
-                                <label for="length" class="col-md-4 control-label">Longueur</label>
-                                <input id="length" placeholder="Longueur disponible" type="number" class="form-control"
-                                name="length" value="{{ $vehicle->max_length }}">
-                                @if ($errors->has('length'))
-                                <span class="col s12">
-                                    <strong>{{ $errors->first('length') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                            <div class="col s12 m6{{ $errors->has('width') ? ' has-error' : '' }}">
-                                <label for="width" class="col-md-4 control-label">Largeur</label>
-                                <input id="width" placeholder="Largeur disponible" type="number" class="form-control"
-                                name="width" value="{{ $vehicle->max_width }}">
-                                @if ($errors->has('width'))
-                                <span class="col s12">
-                                    <strong>{{ $errors->first('width') }}</strong>
-                                </span>
-                                @endif
-                            </div>
-                            <div class="col s12 m6{{ $errors->has('height') ? ' has-error' : '' }}">
-                                <label for="height" class="col-md-4 control-label">Hauteur</label>
-                                <input id="height" placeholder="Hauteur disponible" type="number" class="form-control"
-                                name="height" value="{{ $vehicle->max_height }}">
-                                @if ($errors->has('height'))
-                                <span class="col s12">
-                                    <strong>{{ $errors->first('height') }}</strong>
-                                </span>
-                                @endif
-                            </div>
+
                             <div class="col s12 m6{{ $errors->has('weight') ? ' has-error' : '' }}">
-                                <label for="weight" class="col-md-4 control-label">Poids maximum</label>
-                                <input id="weight" placeholder="Poids disponible" type="number" class="form-control"
+                                <label for="weight" class="col-md-4 control-label">Poids en g</label>
+                                <input id="weight" placeholder="Poids disponible en g" type="number" class="form-control"
                                 name="weight" value="{{ $vehicle->max_weight }}">
                                 @if ($errors->has('weight'))
                                 <span class="col s12">

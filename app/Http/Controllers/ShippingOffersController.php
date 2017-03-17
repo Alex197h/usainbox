@@ -30,7 +30,7 @@ class ShippingOffersController extends Controller{
 
         $alert = new ShippingOffer();
 
-        $infoPositionStart = str_replace(", ", '+',$request->input('city_start'));
+        $infoPositionStart = str_replace(' ', '+',$request->input('city_start'));
         $geocodeStart=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionStart.'&sensor=false');
         $outputStart= json_decode($geocodeStart);
         if(isset($outputStart->results[0])){
@@ -41,10 +41,7 @@ class ShippingOffersController extends Controller{
             return redirect()->back()->withInput()->withErrors(['city_start' => 'L\'adresse n\'est pas valide']);
         }
 
-
-
-
-        $infoPositionEnd = str_replace(", ", '+',$request->input('city_end'));
+        $infoPositionEnd = str_replace(' ', '+',$request->input('city_end'));
         $geocodeEnd=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionEnd.'&sensor=false');
         $outputEnd= json_decode($geocodeEnd);
         if(isset($outputEnd->results[0])){

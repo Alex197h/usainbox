@@ -35,11 +35,10 @@
 
                         <tbody>
                             @foreach($reservations as $reservation)
-
                                 <tr class="res-line">
                                     <td>{!! date('Y/m/d', strtotime($reservation->passage_date)) !!}</td>
                                     <td class="type_offer">
-                                        @if($reservation->shipper_id == Auth::user()->id)
+                                        @if($reservation->isShipper(Auth::user()->id))
                                             <span data-type="E">Expédition</span>
                                         @else
                                             <span data-type="T">Transport</span>
@@ -80,7 +79,11 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a type="button" class="waves-effect btnValider waves-light btn btn-modal" data-id="{{ $reservation->id }}" href="#modalAvis">Avis</a>
+                                            @if( (strtotime($reservation->passage_date) < time()) && !(($reservation->isShipper(Auth::user()->id) && $reservation->shipping_review)||($reservation->isTransporter(Auth::user()->id) && $reservation->transport_review)))
+                                                <a type="button" class="waves-effect btnValider waves-light btn btn-modal" data-id="{{ $reservation->id }}" href="#modalAvis">Avis</a>
+                                            @else
+                                                Oui
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
@@ -121,11 +124,9 @@
                                         </select>
                                         <label>Note</label>
                                     </div>
-                                    <div class="row">
-                                        <div class="input-field col s12">
-                                            <textarea id="review" name="review" class="materialize-textarea" required></textarea>
-                                            <label for="review">Laisser un avis</label>
-                                        </div>
+                                    <div class="input-field col s12">
+                                        <textarea id="review" name="review" class="materialize-textarea" required></textarea>
+                                        <label for="review">Laisser un avis</label>
                                     </div>
                                 </div>
                                 {{ csrf_field() }}

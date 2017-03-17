@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col s9">
-                    <h4>{{$user->last_name}} {{$user->first_name}} <small>({{ $user->note }}/5)</small></h4>
+                    <h4>{{$user->last_name}} {{$user->first_name}} <small>({{ $user->shipping_note }}/5) ({{ $user->transport_note }}/5)</small></h4>
                     <p>
                         <span>Inscrit le {{ utf8_encode(strftime('%A %d %B', strtotime($user->created_at))) }}</span>
                     </p>
@@ -67,11 +67,6 @@
                             <div class="chip"> {{ $reservations }}</div>@endif
                     </a>
 
-                    <a href="{{ route('my_reviews') }}" class="white-text">
-                        <button type="button" class="btn btnProfile">
-                            Vos avis
-                        </button>
-                    </a>
 
                 </div>
             </div>

@@ -49,7 +49,10 @@ class HomeController extends Controller
 
             foreach($offers as $offer){
                 $user = $offer->user;
-                $result[] = array_merge($offer->toArray(), ['user' => array_merge($user->toArray(), ['note' => $user->note])]);
+                $result[] = array_merge($offer->toArray(), ['user' => array_merge($user->toArray(), [
+                    'shipping_note' => $user->shipping_note,
+                    'transport_note' => $user->transport_note
+                ])]);
             }
 
             echo json_encode($result);

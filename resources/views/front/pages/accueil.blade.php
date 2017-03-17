@@ -99,11 +99,11 @@
                     <div class="section center">
                         <h4>$date</h4>
                         <span>$itinerary</span>
+                        <i class="small material-icons">star_border</i><span>$shippingnote/5</span> - <span>$transportnote/5</span><br><br>
                         <i class="small material-icons" style="color:#$gender">account_circle</i><span>
                         <a href="{{ url('user') }}/$user">$name</a> ($age ans)</span><br>
                     </div>
                     <div class="section detail-offer">
-                        <i class="small material-icons">star_border</i><span> $note/5</span><br><br>
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
                         {{ Html::image('public/img/trajet/$regular.icon.svg',
@@ -281,7 +281,8 @@
                                         offerid: result[r].id,
                                         user: result[r].user.id,
                                         avatar: result[r].user.avatar,
-                                        note: result[r].user.note || '0',
+                                        transportnote: result[r].user.transport_note || '0',
+                                        shippingnote: result[r].user.shipping_note || '0',
                                         hour: d.split(' ')[1],
                                         name: result[r].user.first_name + ' ' + result[r].user.last_name,
                                         gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',

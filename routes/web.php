@@ -49,8 +49,6 @@ Route::any('user/bookings', 'UserController@getBookingAuth')->name('my_bookings'
 Route::post('user/bookings/validate', 'UserController@postBookingAuth')->name('post_booking');
 Route::post('user/bookings/validate/post', 'UserController@validateBookingAuth')->name('validate_booking_auth');
 
-Route::get('user/reviews', 'UserController@getReviews')->name('my_reviews');
-Route::post('user/reviews', 'UserController@postReviews')->name('post_reviews');
 
 Route::get('user/ads', 'UserController@getAdAuth')->name('my_ads');
 Route::any('user/ads/modify/{ad_id}', 'UserController@modifyAds')->name('modify_ad');
