@@ -57,6 +57,11 @@ $User = Auth::user();
                         class="material-icons">menu</i></a>
             @if (Auth::check())
                 <ul class="right hide-on-med-and-down">
+                    @if(Auth::user()->is_admin)
+                        <li>
+                            <a href="{{ route('admin') }}" class="black-text"> <i class="material-icons">dashboard</i></a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{route('home')}}" class="black-text"> Rechercher</a>
                     </li>
@@ -70,6 +75,11 @@ $User = Auth::user();
                     </li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
+                    @if(Auth::user()->is_admin)
+                        <li>
+                            <a href="{{ route('admin') }}" class="black-text"> <i class="material-icons">dashboard</i></a>
+                        </li>
+                    @endif
                     <li>
                         <a href="#" class="black-text"> Rechercher</a>
                     </li>

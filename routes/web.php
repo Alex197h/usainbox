@@ -22,6 +22,7 @@ Route::post('offer/transport/booking/save', 'TransportOffersController@booking_v
 
 Route::any('alert/create', 'ShippingOffersController@index')->name('create_alert');
 Route::post('alert/save', 'ShippingOffersController@save')->name('save_alert');
+Route::get('autosearch', 'ShippingOffersController@autoSearch')->name('autoSearch');
 
 Route::get('offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
 Route::post('offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');

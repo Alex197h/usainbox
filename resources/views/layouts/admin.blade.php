@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Usainbox Admin Panel</title>
-        {{ Html::style('public/css/font-awesome.min.css') }}
-        {{ Html::style('public/css/bootstrap.min.css') }}
-        {{ Html::style('public/admin/style.css') }}
-        {{ Html::style('public/admin/libs/nprogress.css') }}
-        {{ Html::style('public/admin/libs/green.css') }}
-        {{ Html::style('public/admin/libs/select2.min.css') }}
-        {{ Html::style('public/admin/libs/switchery.min.css') }}
-        {{ Html::style('public/admin/libs/tables/tables.css') }}
-        {{ Html::style('public/admin/libs/tables/buttons.css') }}
-        {{ Html::style('public/admin/libs/tables/fixheader.css') }}
-        {{ Html::style('public/admin/libs/tables/reponsive.css') }}
-        {{ Html::style('public/admin/libs/tables/scroller.css') }}
-        {{ Html::style('public/admin/libs/pnotify.css') }}
-        {{ Html::style('public/admin/libs/pnotify.buttons.css') }}
-        {{ Html::style('public/admin/libs/pnotify.nonblock.css') }}
-        {{ HTML::script('public/admin/libs/jquery.min.js') }}
-        {{ HTML::script('public/admin/libs/bootstrap.min.js') }}
-    </head>
-    <body class="nav-md">
-        <div class="container body">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Usainbox Admin Panel</title>
+    {{ Html::style('public/css/font-awesome.min.css') }}
+    {{ Html::style('public/css/bootstrap.min.css') }}
+    {{ Html::style('public/admin/style.css') }}
+    {{ Html::style('public/admin/libs/nprogress.css') }}
+    {{ Html::style('public/admin/libs/green.css') }}
+    {{ Html::style('public/admin/libs/select2.min.css') }}
+    {{ Html::style('public/admin/libs/switchery.min.css') }}
+    {{ Html::style('public/admin/libs/tables/tables.css') }}
+    {{ Html::style('public/admin/libs/tables/buttons.css') }}
+    {{ Html::style('public/admin/libs/tables/fixheader.css') }}
+    {{ Html::style('public/admin/libs/tables/reponsive.css') }}
+    {{ Html::style('public/admin/libs/tables/scroller.css') }}
+    {{ Html::style('public/admin/libs/pnotify.css') }}
+    {{ Html::style('public/admin/libs/pnotify.buttons.css') }}
+    {{ Html::style('public/admin/libs/pnotify.nonblock.css') }}
+    {{ HTML::script('public/admin/libs/jquery.min.js') }}
+    {{ HTML::script('public/admin/libs/bootstrap.min.js') }}
+</head>
+<body class="nav-md">
+    <div class="container body">
         <div class="main_container">
             <div class="col-md-3 left_col menu_fixed">
                 <div class="left_col scroll-view">
@@ -48,22 +48,35 @@
                     </div>
                     <div class="sidebar-footer hidden-small">
                         <a data-toggle="tooltip" data-placement="top" title="Settings">
-                        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
-                        <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
                         <a data-toggle="tooltip" data-placement="top" title="Logout" href="login.html">
-                        <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
                 </div>
             </div>
             <div class="top_nav">
                 <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="{{ route('home') }}" class="user-profile">
+                                    Retour au site
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <div class="right_col" role="main">
@@ -82,15 +95,15 @@
             </div>
         </div>
         <script>
-            function Notif(title, text, color){
-                new PNotify({
-                    title: title,
-                    text: text,
-                    type: color || 'success',
-                    delay: 2000,
-                    styling: 'bootstrap3'
-                });
-            }
+        function Notif(title, text, color){
+            new PNotify({
+                title: title,
+                text: text,
+                type: color || 'success',
+                delay: 2000,
+                styling: 'bootstrap3'
+            });
+        }
         </script>
         {{ HTML::script('public/admin/libs/fastclick.js') }}
         {{ HTML::script('public/admin/libs/nprogress.js') }}
@@ -104,7 +117,7 @@
         {{ HTML::script('public/admin/libs/pnotify.js') }}
         {{ HTML::script('public/admin/libs/pnotify.buttons.js') }}
         {{ HTML::script('public/admin/libs/pnotify.nonblock.js') }}
-        
+
         {{ HTML::script('public/admin/libs/tables/tables.js') }}
         {{ HTML::script('public/admin/libs/tables/dtables.js') }}
         {{ HTML::script('public/admin/libs/tables/buttons.js') }}
@@ -117,9 +130,9 @@
         {{ HTML::script('public/admin/libs/tables/responsive.js') }}
         {{ HTML::script('public/admin/libs/tables/responsivebs.js') }}
         {{ HTML::script('public/admin/libs/tables/scroller.js') }}
-        
+
         {{ HTML::script('public/admin/script.js') }}
-        
+
         @yield('script', '')
     </body>
-</html>
+    </html>
