@@ -1,9 +1,8 @@
 @extends('layouts.app')
 
-@section('page_title', 'Listes des expéditions')
+@section('page_title', 'Alerte')
 
 @section('content')
-
     <div class="container">
         <div class="row">
             <div class="col l8 m10 s12 offset-l2 offset-m1 offset-s1 ">
@@ -98,8 +97,6 @@
                                 </span>
                             @endif
                         </div>
-
-
                         <div class="infoProfile col s12">
                             <button type="submit" class="btn btnValider white-text right">
                                 M'alerter

@@ -1,49 +1,46 @@
 @extends('layouts.app')
 
-@section('title', 'Ajouter une offre')
+@section('title', 'Déposer une annonce')
 
 @section('content')
-    <div class="row">
-        <div class="col s12 center">
-            <h4></h4>
+<div class="row">
+    <div class="col s12 center">
+        <h4></h4>
+    </div>
+    <div class="col s12 l4 offset-l1">
+        <div id="resss"></div>
+        <div class="row" id="map"></div>
+    </div>
+    <div class="card col s12 l6">
+        <div class="section center">
+            <h5>
+                Déposer une annonce
+                {{
+                    Html::image('public/img/annonce/file.svg',
+                    'Icon d\'une annonce',
+                    array('class' => 'responsive-img icon'))
+                }}
+            </h5>
         </div>
-        <div class="col s12 l4 offset-l1">
-            <div id="resss"></div>
-            <div class="row" id="map"></div>
-        </div>
-        <div class="card col s12 l6">
-            <div class="section center">
-                <div class="section">
-                    <h5>
-                        Déposer une annonce
-                        {{
-                            Html::image('public/img/recherche/bell.svg',
-                            'Icon d\'une cloche',
-                            array('class' => 'responsive-img icon', 'style' => 'vertical-align:middle;'))
-                        }}
-                    </h5>
-                </div>
-            </div>
-            <form method="post" class="row card-content" action="{{route('post_create_transport_offer')}}">
-                {{ csrf_field() }}
-                <div id="offercopy">
-                    <div class="offer horizontal$selected" offer-id="$offerid">
-                        <div class="card-stacked col s12">
-                            <div class="section detail-steps " id="stepsArea">
-                                <div class="infoDepAnnonce" {{ $errors->has('start_city') ? ' has-error' : '' }}>
-                                    <label class="col s12" for="start_city">Ville de départ <span class="obligatoire">*</span></label>
-                                    <input id="start_city" type="text" class="col s12 form-control step"
-                                    name="start_city" value="{{ old('start_city') }}" draggable="true">
-                                    @if ($errors->has('start_city'))
-                                        <span>
-                                            <strong>{{ $errors->first('start_city') }}</strong>
-                                        </span>
-                                    @endif
-                                </div>
-                                <div>
-                                    <p>Villes étapes</p>
-                                    <button type="button" class="btn btnAdd white-text" id="addstep"
-                                    onclick="addStep()">
+        <form method="post" class="row card-content" action="{{route('post_create_transport_offer')}}">
+            {{ csrf_field() }}
+            <div id="offercopy">
+                <div class="offer horizontal$selected" offer-id="$offerid">
+                    <div class="card-stacked col s12">
+
+                        <div class="section detail-steps " id="stepsArea">
+                            <div class="col s12 infoDepAnnonce" {{ $errors->has('start_city') ? ' has-error' : '' }}>
+                                <label class="col s12" for="start_city">Ville de départ <span class="obligatoire">*</span></label>
+                                <input id="start_city" type="text" class="col s12 form-control step" name="start_city" value="{{ old('start_city') }}" draggable="true">
+                                @if ($errors->has('start_city'))
+                                <span>
+                                    <strong>{{ $errors->first('start_city') }}</strong>
+                                </span>
+                                @endif
+                            </div>
+                            <div class="col s12 ">
+                                <p>Villes étapes</p>
+                                <button type="button" class="btn btnAdd white-text" id="addstep" onclick="addStep()">
                                     {{
                                         Html::image('public/img/annonce/add.svg',
                                         'Icon d\'un plus',
@@ -52,137 +49,123 @@
                                 </button>
                                 <br><br>
                             </div>
-                            <div class="col s12 infoDepAnnonce"
-                            id="endstep" {{ $errors->has('end_city') ? ' has-error' : '' }} >
-                            <label class="col s12" for="end_city">Ville d'arrivée <span class="obligatoire">*</span></label>
-                            <input id="end_city" type="text" class="col s12 form-control step" name="end_city"
-                            value="{{ old('end_city') }}" draggable="true">
+                            <div class="col s12 infoDepAnnonce" id="endstep" {{ $errors->has('end_city') ? ' has-error' : '' }} >
+                                <label class="col s12" for="end_city">Ville d'arrivée <span class="obligatoire">*</span></label>
+                                <input id="end_city" type="text" class="col s12 form-control step" name="end_city" value="{{ old('end_city') }}" draggable="true">
 
-                            @if ($errors->has('end_city'))
+                                @if ($errors->has('end_city'))
                                 <span>
                                     <strong>{{ $errors->first('end_city') }}</strong>
                                 </span>
-                            @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="infoProfile infoDepAnnonce col s12" {{ $errors->has('vehicle') ? ' has-error' : '' }}>
-            <label for="vehicle">Véhicule utilisé <span class="obligatoire">*</span></label>
-            <select id="vehicle" type="text" class="col s12 form-control" name="vehicle" required>
-                @foreach($vehicles as $vehicle)
+            <div class="col s12 m6 " {{ $errors->has('vehicle') ? ' has-error' : '' }}>
+                <label for="vehicle">Véhicule utilisé <span class="obligatoire">*</span></label>
+                <select id="vehicle" type="text" class="form-control" name="vehicle" required>
+                    @foreach($vehicles as $vehicle)
                     <option value="{{ $vehicle->id }}"{{ $vehicle->default ? ' selected':'' }}>{{ $vehicle->car_brand }} {{ $vehicle->car_model }}</option>
-                @endforeach
-            </select>
-            @if ($errors->has('vehicle'))
+                    @endforeach
+                </select>
+                @if ($errors->has('vehicle'))
                 <span>
                     <strong>{{ $errors->first('vehicle') }}</strong>
                 </span>
-            @endif
-        </div>
-
-        <div class="col s12 m4 infoProfile"{{ $errors->has('date_start') ? ' has-error' : '' }}>
-            <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
-
-            <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
-            name="date_start" value="{{ old('date_start') }}">
-
-            @if ($errors->has('date_start'))
-                <span>
-                    <strong>{{ $errors->first('date_start') }}</strong>
-                </span>
-            @endif
-        </div>
-
-
-        <div class="col s12 m4 infoProfile "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
-            <label for="max_volume">Volume des colis en Litres<span
-                class="obligatoire">*</span></label>
-
-                <input id="max_volume" type="number" class="form-control" placeholder="Volume en Litres"
-                name="max_volume" value="{{ old('max_volume') }}">
-
-                @if ($errors->has('max_volume'))
-                    <span>
-                        <strong>{{ $errors->first('max_volume') }}</strong>
-                    </span>
                 @endif
             </div>
 
+            <div class="infoProfile col s12 m6 "{{ $errors->has('date_start') ? ' has-error' : '' }}>
+                <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
+                <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
+                name="date_start" value="{{ old('date_start') }}">
+                @if ($errors->has('date_start'))
+                <span>
+                    <strong>{{ $errors->first('date_start') }}</strong>
+                </span>
+                @endif
+            </div>
 
-            <div class="col s12 m4 infoProfile"{{ $errors->has('hour_start') ? ' has-error' : '' }}>
-                <label for="hour_start">Heure de départ <span
+            <div class="infoProfile col s12 m6 "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
+                <label for="max_volume">Volume en Litres<span
                     class="obligatoire">*</span></label>
+                    <input id="max_volume" type="number" class="form-control" placeholder="Volume en Litres"
+                    name="max_volume" value="{{ old('max_volume') }}">
+                    @if ($errors->has('max_volume'))
+                    <span>
+                        <strong>{{ $errors->first('max_volume') }}</strong>
+                    </span>
+                    @endif
+                </div>
 
-                    <input id="hour_start" type="time" class="form-control" placeholder="hh:mm"
-                    name="hour_start" value="{{ old('hour_start') }}">
-
+                <div class="infoProfile col s12 m6 "{{ $errors->has('hour_start') ? ' has-error' : '' }}>
+                    <label for="hour_start">Heure de départ <span class="obligatoire">*</span></label>
+                    <input id="hour_start" type="time" class="form-control" placeholder="hh:mm" name="hour_start" value="{{ old('hour_start') }}">
                     @if ($errors->has('hour_start'))
-                        <span>
-                            <strong>{{ $errors->first('hour_start') }}</strong>
-                        </span>
+                    <span>
+                        <strong>{{ $errors->first('hour_start') }}</strong>
+                    </span>
                     @endif
                 </div>
 
 
                 <div class="col s12 m6 infoProfile"{{ $errors->has('max_weight') ? ' has-error' : '' }}>
                     <label for="max_weight">Poids maximum des colis en g</label>
-
                     <input id="max_weight" type="number" class="form-control" placeholder="Poids max en g"
                     name="max_weight" value="{{ old('max_weight') }}">
-
                     @if ($errors->has('max_weight'))
-                        <span>
-                            <strong>{{ $errors->first('max_weight') }}</strong>
-                        </span>
+                    <span>
+                        <strong>{{ $errors->first('max_weight') }}</strong>
+                    </span>
+                    @endif
+                </div>
+                <div class="col s12 infoProfile" {{ $errors->has('description') ? ' has-error' : '' }}>
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Description" class="materialize-textarea"
+                    name="description">{{ old('description') }} </textarea>
+                    @if ($errors->has('description'))
+                    <span>
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile" {{ $errors->has('is_regular') ? ' has-error' : '' }}>
+                <div class="col s12 m4 infoProfile" {{ $errors->has('is_regular') ? ' has-error' : '' }}>
                     <input type="checkbox" name="is_regular" id="is_regular" value="1"/>
                     <label for="is_regular"> Trajet régulier </label>
 
                     @if ($errors->has('is_regular'))
-                        <span>
-                            <strong>{{ $errors->first('is_regular') }}</strong>
-                        </span>
+                    <span>
+                        <strong>{{ $errors->first('is_regular') }}</strong>
+                    </span>
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile " {{ $errors->has('highway') ? ' has-error' : '' }}>
+                <div class="col s12 m4 infoProfile " {{ $errors->has('highway') ? ' has-error' : '' }}>
                     <input type="checkbox" name="highway" id="highway" value="1"/>
                     <label for="highway">Passer par l'autoroute </label>
 
                     @if ($errors->has('highway'))
-                        <span>
-                            <strong>{{ $errors->first('highway') }}</strong>
-                        </span>
+                    <span>
+                        <strong>{{ $errors->first('highway') }}</strong>
+                    </span>
                     @endif
                 </div>
 
-                <div class="col s12 m6 infoProfile "{{ $errors->has('start_detour') ? ' has-error' : '' }}>
+                <div class="col s12 m4 infoProfile "{{ $errors->has('start_detour') ? ' has-error' : '' }}>
                     <input type="checkbox" name="start_detour" id="start_detour" value="1"/>
                     <label for="start_detour">Détour possible</label>
-
                     @if ($errors->has('start_detour'))
-                        <span>
-                            <strong>{{ $errors->first('start_detour') }}</strong>
-                        </span>
+                    <span>
+                        <strong>{{ $errors->first('start_detour') }}</strong>
+                    </span>
                     @endif
                 </div>
-                <div class="col s12 m12 infoProfile" {{ $errors->has('description') ? ' has-error' : '' }}>
-                    <label for="description">Description</label>
-                    <textarea id="description" placeholder="Description" class="materialize-textarea"
-                    name="description">{{ old('description') }}</textarea>
-                    @if ($errors->has('description'))
-                        <span>
-                            <strong>{{ $errors->first('description') }}</strong>
-                        </span>
-                    @endif
-                </div>
-                <div class="col s12 ">
+
+                <div class="col s12 infoProfile">
                     <button type="submit" class="btn btnValider white-text right">
                         Poster l'annonce
                     </button>

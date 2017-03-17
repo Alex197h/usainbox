@@ -219,13 +219,16 @@ input[type="date"]::-webkit-inner-spin-button {
     background-color: #786A6A !important;
 }
 .infoProfile{
-    margin-bottom: 30px;
+    margin-bottom: 30px !important;
+}
+.infoProfile2{
+    margin-bottom: 70px !important;
 }
 .btnProfile{
     text-transform: none;
     background-color: #786A6A !important;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin-bottom: 10px !important;
+    margin-right: 10px !important;
     padding-left: 15px !important;
     padding-right: 15px!important;
 }
@@ -340,4 +343,17 @@ border: solid #93c193 2px;
 .error{
     padding-bottom: 30px !important;
     color: #da4a4a !important;
+}
+span.badge.new:after {
+    content: " nouvelle(s)" !important;
+}
+.collection a.collection-item{
+    display: inline-block !important;
+    color: #786A6A !important;
+}
+.collection{
+    border: none !important;
+}
+.collection .collection-item{
+    border-bottom: none !important;
 }

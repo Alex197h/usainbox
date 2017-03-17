@@ -99,9 +99,18 @@
                     <div class="section center">
                         <h4>$date</h4>
                         <span>$itinerary</span>
-                        <i class="small material-icons">star_border</i><span>$shippingnote/5</span> - <span>$transportnote/5</span><br><br>
                         <i class="small material-icons" style="color:#$gender">account_circle</i><span>
                         <a href="{{ url('user') }}/$user">$name</a> ($age ans)</span><br>
+                        <span class="col s12 ">
+
+                            {{
+                                Html::image('public/img/legende/T.svg',
+                                'Icon d\'un colis',
+                                array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Note transporteur'))
+                            }}
+                            $transportnote/5
+                        </span>
+                        <br>
                     </div>
                     <div class="section detail-offer">
                         <b>Heure de départ:</b> $hour<br>
@@ -110,9 +119,7 @@
                             'Calendrier',
                             array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text'))
                         }}
-
                         $highway $charge $detour
-
                     </div>
                 </div>
                 <div class="card-action">
