@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $offers = TransportOffer::with('steps')->where('full', 0)->get();
+        $offers = TransportOffer::with('steps')->where('full', 0)->where('date_start', '>=', date('Y-m-d'))->get();
 
         $transport_offers = [];
         foreach($offers as $offer){
@@ -45,7 +45,7 @@ class HomeController extends Controller
     public function ptest(){
         if(isset($_POST['transport'])){
             $result = [];
-            $offers = TransportOffer::whereIn('id', $_POST['transport'])->get();
+            $offers = TransportOffer::with('steps')->whereIn('id', $_POST['transport'])->get();
 
             foreach($offers as $offer){
                 $user = $offer->user;

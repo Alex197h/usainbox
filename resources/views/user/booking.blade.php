@@ -61,8 +61,8 @@
                                         <td>{{ $reservation->city_start_label }}</td>
                                         <td>{{ $reservation->city_end_label }}</td>
                                         <td>{{ $reservation->parcel_volume }} cm3</td>
-                                        <td>{{ $reservation->price }}€</td>
-                                        <td>{{ date('h:i', strtotime($reservation->hour)) }}</td>
+                                        <td>{{ $reservation->price ? $reservation->price.'€' : '-' }}</td>
+                                        <td>{{ $reservation->hour ? date('H:i', strtotime($reservation->hour)) : '-' }}</td>
                                         <td>
                                             @if($reservation->shipper_id == Auth::user()->id && $reservation->validated)
                                                 <a class="btn green disabled">Validée</a>
@@ -82,7 +82,11 @@
                                             @if( (strtotime($reservation->passage_date) < time()) && !(($reservation->isShipper(Auth::user()->id) && $reservation->shipping_review)||($reservation->isTransporter(Auth::user()->id) && $reservation->transport_review)))
                                                 <a type="button" class="waves-effect btnValider waves-light btn btn-modal" data-id="{{ $reservation->id }}" href="#modalAvis">Avis</a>
                                             @else
-                                                Oui
+                                                {{
+                                                    Html::image('public/img/reservation/checked.svg',
+                                                    'Icon validé',
+                                                    array('class' => 'responsive-img iconC'))
+                                                }}
                                             @endif
                                         </td>
                                     </tr>

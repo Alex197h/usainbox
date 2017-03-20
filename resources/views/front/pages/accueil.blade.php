@@ -119,6 +119,9 @@
                     <div class="section detail-offer">
                         <b>Heure de départ:</b> $hour<br>
                         <b>Description:</b> $description<br><br>
+                        $citiessteps
+                        <br>
+                        <br>
                         {{ Html::image('public/img/trajet/$regular.icon.svg',
                             'Calendrier',
                             array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text'))
@@ -286,6 +289,12 @@
                                     var divo = $('#offercopy').html();
                                     var d = result[r].date_start;
 
+                                    var steps = result[r].steps;
+                                    var ss = [];
+                                    for(s in steps){
+                                        ss.push(steps[s].label.split(', ')[0]);
+                                    }
+
                                     var arr = {
                                         selected: count == 1 ? ' selected' : '',
                                         date: (new Date(d.split(' ')[0])).toLocaleDateString(),
@@ -295,6 +304,7 @@
                                         transportnote: result[r].user.transport_note || '0',
                                         shippingnote: result[r].user.shipping_note || '0',
                                         hour: d.split(' ')[1],
+                                        citiessteps: ss.join(' -> '),
                                         name: result[r].user.first_name + ' ' + result[r].user.last_name,
                                         gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',
                                         age: (new Date().getFullYear()) - (new Date(result[r].user.birthday).getFullYear()),

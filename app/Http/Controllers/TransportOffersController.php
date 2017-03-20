@@ -316,6 +316,7 @@ class TransportOffersController extends Controller
         $booking = new Reservation();
 
         $booking->passage_date = date('Y-m-d', strtotime($transport_offer->date_start));
+        $booking->hour = null;
         $booking->transport_offer_id = $request->input('transport_offer_id');
         $booking->parcel_volume = $request->input('parcel_volume');
         $booking->shipper_id = Auth::user()->id;

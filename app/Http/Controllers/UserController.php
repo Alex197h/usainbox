@@ -21,7 +21,9 @@ class UserController extends Controller
     {
         if (isset(Auth::user()->id) && $user->id == Auth::user()->id){
             return redirect()->route('user_profile');
-        } else view('user.other_profile', ['user' => $user]);
+        } else{
+            return view('user.other_profile', ['user' => $user]);
+        }
     }
 
     public function deleteAuthProfile()
@@ -151,10 +153,11 @@ class UserController extends Controller
 
     public function validateBookingAuth(Request $request)
     {
+
         $rules = array(
             'booking_id' => 'required|numeric',
             'price' => 'required|numeric',
-            'hour' => 'required|date_format:h:i'
+            'hour' => 'required|date_format:H:i'
         );
 
         $this->validate($request, $rules);

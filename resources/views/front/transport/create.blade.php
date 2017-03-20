@@ -33,9 +33,16 @@
                                 <label class="col s12" for="start_city">Ville de départ <span class="obligatoire">*</span></label>
                                 <input required id="start_city" type="text" class="col s12 form-control step" name="start_city" value="{{ old('start_city') }}" draggable="true">
                                 @if ($errors->has('start_city'))
-                                <span>
-                                    <strong>{{ $errors->first('start_city') }}</strong>
-                                </span>
+                                    <span class="col s12 error">
+                                        {{
+                                            Html::image('public/img/notification/warning.svg',
+                                            'Icon d\'un triangle attention',
+                                            array('class' => 'responsive-img iconC'))
+                                        }}
+                                        <strong>
+                                            {{ $errors->first('start_city') }}
+                                        </strong>
+                                    </span>
                                 @endif
                             </div>
                             <div class="col s12 ">
@@ -54,9 +61,16 @@
                                 <input required id="end_city" type="text" class="col s12 form-control step" name="end_city" value="{{ old('end_city') }}" draggable="true">
 
                                 @if ($errors->has('end_city'))
-                                <span>
-                                    <strong>{{ $errors->first('end_city') }}</strong>
-                                </span>
+                                    <span class="col s12 error">
+                                        {{
+                                            Html::image('public/img/notification/warning.svg',
+                                            'Icon d\'un triangle attention',
+                                            array('class' => 'responsive-img iconC'))
+                                        }}
+                                        <strong>
+                                            {{ $errors->first('end_city') }}
+                                        </strong>
+                                    </span>
                                 @endif
                             </div>
                         </div>
@@ -72,9 +86,16 @@
                     @endforeach
                 </select>
                 @if ($errors->has('vehicle'))
-                <span>
-                    <strong>{{ $errors->first('vehicle') }}</strong>
-                </span>
+                    <span class="col s12 error">
+                        {{
+                            Html::image('public/img/notification/warning.svg',
+                            'Icon d\'un triangle attention',
+                            array('class' => 'responsive-img iconC'))
+                        }}
+                        <strong>
+                            {{ $errors->first('vehicle') }}
+                        </strong>
+                    </span>
                 @endif
             </div>
 
@@ -83,9 +104,16 @@
                 <input required id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
                 name="date_start" value="{{ old('date_start') }}">
                 @if ($errors->has('date_start'))
-                <span>
-                    <strong>{{ $errors->first('date_start') }}</strong>
-                </span>
+                    <span class="col s12 error">
+                        {{
+                            Html::image('public/img/notification/warning.svg',
+                            'Icon d\'un triangle attention',
+                            array('class' => 'responsive-img iconC'))
+                        }}
+                        <strong>
+                            {{ $errors->first('date_start') }}
+                        </strong>
+                    </span>
                 @endif
             </div>
 
@@ -95,9 +123,16 @@
                     <input required id="max_volume" type="number" class="form-control" placeholder="Volume en Litres"
                     name="max_volume" value="{{ old('max_volume') }}">
                     @if ($errors->has('max_volume'))
-                    <span>
-                        <strong>{{ $errors->first('max_volume') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('max_volume') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
@@ -105,9 +140,16 @@
                     <label for="hour_start">Heure de départ <span class="obligatoire">*</span></label>
                     <input required id="hour_start" type="time" class="form-control" placeholder="hh:mm" name="hour_start" value="{{ old('hour_start') }}">
                     @if ($errors->has('hour_start'))
-                    <span>
-                        <strong>{{ $errors->first('hour_start') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('hour_start') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
@@ -117,9 +159,16 @@
                     <input id="max_weight" type="number" class="form-control" placeholder="Poids max en g"
                     name="max_weight" value="{{ old('max_weight') }}">
                     @if ($errors->has('max_weight'))
-                    <span>
-                        <strong>{{ $errors->first('max_weight') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('max_weight') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
                 <div class="col s12 infoProfile" {{ $errors->has('description') ? ' has-error' : '' }}>
@@ -127,9 +176,16 @@
                     <textarea id="description" placeholder="Description" class="materialize-textarea"
                     name="description">{{ old('description') }} </textarea>
                     @if ($errors->has('description'))
-                    <span>
-                        <strong>{{ $errors->first('description') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('description') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
@@ -138,9 +194,16 @@
                     <label for="is_regular"> Trajet régulier </label>
 
                     @if ($errors->has('is_regular'))
-                    <span>
-                        <strong>{{ $errors->first('is_regular') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('is_regular') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
@@ -149,9 +212,16 @@
                     <label for="highway">Passer par l'autoroute </label>
 
                     @if ($errors->has('highway'))
-                    <span>
-                        <strong>{{ $errors->first('highway') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('highway') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
@@ -159,9 +229,16 @@
                     <input type="checkbox" name="start_detour" id="start_detour" value="1"/>
                     <label for="start_detour">Détour possible</label>
                     @if ($errors->has('start_detour'))
-                    <span>
-                        <strong>{{ $errors->first('start_detour') }}</strong>
-                    </span>
+                        <span class="col s12 error">
+                            {{
+                                Html::image('public/img/notification/warning.svg',
+                                'Icon d\'un triangle attention',
+                                array('class' => 'responsive-img iconC'))
+                            }}
+                            <strong>
+                                {{ $errors->first('start_detour') }}
+                            </strong>
+                        </span>
                     @endif
                 </div>
 
