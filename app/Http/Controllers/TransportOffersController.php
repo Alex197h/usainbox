@@ -186,7 +186,7 @@ class TransportOffersController extends Controller
             $results[] = $offer->transport_offer_id;
         }
 
-        $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->orderBy('date_start')->get();
+        $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->where('full', 0)->orderBy('date_start')->get();
 
         $city_steps = array();
         foreach ($view_offers as $view_offer) {
@@ -310,7 +310,7 @@ class TransportOffersController extends Controller
         );
 
         $this->validate($request, $rules);
-        
+
         $transport_offer = TransportOffer::where('id', $request->input('transport_offer_id'))->first();
 
         $booking = new Reservation();

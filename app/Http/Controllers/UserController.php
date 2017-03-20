@@ -19,10 +19,9 @@ class UserController extends Controller
 {
     public function getProfile(User $user)
     {
-        if (isset(Auth::user()->id) && $user->id == Auth::user()->id)
+        if (isset(Auth::user()->id) && $user->id == Auth::user()->id){
             return redirect()->route('user_profile');
-        else
-            return view('user.other_profile', ['user' => $user]);
+        } else view('user.other_profile', ['user' => $user]);
     }
 
     public function deleteAuthProfile()
@@ -46,10 +45,9 @@ class UserController extends Controller
             foreach ($vehicles as $vehicle) {
                 $vehicles_id[] = $vehicle->id;
             }
-            $transport_offers = TransportOffer::whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
+            $transport_offers = TransportOffer::with('steps')->whereIn('vehicle_id', $vehicles_id)->limit(5)->get();
             $city_steps = array();
             foreach ($transport_offers as $transport_offer) {
-
                 $steps = $transport_offer->steps;
                 foreach ($steps as $step) {
                     $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
@@ -76,6 +74,30 @@ class UserController extends Controller
             return redirect()->route('login');
         }
 
+    }
+
+    public function getNotifications(){
+        $user = Auth::user();
+
+        $ids = [];
+        $notifs = [];
+
+        foreach($user->notifications as $notification) {
+            if(!empty($notification->data['ids'])){
+                foreach($notification->data['ids'] as $k => $id){
+                    $ids[] = $id;
+                    $notifs[$id] = $notification;
+                }
+            }
+        }
+        $offers = TransportOffer::whereIn('id', $ids)->orderBy('date_start', 'desc')->with('steps')->get();
+
+
+        return view('user.notifications', [
+            'user' => $user,
+            'offers' => $offers,
+            'notifs' => $notifs,
+        ]);
     }
 
     public function getBookingAuth(Request $request)
@@ -288,8 +310,8 @@ class UserController extends Controller
     {
         $rules = array(
             'vehicle_type' => 'required|numeric',
-            'vehicle_brand' => 'max:255',
-            'vehicle_model' => 'max:255',
+            'vehicle_brand' => 'required|max:255',
+            'vehicle_model' => 'required|max:255',
             'volume' => 'required|numeric',
             'length' => 'numeric',
             'width' => 'numeric',

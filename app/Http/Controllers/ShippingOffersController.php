@@ -38,8 +38,8 @@ class ShippingOffersController extends Controller{
         $outputStart= json_decode($geocodeStart);
         if(isset($outputStart->results[0])){
             $start_city = $outputStart->results[0]->geometry->location;
-            $alert->longitude_start = $offer->longitude_start;
-            $alert->latitude_start = $offer->latitude_start;
+            $alert->longitude_start = $start_city->lng;
+            $alert->latitude_start = $start_city->lat;
         }else{
             return redirect()->back()->withInput()->withErrors(['city_start' => 'L\'adresse n\'est pas valide']);
         }
@@ -47,10 +47,11 @@ class ShippingOffersController extends Controller{
         $infoPositionEnd = str_replace(' ', '+',$request->input('city_end'));
         $geocodeEnd=file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.$infoPositionEnd.'&sensor=false');
         $outputEnd= json_decode($geocodeEnd);
+
         if(isset($outputEnd->results[0])){
             $end_city = $outputEnd->results[0]->geometry->location;
-            $alert->longitude_end = $offer->longitude_end;
-            $alert->latitude_end = $offer->latitude_end;
+            $alert->longitude_end = $end_city->lng;
+            $alert->latitude_end = $end_city->lat;
         }else{
             return redirect()->back()->withInput()->withErrors(['city_end' => 'L\'adresse n\'est pas valide']);
         }
@@ -132,17 +133,18 @@ class ShippingOffersController extends Controller{
                 $results[] = $r->transport_offer_id;
             }
 
+
             $results = TransportOffer::whereIn('id', $results)->where('date_start', '<=', $offer->fixed_date)->where('date_start', '>=', date('Y-m-d H:i:s'))->where('full', 0)->get();
             if($results){
                 $ids = [];
                 foreach($results as $result){
                     $ids[] = $result->id;
                 }
-
-                $offer->user->notify(new Alerts($ids));
-
-                $offer->booked = true;
-                //$offer->save();
+                if(count($ids) > 0){
+                    $offer->user->notify(new Alerts($ids));
+                    $offer->booked = true;
+                    $offer->save();
+                }
             }
         }
     }

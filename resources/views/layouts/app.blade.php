@@ -62,6 +62,12 @@ $User = Auth::user();
                             <a href="{{ route('admin') }}" class="black-text"> <i class="material-icons">dashboard</i></a>
                         </li>
                     @endif
+
+                    @if(count($User->unreadNotifications) != 0)
+                        <li>
+                            <a href="{{ route('auth_notifications') }}" class="black-text"> Cloche <span class="badge">{{ count($User->unreadNotifications) }}</span></a>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{route('home')}}" class="black-text"> Rechercher</a>
                     </li>
@@ -70,7 +76,7 @@ $User = Auth::user();
                     </li>
                     <li>
                         <a class="dropdown-button black-text" href="#!"
-                           data-activates="dropdown1">{{$User->last_name}} {{$User->first_name}}<i
+                           data-activates="dropdown1">{{$User->full_name }}<i
                                     class="material-icons right">arrow_drop_down</i></a>
                     </li>
                 </ul>
@@ -141,10 +147,6 @@ $User = Auth::user();
             <div class="col l3">
                 <h5 class="white-text">Informations</h5>
                 <ul>
-                    <li>
-                        <a class="grey-text text-lighten-3" href="{{route('page', 'about')}}" class="black-text">Comment
-                            ça marche ?</a>
-                    </li>
                     <li>
                         <a class="grey-text text-lighten-3" href="{{route('page', 'what')}}" class="black-text">A quoi
                             ça sert ?</a>

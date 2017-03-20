@@ -40,6 +40,7 @@ Route::model('ad_id', App\TransportOffer::class);
 Route::get('user/profile', 'UserController@getProfileAuth')->name('user_profile');
 Route::post('user/profile', 'UserController@updateProfileAuth')->name('update_user_profile');
 Route::get('user/profile/delete', 'UserController@deleteAuthProfile')->name('delete_auth_profile');
+Route::get('user/notifications', 'UserController@getNotifications')->name('auth_notifications');
 
 Route::any('user/vehicles/modify/{vehicle_id}', 'UserController@modifyVehicles')->name('modify_vehicle');
 Route::get('user/vehicles/delete/{vehicle_id?}', 'UserController@deleteVehicle')->name('delete_vehicle');

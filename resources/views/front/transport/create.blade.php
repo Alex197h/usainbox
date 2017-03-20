@@ -31,7 +31,7 @@
                         <div class="section detail-steps " id="stepsArea">
                             <div class="col s12 infoDepAnnonce" {{ $errors->has('start_city') ? ' has-error' : '' }}>
                                 <label class="col s12" for="start_city">Ville de départ <span class="obligatoire">*</span></label>
-                                <input id="start_city" type="text" class="col s12 form-control step" name="start_city" value="{{ old('start_city') }}" draggable="true">
+                                <input required id="start_city" type="text" class="col s12 form-control step" name="start_city" value="{{ old('start_city') }}" draggable="true">
                                 @if ($errors->has('start_city'))
                                 <span>
                                     <strong>{{ $errors->first('start_city') }}</strong>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col s12 infoDepAnnonce" id="endstep" {{ $errors->has('end_city') ? ' has-error' : '' }} >
                                 <label class="col s12" for="end_city">Ville d'arrivée <span class="obligatoire">*</span></label>
-                                <input id="end_city" type="text" class="col s12 form-control step" name="end_city" value="{{ old('end_city') }}" draggable="true">
+                                <input required id="end_city" type="text" class="col s12 form-control step" name="end_city" value="{{ old('end_city') }}" draggable="true">
 
                                 @if ($errors->has('end_city'))
                                 <span>
@@ -80,7 +80,7 @@
 
             <div class="infoProfile col s12 m6 "{{ $errors->has('date_start') ? ' has-error' : '' }}>
                 <label for="date_start">Date de départ <span class="obligatoire">*</span></label>
-                <input id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
+                <input required id="date_start" type="date" class="datepicker form-control" placeholder="jj/mm/aaaa"
                 name="date_start" value="{{ old('date_start') }}">
                 @if ($errors->has('date_start'))
                 <span>
@@ -92,7 +92,7 @@
             <div class="infoProfile col s12 m6 "{{ $errors->has('max_volume') ? ' has-error' : '' }}>
                 <label for="max_volume">Volume en Litres<span
                     class="obligatoire">*</span></label>
-                    <input id="max_volume" type="number" class="form-control" placeholder="Volume en Litres"
+                    <input required id="max_volume" type="number" class="form-control" placeholder="Volume en Litres"
                     name="max_volume" value="{{ old('max_volume') }}">
                     @if ($errors->has('max_volume'))
                     <span>
@@ -103,7 +103,7 @@
 
                 <div class="infoProfile col s12 m6 "{{ $errors->has('hour_start') ? ' has-error' : '' }}>
                     <label for="hour_start">Heure de départ <span class="obligatoire">*</span></label>
-                    <input id="hour_start" type="time" class="form-control" placeholder="hh:mm" name="hour_start" value="{{ old('hour_start') }}">
+                    <input required id="hour_start" type="time" class="form-control" placeholder="hh:mm" name="hour_start" value="{{ old('hour_start') }}">
                     @if ($errors->has('hour_start'))
                     <span>
                         <strong>{{ $errors->first('hour_start') }}</strong>
