@@ -6,8 +6,8 @@
 
     <div class="row">
         <div class="col s8 offset-s2">
-            <div class="row card-panel">
-                <div class="center">
+            <div class="row card">
+                <div class="col s12 center">
                     <h4>{!! ucfirst(utf8_encode(strftime('%A %d %B %Y', strtotime($offer->date_start)))) !!}</h4>
                     @if(isset($steps[$offer->id]))
                         @foreach($steps[$offer->id] as $step)
@@ -91,7 +91,7 @@
                 @if(strtotime($offer->date_start) >= time())
                     @if($auth && $user->id != $auth->id || !$auth)
                         @if($auth)
-                            <form method="post" action="{{ route('booking') }}" class="col s12">
+                            <form method="post" action="{{ route('booking') }}" style="margin-top: 30px;" class="col s12 card-action righ-align">
                                 {{ csrf_field() }}
                                 <input type="hidden" value="{{ $user->id }}" name="transporter_id">
                                 <input type="hidden" value="{{ $offer->id }}" name="transport_offer_id">
@@ -101,7 +101,7 @@
                             </form>
                         @else
                             <div class="col s12">
-                                <a href="{{route('login')}}" class="btn btnValider white-text right">
+                                <a href="{{route('login')}}" class="btn btnValider white-text card-action right-align">
                                     Envoyer une demande
                                 </a>
                             </div>
