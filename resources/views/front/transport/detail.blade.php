@@ -100,8 +100,8 @@
                                 </button>
                             </form>
                         @else
-                            <div class="col s12">
-                                <a href="{{route('login')}}" class="btn btnValider white-text card-action right-align">
+                            <div style="margin-top: 30px;" class="col s12 card-action right-align">
+                                <a href="{{route('login')}}" class="btn btnValider white-text">
                                     Envoyer une demande
                                 </a>
                             </div>
