@@ -357,3 +357,7 @@ span.badge.new:after {
 .collection .collection-item{
     border-bottom: none !important;
 }
+
+.btn-profile-important:hover{
+    background-color: #ddd !important;
+}
