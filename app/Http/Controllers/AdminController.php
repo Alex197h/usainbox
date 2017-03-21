@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Question;
+use App\ShippingOffer;
 use App\TransportOffer;
 use App\TypeVehicle;
 use App\User;
 use App\Vehicle;
+use DB;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller {
@@ -15,7 +17,64 @@ class AdminController extends Controller {
     }
     
     public function home(){
-        return view('admin.home');
+        
+        $countRegDays = DB::select(
+            'SELECT date(created_at) AS day, count(*) AS nb
+            FROM users WHERE created_at >= date(:date)
+            GROUP BY date(created_at)', ['date' => date('Y-m-d', strtotime(' -7 days'))]);
+        $countRegDaysRes = [];
+        foreach($countRegDays as $a){
+            $countRegDaysRes[$a->day] = $a->nb;
+        }
+        
+        $countVehicles = DB::select(
+            'SELECT DISTINCT t.label AS vehicle, COUNT(*) AS nb
+            FROM vehicles v JOIN type_vehicles t ON v.type_vehicle_id=t.id
+            GROUP BY t.label ORDER BY nb DESC');
+        
+        $countVehiclesRes = [];
+        $totVehicles = 0;
+        foreach($countVehicles as $a){
+            $countVehiclesRes[$a->vehicle] = $a->nb;
+            $totVehicles += $a->nb;
+        }
+        
+        
+        return view('admin.home', [
+            'colors' => [
+                "#BDC3C7", "#9B59B6",
+                "#E74C3C", "#26B99A",
+                "#3498DB","#F2B968",
+                "#2C3E50", "#6A7987",
+                "#2C3E50", "#377A88",
+            ],
+            'stats' => (Object)[
+                'countUsers' => User::count(),
+                'countDailyUsers' => User::whereDate('created_at', '=', date('Y-m-d'))->count(),
+                'countDailyLogUsers' => User::whereDate('updated_at', '=', date('Y-m-d'))->count(),
+                'countMales' => User::where('gender', 1)->count(),
+                'countFemales' => User::where('gender', 0)->count(),
+                'countTOffers' => TransportOffer::whereDate('created_at', '=', date('Y-m-d'))->count(),
+                'countTOffersPrev' => TransportOffer::whereDate('created_at', '=', date('Y-m-d', strtotime(' -1 day')))->count(),
+                'countEOffers' => ShippingOffer::whereDate('created_at', '=', date('Y-m-d'))->count(),
+                'countEOffersPrev' => ShippingOffer::whereDate('created_at', '=', date('Y-m-d', strtotime(' -1 day')))->count(),
+                'countAges' => [
+                    '- de 20 ans' => User::whereDate('birthday', '>=', date('Y', strtotime(' -19 years')).'-01-01')->count(),
+                    '20 - 25 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -20 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -25 years')).'-01-01')->count(),
+                    '25 - 30 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -25 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -30 years')).'-01-01')->count(),
+                    '30 - 35 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -30 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -35 years')).'-01-01')->count(),
+                    '35 - 40 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -35 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -40 years')).'-01-01')->count(),
+                    '40 - 45 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -40 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -45 years')).'-01-01')->count(),
+                    '45 - 50 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -45 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -50 years')).'-01-01')->count(),
+                    '50 - 55 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -50 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -55 years')).'-01-01')->count(),
+                    '55 - 60 ans' => User::whereDate('birthday', '<=', date('Y', strtotime(' -55 years')).'-01-01')->whereDate('birthday', '>', date('Y', strtotime(' -60 years')).'-01-01')->count(),
+                    '60 ans et +' => User::whereDate('birthday', '<=', date('Y', strtotime(' -60 years')).'-01-01')->count(),
+                ],
+                'countRegDays' => $countRegDaysRes,
+                'countVehicles' => $totVehicles,
+                'countEachVehicles' => $countVehiclesRes,
+            ]
+        ]);
     }
     
     public function page(Request $request = null, $page, $type = '', $id = null){

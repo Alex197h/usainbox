@@ -116,6 +116,9 @@
         {{ HTML::script('public/admin/libs/pnotify.js') }}
         {{ HTML::script('public/admin/libs/pnotify.buttons.js') }}
         {{ HTML::script('public/admin/libs/pnotify.nonblock.js') }}
+        {{ HTML::script('public/admin/libs/Chart.min.js') }}
+        {{ HTML::script('public/admin/libs/raphael.min.js') }}
+        {{ HTML::script('public/admin/libs/morris.min.js') }}
 
         {{ HTML::script('public/admin/libs/tables/tables.js') }}
         {{ HTML::script('public/admin/libs/tables/dtables.js') }}

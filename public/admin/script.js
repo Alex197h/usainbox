@@ -241,33 +241,35 @@ function init_skycons() {
 }
 
 function init_chart_doughnut() {
-    if("undefined"!=typeof Chart&&(console.log("init_chart_doughnut"), $(".canvasDoughnut").length)) {
-        var a= {
-            type:"doughnut",
-            tooltipFillColor:"rgba(51, 51, 51, 0.55)",
-            data: {
-                labels:["Symbian",
-                "Blackberry",
-                "Other",
-                "Android",
-                "IOS"],
-                datasets:[ {
-                    data: [15, 20, 30, 10, 30], backgroundColor: ["#BDC3C7", "#9B59B6", "#E74C3C", "#26B99A", "#3498DB"], hoverBackgroundColor: ["#CFD4D8", "#B370CF", "#E95E4F", "#36CAAB", "#49A9EA"]
-                }
-                ]
-            }
-            ,
-            options: {
-                legend: !1, responsive: !1
-            }
-        }
-        ;
-        $(".canvasDoughnut").each(function() {
-            var b=$(this);
-            new Chart(b, a)
-        }
-        )
-    }
+    // if("undefined"!=typeof Chart&&(console.log("init_chart_doughnut"), $(".canvasDoughnut").length)) {
+        // var a= {
+            // type:"doughnut",
+            // tooltipFillColor:"rgba(51, 51, 51, 0.55)",
+            // data: {
+                // labels:["Symbian",
+                // "Blackberry",
+                // "Other",
+                // "Android",
+                // "IOS"],
+                // datasets:[ {
+                    // data: [15, 20, 30, 10, 30],
+                    // backgroundColor: ["#BDC3C7", "#9B59B6", "#E74C3C", "#26B99A", "#3498DB"],
+                    // hoverBackgroundColor: ["#CFD4D8", "#B370CF", "#E95E4F", "#36CAAB", "#49A9EA"]
+                // }
+                // ]
+            // }
+            // ,
+            // options: {
+                // legend: !1, responsive: !1
+            // }
+        // }
+        // ;
+        // $(".canvasDoughnut").each(function() {
+            // var b=$(this);
+            // new Chart(b, a)
+        // }
+        // )
+    // }
 }
 
 function init_gauge() {
@@ -1461,40 +1463,7 @@ function init_DataTables() {
 
 function init_morris_charts() {
     "undefined"!=typeof Morris&&(console.log("init_morris_charts"),
-    $("#graph_bar").length&&Morris.Bar( {
-        element:"graph_bar", data:[ {
-            device: "iPhone 4", geekbench: 380
-        }
-        , {
-            device: "iPhone 4S", geekbench: 655
-        }
-        , {
-            device: "iPhone 3GS", geekbench: 275
-        }
-        , {
-            device: "iPhone 5", geekbench: 1571
-        }
-        , {
-            device: "iPhone 5S", geekbench: 655
-        }
-        , {
-            device: "iPhone 6", geekbench: 2154
-        }
-        , {
-            device: "iPhone 6 Plus", geekbench: 1144
-        }
-        , {
-            device: "iPhone 6S", geekbench: 2371
-        }
-        , {
-            device: "iPhone 6S Plus", geekbench: 1471
-        }
-        , {
-            device: "Other", geekbench: 1371
-        }
-        ], xkey:"device", ykeys:["geekbench"], labels:["Geekbench"], barRatio:.4, barColors:["#26B99A", "#34495E", "#ACADAC", "#3498DB"], xLabelAngle:35, hideHover:"auto", resize:!0
-    }
-    ),
+    
     $("#graph_bar_group").length&&Morris.Bar( {
         element:"graph_bar_group", data:[ {
             period: "2016-10-01", licensed: 807, sorned: 660
