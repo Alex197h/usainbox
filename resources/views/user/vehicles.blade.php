@@ -56,7 +56,7 @@
                     </div>
                     <div class="infoProfile col s12 m6 {{ $errors->has('vehicle_brand') ? ' has-error' : '' }}">
                         <label for="vehicle_brand">Marque <span class="obligatoire">*</span></label>
-                        <input required id="vehicle_brand" type="text" class="form-control" placeholder="Marque du véhicule" name="vehicle_brand" value="{{ old('vehicle_brand') }}">
+                        <input list="brands-list" required id="vehicle_brand" type="text" class="form-control" placeholder="Marque du véhicule" name="vehicle_brand" value="{{ old('vehicle_brand') }}">
                         @if ($errors->has('vehicle_brand'))
                         <span class="col s12 error">
                             {{
@@ -72,7 +72,7 @@
                     </div>
                     <div class="infoProfile col s12 m6 {{ $errors->has('vehicle_model') ? ' has-error' : '' }}">
                         <label for="vehicle_model" class="col-md-4 control-label">Modèle <span class="obligatoire">*</span></label>
-                        <input id="vehicle_model" type="text" class="form-control" placeholder="E-Modèle du véhicule" name="vehicle_model" value="{{ old('vehicle_model') }}" required>
+                        <input list="models-list" id="vehicle_model" type="text" class="form-control" placeholder="E-Modèle du véhicule" name="vehicle_model" value="{{ old('vehicle_model') }}" required>
                         @if ($errors->has('vehicle_model'))
                         <span class="col s12 error">
                             {{
@@ -145,21 +145,49 @@
                     <div class="input-field col s12">
                         <span><span class="obligatoire">*</span> Champs obligatoires</span>
                     </div>
+                    
+                    <datalist id="brands-list"></datalist>
+                    <datalist id="models-list"></datalist>
                 </form>
+                <div class="test col s12"></div>
             </div>
             <script>
-            $('#width, #height, #length').on('input', function (id) {
-                var width = $('#width').val();
-                var height = $('#height').val();
-                var length = $('#length').val();
+                $('#width, #height, #length').on('input', function (id) {
+                    var width = $('#width').val();
+                    var height = $('#height').val();
+                    var length = $('#length').val();
 
-                if (
-                    width == '' || height == '' || length == '' ||
-                    width == 0 || height == 0 || length == 0)
-                    $('#volume').val('');
-                    else
-                    $('#volume').val(width * height * length);
-
+                    if (
+                        width == '' || height == '' || length == '' ||
+                        width == 0 || height == 0 || length == 0)
+                        $('#volume').val('');
+                    else $('#volume').val(width * height * length);
+                });
+                
+                $('#vehicle_type').on('change', function(){
+                    var id = this.value;
+                    
+                    $.ajax({
+                        url: '{{ route('get_vehicles_brands') }}',
+                        method: 'POST',
+                        dataType: 'json',
+                        data: {
+                            id: id,
+                            _token: '{{ csrf_token() }}',
+                        },
+                        success: function(result){
+                            if(result.brands){
+                                $('#brands-list').html('');
+                                for(i in result.brands)
+                                    $('#brands-list').append('<option value="'+result.brands[i]+'">');
+                            }
+                            if(result.models){
+                                $('#models-list').html('');
+                                for(i in result.models)
+                                    $('#models-list').append('<option value="'+result.models[i]+'">');
+                            }
+                        }
+                    });
                 });
                 </script>
             </div>

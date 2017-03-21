@@ -27,6 +27,8 @@ Route::get('autosearch', 'ShippingOffersController@autoSearch')->name('autoSearc
 Route::get('offer/shipping/create', 'ShippingOffersController@create')->name('create_shipping_offer');
 Route::post('offer/shipping/create', 'ShippingOffersController@postCreate')->name('post_create_shipping_offer');
 
+Route::any('vehicles/brands', 'HomeController@getVehiclesBrands')->name('get_vehicles_brands');
+
 
 
 Route::get('page/{page}', 'AboutController@page')->name('page');

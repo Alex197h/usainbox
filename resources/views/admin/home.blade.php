@@ -69,7 +69,7 @@
     <div class="col-md-6 col-sm-6 col-xs-12">
         <div class="x_panel tile">
             <div class="x_title">
-                <h2>Véhicules les plus utilisés</h2>
+                <h2>Véhicules les plus utilisés <small>sur un total de {{ $stats->countVehicles }} véhicule</small></h2>
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
@@ -97,7 +97,7 @@
                                 @foreach($stats->countEachVehicles as $k => $c)
                                     <tr>
                                         <td><p><i class="fa fa-square" style="color:{{ $colors[$color] }}"></i>{{ $k }}</p></td>
-                                        <td>{{ $c }}</td>
+                                        <td>{{ round($c*100/$stats->countVehicles) }} %</td>
                                     </tr>
                                     <?php $color++; ?>
                                 @endforeach
@@ -141,7 +141,7 @@
             type:"doughnut",
             tooltipFillColor:"rgba(51, 51, 51, 0.55)",
             data: {
-                labels: {!! json_encode(/*array_map(function($c){return $c*10;}, */array_keys($stats->countEachVehicles))/*)*/ !!},
+                labels: {!! json_encode(array_keys($stats->countEachVehicles)) !!},
                 datasets: [{
                     data: {!! json_encode(array_values($stats->countEachVehicles)) !!},
                     backgroundColor: {!! json_encode(array_slice($colors, 0, count($stats->countEachVehicles))) !!},

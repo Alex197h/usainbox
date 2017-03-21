@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\TransportOffer;
+use App\Vehicle;
+use DB;
 
 class HomeController extends Controller
 {
@@ -59,5 +61,22 @@ class HomeController extends Controller
 
             echo json_encode($result);
         }
+    }
+    
+    public function getVehiclesBrands(Request $request){
+        $id = $_REQUEST['id'];
+        
+        $vehicles = DB::select("SELECT car_brand, car_model FROM vehicles WHERE type_vehicle_id = $id");
+        
+        $brands = [];
+        $models = [];
+        foreach($vehicles as $vehicle){
+            if(!in_array($vehicle->car_brand, $brands))
+                $brands[] = $vehicle->car_brand;
+            if(!in_array($vehicle->car_model, $models))
+                $models[] = $vehicle->car_model;
+        }
+        
+        return json_encode(['brands' => $brands, 'models' => $models]);
     }
 }
