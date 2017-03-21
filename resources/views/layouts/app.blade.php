@@ -22,7 +22,7 @@
     <?php
     $User = Auth::user();
     ?>
-    <header class="row navbar-fixed" style="margin:0;">
+    <header class="row navbar-fixed" style="margin:0;z-index:990;">
 
         <ul id="dropdown1" class="dropdown-content">
             <li>
@@ -95,14 +95,14 @@
                                 class="material-icons right">arrow_drop_down</i></a>
                             </li>
                         </ul>
-                        <ul class="side-nav" id="mobile-demo">
+                        <ul class="side-nav" id="mobile-demo" style="z-index:999">
                             @if(Auth::user()->is_admin)
                                 <li>
                                     <a href="{{ route('admin') }}" class="black-text"> <i class="material-icons">dashboard</i></a>
                                 </li>
                             @endif
                             <li>
-                                <a href="#" class="black-text"> Rechercher</a>
+                                <a href="{{route('home')}}" class="black-text"> Rechercher</a>
                             </li>
                             <li>
                                 <a href="{{route('login')}}" class="black-text">Déposer une annonce</a>

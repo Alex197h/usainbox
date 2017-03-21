@@ -66,13 +66,12 @@
                         <a class="collection-item" href="{{route('user_vehicles')}}">
                             Ajouter un vehicule
                         </a>
-                        <a class="collection-item" href="{{ route('my_ads') }}">
-                            Vos annonces
-                        </a>
-
                         <a class="collection-item btn-profile-important" style="background-color: #fff;"
                            href="#vehicles">
                             Vos vehicules
+                        </a>
+                        <a class="collection-item" href="{{ route('my_ads') }}">
+                            Vos annonces
                         </a>
                         <a class="collection-item" href="{{ route('my_bookings') }}">
                             Vos reservations

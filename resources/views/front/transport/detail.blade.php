@@ -7,8 +7,10 @@
     <div class="row">
         <div class="col s8 offset-s2">
             <div class="row card">
-                <div class="col s12 center">
-                    <h4>{!! ucfirst(utf8_encode(strftime('%A %d %B %Y', strtotime($offer->date_start)))) !!}</h4>
+                <div class="section center">
+                    <h5>
+                        {!! ucfirst(utf8_encode(strftime('%A %d %B %Y', strtotime($offer->date_start)))) !!}
+                    </h5>
                     @if(isset($steps[$offer->id]))
                         @foreach($steps[$offer->id] as $step)
 
@@ -119,11 +121,41 @@
                         @endif
                     @endif
                 </div>
-                @foreach($offer->reviews as $r)
-                    <p>{{ $r->review }} ({{ $r->note }}/5)</p>
-                @endforeach
+                @if(!$offer->reviews->isEmpty())
+                    <div class="row card-panel">
+                        <h5>
+                            Quelque avis sur {{ $user->fullname }}
+
+                            {{
+                                Html::image('public/img/annonce/up.svg',
+                                'Icon d\'un pouce vers le haut',
+                                array('class' => 'responsive-img icon'))
+                            }}
+
+                        </h5>
+                        @foreach($offer->reviews as $r)
+
+                            <br>
+                            <div class="avis col s8 offset-s2">
+                                <p>{{ $r->review }} ({{ $r->note }}/5)</p>
+                            </div>
+
+                        @endforeach
+                    </div>
+                @endif
+
                 @if(!$questions->isEmpty())
                     <div class="row card-panel">
+                        <h5>
+                            Questions sur l'annonce
+
+                            {{
+                                Html::image('public/img/annonce/help.svg',
+                                'Icon d\'une question',
+                                array('class' => 'responsive-img icon', 'style' => 'vertical-align:middle;'))
+                            }}
+                        </h5>
+                        <br>
                         <div class="col s8 offset-s2">
                             @foreach($questions as $question)
                                 <div class="{{ $auth && $auth->id == $question->user->id ? 'right-align reponse' : 'question' }}">

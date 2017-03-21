@@ -330,6 +330,12 @@ width: 330px;
 border: solid #93c193 2px;
 }*/
 
+.avis{
+    background: rgba(255, 218, 68, 0.66);
+    padding: 15px;
+    margin-bottom: 15px;
+    border: solid rgba(199, 168, 44, 0.66) 2px;
+}
 .question{
     background: rgba(231, 225, 225, 0.66);
     padding: 15px;
@@ -366,4 +372,7 @@ span.badge.new:after {
 #DataTables_Table_0_filter{
     margin-bottom: 80px;
     margin-top: 35px;
+}
+#sidenav-overlay{
+    z-index: 950!important;
 }
