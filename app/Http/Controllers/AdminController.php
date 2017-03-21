@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Question;
 use App\TransportOffer;
 use App\TypeVehicle;
 use App\User;
@@ -208,6 +209,14 @@ class AdminController extends Controller {
         
         return view('admin.transports', [
             'transports' => TransportOffer::with('vehicle.user')->get()
+        ]);
+    }
+    
+    public function comments($page = '', $id = null, $request){
+        
+        
+        return view('admin.questions', [
+            'questions' => Question::with('user')->get()
         ]);
     }
 }

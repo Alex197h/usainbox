@@ -41,8 +41,7 @@
                                 <li><a href="{{ route('admin_page', 'users') }}"><i class="fa fa-users"></i> Membres</a></li>
                                 <li><a href="{{ route('admin_page', 'vehicles') }}"><i class="fa fa-car"></i> Vehicules</a></li>
                                 <li><a href="{{ route('admin_page', 'transports') }}"><i class="fa fa-car"></i> Transports</a></li>
-                                <li><a><i class="fa fa-car"></i> Réservations</a></li>
-                                <li><a><i class="fa fa-comments-o"></i> Commentaires</a></li>
+                                <li><a href="{{ route('admin_page', 'comments') }}"><i class="fa fa-comments-o"></i> Commentaires</a></li>
                             </ul>
                         </div>
                     </div>
