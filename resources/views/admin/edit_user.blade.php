@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Profil de '.$user->full_name)
+@section('title', 'Profil de '.$user->full_name.' <a href="'.route('profile', $user->id).'" title="Voir sur le site" target="_blank"><i class="fa fa-arrow-right"></i></a>')
 
 @section('content')
 <div class="row">
