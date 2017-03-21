@@ -35,8 +35,6 @@
                         <label for="hour" class="active">Heure de passage à <strong>{{ $booking->city_start_label }}</strong></label>
                         <input placeholder="Heure de passage à {{ $booking->city_start_label }}" name="hour" id="hour" type="time"
                         value="{{ old('hour') }}" min="0">
-
-
                         @if ($errors->has('hour'))
                             <span class="col s12">
                                 <strong>{{ $errors->first('hour') }}</strong>
@@ -46,7 +44,7 @@
 
                     <input type="hidden" name="booking_id" value="{{ $booking->id }}">
 
-                    <div class="input-field right-align">
+                    <div class="right-align">
                         <button type="submit" class="btn btnValider">
                             Confirmer la réservation
                         </button>

@@ -109,6 +109,8 @@ function initMap(){
                     @endif
                     <br>
 
+                    <b>Véhicule:</b> {{ $offer->vehicle->typeVehicle->label }}
+                    <br>
                     <b>Heure de départ :</b> {{ date('H:i', strtotime($offer->date_start)) }}
                     <br>
 
