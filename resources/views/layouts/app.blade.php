@@ -76,7 +76,7 @@
                                     {{
                                         Html::image('public/img/accueil/bell.svg',
                                         'Icon d\'une cloche',
-                                        array('class' => 'responsive-img icon tooltipped', 'data-tooltip' => 'Notification', 'style' => 'vertical-align:middle;'))
+                                        array('class' => 'responsive-img icon tooltipped', 'data-tooltip' => 'Notifications', 'style' => 'vertical-align:middle;'))
                                     }}
                                     @if(count($User->unreadNotifications)>0)
                                         <span class="badge">{{ count($User->unreadNotifications) }}</span>

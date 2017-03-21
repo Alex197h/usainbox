@@ -57,7 +57,7 @@
                         <br>
                         <b>Heure de départ:</b> {{ date('H:i', strtotime($offer->date_start)) }}
                         <br>
-                        
+
                         <b>Poids maximum du colis:</b> {{ $offer->max_weight }}
                         <br>
 
@@ -83,9 +83,14 @@
                     <div class="col s4 offset-s1 annoncepanel">
                         <h5>Conducteur</h5>
                         <a href="{{ route('profile', $user->id) }}">{{ $user->fullname }}</a>
-                        <br>
-                        <b>Note:</b> {{ $user->transport_note }}/5
-                        <br>
+                        <p>
+                        {{
+                            Html::image('public/img/legende/T.svg',
+                            'Icon d\'un colis',
+                            array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Note transporteur'))
+                        }}
+                        {{ $user->transport_note }}/5
+                        </p>
                     </div>
                 </div>
                 @if(strtotime($offer->date_start) >= time())
@@ -145,7 +150,9 @@
                                     <label for="question">Pose ta question</label>
                                 </div>
                                 {{ csrf_field() }}
-                                <input class="waves-effect waves-light btnValider btn right" type="submit" value="Envoyer">
+                                <button type="submit" class="btn btnValider white-text right">
+                                    Poster le message
+                                </button>
                             </div>
                         </form>
                     </div>
