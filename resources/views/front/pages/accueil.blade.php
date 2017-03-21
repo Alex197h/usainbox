@@ -81,7 +81,7 @@
         <div id="transport_offers" class="col s12"></div>
     </div>
 
-    <div class="row scrollspy">
+    <div class="row scrollspy hide-on-med-and-down">
         <h3 class="center" style="padding: 55px;">Comment ça marche ?</h3>
     </div>
 
