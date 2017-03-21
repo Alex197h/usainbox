@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Offre de transport de '.$user->full_name)
+@section('title', 'Offre de transport de '.$user->full_name.' <a href="'.route('detail_transport_offer', $transport->id).'" title="Voir sur le site" target="_blank"><i class="fa fa-arrow-right"></i></a>')
 
 @section('content')
 <div class="row">

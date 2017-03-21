@@ -213,7 +213,15 @@ class AdminController extends Controller {
     }
     
     public function comments($page = '', $id = null, $request){
-        
+        if($page == 'rem'){
+            $q = Question::find($id);
+            if($q){
+                $q->delete();
+                return json_encode([
+                    'success' => true
+                ]);
+            } return json_encode([]);
+        }
         
         return view('admin.questions', [
             'questions' => Question::with('user')->get()
