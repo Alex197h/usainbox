@@ -59,7 +59,14 @@
                         <ul class="right hide-on-med-and-down">
                             @if(Auth::user()->is_admin)
                                 <li>
-                                    <a href="{{ route('admin') }}" class="black-text"> <i class="material-icons">dashboard</i></a>
+                                    <a href="{{ route('admin') }}" class="black-text">
+                                        {{
+                                            Html::image('public/img/admin/boss.svg',
+                                            'Icon d\'un boss',
+                                            array('class' => 'responsive-img tooltipped icon',
+                                            'data-tooltip' => 'Administration', 'style' => 'vertical-align:middle;'))
+                                        }}
+                                    </a>
                                 </li>
                             @endif
 
@@ -67,9 +74,9 @@
                             <li>
                                 <a href="{{ route('auth_notifications') }}" class="black-text">
                                     {{
-                                        Html::image('public/img/recherche/bell.svg',
+                                        Html::image('public/img/accueil/bell.svg',
                                         'Icon d\'une cloche',
-                                        array('class' => 'responsive-img iconC'))
+                                        array('class' => 'responsive-img icon tooltipped', 'data-tooltip' => 'Notification', 'style' => 'vertical-align:middle;'))
                                     }}
                                     @if(count($User->unreadNotifications)>0)
                                         <span class="badge">{{ count($User->unreadNotifications) }}</span>

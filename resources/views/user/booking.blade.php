@@ -90,9 +90,9 @@
                                         <a type="button" class="waves-effect btnValider waves-light btn btn-modal" data-id="{{ $reservation->id }}" href="#modalAvis">Avis</a>
                                     @elseif ((strtotime($reservation->passage_date) >= time()))
                                         {{
-                                            Html::image('public/img/reservation/list.svg',
-                                            'Icon validé',
-                                            array('class' => 'responsive-img iconC'))
+                                            Html::image('public/img/reservation/error.svg',
+                                            'Icon croix rouge',
+                                            array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Vous ne pouvez pas encore laisser d\'avis'))
                                         }}
                                     @else
                                         {{
