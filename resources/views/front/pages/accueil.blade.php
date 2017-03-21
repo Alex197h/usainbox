@@ -143,8 +143,6 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
     <script type="text/javascript">
 
-        var myVideo =  iframe.getElementById('myVideo');
-        myVideo.mute();
 
         var MapElement = document.getElementById('map');
         var ShowElement = document.getElementById('show');
