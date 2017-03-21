@@ -74,7 +74,6 @@ $('#switch').on('click', function () {
 <div id="introduction" class="row scrollspy">
     <h3 class="center" style="padding: 55px;">Retrouver des transport partout en France</h3>
 </div>
-
 <div class="row">
     <div id="resss"></div>
     <div class="col s12 right" id="map"></div>
@@ -117,6 +116,7 @@ $('#switch').on('click', function () {
                     </div>
                     <div class="section detail-offer">
                         <b>Heure de départ:</b> $hour<br>
+                        <b>Vehicule:</b> $typevehicle<br>
                         <b>Trajet:</b> $citiessteps <br><br>
 
                         <br>
@@ -294,6 +294,9 @@ $('#switch').on('click', function () {
                                     ss.push(steps[s].label.split(', ')[0]);
                                 }
 
+                                var hour = d.split(' ')[1].split(':');
+                                hour.pop();
+
                                 var arr = {
                                     selected: count == 1 ? ' selected' : '',
                                     date: (new Date(d.split(' ')[0])).toLocaleDateString(),
@@ -302,7 +305,8 @@ $('#switch').on('click', function () {
                                     avatar: result[r].user.avatar,
                                     transportnote: result[r].user.transport_note || '0',
                                     shippingnote: result[r].user.shipping_note || '0',
-                                    hour: d.split(' ')[1],
+                                    hour: hour.join(':'),
+                                    typevehicle: result[r].vehicle,
                                     citiessteps: ss.join(' → '),
                                     name: result[r].user.first_name + ' ' + result[r].user.last_name,
                                     gender: result[r].user.gender == 0 ? 'FFBCD8' : '39D5FF',

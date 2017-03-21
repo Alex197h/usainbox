@@ -363,3 +363,7 @@ span.badge.new:after {
 .btn-profile-important:hover{
     background-color: #ddd !important;
 }
+#DataTables_Table_0_filter{
+    margin-bottom: 80px;
+    margin-top: 35px;
+}

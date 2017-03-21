@@ -18,59 +18,67 @@
                         'Icon d\'une annonce',
                         array('class' => 'responsive-img icon','style' => 'vertical-align: middle;'))
                     }}
-            </h5>
-        </div>
+                </h5>
+            </div>
 
 
-        @if(!$reservations->isEmpty())
-            <table class="responsive-table">
-                <thead class="">
-                    <tr>
-                        <th>Date</th>
-                        <th>Type</th>
-                        <th>Offre</th>
-                        <th>Demandeur</th>
-                        <th>Etape de départ</th>
-                        <th>Etape d'arrivée</th>
-                        <th>Volume du colis</th>
-                        <th>Prix</th>
-                        <th>Heure de passage</th>
-                        <th>Valider la réservation</th>
-                        <th>Laisser un avis</th>
-                    </tr>
-                </thead>
+            @if(!$reservations->isEmpty())
+                <table class="responsive-table">
+                    <thead class="">
+                        <tr>
+                            <th class="center">Date</th>
+                            <th class="center">Type</th>
+                            <th class="center">Demandeur</th>
+                            <th class="center">Tajet</th>
+                            <th class="center">Volume</th>
+                            <th class="center">Prix</th>
+                            <th class="center">Heure</th>
+                            <th class="center">Valider</th>
+                            <th class="center">Avis</th>
+                        </tr>
+                    </thead>
 
-                <tbody>
-                    @foreach($reservations as $reservation)
-                        <tr class="res-line">
-                            <td>{!! date('Y/m/d', strtotime($reservation->passage_date)) !!}</td>
-                            <td class="type_offer">
-                                @if($reservation->isShipper(Auth::user()->id))
-                                    <span data-type="E">Expédition</span>
-                                @else
-                                    <span data-type="T">Transport</span>
-                                @endif
-                            </td>
-                            <td>
-                                <a href="{{ route('detail_transport_offer', $reservation->transport_offer_id) }}"
-                                    target="_blank">Voir
-                                    l'offre</a>
+                    <tbody>
+                        @foreach($reservations as $reservation)
+                            <tr class="res-line">
+                                <td class="center">
+                                    <a class="tooltipped" data-tooltip="Voir le détail de l'annonce" href="{{ route('detail_transport_offer', $reservation->transport_offer_id) }}" target="_blank">
+                                        {!! ucfirst(utf8_encode(strftime('%d %B %Y', strtotime($reservation->passage_date)))) !!}
+                                    </a>
+
                                 </td>
-                                <td>
-                                    <a href="{{ route('profile', $users[$reservation->id][0]->id) }}" target="_blank">
+                                <td class="center type_offer">
+                                    @if($reservation->isShipper(Auth::user()->id))
+                                        {{
+                                            Html::image('public/img/legende/E.svg',
+                                            'Icon d\'un volant',
+                                            array('class' => 'datatype responsive-img iconC tooltipped', 'data-type' => 'E', 'data-tooltip' => 'Expédition'))
+                                        }}
+                                    @else
+                                        {{
+                                            Html::image('public/img/legende/T.svg',
+                                            'Icon d\'un colis',
+                                            array('class' => 'datatype responsive-img iconC tooltipped', 'data-type' => 'T', 'data-tooltip' => 'Transport'))
+                                        }}
+                                    @endif
+                                </td>
+                                <td class="center">
+                                    <a class="tooltipped" data-tooltip="Voir le profil" href="{{ route('profile', $users[$reservation->id][0]->id) }}" target="_blank">
                                         {{ $users[$reservation->id][0]->fullname }}
                                     </a>
+                                    <hr>
                                     @if($reservation->transporter_id == Auth::user()->id)
-                                        <br> <a href="tel:{{ $users[$reservation->id][0]->phone }}">{{ $users[$reservation->id][0]->phone }}</a>
+                                        <a class="tooltipped" data-tooltip="Appeler" href="tel:{{ $users[$reservation->id][0]->phone }}">{{ $users[$reservation->id][0]->phone }}</a>
                                     @endif
 
                                 </td>
-                                <td>{{ $reservation->city_start_label }}</td>
-                                <td>{{ $reservation->city_end_label }}</td>
-                                <td>{{ $reservation->parcel_volume }} cm3</td>
-                                <td>{{ $reservation->price ? $reservation->price.'€' : '-' }}</td>
-                                <td>{{ $reservation->hour ? date('H:i', strtotime($reservation->hour)) : '-' }}</td>
-                                <td>
+                                <td class="center">
+                                    {{ $reservation->city_start_label }} → {{ $reservation->city_end_label }}
+                                </td>
+                                <td class="center">{{ $reservation->parcel_volume }} L</td>
+                                <td class="center">{{ $reservation->price ? $reservation->price.'€' : '-' }}</td>
+                                <td class="center">{{ $reservation->hour ? date('H:i', strtotime($reservation->hour)) : '-' }}</td>
+                                <td class="center">
                                     @if($reservation->shipper_id == Auth::user()->id && $reservation->validated)
                                         <a class="btn green disabled">Validée</a>
                                     @elseif($reservation->shipper_id == Auth::user()->id && !$reservation->validated)
@@ -160,7 +168,7 @@
 
                     var id = $(this).attr('data-id');
                     $('#reservation').val(id);
-                    var type = $(this).parents('.res-line').find('.type_offer span').attr('data-type');
+                    var type = $(this).parents('.res-line').find('.datatype').attr('data-type');
                     $('#type').val(type);
                 });
                 $('table').DataTable();

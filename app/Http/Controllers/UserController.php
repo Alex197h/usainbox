@@ -114,6 +114,7 @@ class UserController extends Controller
                 $r->$v = $request->review;
                 $r->save();
             }
+            return back();
         }
 
 
@@ -292,6 +293,9 @@ class UserController extends Controller
 
     public function deleteAd(TransportOffer $ad)
     {
+        foreach($ad->reservations as $r) $r->delete();
+        foreach($ad->questions as $q) $q->delete();
+        TransportStep::where('transport_offer_id', $ad->id)->delete();
         $ad->delete();
         return redirect()->route('my_ads')->with('message', 'Annonce supprimée !');
     }
