@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="infoProfile col s12 m6{{ $errors->has('weight') ? ' has-error' : '' }}">
-                        <label for="weight" class="col-md-4 control-label">Poids maximum</label>
+                        <label for="weight" class="col-md-4 control-label">Poids en kg</label>
                         <input id="weight" placeholder="Poids disponible" type="number" class="form-control" name="weight">
                         @if ($errors->has('weight'))
                         <span class="col s12 error">
@@ -145,7 +145,7 @@
                     <div class="input-field col s12">
                         <span><span class="obligatoire">*</span> Champs obligatoires</span>
                     </div>
-                    
+
                     <datalist id="brands-list"></datalist>
                     <datalist id="models-list"></datalist>
                 </form>
@@ -163,10 +163,10 @@
                         $('#volume').val('');
                     else $('#volume').val(width * height * length);
                 });
-                
+
                 $('#vehicle_type').on('change', function(){
                     var id = this.value;
-                    
+
                     $.ajax({
                         url: '{{ route('get_vehicles_brands') }}',
                         method: 'POST',
