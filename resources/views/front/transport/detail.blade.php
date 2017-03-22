@@ -121,7 +121,7 @@
                         @endif
                     @endif
                 </div>
-                @if(!$offer->reviews->isEmpty())
+                @if(!$reviews->isEmpty())
                     <div class="row card-panel">
                         <h5>
                             Quelque avis sur {{ $user->fullname }}
@@ -133,7 +133,7 @@
                             }}
 
                         </h5>
-                        @foreach($offer->reviews as $r)
+                        @foreach($reviews as $r)
 
                             <br>
                             <div class="avis col s8 offset-s2">

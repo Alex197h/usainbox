@@ -58,79 +58,73 @@ function initMap(){
         <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 card annoncepanel">
             <div class="section center">
                 <h5>{!! ucfirst(utf8_encode(strftime('%A %d %B', strtotime($offer->date_start)))) !!}</h5>
-                @if(isset($steps[$offer->id]))
-                    @foreach($steps[$offer->id] as $step)
-
-                        <span>{{ $step }}  @if(!$loop->last) → @endif </span>
-
-                        @endforeach
-                    @endif
-                </div>
-                <div class="section">
-                    <a href="{{ route('profile', $offer->user->id) }}">{{ $offer->user->full_name }}</a>
-                    <br>
-                    <br>
-                    @if($offer->is_regular)
-                        {{
-                            Html::image('public/img/trajet/regularYes.svg',
-                            'Calendrier',
-                            array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet régulier'))
-                        }}
-                    @else
-                        {{
-                            Html::image('public/img/trajet/regularNo.svg',
-                            'Calendrier',
-                            array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet occasionnel'))
-                        }}
-                    @endif
-                    @if($offer->highway)
-                        {{
-                            Html::image('public/img/trajet/highwayYes.svg',
-                            'Icon de l\'autoroute',
-                            array('class' => 'responsive-img tooltipped iconT',
-                            'data-tooltip' => 'Prend l\'autoroute'))
-                        }}
-                    @endif
-                    @if($offer->detour)
-                        {{
-                            Html::image('public/img/trajet/detour.svg',
-                            'Icon de deux flèche pour le détour',
-                            array('class' => 'responsive-img tooltipped iconT',
-                            'data-tooltip' => 'Détour possible'))
-                        }}
-                    @endif
-                    @if($offer->user->help_charge)
-                        {{
-                            Html::image('public/img/trajet/cartYes.svg',
-                            'Icon d\'un diable pour le transport',
-                            array('class' => 'responsive-img tooltipped iconT',
-                            'data-tooltip' => 'Aide pour le chargement'))
-                        }}
-                    @endif
-                    <br>
-
-                    <b>Véhicule:</b> {{ $offer->vehicle->typeVehicle->label }}
-                    <br>
-                    <b>Heure de départ :</b> {{ date('H:i', strtotime($offer->date_start)) }}
-                    <br>
-
-                    <b>Volume disponible :</b> {{ $offer->volume }}
-                    <br>
-
-                    @if($offer->description)
-                        <b>Description :</b>
-                        {{ $offer->description }}
-                        <br>
-                    @endif
-                </div>
-                <div class="card-action right-align">
-                    <a href="{{ route('detail_transport_offer', $offer->id) }}" class="brown-text">Voir
-                        l'annonce</a>
-                    </div>
-                </div>
-
-                <div class="row">
+                @foreach($offer->steps as $step)
+                    <span>{{ $step->label }} @if(!$loop->last) → @endif </span>
                 @endforeach
+            </div>
+            <div class="section">
+                <a href="{{ route('profile', $offer->user->id) }}">{{ $offer->user->full_name }}</a>
+                <br>
+                <br>
+                @if($offer->is_regular)
+                    {{
+                        Html::image('public/img/trajet/regularYes.svg',
+                        'Calendrier',
+                        array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet régulier'))
+                    }}
+                @else
+                    {{
+                        Html::image('public/img/trajet/regularNo.svg',
+                        'Calendrier',
+                        array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => 'Trajet occasionnel'))
+                    }}
+                @endif
+                @if($offer->highway)
+                    {{
+                        Html::image('public/img/trajet/highwayYes.svg',
+                        'Icon de l\'autoroute',
+                        array('class' => 'responsive-img tooltipped iconT',
+                        'data-tooltip' => 'Prend l\'autoroute'))
+                    }}
+                @endif
+                @if($offer->detour)
+                    {{
+                        Html::image('public/img/trajet/detour.svg',
+                        'Icon de deux flèche pour le détour',
+                        array('class' => 'responsive-img tooltipped iconT',
+                        'data-tooltip' => 'Détour possible'))
+                    }}
+                @endif
+                @if($offer->user->help_charge)
+                    {{
+                        Html::image('public/img/trajet/cartYes.svg',
+                        'Icon d\'un diable pour le transport',
+                        array('class' => 'responsive-img tooltipped iconT',
+                        'data-tooltip' => 'Aide pour le chargement'))
+                    }}
+                @endif
+                <br>
+
+                <b>Véhicule:</b> {{ $offer->vehicle->typeVehicle->label }}
+                <br>
+                <b>Heure de départ :</b> {{ date('H:i', strtotime($offer->date_start)) }}
+                <br>
+
+                <b>Volume disponible :</b> {{ $offer->volume }}
+                <br>
+
+                @if($offer->description)
+                    <b>Description :</b>
+                    {{ $offer->description }}
+                    <br>
+                @endif
+            </div>
+            <div class="card-action right-align">
+                <a href="{{ route('detail_transport_offer', $offer->id) }}" class="brown-text">Voir l'annonce</a>
+            </div>
+        </div>
+        <div class="row">
+            @endforeach
                 <div class="col l6 m10 s10 offset-l3 offset-m1 offset-s1 annoncepanel">
                     <div class="section center">
                         <h4>Aucune offre ne vous convient ?</h4>
