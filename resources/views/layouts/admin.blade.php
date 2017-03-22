@@ -33,6 +33,19 @@
                         <a href="{{ route('admin') }}" class="site_title"><i class="fa fa-sliders"></i> <span>Usainbox Admin</span></a>
                     </div>
                     <div class="clearfix"></div>
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            {{
+                                Html::image(Auth::user()->avatar_path,
+                                'Avatar par default de l\'utilisateur',
+                                ['class' => 'img-circle profile_img'])
+                            }}
+                        </div>
+                        <div class="profile_info">
+                            <span>Bienvenue, </span>
+                            <h2>{{ Auth::user()->full_name }}</h2>
+                        </div>
+                    </div>
                     <br>
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">

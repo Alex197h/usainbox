@@ -6,48 +6,37 @@
 
     @if (session('message_error'))
         <script type="text/javascript">
-            function toast() {
-                Materialize.toast('{{ session('message_error') }}', 4000)
-            }
-            window.onload = toast;
+        function toast() {
+            Materialize.toast('{{ session('message_error') }}', 4000)
+        }
+        window.onload = toast;
         </script>
     @endif
 
 
     <div class="row header-search">
-        <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form"
-              method="POST" action="{{ route('transport') }}">
+        <form style="background: rgba(120, 106, 106, 0.75);" class="col s10 offset-s1" role="form" method="POST" action="{{ route('transport') }}">
             {{ csrf_field() }}
             <h4 class="col s12 white-text">Envoyez vos colis rapidement</h4>
             <div class="row">
                 <div class="input-field col s12 l3">
-                    <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start"
-                           value="{{ old('city_start') }}" required>
+                    <input id="city_start" class="white" placeholder="Ville départ" type="text" name="city_start" value="{{ old('city_start') }}" required>
                     <label style="display: none;" for="city_start">Ville départ</label>
                 </div>
                 <div style="text-align: center;" class="input-field col s4 l1 offset-s4">
-                    <button type="button" style="height: 44px;" id="switch"
-                            class="valign-wrapper col s12 btn white black-text">
+                    <button type="button" style="height: 44px;" id="switch" class="valign-wrapper col s12 btn white black-text">
                         <i class="valign material-icons">compare_arrows</i>
-                        {{--{{--}}
-                        {{--Html::image('public/img/switch.svg',--}}
-                        {{--'Deux flèches pour switch',--}}
-                        {{--array('class' => 'responsive-img icon', 'style' => 'vertical-align: middle;'))--}}
-                        {{--}}--}}
                     </button>
                 </div>
                 <div class="input-field col s12 l3">
-                    <input id="city_end" class="white" placeholder="Ville arrivée" type="text"
-                           value="{{ old('city_end') }}" name="city_end" required>
+                    <input id="city_end" class="white" placeholder="Ville arrivée" type="text" value="{{ old('city_end') }}" name="city_end" required>
                     <label style="display: none;" for="city_end">Ville arrivée</label>
                 </div>
                 <div class="input-field col s12 l2">
-                    <input type="date" name="date" class=" white" placeholder="Date"
-                           value="{{ date('Y-m-d') }}">
+                    <input type="date" name="date" class=" white" placeholder="Date" value="{{ date('Y-m-d') }}">
                 </div>
                 <div class="input-field col s12 l3">
-                    <button style="height: 44px;" type="submit"
-                            class="col s12 btn waves-effect waves-light white black-text">
+                    <button style="height: 44px;" type="submit" class="col s12 btn waves-effect waves-light white black-text">
                         Expédier
                         {{
                             Html::image('public/img/transport.svg',
@@ -58,18 +47,16 @@
                 </div>
             </div>
         </form>
-        <a id="scrollDown" href="#introduction"
-           class="hide-on-small-only waves-light transparent white-text"><i
-                    class="material-icons floating scrollspy">expand_more</i></a>
+        <a id="scrollDown" href="#introduction" class="hide-on-small-only waves-light transparent white-text"><i class="material-icons floating scrollspy">expand_more</i></a>
     </div>
 
     <script>
-        $('#switch').on('click', function () {
-            var first = $('#city_start').val();
-            var last = $('#city_end').val();
-            $('#city_start').val(last);
-            $('#city_end').val(first);
-        });
+    $('#switch').on('click', function () {
+        var first = $('#city_start').val();
+        var last = $('#city_end').val();
+        $('#city_start').val(last);
+        $('#city_end').val(first);
+    });
     </script>
 
     <div id="introduction" class="row scrollspy">
@@ -87,8 +74,8 @@
 
     <section class="col s12 m8 offset-m2 center hide-on-med-and-down" id="video-pres">
         <iframe width="850" height="500" id="myVideo"
-                src="https://www.youtube.com/embed/QJRXN-AtUic?autoplay=1&playlist=QJRXN-AtUic&loop=1&controls=0"
-                frameborder="0" allowfullscreen></iframe>
+        src="https://www.youtube.com/embed/l-KxafT22GE?autoplay=1&playlist=QJRXN-AtUic&loop=1&controls=0"
+        frameborder="0" allowfullscreen></iframe>
     </section>
 
     <div id="offercopy" hidden>
@@ -106,42 +93,42 @@
                         <h4>Le $date</h4>
                         <span>$itinerary</span>
                         <i class="small material-icons"
-                           style="color:#$gender; vertical-align: middle">account_circle</i><span>
-                        <a class="tooltipped" data-tooltip="Voir le profil" href="{{ url('user') }}/$user">$name</a> ($age ans)</span><br><br>
-                        <span class="col s12 ">
-                            {{
-                                Html::image('public/img/legende/T.svg',
-                                'Icon d\'un colis',
-                                array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Note transporteur'))
-                            }}
-                            $transportnote/5
-                        </span>
-                        <br>
-                    </div>
-                    <div class="section detail-offer">
-                        <b>Heure de départ:</b> $hour<br>
-                        <b>Vehicule:</b> $typevehicle<br>
-                        <b>Trajet:</b> $citiessteps <br><br>
+                        style="color:#$gender; vertical-align: middle">account_circle</i><span>
+                            <a class="tooltipped" data-tooltip="Voir le profil" href="{{ url('user') }}/$user">$name</a> ($age ans)</span><br><br>
+                            <span class="col s12 ">
+                                {{
+                                    Html::image('public/img/legende/T.svg',
+                                    'Icon d\'un colis',
+                                    array('class' => 'responsive-img iconC tooltipped', 'data-tooltip' => 'Note transporteur'))
+                                }}
+                                $transportnote/5
+                            </span>
+                            <br>
+                        </div>
+                        <div class="section detail-offer">
+                            <b>Heure de départ:</b> $hour<br>
+                            <b>Vehicule:</b> $typevehicle<br>
+                            <b>Trajet:</b> $citiessteps <br><br>
 
-                        <br>
-                        <br>
-                        {{ Html::image('public/img/trajet/$regular.icon.svg',
-                            'Calendrier',
-                            array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text'))
-                        }}
-                        $highway $charge $detour
+                            <br>
+                            <br>
+                            {{ Html::image('public/img/trajet/$regular.icon.svg',
+                                'Calendrier',
+                                array('class' => 'responsive-img tooltipped iconT', 'data-tooltip' => '$regular.text'))
+                            }}
+                            $highway $charge $detour
+                        </div>
                     </div>
-                </div>
-                <div class="card-action">
-                    <a href="{{ route('detail_transport_offer') }}/$offerid">Voir l'annonce</a>
+                    <div class="card-action">
+                        <a href="{{ route('detail_transport_offer') }}/$offerid">Voir l'annonce</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
-    <script type="text/javascript">
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUTW7_sKsarvYpb8HJdG1cWptczyG3Jf0&callback=initMap&libraries=places"></script>
+        <script type="text/javascript">
 
 
         var MapElement = document.getElementById('map');
@@ -322,26 +309,26 @@
                                             text: result[r].is_regular ? 'Trajet régulier' : 'Trajet occasionnel',
                                         },
                                         highway: result[r].highway == 1 ?
-                                            '{{
-                                        Html::image('public/img/trajet/highwayYes.svg',
-                                        'Icon de l\'autoroute',
-                                        array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Prend l\'autoroute'))
-                                    }}' : '',
+                                        '{{
+                                            Html::image('public/img/trajet/highwayYes.svg',
+                                            'Icon de l\'autoroute',
+                                            array('class' => 'responsive-img tooltipped iconT',
+                                            'data-tooltip' => 'Prend l\'autoroute'))
+                                        }}' : '',
 
                                         charge: result[r].user.help_charge == 1 ?
-                                            '{{ Html::image('public/img/trajet/cartYes.svg',
-                                        'Icon d\'un diable pour le transport',
-                                        array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Aide pour le chargement'))
-                                    }}' : '',
+                                        '{{ Html::image('public/img/trajet/cartYes.svg',
+                                            'Icon d\'un diable pour le transport',
+                                            array('class' => 'responsive-img tooltipped iconT',
+                                            'data-tooltip' => 'Aide pour le chargement'))
+                                        }}' : '',
 
                                         detour: result[r].detour == 1 ?
-                                            '{{ Html::image('public/img/trajet/detour.svg',
-                                        'Icon de deux flèche pour le détour',
-                                        array('class' => 'responsive-img tooltipped iconT',
-                                        'data-tooltip' => 'Détour possible'))
-                                    }}' : '',
+                                        '{{ Html::image('public/img/trajet/detour.svg',
+                                            'Icon de deux flèche pour le détour',
+                                            array('class' => 'responsive-img tooltipped iconT',
+                                            'data-tooltip' => 'Détour possible'))
+                                        }}' : '',
                                     };
                                     divo = divo.replace(/[$]([a-z]+)([.]([a-z]+))?/g, function (matches, a, b, c) {
                                         var res = '';
@@ -445,7 +432,7 @@
             }
         });
 
-    </script>
+        </script>
 
 
-@endsection
+    @endsection

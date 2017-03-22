@@ -24,7 +24,7 @@ class TransportOffer extends Model {
     }
 
     public function steps(){
-        return $this->hasMany('App\TransportStep');
+        return $this->hasMany('App\TransportStep')->orderBy('step');
     }
 
     public function getUserAttribute(){

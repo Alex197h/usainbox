@@ -70,7 +70,7 @@ class TransportOffersController extends Controller
             $step1 = new TransportStep();
             $step1->transport_offer_id = $transport->id;
             $step1->label = $request->input('start_city');
-            $infoPosition = str_replace(", ", '+', $request->input('start_city'));
+            $infoPosition = str_replace(' ', '+', $request->input('start_city'));
             $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $infoPosition . '&sensor=false');
             $output = json_decode($geocode);
             $step1->latitude = $output->results[0]->geometry->location->lat;
@@ -81,7 +81,7 @@ class TransportOffersController extends Controller
                 $step = new TransportStep();
                 $step->transport_offer_id = $transport->id;
                 $step->label = $request->steps[$i];
-                $infoPositionStep = str_replace(", ", '+', $request->steps[$i]);
+                $infoPositionStep = str_replace(' ', '+', $request->steps[$i]);
                 $geocodeStep = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $infoPositionStep . '&sensor=false');
                 $outputStep = json_decode($geocodeStep);
                 $step->latitude = $outputStep->results[0]->geometry->location->lat;
@@ -92,7 +92,7 @@ class TransportOffersController extends Controller
             $steplast = new TransportStep();
             $steplast->transport_offer_id = $transport->id;
             $steplast->label = $request->input('end_city');
-            $infoPositionEnd = str_replace(", ", '+', $request->input('end_city'));
+            $infoPositionEnd = str_replace(' ', '+', $request->input('end_city'));
             $geocodeEnd = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address=' . $infoPositionEnd . '&sensor=false');
             $outputEnd = json_decode($geocodeEnd);
             $steplast->latitude = $outputEnd->results[0]->geometry->location->lat;
@@ -153,7 +153,7 @@ class TransportOffersController extends Controller
 
 
         $offers = DB::select(
-            'SELECT transport_offer_id
+            "SELECT transport_offer_id
             FROM transport_steps tr
                 WHERE longitude >= :long_start_min
                 AND longitude <= :long_start_max
@@ -167,8 +167,9 @@ class TransportOffersController extends Controller
                 AND latitude >= :lat_end_min
                 AND latitude <= :lat_end_max
                 AND tr.step <= td.step
-            )',
+            )",
             [
+                // 'label' => $request->input('city_start'),
                 'long_start_min' => $start_area[1],
                 'long_start_max' => $start_area[3],
                 'lat_start_min' => $start_area[0],
@@ -186,33 +187,37 @@ class TransportOffersController extends Controller
             $results[] = $offer->transport_offer_id;
         }
 
-        $view_offers = TransportOffer::whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->where('full', 0)->orderBy('date_start')->get();
+        $view_offers = TransportOffer::with('steps')->whereIn('id', $results)->where('date_start', '>=', $request->input('date'))->where('full', 0)->orderBy('date_start')->get();
 
         $city_steps = array();
         foreach ($view_offers as $view_offer) {
-
             $steps = $view_offer->steps;
             foreach ($steps as $step) {
-                $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+                // var_dump($step->toArray());
+                // $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
-                $output = json_decode($geocode);
+                // $output = json_decode($geocode);
 
-                $res = '';
-                foreach($output->results[0]->address_components as $e){
-                    if(in_array('locality', $e->types)){
-                        $res = $e->long_name;
-                        break;
-                    }
-                }
-
-                if (isset($output->results[0])) {
-                    $city_steps[$view_offer->id][$step->step] = $res;
-                }
+                // $res = '';
+                // if (isset($output->results[0])) {
+                    // foreach($output->results[0]->address_components as $e){
+                        // if(in_array('locality', $e->types)){
+                            // $res = $e->long_name;
+                            // break;
+                        // }
+                    // }
+                    $city_steps[$view_offer->id][$step->step] = $step->label;
+                // }
             }
         }
 
 
-        return view('front.transport.list', ['offers' => $view_offers, 'steps' => $city_steps, 'city_start' => $request->input('city_start'), 'city_end' => $request->input('city_end')]);
+        return view('front.transport.list', [
+            'offers' => $view_offers,
+            'steps' => $city_steps,
+            'city_start' => $request->input('city_start'),
+            'city_end' => $request->input('city_end')
+        ]);
     }
 
     public function detail(Request $request, TransportOffer $transportOffer){
@@ -223,21 +228,21 @@ class TransportOffersController extends Controller
         $auth = Auth::user();
 
         foreach ($steps as $step) {
-            $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+            // $geocode = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
-            $output = json_decode($geocode);
+            // $output = json_decode($geocode);
 
-            if (isset($output->results[0])) {
-                $res = '';
-                foreach($output->results[0]->address_components as $e){
-                    if(in_array('locality', $e->types)){
-                        $res = $e->long_name;
-                        break;
-                    }
-                }
+            // if (isset($output->results[0])) {
+                // $res = '';
+                // foreach($output->results[0]->address_components as $e){
+                    // if(in_array('locality', $e->types)){
+                        // $res = $e->long_name;
+                        // break;
+                    // }
+                // }
 
-                $city_steps[$transportOffer->id][$step->step] = $res;
-            }
+                $city_steps[$transportOffer->id][$step->step] = $step->label;
+            // }
         }
 
         if($request->has('question')){
@@ -256,6 +261,7 @@ class TransportOffersController extends Controller
 
         return view('front.transport.detail', [
             'offer' => $transportOffer,
+            'reviews' => Reservation::where('transporter_id', $user->id)->whereNotNull('shipping_review')->select('shipping_review as review', 'shipping_note as note')->inRandomOrder()->limit(5)->get(),
             'questions' => $transportOffer->questions,
             'user' => $user,
             'auth' => $auth,
@@ -279,21 +285,21 @@ class TransportOffersController extends Controller
         $city_steps = array();
 
         foreach ($steps as $step) {
-            $geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
+            // $geocode = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?latlng=' . $step['latitude'] . ',' . $step['longitude'] . '&sensor=false');
 
-            $output = json_decode($geocode);
+            // $output = json_decode($geocode);
 
-            if (isset($output->results[0])) {
-                $res = '';
-                foreach($output->results[0]->address_components as $e){
-                    if(in_array('locality', $e->types)){
-                        $res = $e->long_name;
-                        break;
-                    }
-                }
-                $city_steps[$step->step] = $res;
+            // if (isset($output->results[0])) {
+                // $res = '';
+                // foreach($output->results[0]->address_components as $e){
+                    // if(in_array('locality', $e->types)){
+                        // $res = $e->long_name;
+                        // break;
+                    // }
+                // }
+                $city_steps[$step->step] = $step->label;
 
-            }
+            // }
         }
 //        var_dump($city_steps);
         return view('front.transport.form_booking', array('city_steps' => $city_steps, 'transporter_id' => $request->input('transporter_id'), 'transport_offer' => $transport_offer));
