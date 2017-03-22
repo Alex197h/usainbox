@@ -9,7 +9,7 @@
             <div class="row card">
                 <div class="section center">
                     <h5>
-                        {!! ucfirst(utf8_encode(strftime('%A %d %B %Y', strtotime($offer->date_start)))) !!}
+                        {!! utf8_encode(ucfirst(strftime('%A %d %B %Y', strtotime($offer->date_start)))) !!}
                     </h5>
                     @if(isset($steps[$offer->id]))
                         @foreach($steps[$offer->id] as $step)
