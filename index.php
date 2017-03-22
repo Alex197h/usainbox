@@ -56,5 +56,3 @@ $response = $kernel->handle(
 $response->send();
 
 $kernel->terminate($request, $response);
-
-setlocale(LC_TIME, 'fr_FR.utf8','fra');
